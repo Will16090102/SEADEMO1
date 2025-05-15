@@ -18,10 +18,10 @@
       padding: 2rem;
       border-radius: 16px;
       max-width: 600px;
-      margin: auto 0 2rem 0;
+      margin: 2rem auto;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-    input, button {
+    input, select, button {
       padding: 0.7rem;
       margin: 0.5rem;
       width: 80%;
@@ -33,9 +33,12 @@
       color: white;
       border: none;
       cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
     }
     button:hover {
-      background-color: #a11e1e;
+      background-color: #8b1a1a;
+      transform: translateY(-2px);
     }
     a {
       text-decoration: none;
@@ -45,6 +48,61 @@
       font-size: 0.9rem;
       color: #ffebcd;
     }
+    .result-box {
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      text-align: left;
+      border-left: 4px solid #b22222;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+      text-align: left;
+      padding: 0 10%;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+    }
+    .price-breakdown {
+      margin-top: 1rem;
+      border-top: 1px dashed #ccc;
+      padding-top: 1rem;
+    }
+    .total-price {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #b22222;
+      margin: 1rem 0;
+    }
+    .hidden {
+      display: none;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .tab {
+      padding: 0.5rem 1rem;
+      background: #f0f0f0;
+      color: #7c0a02;
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      margin: 0 0.2rem;
+    }
+    .tab.active {
+      background: white;
+      font-weight: bold;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -52,22 +110,102 @@
   <p>Envíos desde USA a Perú con confianza</p>
 
   <div class="card">
-    <h2>Calculadora de Cotización</h2>
-    <input type="number" id="peso" placeholder="Peso (kg)" step="0.01"><br>
-    <input type="number" id="valor" placeholder="Valor del producto ($)" step="0.01"><br>
-    <input type="text" id="producto" placeholder="Nombre del producto (opcional)" /><br>
-    <button onclick="calcular()">Calcular Envío</button>
-    <p id="resultado"></p>
-    <p class="note" id="alerta"></p>
-  </div>
-
-  <div class="card">
-    <h2>Cotizador con búsqueda en Amazon</h2>
-    <input type="text" id="amazonQuery" placeholder="Buscar producto en Amazon (ej: celular Samsung)"><br>
-    <input type="number" id="pesoAmazon" placeholder="Peso (kg)" step="0.01"><br>
-    <input type="number" id="valorAmazon" placeholder="Valor del producto ($)" step="0.01"><br>
-    <button onclick="calcularAmazon()">Buscar y Calcular</button>
-    <p id="resultadoAmazon"></p>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('manual')">Cotización Manual</div>
+      <div class="tab" onclick="switchTab('amazon')">Búsqueda en Amazon</div>
+    </div>
+    
+    <div id="manual-tab" class="tab-content active">
+      <h2>Calculadora de Envío</h2>
+      <div class="form-group">
+        <label for="peso">Peso del paquete (kg)</label>
+        <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
+      </div>
+      
+      <div class="form-group">
+        <label for="valor">Valor declarado (USD)</label>
+        <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
+      </div>
+      
+      <div class="form-group">
+        <label for="producto">Tipo de producto (opcional)</label>
+        <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
+      </div>
+      
+      <div class="form-group">
+        <label for="tipo-envio">Tipo de envío</label>
+        <select id="tipo-envio">
+          <option value="estandar">Estándar (12 USD/kg)</option>
+          <option value="express">Express (18 USD/kg)</option>
+        </select>
+      </div>
+      
+      <button onclick="calcular()">Calcular Costo Total</button>
+      
+      <div id="resultado" class="result-box hidden">
+        <h3>Resumen de Cotización</h3>
+        <div id="producto-info"></div>
+        
+        <div class="total-price">
+          Total estimado: <span id="total-cotizacion">$0.00</span>
+        </div>
+        
+        <div class="price-breakdown">
+          <p><strong>Desglose de costos:</strong></p>
+          <p>• Costo de envío: <span id="costo-envio">$0.00</span></p>
+          <p>• Impuesto Ad Valorem (4%): <span id="ad-valorem">$0.00</span></p>
+          <p>• IGV (18% sobre valor + Ad Valorem): <span id="igv">$0.00</span></p>
+          <p>• Seguro (0.35% del valor): <span id="seguro">$0.00</span></p>
+        </div>
+        
+        <p id="alerta" class="note" style="color: #7c0a02; margin-top: 1rem;"></p>
+      </div>
+    </div>
+    
+    <div id="amazon-tab" class="tab-content">
+      <h2>Cotizador con Amazon</h2>
+      <div class="form-group">
+        <label for="amazonQuery">Buscar producto en Amazon</label>
+        <input type="text" id="amazonQuery" placeholder="Ej: iPhone 13, zapatillas Nike">
+      </div>
+      
+      <div class="form-group">
+        <label for="pesoAmazon">Peso estimado (kg)</label>
+        <input type="number" id="pesoAmazon" placeholder="Ej: 0.5" step="0.01" min="0.1">
+      </div>
+      
+      <div class="form-group">
+        <label for="valorAmazon">Precio del producto (USD)</label>
+        <input type="number" id="valorAmazon" placeholder="Ej: 299" step="0.01" min="1">
+      </div>
+      
+      <div class="form-group">
+        <label for="tipo-envio-amazon">Tipo de envío</label>
+        <select id="tipo-envio-amazon">
+          <option value="estandar">Estándar (12 USD/kg)</option>
+          <option value="express">Express (18 USD/kg)</option>
+        </select>
+      </div>
+      
+      <button onclick="calcularAmazon()">Buscar y Calcular</button>
+      
+      <div id="resultadoAmazon" class="result-box hidden">
+        <h3>Resultado de búsqueda:</h3>
+        <p id="amazon-link"></p>
+        
+        <div class="total-price">
+          Total estimado: <span id="total-amazon">$0.00</span>
+        </div>
+        
+        <div class="price-breakdown">
+          <p><strong>Desglose de costos:</strong></p>
+          <p>• Costo de envío: <span id="costo-envio-amazon">$0.00</span></p>
+          <p>• Impuesto Ad Valorem (4%): <span id="ad-valorem-amazon">$0.00</span></p>
+          <p>• IGV (18% sobre valor + Ad Valorem): <span id="igv-amazon">$0.00</span></p>
+          <p>• Seguro (0.35% del valor): <span id="seguro-amazon">$0.00</span></p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div style="margin-top: 2rem;">
@@ -77,33 +215,78 @@
   </div>
 
   <script>
+    function switchTab(tabName) {
+      // Oculta todos los contenidos de pestañas
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Desactiva todas las pestañas
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Activa la pestaña seleccionada
+      document.getElementById(tabName + '-tab').classList.add('active');
+      document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
+    }
+
     function calcular() {
       const peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
-      const producto = document.getElementById("producto").value.toLowerCase();
-      if (isNaN(peso) || isNaN(valor) || peso <= 0 || valor <= 0) {
-        alert("Por favor ingresa peso y valor válidos.");
+      const producto = document.getElementById("producto").value;
+      const tipoEnvio = document.getElementById("tipo-envio").value;
+      
+      // Validaciones
+      if (isNaN(peso) || peso <= 0) {
+        alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
         return;
       }
-      const envio = peso <= 1 ? 12 : 12 * peso;
-
+      
+      if (isNaN(valor) || valor <= 0) {
+        alert("Por favor ingresa un valor declarado válido (mínimo $1)");
+        return;
+      }
+      
+      // Calcular costos
+      const tarifaBase = tipoEnvio === 'express' ? 18 : 12;
+      const envio = peso <= 1 ? tarifaBase : tarifaBase * peso;
+      
       const adValorem = valor * 0.04;
       const igv = (valor + adValorem) * 0.18;
       const impuestosTotales = adValorem + igv;
       const seguro = valor * 0.0035;
       const total = envio + impuestosTotales + seguro;
-
-      document.getElementById("resultado").innerHTML = `
-        <strong>Total estimado:</strong> $${total.toFixed(2)}<br>
-        Envío: $${envio.toFixed(2)}<br>
-        Impuestos totales (IGV + Ad Valorem): $${impuestosTotales.toFixed(2)}<br>
-        Seguro: $${seguro.toFixed(2)}
-      `;
-
-      if (producto.includes("radiofrecuencia") || producto.includes("gps") || producto.includes("dron")) {
-        document.getElementById("alerta").innerText = "⚠ Este producto podría requerir documentación adicional (SUNAT u homologación).";
+      
+      // Mostrar resultados
+      document.getElementById("resultado").classList.remove("hidden");
+      
+      if (producto) {
+        document.getElementById("producto-info").innerHTML = `
+          <p><strong>Producto:</strong> ${producto}</p>
+          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg</p>
+          <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
+        `;
       } else {
-        document.getElementById("alerta").innerText = "";
+        document.getElementById("producto-info").innerHTML = `
+          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg</p>
+          <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
+        `;
+      }
+      
+      document.getElementById("total-cotizacion").textContent = `$${total.toFixed(2)}`;
+      document.getElementById("costo-envio").textContent = `$${envio.toFixed(2)}`;
+      document.getElementById("ad-valorem").textContent = `$${adValorem.toFixed(2)}`;
+      document.getElementById("igv").textContent = `$${igv.toFixed(2)}`;
+      document.getElementById("seguro").textContent = `$${seguro.toFixed(2)}`;
+      
+      // Mostrar alertas si es necesario
+      const productoLower = producto.toLowerCase();
+      if (productoLower.includes("radiofrecuencia") || productoLower.includes("gps") || 
+          productoLower.includes("dron") || productoLower.includes("electrónico")) {
+        document.getElementById("alerta").innerHTML = "⚠ Atención: Este producto podría requerir documentación adicional (permisos de SUNAT u homologación).";
+      } else {
+        document.getElementById("alerta").innerHTML = "";
       }
     }
 
@@ -111,33 +294,48 @@
       const query = document.getElementById("amazonQuery").value.trim();
       const peso = parseFloat(document.getElementById("pesoAmazon").value);
       const valor = parseFloat(document.getElementById("valorAmazon").value);
+      const tipoEnvio = document.getElementById("tipo-envio-amazon").value;
+      
       if (query === "") {
-        alert("Por favor ingresa un término para buscar en Amazon.");
+        alert("Por favor ingresa un término de búsqueda para Amazon.");
         return;
       }
-      if (isNaN(peso) || isNaN(valor) || peso <= 0 || valor <= 0) {
-        alert("Por favor ingresa peso y valor válidos.");
+      
+      if (isNaN(peso) || peso <= 0) {
+        alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
         return;
       }
-
-      const envio = peso <= 1 ? 12 : 12 * peso;
-
+      
+      if (isNaN(valor) || valor <= 0) {
+        alert("Por favor ingresa un valor declarado válido (mínimo $1)");
+        return;
+      }
+      
+      // Calcular costos (misma lógica que la función calcular)
+      const tarifaBase = tipoEnvio === 'express' ? 18 : 12;
+      const envio = peso <= 1 ? tarifaBase : tarifaBase * peso;
+      
       const adValorem = valor * 0.04;
       const igv = (valor + adValorem) * 0.18;
       const impuestosTotales = adValorem + igv;
       const seguro = valor * 0.0035;
       const total = envio + impuestosTotales + seguro;
-
+      
       // Mostrar resultados
-      document.getElementById("resultadoAmazon").innerHTML = `
-        <strong>Resultado de búsqueda:</strong> <a href="https://www.amazon.com/s?k=${encodeURIComponent(query)}" target="_blank" rel="noopener noreferrer">${query}</a><br>
-        <strong>Total estimado de envío:</strong> $${total.toFixed(2)}<br>
-        Envío: $${envio.toFixed(2)}<br>
-        Impuestos totales (IGV + Ad Valorem): $${impuestosTotales.toFixed(2)}<br>
-        Seguro: $${seguro.toFixed(2)}
+      document.getElementById("resultadoAmazon").classList.remove("hidden");
+      
+      document.getElementById("amazon-link").innerHTML = `
+        <a href="https://www.amazon.com/s?k=${encodeURIComponent(query)}" target="_blank" rel="noopener noreferrer">
+          Ver resultados para: ${query}
+        </a>
       `;
+      
+      document.getElementById("total-amazon").textContent = `$${total.toFixed(2)}`;
+      document.getElementById("costo-envio-amazon").textContent = `$${envio.toFixed(2)}`;
+      document.getElementById("ad-valorem-amazon").textContent = `$${adValorem.toFixed(2)}`;
+      document.getElementById("igv-amazon").textContent = `$${igv.toFixed(2)}`;
+      document.getElementById("seguro-amazon").textContent = `$${seguro.toFixed(2)}`;
     }
   </script>
 </body>
 </html>
-
