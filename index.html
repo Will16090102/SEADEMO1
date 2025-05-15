@@ -36,7 +36,6 @@
       color: #333;
       display: flex;
       flex-direction: column;
-      justify-content: center;
     }
     h1 {
       color: #7c0a02;
@@ -80,6 +79,8 @@
       margin-bottom: 1rem;
       text-align: center;
       color: #7c0a02;
+      border-bottom: 2px solid #7c0a02;
+      padding-bottom: 0.5rem;
     }
     .result-value {
       font-size: 1.8rem;
@@ -89,19 +90,27 @@
       color: #b22222;
     }
     .result-details {
-      margin-top: 1.5rem;
+      margin-top: 1rem;
     }
     .result-item {
       margin-bottom: 0.8rem;
       padding-bottom: 0.8rem;
       border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+    }
+    .result-item strong {
+      color: #555;
+    }
+    .result-item span {
+      font-weight: bold;
+      color: #7c0a02;
     }
     .note {
       font-size: 0.8rem;
       color: #666;
-      margin-top: 2rem;
+      margin-top: 1rem;
       font-style: italic;
-      text-align: center;
     }
     .tabs {
       display: flex;
@@ -113,6 +122,8 @@
       padding: 0.8rem;
       background: #f0f0f0;
       cursor: pointer;
+      border-radius: 5px 5px 0 0;
+      margin-right: 5px;
     }
     .tab.active {
       background: white;
@@ -124,6 +135,26 @@
     }
     .tab-content.active {
       display: block;
+    }
+    .whatsapp-btn {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .whatsapp-btn:hover {
+      background-color: #128C7E;
     }
     @media (max-width: 768px) {
       body {
@@ -142,7 +173,7 @@
   <div class="calculator-container">
     <div class="form-section">
       <h1>SEA Express</h1>
-      <p style="text-align: center; margin-bottom: 2rem;">Elígelo y es tuyo</p>
+      <p style="text-align: center; margin-bottom: 2rem; color: #7c0a02;">Elígelo y es tuyo</p>
       
       <div class="tabs">
         <div class="tab active" onclick="switchTab('manual')">Manual</div>
@@ -179,25 +210,41 @@
     </div>
     
     <div class="result-section">
-      <div class="result-title">Resumen de Cotización</div>
-      <div id="producto-info" style="text-align: center; margin-bottom: 1rem;"></div>
-      
-      <div class="result-value" id="total-cotizacion">$0.00</div>
+      <div class="result-title">Total de la Importación</div>
+      <div class="result-value" id="total-cotizacion">US$ 0.00</div>
       
       <div class="result-details">
         <div class="result-item">
-          <strong>Costo de envío:</strong> <span id="costo-envio">$0.00</span>
+          <strong>Total de Servicio de Envío Franco</strong>
+          <span id="costo-envio">US$ 0.00</span>
         </div>
         <div class="result-item">
-          <strong>Impuestos totales (24%):</strong> <span id="impuestos-totales">$0.00</span>
+          <strong>Total de Impuestos</strong>
+          <span id="impuestos-totales">US$ 0.00</span>
+        </div>
+        <div class="result-item">
+          <strong>IGV (de trámite y delivery)</strong>
+          <span id="igv">US$ 0.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Impuestos por pagar a SUNAT</strong>
+          <span id="sunat">US$ 0.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Flete</strong>
+          <span id="flete">US$ 10.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Trámite de Aduanas</strong>
+          <span id="tramite">US$ 8.00</span>
         </div>
       </div>
       
       <div class="note" id="alerta"></div>
       <div class="note">* Impuestos aplican solo para valores mayores a $200</div>
       
-      <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank" style="display: block; margin-top: 2rem;">
-        <button style="background-color: #25D366;">
+      <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank">
+        <button class="whatsapp-btn">
           📲 Consultar por WhatsApp
         </button>
       </a>
@@ -241,14 +288,21 @@
       }
       
       // Calcular costos según las reglas originales
-      const tarifaBase = 12; // $12 por kg
+      const flete = 10; // $10 fijo de flete
+      const tramiteAduanas = 8; // $8 fijo de trámite
       const pesoRedondeado = Math.ceil(peso); // Redondear hacia arriba
-      const envio = pesoRedondeado * tarifaBase + 8; // $8 fijo de desaduanaje
+      const costoEnvio = pesoRedondeado * 12; // $12 por kg
+      
+      // Costo total del servicio (flete + trámite + envío)
+      const totalServicio = flete + tramiteAduanas + costoEnvio;
+      
+      // IGV (18% sobre el servicio)
+      const igv = totalServicio * 0.18;
       
       // Impuesto del 24% solo si el valor es mayor a $200
-      const impuestosTotales = valor > 200 ? valor * 0.24 : 0;
+      const impuestosSunat = valor > 200 ? valor * 0.24 : 0;
       
-      const total = envio + impuestosTotales;
+      const total = totalServicio + igv + impuestosSunat;
       
       // Guardar última cotización
       ultimaCotizacion = {
@@ -256,8 +310,12 @@
         producto: producto || "Sin descripción",
         peso: peso,
         valor: valor,
-        envio: envio,
-        impuestos: impuestosTotales,
+        flete: flete,
+        tramiteAduanas: tramiteAduanas,
+        costoEnvio: costoEnvio,
+        totalServicio: totalServicio,
+        igv: igv,
+        impuestosSunat: impuestosSunat,
         total: total
       };
       
@@ -265,22 +323,13 @@
       actualizarEnlaceWhatsApp();
       
       // Mostrar resultados
-      if (producto) {
-        document.getElementById("producto-info").innerHTML = `
-          <p><strong>Producto:</strong> ${producto}</p>
-          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg (redondeado a ${pesoRedondeado} kg)</p>
-          <p><strong>Valor:</strong> $${valor.toFixed(2)}</p>
-        `;
-      } else {
-        document.getElementById("producto-info").innerHTML = `
-          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg (redondeado a ${pesoRedondeado} kg)</p>
-          <p><strong>Valor:</strong> $${valor.toFixed(2)}</p>
-        `;
-      }
-      
-      document.getElementById("total-cotizacion").textContent = `$${total.toFixed(2)}`;
-      document.getElementById("costo-envio").textContent = `$${envio.toFixed(2)}`;
-      document.getElementById("impuestos-totales").textContent = `$${impuestosTotales.toFixed(2)}`;
+      document.getElementById("total-cotizacion").textContent = `US$ ${total.toFixed(2)}`;
+      document.getElementById("costo-envio").textContent = `US$ ${totalServicio.toFixed(2)}`;
+      document.getElementById("impuestos-totales").textContent = `US$ ${impuestosSunat.toFixed(2)}`;
+      document.getElementById("igv").textContent = `US$ ${igv.toFixed(2)}`;
+      document.getElementById("sunat").textContent = `US$ ${impuestosSunat.toFixed(2)}`;
+      document.getElementById("flete").textContent = `US$ ${flete.toFixed(2)}`;
+      document.getElementById("tramite").textContent = `US$ ${tramiteAduanas.toFixed(2)}`;
       
       // Mostrar alertas si es necesario
       const productoLower = producto.toLowerCase();
@@ -332,10 +381,13 @@
       
       mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
       mensaje += `💰 Valor: $${ultimaCotizacion.valor.toFixed(2)}\n`;
-      mensaje += `✈️ Envío: $${ultimaCotizacion.envio.toFixed(2)}\n`;
+      mensaje += `✈️ Flete: $${ultimaCotizacion.flete.toFixed(2)}\n`;
+      mensaje += `📝 Trámite: $${ultimaCotizacion.tramiteAduanas.toFixed(2)}\n`;
+      mensaje += `🚚 Envío: $${ultimaCotizacion.costoEnvio.toFixed(2)}\n`;
+      mensaje += `🏛️ IGV: $${ultimaCotizacion.igv.toFixed(2)}\n`;
       
-      if (ultimaCotizacion.impuestos > 0) {
-        mensaje += `🏛️ Impuestos (24%): $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
+      if (ultimaCotizacion.impuestosSunat > 0) {
+        mensaje += `💰 Impuestos SUNAT (24%): $${ultimaCotizacion.impuestosSunat.toFixed(2)}\n`;
       }
       
       mensaje += `------------------------------\n`;
