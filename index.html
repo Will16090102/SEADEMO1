@@ -101,10 +101,6 @@
     .cost-item {
       margin: 0.5rem 0;
     }
-    .optional {
-      color: #666;
-      font-style: italic;
-    }
     .loading {
       display: inline-block;
       width: 20px;
@@ -121,7 +117,7 @@
 </head>
 <body>
   <h1>SEA Express</h1>
-  <p>Envíos desde USA a Perú con confianza</p>
+  <p>Elígelo y es tuyo</p>
 
   <div class="card">
     <div class="tabs">
@@ -175,16 +171,6 @@
         <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
       </div>
       
-      <div class="form-group">
-        <label for="pesoEnlace">Peso estimado (kg) <span class="optional">(opcional)</span></label>
-        <input type="number" id="pesoEnlace" placeholder="Ej: 0.5" step="0.01" min="0.1">
-      </div>
-      
-      <div class="form-group">
-        <label for="valorEnlace">Precio del producto (USD) <span class="optional">(opcional)</span></label>
-        <input type="number" id="valorEnlace" placeholder="Ej: 299" step="0.01" min="1">
-      </div>
-      
       <button onclick="calcularPorEnlace()" id="btn-calcular-enlace">
         Calcular Costo
       </button>
@@ -204,18 +190,12 @@
         <div class="cost-item">
           <p><strong>Impuestos totales:</strong> <span id="impuestos-totales-enlace">$0.00</span></p>
         </div>
-        
-        <div id="detalles-auto" class="hidden">
-          <p class="note" style="color: #7c0a02; font-size: 0.9rem;">
-            * Los datos de peso y valor se obtuvieron automáticamente del enlace
-          </p>
-        </div>
       </div>
     </div>
   </div>
 
   <div style="margin-top: 2rem;">
-    <a id="whatsapp-link" href="https://wa.me/51999999999?text=Hola%20SEA%20Express%2C%20quiero%20más%20información" target="_blank">
+    <a id="whatsapp-link" href="https://wa.me/51923465624?text=Hola%20SEA%20Express%2C%20quiero%20más%20información" target="_blank">
       <button>📲 Consultar por última cotización</button>
     </a>
   </div>
@@ -274,7 +254,6 @@
         valor: valor,
         envio: envio,
         impuestos: impuestosTotales,
-        seguro: seguro,
         total: total
       };
       
@@ -313,11 +292,15 @@
 
     function calcularPorEnlace() {
       const enlace = document.getElementById("enlace-producto").value.trim();
-      const pesoInput = document.getElementById("pesoEnlace").value;
-      const valorInput = document.getElementById("valorEnlace").value;
       
       if (enlace === "") {
         alert("Por favor ingresa un enlace válido.");
+        return;
+      }
+      
+      // Validar que sea un enlace http/https
+      if (!enlace.startsWith('http://') && !enlace.startsWith('https://')) {
+        alert("Por favor ingresa un enlace válido (debe comenzar con http:// o https://)");
         return;
       }
       
@@ -326,101 +309,17 @@
       btn.innerHTML = '<span class="loading"></span> Procesando enlace...';
       btn.disabled = true;
       
-      // Simular obtención de datos del enlace (en un caso real aquí harías una llamada a tu backend)
+      // Simular obtención de datos del enlace
       setTimeout(() => {
-        // Datos simulados que se obtendrían del enlace
-        const datosSimulados = obtenerDatosDeEnlace(enlace);
+        // Aquí en un caso real harías una llamada a tu backend
+        // para obtener los datos reales del producto
         
-        // Usar los valores del input si fueron proporcionados, de lo contrario usar los del enlace
-        const peso = pesoInput ? parseFloat(pesoInput) : datosSimulados.peso;
-        const valor = valorInput ? parseFloat(valorInput) : datosSimulados.valor;
-        
-        if ((!pesoInput && isNaN(peso)) || peso <= 0) {
-          alert("No se pudo obtener el peso automáticamente. Por favor ingrésalo manualmente.");
-          btn.innerHTML = 'Calcular Costo';
-          btn.disabled = false;
-          return;
-        }
-        
-        if ((!valorInput && isNaN(valor)) || valor <= 0) {
-          alert("No se pudo obtener el valor automáticamente. Por favor ingrésalo manualmente.");
-          btn.innerHTML = 'Calcular Costo';
-          btn.disabled = false;
-          return;
-        }
-        
-        // Calcular costos
-        const tarifaBase = 12;
-        const envio = peso <= 1 ? tarifaBase : tarifaBase * peso;
-        
-        const adValorem = valor * 0.04;
-        const igv = (valor + adValorem) * 0.18;
-        const impuestosTotales = adValorem + igv;
-        const seguro = valor * 0.0035;
-        const total = envio + impuestosTotales + seguro;
-        
-        // Guardar última cotización
-        ultimaCotizacion = {
-          tipo: "enlace",
-          enlace: enlace,
-          peso: peso,
-          valor: valor,
-          envio: envio,
-          impuestos: impuestosTotales,
-          seguro: seguro,
-          total: total,
-          datosAutomaticos: !pesoInput || !valorInput
-        };
-        
-        // Actualizar enlace de WhatsApp
-        actualizarEnlaceWhatsApp();
-        
-        // Mostrar resultados
-        document.getElementById("resultadoEnlace").classList.remove("hidden");
-        
-        // Acortar el enlace para mostrar (si es muy largo)
-        const enlaceMostrar = enlace.length > 50 ? enlace.substring(0, 50) + "..." : enlace;
-        
-        document.getElementById("enlace-info").innerHTML = `
-          <p><strong>Producto:</strong> <a href="${enlace}" target="_blank">${enlaceMostrar}</a></p>
-          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg ${pesoInput ? '' : '(obtenido automáticamente)'}</p>
-          <p><strong>Valor declarado:</strong> $${valor.toFixed(2)} ${valorInput ? '' : '(obtenido automáticamente)'}</p>
-        `;
-        
-        document.getElementById("total-enlace").textContent = `$${total.toFixed(2)}`;
-        document.getElementById("costo-envio-enlace").textContent = `$${envio.toFixed(2)}`;
-        document.getElementById("impuestos-totales-enlace").textContent = `$${impuestosTotales.toFixed(2)}`;
-        
-        // Mostrar nota si se usaron datos automáticos
-        if (!pesoInput || !valorInput) {
-          document.getElementById("detalles-auto").classList.remove("hidden");
-        } else {
-          document.getElementById("detalles-auto").classList.add("hidden");
-        }
+        // Por ahora mostramos un mensaje de que se necesita implementar
+        alert("Esta función necesita conectarse con un servicio backend que analice el enlace y obtenga los datos del producto.");
         
         btn.innerHTML = 'Calcular Costo';
         btn.disabled = false;
-      }, 1500); // Simular tiempo de espera para obtener datos
-    }
-    
-    // Función simulada para obtener datos de un enlace (en producción esto sería una llamada a tu backend)
-    function obtenerDatosDeEnlace(enlace) {
-      // Esta es una simulación - en la práctica necesitarías un servicio backend
-      // que analice el enlace y devuelva peso y valor
-      
-      // Simulación para enlaces de Amazon
-      if (enlace.includes("amazon.com") || enlace.includes("amazon.")) {
-        return {
-          peso: Math.random() * 2 + 0.3, // Peso aleatorio entre 0.3 y 2.3 kg
-          valor: Math.round(Math.random() * 500 + 50) // Valor aleatorio entre 50 y 550
-        };
-      }
-      
-      // Simulación para otros enlaces
-      return {
-        peso: Math.random() * 5 + 0.5, // Peso aleatorio entre 0.5 y 5.5 kg
-        valor: Math.round(Math.random() * 1000 + 100) // Valor aleatorio entre 100 y 1100
-      };
+      }, 1500);
     }
     
     function actualizarEnlaceWhatsApp() {
@@ -438,12 +337,11 @@
       mensaje += `💰 Valor declarado: $${ultimaCotizacion.valor.toFixed(2)}\n`;
       mensaje += `✈️ Costo de envío: $${ultimaCotizacion.envio.toFixed(2)}\n`;
       mensaje += `🏛️ Impuestos totales: $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
-      mensaje += `🛡️ Seguro: $${ultimaCotizacion.seguro.toFixed(2)}\n`;
       mensaje += `💵 TOTAL ESTIMADO: $${ultimaCotizacion.total.toFixed(2)}\n\n`;
       mensaje += "Por favor, necesito más información sobre este envío.";
       
       const encodedMessage = encodeURIComponent(mensaje);
-      document.getElementById("whatsapp-link").href = `https://wa.me/51999999999?text=${encodedMessage}`;
+      document.getElementById("whatsapp-link").href = `https://wa.me/51923465624?text=${encodedMessage}`;
     }
   </script>
 </body>
