@@ -267,7 +267,6 @@
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      /* Eliminamos las transiciones y efectos hover */
     }
 
     .feature-icon {
@@ -386,7 +385,6 @@
         <button onclick="calcularPorEnlace()">Calcular</button>
       </div>
 
-      <!-- Sección de características ESTÁTICAS (sin hover) -->
       <div class="features-section">
         <div class="feature-card">
           <div class="feature-icon">
@@ -500,17 +498,15 @@
         return;
       }
       
-      // Calcular costos según las reglas (prorrateo exacto)
+      // Calcular costos según las reglas actualizadas
       const desaduanaje = 8; // $8 fijos de desaduanaje
-      const primerKilo = 12; // $12 por el primer kg
-      const kilosAdicionales = Math.max(0, peso - 1); // Kilos adicionales (decimales)
-      const adicionalPorKilo = 12; // $12 por cada kg adicional (prorrateado)
+      const costoPorKilo = 15; // $15 por cada kg (actualizado)
       
-      const costoEnvio = primerKilo + (kilosAdicionales * adicionalPorKilo);
+      const costoEnvio = peso * costoPorKilo;
       const envioTotal = costoEnvio + desaduanaje;
       
-      // Impuesto del 24% solo si el valor es mayor a $200
-      const impuestos = valor > 200 ? valor * 0.24 : 0;
+      // Impuesto del 25% si el valor es mayor a $200 (actualizado)
+      const impuestos = valor > 200 ? valor * 0.25 : 0;
       
       // Total incluyendo el valor del producto
       const total = valor + envioTotal + impuestos;
@@ -616,7 +612,7 @@
       mensaje += `✈️ *Total envío:* $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
       
       if (ultimaCotizacion.impuestos > 0) {
-        mensaje += `🏛️ *Impuestos:* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
+        mensaje += `🏛️ *Impuestos (25%):* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
       }
       
       mensaje += `💵 *Total con todo:* $${ultimaCotizacion.total.toFixed(2)}\n\n`;
