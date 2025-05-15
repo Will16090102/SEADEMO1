@@ -329,6 +329,11 @@
         </div>
         
         <div class="result-item">
+          <strong>Desaduanaje:</strong>
+          <span id="desaduanaje">$8.00</span>
+        </div>
+        
+        <div class="result-item">
           <strong>Impuestos totales (24%):</strong>
           <span id="impuestos">$0.00</span>
         </div>
@@ -391,16 +396,19 @@
       }
       
       // Calcular costos según las nuevas reglas
+      const desaduanaje = 8; // $8 fijos de desaduanaje
       const primerKilo = 12; // $12 por el primer kg (siempre se cobra completo)
       const kilosAdicionales = Math.max(0, Math.ceil(peso) - 1); // Kilos adicionales redondeados
       const adicionalPorKilo = 8; // $8 por cada kg adicional
       
-      const envioTotal = primerKilo + (kilosAdicionales * adicionalPorKilo);
+      const costoEnvio = primerKilo + (kilosAdicionales * adicionalPorKilo);
+      const envioTotal = costoEnvio + desaduanaje;
       
       // Impuesto del 24% solo si el valor es mayor a $200
       const impuestos = valor > 200 ? valor * 0.24 : 0;
       
-      const total = envioTotal + impuestos;
+      // Total incluyendo el valor del producto
+      const total = valor + envioTotal + impuestos;
       
       // Guardar última cotización
       ultimaCotizacion = {
@@ -408,6 +416,8 @@
         producto: producto || "Sin descripción",
         peso: peso,
         valor: valor,
+        desaduanaje: desaduanaje,
+        costoEnvio: costoEnvio,
         envioTotal: envioTotal,
         impuestos: impuestos,
         total: total
@@ -445,6 +455,7 @@
         
         document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg (se redondea a ${Math.ceil(ultimaCotizacion.peso)} kg)`;
         document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
+        document.getElementById("desaduanaje").textContent = `$${ultimaCotizacion.desaduanje.toFixed(2)}`;
         document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
         document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
         document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
@@ -494,6 +505,7 @@
       
       mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg (redondeado a ${Math.ceil(ultimaCotizacion.peso)} kg)\n`;
       mensaje += `💰 Valor declarado: $${ultimaCotizacion.valor.toFixed(2)}\n`;
+      mensaje += `📦 Desaduanaje: $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
       mensaje += `🚚 Precio de envío: $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
       
       if (ultimaCotizacion.impuestos > 0) {
