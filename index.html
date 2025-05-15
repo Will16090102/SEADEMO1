@@ -101,6 +101,22 @@
     .cost-item {
       margin: 0.5rem 0;
     }
+    .optional {
+      color: #666;
+      font-style: italic;
+    }
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #7c0a02;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -110,19 +126,19 @@
   <div class="card">
     <div class="tabs">
       <div class="tab active" onclick="switchTab('manual')">Cotización Manual</div>
-      <div class="tab" onclick="switchTab('amazon')">Cotización desde Enlace</div>
+      <div class="tab" onclick="switchTab('enlace')">Cotización por Enlace</div>
     </div>
     
     <div id="manual-tab" class="tab-content active">
       <h2>Calculadora de Envío</h2>
       <div class="form-group">
-        <label for="peso">Peso del paquete (kg)</label>
-        <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
+        <label for="peso">Peso del paquete (kg)*</label>
+        <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required>
       </div>
       
       <div class="form-group">
-        <label for="valor">Valor declarado (USD)</label>
-        <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
+        <label for="valor">Valor declarado (USD)*</label>
+        <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required>
       </div>
       
       <div class="form-group">
@@ -152,39 +168,47 @@
       </div>
     </div>
     
-    <div id="amazon-tab" class="tab-content">
-      <h2>Cotizador desde Enlace</h2>
+    <div id="enlace-tab" class="tab-content">
+      <h2>Cotizador por Enlace</h2>
       <div class="form-group">
-        <label for="enlace-producto">Enlace del producto (Amazon u otros)</label>
-        <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
+        <label for="enlace-producto">Enlace del producto*</label>
+        <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
       </div>
       
       <div class="form-group">
-        <label for="pesoAmazon">Peso estimado (kg)</label>
-        <input type="number" id="pesoAmazon" placeholder="Ej: 0.5" step="0.01" min="0.1">
+        <label for="pesoEnlace">Peso estimado (kg) <span class="optional">(opcional)</span></label>
+        <input type="number" id="pesoEnlace" placeholder="Ej: 0.5" step="0.01" min="0.1">
       </div>
       
       <div class="form-group">
-        <label for="valorAmazon">Precio del producto (USD)</label>
-        <input type="number" id="valorAmazon" placeholder="Ej: 299" step="0.01" min="1">
+        <label for="valorEnlace">Precio del producto (USD) <span class="optional">(opcional)</span></label>
+        <input type="number" id="valorEnlace" placeholder="Ej: 299" step="0.01" min="1">
       </div>
       
-      <button onclick="calcularAmazon()">Calcular Costo</button>
+      <button onclick="calcularPorEnlace()" id="btn-calcular-enlace">
+        Calcular Costo
+      </button>
       
-      <div id="resultadoAmazon" class="result-box hidden">
+      <div id="resultadoEnlace" class="result-box hidden">
         <h3>Resumen de Cotización</h3>
         <div id="enlace-info"></div>
         
         <div class="total-price">
-          Total estimado: <span id="total-amazon">$0.00</span>
+          Total estimado: <span id="total-enlace">$0.00</span>
         </div>
         
         <div class="cost-item">
-          <p><strong>Costo de envío:</strong> <span id="costo-envio-amazon">$0.00</span></p>
+          <p><strong>Costo de envío:</strong> <span id="costo-envio-enlace">$0.00</span></p>
         </div>
         
         <div class="cost-item">
-          <p><strong>Impuestos totales:</strong> <span id="impuestos-totales-amazon">$0.00</span></p>
+          <p><strong>Impuestos totales:</strong> <span id="impuestos-totales-enlace">$0.00</span></p>
+        </div>
+        
+        <div id="detalles-auto" class="hidden">
+          <p class="note" style="color: #7c0a02; font-size: 0.9rem;">
+            * Los datos de peso y valor se obtuvieron automáticamente del enlace
+          </p>
         </div>
       </div>
     </div>
@@ -287,66 +311,116 @@
       }
     }
 
-    function calcularAmazon() {
+    function calcularPorEnlace() {
       const enlace = document.getElementById("enlace-producto").value.trim();
-      const peso = parseFloat(document.getElementById("pesoAmazon").value);
-      const valor = parseFloat(document.getElementById("valorAmazon").value);
+      const pesoInput = document.getElementById("pesoEnlace").value;
+      const valorInput = document.getElementById("valorEnlace").value;
       
       if (enlace === "") {
         alert("Por favor ingresa un enlace válido.");
         return;
       }
       
-      if (isNaN(peso) || peso <= 0) {
-        alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
-        return;
+      // Mostrar loading
+      const btn = document.getElementById("btn-calcular-enlace");
+      btn.innerHTML = '<span class="loading"></span> Procesando enlace...';
+      btn.disabled = true;
+      
+      // Simular obtención de datos del enlace (en un caso real aquí harías una llamada a tu backend)
+      setTimeout(() => {
+        // Datos simulados que se obtendrían del enlace
+        const datosSimulados = obtenerDatosDeEnlace(enlace);
+        
+        // Usar los valores del input si fueron proporcionados, de lo contrario usar los del enlace
+        const peso = pesoInput ? parseFloat(pesoInput) : datosSimulados.peso;
+        const valor = valorInput ? parseFloat(valorInput) : datosSimulados.valor;
+        
+        if ((!pesoInput && isNaN(peso)) || peso <= 0) {
+          alert("No se pudo obtener el peso automáticamente. Por favor ingrésalo manualmente.");
+          btn.innerHTML = 'Calcular Costo';
+          btn.disabled = false;
+          return;
+        }
+        
+        if ((!valorInput && isNaN(valor)) || valor <= 0) {
+          alert("No se pudo obtener el valor automáticamente. Por favor ingrésalo manualmente.");
+          btn.innerHTML = 'Calcular Costo';
+          btn.disabled = false;
+          return;
+        }
+        
+        // Calcular costos
+        const tarifaBase = 12;
+        const envio = peso <= 1 ? tarifaBase : tarifaBase * peso;
+        
+        const adValorem = valor * 0.04;
+        const igv = (valor + adValorem) * 0.18;
+        const impuestosTotales = adValorem + igv;
+        const seguro = valor * 0.0035;
+        const total = envio + impuestosTotales + seguro;
+        
+        // Guardar última cotización
+        ultimaCotizacion = {
+          tipo: "enlace",
+          enlace: enlace,
+          peso: peso,
+          valor: valor,
+          envio: envio,
+          impuestos: impuestosTotales,
+          seguro: seguro,
+          total: total,
+          datosAutomaticos: !pesoInput || !valorInput
+        };
+        
+        // Actualizar enlace de WhatsApp
+        actualizarEnlaceWhatsApp();
+        
+        // Mostrar resultados
+        document.getElementById("resultadoEnlace").classList.remove("hidden");
+        
+        // Acortar el enlace para mostrar (si es muy largo)
+        const enlaceMostrar = enlace.length > 50 ? enlace.substring(0, 50) + "..." : enlace;
+        
+        document.getElementById("enlace-info").innerHTML = `
+          <p><strong>Producto:</strong> <a href="${enlace}" target="_blank">${enlaceMostrar}</a></p>
+          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg ${pesoInput ? '' : '(obtenido automáticamente)'}</p>
+          <p><strong>Valor declarado:</strong> $${valor.toFixed(2)} ${valorInput ? '' : '(obtenido automáticamente)'}</p>
+        `;
+        
+        document.getElementById("total-enlace").textContent = `$${total.toFixed(2)}`;
+        document.getElementById("costo-envio-enlace").textContent = `$${envio.toFixed(2)}`;
+        document.getElementById("impuestos-totales-enlace").textContent = `$${impuestosTotales.toFixed(2)}`;
+        
+        // Mostrar nota si se usaron datos automáticos
+        if (!pesoInput || !valorInput) {
+          document.getElementById("detalles-auto").classList.remove("hidden");
+        } else {
+          document.getElementById("detalles-auto").classList.add("hidden");
+        }
+        
+        btn.innerHTML = 'Calcular Costo';
+        btn.disabled = false;
+      }, 1500); // Simular tiempo de espera para obtener datos
+    }
+    
+    // Función simulada para obtener datos de un enlace (en producción esto sería una llamada a tu backend)
+    function obtenerDatosDeEnlace(enlace) {
+      // Esta es una simulación - en la práctica necesitarías un servicio backend
+      // que analice el enlace y devuelva peso y valor
+      
+      // Simulación para enlaces de Amazon
+      if (enlace.includes("amazon.com") || enlace.includes("amazon.")) {
+        return {
+          peso: Math.random() * 2 + 0.3, // Peso aleatorio entre 0.3 y 2.3 kg
+          valor: Math.round(Math.random() * 500 + 50) // Valor aleatorio entre 50 y 550
+        };
       }
       
-      if (isNaN(valor) || valor <= 0) {
-        alert("Por favor ingresa un valor declarado válido (mínimo $1)");
-        return;
-      }
-      
-      // Calcular costos (misma lógica que la función calcular)
-      const tarifaBase = 12;
-      const envio = peso <= 1 ? tarifaBase : tarifaBase * peso;
-      
-      const adValorem = valor * 0.04;
-      const igv = (valor + adValorem) * 0.18;
-      const impuestosTotales = adValorem + igv;
-      const seguro = valor * 0.0035;
-      const total = envio + impuestosTotales + seguro;
-      
-      // Guardar última cotización
-      ultimaCotizacion = {
-        tipo: "amazon",
-        enlace: enlace,
-        peso: peso,
-        valor: valor,
-        envio: envio,
-        impuestos: impuestosTotales,
-        seguro: seguro,
-        total: total
+      // Simulación para otros enlaces
+      return {
+        peso: Math.random() * 5 + 0.5, // Peso aleatorio entre 0.5 y 5.5 kg
+        valor: Math.round(Math.random() * 1000 + 100) // Valor aleatorio entre 100 y 1100
       };
-      
-      // Actualizar enlace de WhatsApp
-      actualizarEnlaceWhatsApp();
-      
-      // Mostrar resultados
-      document.getElementById("resultadoAmazon").classList.remove("hidden");
-      
-      // Acortar el enlace para mostrar (si es muy largo)
-      const enlaceMostrar = enlace.length > 50 ? enlace.substring(0, 50) + "..." : enlace;
-      
-      document.getElementById("enlace-info").innerHTML = `
-        <p><strong>Producto:</strong> <a href="${enlace}" target="_blank">${enlaceMostrar}</a></p>
-        <p><strong>Peso:</strong> ${peso.toFixed(2)} kg</p>
-        <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
-      `;
-      
-      document.getElementById("total-amazon").textContent = `$${total.toFixed(2)}`;
-      document.getElementById("costo-envio-amazon").textContent = `$${envio.toFixed(2)}`;
-      document.getElementById("impuestos-totales-amazon").textContent = `$${impuestosTotales.toFixed(2)}`;
     }
     
     function actualizarEnlaceWhatsApp() {
@@ -369,7 +443,7 @@
       mensaje += "Por favor, necesito más información sobre este envío.";
       
       const encodedMessage = encodeURIComponent(mensaje);
-      document.getElementById("whatsapp-link").href = `https://wa.me/51923465624?text=${encodedMessage}`;
+      document.getElementById("whatsapp-link").href = `https://wa.me/51999999999?text=${encodedMessage}`;
     }
   </script>
 </body>
