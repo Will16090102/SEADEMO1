@@ -37,25 +37,19 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      flex-direction: column;
     }
 
     .form-section {
-      display: flex;
+      flex: 1;
       padding: 3rem;
       color: var(--color-primary);
-      transition: all 0.5s ease;
-      gap: 30px;
-    }
-
-    .form-column {
-      flex: 1;
       display: flex;
       flex-direction: column;
+      transition: all 0.5s ease;
     }
 
     .result-section {
-      width: 100%;
+      width: 0;
       background-color: var(--color-bg);
       color: var(--color-text);
       display: flex;
@@ -66,7 +60,8 @@
     }
 
     .result-section.expanded {
-      padding: 3rem;
+      width: 40%; /* Ocupa el 40% del espacio */
+      padding: 2rem;
     }
 
     .logo-container {
@@ -88,6 +83,20 @@
       letter-spacing: 2px;
       margin-top: -0.5rem;
       font-style: italic;
+    }
+
+    h1 {
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+
+    .slogan {
+      text-align: center;
+      color: var(--color-secondary);
+      margin-bottom: 2rem;
+      font-size: 1rem;
     }
 
     .tabs {
@@ -119,13 +128,11 @@
     }
 
     .tab-content.active {
-      display: flex;
-      flex-direction: column;
-      gap: 1.8rem;
+      display: block;
     }
 
     .form-group {
-      margin-bottom: 0;
+      margin-bottom: 1.8rem;
     }
 
     label {
@@ -163,7 +170,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s;
-      margin-top: auto; /* Empuja el botón hacia abajo */
+      margin-top: 0.5rem;
     }
 
     button:hover {
@@ -216,20 +223,11 @@
     }
 
     .total-price {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: bold;
       text-align: center;
       margin: 1.5rem 0;
       color: var(--color-primary);
-      background-color: rgba(190, 21, 34, 0.1);
-      padding: 15px;
-      border-radius: 8px;
-      border: 2px solid var(--color-primary);
-    }
-
-    .highlight-price {
-      font-size: 1.2em;
-      color: var(--color-primary-dark);
     }
 
     .whatsapp-btn {
@@ -261,7 +259,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-      padding: 0 3rem 3rem 3rem;
+      margin-top: 40px;
     }
 
     .feature-card {
@@ -294,13 +292,26 @@
         padding: 1rem;
       }
       
-      .form-section {
+      .calculator-container {
         flex-direction: column;
+      }
+      
+      .result-section {
+        width: 100%;
+        padding: 0;
+      }
+      
+      .result-section.expanded {
+        width: 100%;
+        padding: 2rem;
+      }
+      
+      .form-section {
         padding: 2rem;
       }
 
       .features-section {
-        padding: 0 2rem 2rem 2rem;
+        grid-template-columns: 1fr;
       }
     }
 
@@ -319,7 +330,7 @@
       }
       
       .total-price {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
       
       .logo {
@@ -329,11 +340,6 @@
       .logo-subtext {
         font-size: 0.8rem;
       }
-
-      .features-section {
-        padding: 0 1.5rem 1.5rem 1.5rem;
-        grid-template-columns: 1fr;
-      }
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -341,121 +347,118 @@
 <body>
   <div class="calculator-container">
     <div class="form-section">
-      <div class="form-column">
-        <div class="logo-container">
-          <div class="logo">SEA EXPRESS</div>
-          <div class="logo-subtext">Elígelo y es tuyo</div>
+      <div class="logo-container">
+        <div class="logo">SEA EXPRESS</div>
+        <div class="logo-subtext">Elígelo y es tuyo</div>
+      </div>
+      
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('manual')">Manual</div>
+        <div class="tab" onclick="switchTab('enlace')">Por Enlace</div>
+      </div>
+      
+      <div id="manual-tab" class="tab-content active">
+        <div class="form-group">
+          <label for="valor">Valor declarado (USD)</label>
+          <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
         </div>
         
-        <div class="tabs">
-          <div class="tab active" onclick="switchTab('manual')">Manual</div>
-          <div class="tab" onclick="switchTab('enlace')">Por Enlace</div>
+        <div class="form-group">
+          <label for="peso">Peso del paquete (kg)</label>
+          <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
         </div>
         
-        <div id="manual-tab" class="tab-content active">
-          <div class="form-group">
-            <label for="valor">Valor declarado (USD)</label>
-            <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
-          </div>
-          
-          <div class="form-group">
-            <label for="peso">Peso del paquete (kg)</label>
-            <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
-          </div>
-          
-          <div class="form-group">
-            <label for="producto">Descripción del producto (opcional)</label>
-            <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-          </div>
-          
-          <button onclick="calcular()">Calcular</button>
+        <div class="form-group">
+          <label for="producto">Descripción del producto (opcional)</label>
+          <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
         </div>
         
-        <div id="enlace-tab" class="tab-content">
-          <div class="form-group">
-            <label for="enlace-producto">Enlace del producto</label>
-            <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
+        <button onclick="calcular()">Calcular</button>
+      </div>
+      
+      <div id="enlace-tab" class="tab-content">
+        <div class="form-group">
+          <label for="enlace-producto">Enlace del producto</label>
+          <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
+        </div>
+        
+        <button onclick="calcularPorEnlace()">Calcular</button>
+      </div>
+
+      <div class="features-section">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shipping-fast"></i>
+          </div>
+          <h3 class="feature-title">Envío Express</h3>
+          <p class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="feature-title">Envío Seguro</h3>
+          <p class="feature-text">Protegemos tu envío con seguro incluido contra pérdida o daño.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3 class="feature-title">Soporte 24/7</h3>
+          <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div id="result-section" class="result-section">
+      <div class="result-title">Resumen de Cotización</div>
+      
+      <div id="result-content" class="result-content">
+        <div id="producto-info"></div>
+        
+        <div class="result-item">
+          <strong>Valor declarado:</strong>
+          <span id="valor-result">$0.00</span>
+        </div>
+        
+        <div class="result-item">
+          <strong>Peso:</strong>
+          <span id="peso-result">0.00 kg</span>
+        </div>
+        
+        <div class="result-item">
+          <strong>Desaduanaje:</strong>
+          <span id="desaduanaje">$8.00</span>
+        </div>
+        
+        <div class="result-item">
+          <strong>Costo de envío:</strong>
+          <span id="costo-envio">$0.00</span>
+        </div>
+        
+        <div class="result-item">
+          <strong>Impuestos:</strong>
+          <span id="impuestos">$0.00</span>
+        </div>
+        
+        <div class="total-section">
+          <div class="result-item">
+            <strong>Total envío:</strong>
+            <span id="envio-total">$0.00</span>
           </div>
           
-          <button onclick="calcularPorEnlace()">Calcular</button>
+          <div class="result-item">
+            <strong>Total con todo:</strong>
+            <span id="total">$0.00</span>
+          </div>
         </div>
       </div>
       
-      <div id="result-section" class="result-section">
-        <div class="result-title">Resumen de Cotización</div>
-        
-        <div id="result-content" class="result-content">
-          <div id="producto-info"></div>
-          
-          <div class="result-item">
-            <strong>Valor declarado:</strong>
-            <span id="valor-result">$0.00</span>
-          </div>
-          
-          <div class="result-item">
-            <strong>Peso:</strong>
-            <span id="peso-result">0.00 kg</span>
-          </div>
-          
-          <div class="result-item">
-            <strong>Desaduanaje:</strong>
-            <span id="desaduanaje">$8.00</span>
-          </div>
-          
-          <div class="result-item">
-            <strong>Costo de envío:</strong>
-            <span id="costo-envio">$0.00</span>
-          </div>
-          
-          <div class="result-item">
-            <strong>Impuestos (25%):</strong>
-            <span id="impuestos">$0.00</span>
-          </div>
-          
-          <div class="total-section">
-            <div class="result-item">
-              <strong>Total envío:</strong>
-              <span id="envio-total" class="highlight-price">$0.00</span>
-            </div>
-            
-            <div class="total-price">
-              <span>Total a pagar: </span>
-              <span id="total" class="highlight-price">$0.00</span>
-            </div>
-          </div>
-        </div>
-        
-        <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank">
-          <button class="whatsapp-btn">
-            <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
-          </button>
-        </a>
-      </div>
-    </div>
-
-    <!-- Sección de características ESTÁTICAS -->
-    <div class="features-section">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shipping-fast"></i>
-        </div>
-        <h3 class="feature-title">Envío Express</h3>
-        <p class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <h3 class="feature-title">Envío Seguro</h3>
-        <p class="feature-text">Protegemos tu envío con seguro incluido contra pérdida o daño.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-headset"></i>
-        </div>
-        <h3 class="feature-title">Soporte 24/7</h3>
-        <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
-      </div>
+      <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank">
+        <button class="whatsapp-btn">
+          <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
+        </button>
+      </a>
     </div>
   </div>
 
@@ -497,12 +500,12 @@
       
       // Calcular costos según las reglas actualizadas
       const desaduanaje = 8; // $8 fijos de desaduanaje
-      const costoPorKilo = 15; // $15 por cada kg (actualizado)
+      const costoPorKilo = 15; // $15 por cada kg
       
       const costoEnvio = peso * costoPorKilo;
       const envioTotal = costoEnvio + desaduanaje;
       
-      // Impuesto del 25% si el valor es mayor a $200 (actualizado)
+      // Impuesto del 25% si el valor es mayor a $200
       const impuestos = valor > 200 ? valor * 0.25 : 0;
       
       // Total incluyendo el valor del producto
@@ -529,7 +532,7 @@
     }
 
     function mostrarResultados() {
-      // Mostrar la sección de resultados
+      // Expandir la sección de resultados
       const resultSection = document.getElementById("result-section");
       resultSection.classList.add("expanded");
       
@@ -609,7 +612,7 @@
       mensaje += `✈️ *Total envío:* $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
       
       if (ultimaCotizacion.impuestos > 0) {
-        mensaje += `🏛️ *Impuestos (25%):* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
+        mensaje += `🏛️ *Impuestos:* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
       }
       
       mensaje += `💵 *Total con todo:* $${ultimaCotizacion.total.toFixed(2)}\n\n`;
