@@ -223,11 +223,20 @@
     }
 
     .total-price {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: bold;
       text-align: center;
       margin: 1.5rem 0;
       color: var(--color-primary);
+      background-color: rgba(190, 21, 34, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      border: 2px solid var(--color-primary);
+    }
+
+    .highlight-price {
+      font-size: 1.2em;
+      color: var(--color-primary-dark);
     }
 
     .whatsapp-btn {
@@ -266,7 +275,8 @@
       background-color: var(--color-light);
       border-radius: 8px;
       padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      /* Eliminado el efecto hover */
     }
 
     .feature-icon {
@@ -330,7 +340,7 @@
       }
       
       .total-price {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
       }
       
       .logo {
@@ -385,20 +395,21 @@
         <button onclick="calcularPorEnlace()">Calcular</button>
       </div>
 
+      <!-- Sección de características ESTÁTICAS -->
       <div class="features-section">
         <div class="feature-card">
           <div class="feature-icon">
             <i class="fas fa-shipping-fast"></i>
           </div>
-          <h3 class="feature-title">Envíos Rápidos</h3>
-          <p class="feature-text">Entrega express en 7-10 días hábiles desde que recibimos tu paquete.</p>
+          <h3 class="feature-title">Envío Express</h3>
+          <p class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
             <i class="fas fa-shield-alt"></i>
           </div>
-          <h3 class="feature-title">Seguro Incluido</h3>
-          <p class="feature-text">Todos nuestros envíos incluyen seguro básico contra pérdida o daño.</p>
+          <h3 class="feature-title">Envío Seguro</h3>
+          <p class="feature-text">Protegemos tu envío con seguro incluido contra pérdida o daño.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -437,19 +448,19 @@
         </div>
         
         <div class="result-item">
-          <strong>Impuestos:</strong>
+          <strong>Impuestos (25%):</strong>
           <span id="impuestos">$0.00</span>
         </div>
         
         <div class="total-section">
           <div class="result-item">
             <strong>Total envío:</strong>
-            <span id="envio-total">$0.00</span>
+            <span id="envio-total" class="highlight-price">$0.00</span>
           </div>
           
-          <div class="result-item">
-            <strong>Total con todo:</strong>
-            <span id="total">$0.00</span>
+          <div class="total-price">
+            <span>Total a pagar: </span>
+            <span id="total" class="highlight-price">$0.00</span>
           </div>
         </div>
       </div>
