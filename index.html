@@ -15,6 +15,7 @@
       --color-light: #FFFFFF;
       --color-border: #E0E0E0;
       --color-bg: #F8F9FA;
+      --color-highlight: #BE1522;
     }
 
     body {
@@ -75,19 +76,17 @@
       margin-bottom: 1.5rem;
     }
 
-    .logo {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: var(--color-primary);
-      letter-spacing: 1px;
+    .logo-img {
+      max-width: 200px;
+      height: auto;
+      margin-bottom: 0.5rem;
     }
 
-    .logo-subtext {
+    .logo-text {
       font-size: 1rem;
       color: var(--color-secondary);
       font-weight: 500;
       letter-spacing: 2px;
-      margin-top: -0.5rem;
       font-style: italic;
     }
 
@@ -222,18 +221,26 @@
       color: var(--color-primary);
     }
 
-    .total-section {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 2px dashed var(--color-primary);
+    .highlight-box {
+      background-color: rgba(190, 21, 34, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      border: 1px solid var(--color-primary);
     }
 
-    .total-price {
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-align: center;
-      margin: 1.5rem 0;
+    .highlight-title {
       color: var(--color-primary);
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-value {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: var(--color-primary);
+      text-align: center;
     }
 
     .whatsapp-btn {
@@ -339,16 +346,12 @@
         padding: 1.5rem;
       }
       
-      .total-price {
-        font-size: 1.3rem;
+      .logo-img {
+        max-width: 150px;
       }
       
-      .logo {
-        font-size: 2rem;
-      }
-      
-      .logo-subtext {
-        font-size: 0.8rem;
+      .highlight-value {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -359,8 +362,9 @@
     <div class="calculator-wrapper">
       <div class="form-section">
         <div class="logo-container">
-          <div class="logo">SEA EXPRESS</div>
-          <div class="logo-subtext">Elígelo y es tuyo</div>
+          <!-- Cambia la URL por la de tu logo en GitHub -->
+          <img src="https://raw.githubusercontent.com/tu_usuario/tu_repositorio/main/ruta/al/logo.png" alt="SEA Express Logo" class="logo-img">
+          <div class="logo-text">Elígelo y es tuyo</div>
         </div>
         
         <div class="tabs">
@@ -428,16 +432,14 @@
             <span id="impuestos">$0.00</span>
           </div>
           
-          <div class="total-section">
-            <div class="result-item">
-              <strong>Total envío:</strong>
-              <span id="envio-total">$0.00</span>
-            </div>
-            
-            <div class="result-item">
-              <strong>Total con todo:</strong>
-              <span id="total">$0.00</span>
-            </div>
+          <div class="highlight-box">
+            <div class="highlight-title">Total envío</div>
+            <div class="highlight-value" id="envio-total">$0.00</div>
+          </div>
+          
+          <div class="highlight-box">
+            <div class="highlight-title">Costo total</div>
+            <div class="highlight-value" id="total">$0.00</div>
           </div>
         </div>
         
@@ -629,7 +631,7 @@
         mensaje += `🏛️ *Impuestos:* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
       }
       
-      mensaje += `💵 *Total con todo:* $${ultimaCotizacion.total.toFixed(2)}\n\n`;
+      mensaje += `💵 *Costo total:* $${ultimaCotizacion.total.toFixed(2)}\n\n`;
       mensaje += "Por favor, envíenme información sobre *mi descuento especial* para proceder con el envío. ¡Gracias!";
       
       const encodedMessage = encodeURIComponent(mensaje);
