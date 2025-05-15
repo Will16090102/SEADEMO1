@@ -29,7 +29,6 @@
       border-radius: 8px;
     }
     button {
-      background-color: #b22222;
       color: white;
       border: none;
       cursor: pointer;
@@ -37,7 +36,6 @@
       transition: all 0.3s;
     }
     button:hover {
-      background-color: #8b1a1a;
       transform: translateY(-2px);
     }
     a {
@@ -117,6 +115,30 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    /* Estilo especial para el botón de WhatsApp */
+    .whatsapp-btn {
+      background-color: #25D366;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      animation: pulse 1.5s infinite;
+    }
+    .whatsapp-btn:hover {
+      background-color: #128C7E;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .whatsapp-icon {
+      margin-right: 8px;
+      font-size: 1.2rem;
+    }
   </style>
 </head>
 <body>
@@ -146,7 +168,7 @@
         <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
       </div>
       
-      <button onclick="calcular()">Calcular Costo Total</button>
+      <button onclick="calcular()" style="background-color: #b22222;">Calcular Costo Total</button>
       
       <div id="resultado" class="result-box hidden">
         <h3>Resumen de Cotización</h3>
@@ -154,10 +176,6 @@
         
         <div class="cost-item">
           <p><strong>Costo de envío:</strong> <span id="costo-envio">$0.00</span></p>
-        </div>
-        
-        <div class="cost-item">
-          <p><strong>Desaduanaje:</strong> <span id="desaduanaje">$8.00</span></p>
         </div>
         
         <div class="cost-item">
@@ -181,7 +199,7 @@
         <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
       </div>
       
-      <button onclick="calcularPorEnlace()" id="btn-calcular-enlace">
+      <button onclick="calcularPorEnlace()" id="btn-calcular-enlace" style="background-color: #b22222;">
         Calcular Costo
       </button>
       
@@ -191,10 +209,6 @@
         
         <div class="cost-item">
           <p><strong>Costo de envío:</strong> <span id="costo-envio-enlace">$0.00</span></p>
-        </div>
-        
-        <div class="cost-item">
-          <p><strong>Desaduanaje:</strong> <span id="desaduanaje-enlace">$8.00</span></p>
         </div>
         
         <div class="cost-item">
@@ -212,7 +226,9 @@
 
   <div style="margin-top: 2rem;">
     <a id="whatsapp-link" href="https://wa.me/51923465624?text=Hola%20SEA%20Express%2C%20quiero%20más%20información" target="_blank">
-      <button>📲 Consultar por última cotización</button>
+      <button class="whatsapp-btn">
+        <span class="whatsapp-icon">📲</span> Consultar por última cotización
+      </button>
     </a>
   </div>
 
@@ -253,15 +269,14 @@
       }
       
       // Calcular costos según las nuevas reglas
-      const tarifaBase = 12; // $12 por kg
+      const tarifaBase = 20; // $20 por kg (incluye desaduanaje)
       const pesoRedondeado = Math.ceil(peso); // Redondear hacia arriba
       const envio = pesoRedondeado * tarifaBase;
-      const desaduanaje = 8; // Costo fijo de desaduanaje
       
       // Impuesto del 24% solo si el valor es mayor a $200
       const impuestosTotales = valor > 200 ? valor * 0.24 : 0;
       
-      const total = envio + desaduanaje + impuestosTotales;
+      const total = envio + impuestosTotales;
       
       // Guardar última cotización
       ultimaCotizacion = {
@@ -270,7 +285,6 @@
         peso: peso,
         valor: valor,
         envio: envio,
-        desaduanaje: desaduanaje,
         impuestos: impuestosTotales,
         total: total
       };
@@ -296,7 +310,6 @@
       
       document.getElementById("total-cotizacion").textContent = `$${total.toFixed(2)}`;
       document.getElementById("costo-envio").textContent = `$${envio.toFixed(2)}`;
-      document.getElementById("desaduanaje").textContent = `$${desaduanaje.toFixed(2)}`;
       document.getElementById("impuestos-totales").textContent = `$${impuestosTotales.toFixed(2)}`;
       
       // Mostrar alertas si es necesario
@@ -354,15 +367,14 @@
         }
         
         // Calcular costos según las nuevas reglas
-        const tarifaBase = 12; // $12 por kg
+        const tarifaBase = 20; // $20 por kg (incluye desaduanaje)
         const pesoRedondeado = Math.ceil(peso); // Redondear hacia arriba
         const envio = pesoRedondeado * tarifaBase;
-        const desaduanaje = 8; // Costo fijo de desaduanaje
         
         // Impuesto del 24% solo si el valor es mayor a $200
         const impuestosTotales = valor > 200 ? valor * 0.24 : 0;
         
-        const total = envio + desaduanaje + impuestosTotales;
+        const total = envio + impuestosTotales;
         
         // Guardar última cotización
         ultimaCotizacion = {
@@ -372,7 +384,6 @@
           peso: peso,
           valor: valor,
           envio: envio,
-          desaduanaje: desaduanaje,
           impuestos: impuestosTotales,
           total: total
         };
@@ -392,7 +403,6 @@
         
         document.getElementById("total-enlace").textContent = `$${total.toFixed(2)}`;
         document.getElementById("costo-envio-enlace").textContent = `$${envio.toFixed(2)}`;
-        document.getElementById("desaduanaje-enlace").textContent = `$${desaduanaje.toFixed(2)}`;
         document.getElementById("impuestos-totales-enlace").textContent = `$${impuestosTotales.toFixed(2)}`;
         
         btn.innerHTML = 'Calcular Costo';
@@ -434,10 +444,9 @@
         mensaje += `📦 Producto: ${ultimaCotizacion.producto}\n`;
       }
       
-      mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
+      mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg (se redondea a ${Math.ceil(ultimaCotizacion.peso)} kg)\n`;
       mensaje += `💰 Valor declarado: $${ultimaCotizacion.valor.toFixed(2)}\n`;
       mensaje += `✈️ Costo de envío: $${ultimaCotizacion.envio.toFixed(2)}\n`;
-      mensaje += `📦 Desaduanaje: $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
       
       if (ultimaCotizacion.impuestos > 0) {
         mensaje += `🏛️ Impuestos totales (24%): $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
