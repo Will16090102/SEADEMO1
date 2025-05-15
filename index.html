@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SEA Express</title>
+  <title>SEA Express - Cotiza tu envío</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #7c0a02;
       color: white;
       text-align: center;
@@ -16,40 +16,97 @@
       background: white;
       color: #7c0a02;
       padding: 2rem;
-      border-radius: 12px;
+      border-radius: 16px;
       max-width: 600px;
       margin: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     input, button {
-      padding: 0.5rem;
+      padding: 0.7rem;
       margin: 0.5rem;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #b22222;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #a11e1e;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #ffebcd;
     }
   </style>
 </head>
 <body>
   <h1>SEA Express</h1>
-  <p>Calcula tu envío desde USA</p>
+  <p>Envíos desde USA a Perú con confianza</p>
 
   <div class="card">
-    <h3>Calculadora de Cotización</h3>
+    <h2>Calculadora de Cotización</h2>
     <input type="number" id="peso" placeholder="Peso (kg)" step="0.01"><br>
     <input type="number" id="valor" placeholder="Valor del producto ($)" step="0.01"><br>
-    <button onclick="calcular()">Calcular</button>
+    <input type="text" id="producto" placeholder="Nombre del producto (opcional)" /><br>
+    <button onclick="calcular()">Calcular Envío</button>
     <p id="resultado"></p>
+    <p class="note" id="alerta"></p>
+  </div>
+
+  <div class="card" style="margin-top: 2rem;">
+    <h3>Buscar producto en Amazon</h3>
+    <input type="text" id="amazonSearch" placeholder="Ej: celular Samsung, reloj Casio...">
+    <button onclick="buscarAmazon()">Cotizar en Amazon</button>
+  </div>
+
+  <div style="margin-top: 2rem;">
+    <a href="https://wa.me/51999999999?text=Hola%20SEA%20Express%2C%20quiero%20más%20info%20sobre%20un%20envío" target="_blank">
+      <button>📲 Consultar por WhatsApp</button>
+    </a>
   </div>
 
   <script>
     function calcular() {
       const peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
+      const producto = document.getElementById("producto").value.toLowerCase();
       const envio = peso <= 1 ? 12 : 12 * peso;
+
       const adValorem = valor * 0.04;
       const igv = (valor + adValorem) * 0.18;
+      const impuestosTotales = adValorem + igv;
       const seguro = valor * 0.0035;
-      const total = envio + adValorem + igv + seguro;
-      document.getElementById("resultado").innerHTML = 
-        `Total estimado: $${total.toFixed(2)} <br>(Envío: $${envio.toFixed(2)}, IGV: $${igv.toFixed(2)})`;
+      const total = envio + impuestosTotales + seguro;
+
+      document.getElementById("resultado").innerHTML = `
+        <strong>Total estimado:</strong> $${total.toFixed(2)}<br>
+        Envío: $${envio.toFixed(2)}<br>
+        Impuestos totales (IGV + Ad Valorem): $${impuestosTotales.toFixed(2)}<br>
+        Seguro: $${seguro.toFixed(2)}
+      `;
+
+      if (producto.includes("radiofrecuencia") || producto.includes("gps") || producto.includes("dron")) {
+        document.getElementById("alerta").innerText = "⚠ Este producto podría requerir documentación adicional (SUNAT u homologación).";
+      } else {
+        document.getElementById("alerta").innerText = "";
+      }
+    }
+
+    function buscarAmazon() {
+      const query = document.getElementById("amazonSearch").value;
+      if (query.trim() === "") return;
+      const url = "https://www.amazon.com/s?k=" + encodeURIComponent(query);
+      window.open(url, "_blank");
     }
   </script>
 </body>
 </html>
+
