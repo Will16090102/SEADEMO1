@@ -101,6 +101,10 @@
     .cost-item {
       margin: 0.5rem 0;
     }
+    .divider {
+      border-top: 1px dashed #ccc;
+      margin: 1rem 0;
+    }
     .loading {
       display: inline-block;
       width: 20px;
@@ -148,16 +152,22 @@
         <h3>Resumen de Cotización</h3>
         <div id="producto-info"></div>
         
-        <div class="total-price">
-          Total estimado: <span id="total-cotizacion">$0.00</span>
-        </div>
-        
         <div class="cost-item">
           <p><strong>Costo de envío:</strong> <span id="costo-envio">$0.00</span></p>
         </div>
         
         <div class="cost-item">
-          <p><strong>Impuestos totales:</strong> <span id="impuestos-totales">$0.00</span></p>
+          <p><strong>Desaduanaje:</strong> <span id="desaduanaje">$8.00</span></p>
+        </div>
+        
+        <div class="cost-item">
+          <p><strong>Impuestos totales (24%):</strong> <span id="impuestos-totales">$0.00</span></p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="total-price">
+          Total estimado: <span id="total-cotizacion">$0.00</span>
         </div>
         
         <p id="alerta" class="note" style="color: #7c0a02; margin-top: 1rem;"></p>
@@ -179,16 +189,22 @@
         <h3>Resumen de Cotización</h3>
         <div id="enlace-info"></div>
         
-        <div class="total-price">
-          Total estimado: <span id="total-enlace">$0.00</span>
-        </div>
-        
         <div class="cost-item">
           <p><strong>Costo de envío:</strong> <span id="costo-envio-enlace">$0.00</span></p>
         </div>
         
         <div class="cost-item">
-          <p><strong>Impuestos totales:</strong> <span id="impuestos-totales-enlace">$0.00</span></p>
+          <p><strong>Desaduanaje:</strong> <span id="desaduanaje-enlace">$8.00</span></p>
+        </div>
+        
+        <div class="cost-item">
+          <p><strong>Impuestos totales (24%):</strong> <span id="impuestos-totales-enlace">$0.00</span></p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="total-price">
+          Total estimado: <span id="total-enlace">$0.00</span>
         </div>
       </div>
     </div>
@@ -236,15 +252,16 @@
         return;
       }
       
-      // Calcular costos
-      const tarifaBase = 12; // Solo un tipo de envío
-      const envio = peso <= 1 ? tarifaBase : tarifaBase * peso;
+      // Calcular costos según las nuevas reglas
+      const tarifaBase = 12; // $12 por kg
+      const pesoRedondeado = Math.ceil(peso); // Redondear hacia arriba
+      const envio = pesoRedondeado * tarifaBase;
+      const desaduanaje = 8; // Costo fijo de desaduanaje
       
-      const adValorem = valor * 0.04;
-      const igv = (valor + adValorem) * 0.18;
-      const impuestosTotales = adValorem + igv;
-      const seguro = valor * 0.0035;
-      const total = envio + impuestosTotales + seguro;
+      // Impuesto del 24% solo si el valor es mayor a $200
+      const impuestosTotales = valor > 200 ? valor * 0.24 : 0;
+      
+      const total = envio + desaduanaje + impuestosTotales;
       
       // Guardar última cotización
       ultimaCotizacion = {
@@ -253,6 +270,7 @@
         peso: peso,
         valor: valor,
         envio: envio,
+        desaduanaje: desaduanaje,
         impuestos: impuestosTotales,
         total: total
       };
@@ -266,18 +284,19 @@
       if (producto) {
         document.getElementById("producto-info").innerHTML = `
           <p><strong>Producto:</strong> ${producto}</p>
-          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg</p>
+          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg (se redondea a ${pesoRedondeado} kg)</p>
           <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
         `;
       } else {
         document.getElementById("producto-info").innerHTML = `
-          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg</p>
+          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg (se redondea a ${pesoRedondeado} kg)</p>
           <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
         `;
       }
       
       document.getElementById("total-cotizacion").textContent = `$${total.toFixed(2)}`;
       document.getElementById("costo-envio").textContent = `$${envio.toFixed(2)}`;
+      document.getElementById("desaduanaje").textContent = `$${desaduanaje.toFixed(2)}`;
       document.getElementById("impuestos-totales").textContent = `$${impuestosTotales.toFixed(2)}`;
       
       // Mostrar alertas si es necesario
@@ -311,15 +330,96 @@
       
       // Simular obtención de datos del enlace
       setTimeout(() => {
-        // Aquí en un caso real harías una llamada a tu backend
-        // para obtener los datos reales del producto
+        // En un caso real, aquí harías una llamada a tu backend
+        // Para este ejemplo, usaremos datos de ejemplo basados en Amazon
+        const datosProducto = obtenerDatosDeAmazon(enlace);
         
-        // Por ahora mostramos un mensaje de que se necesita implementar
-        alert("Esta función necesita conectarse con un servicio backend que analice el enlace y obtenga los datos del producto.");
+        if (!datosProducto) {
+          alert("No se pudo obtener información del producto. Por favor ingresa los datos manualmente.");
+          btn.innerHTML = 'Calcular Costo';
+          btn.disabled = false;
+          return;
+        }
+        
+        // Calcular costos con los datos obtenidos
+        const peso = parseFloat(datosProducto.peso);
+        const valor = parseFloat(datosProducto.precio);
+        const producto = datosProducto.nombre;
+        
+        if (isNaN(peso) || peso <= 0 || isNaN(valor) || valor <= 0) {
+          alert("No se pudieron obtener los datos necesarios del producto. Por favor ingrésalos manualmente.");
+          btn.innerHTML = 'Calcular Costo';
+          btn.disabled = false;
+          return;
+        }
+        
+        // Calcular costos según las nuevas reglas
+        const tarifaBase = 12; // $12 por kg
+        const pesoRedondeado = Math.ceil(peso); // Redondear hacia arriba
+        const envio = pesoRedondeado * tarifaBase;
+        const desaduanaje = 8; // Costo fijo de desaduanaje
+        
+        // Impuesto del 24% solo si el valor es mayor a $200
+        const impuestosTotales = valor > 200 ? valor * 0.24 : 0;
+        
+        const total = envio + desaduanaje + impuestosTotales;
+        
+        // Guardar última cotización
+        ultimaCotizacion = {
+          tipo: "enlace",
+          enlace: enlace,
+          producto: producto,
+          peso: peso,
+          valor: valor,
+          envio: envio,
+          desaduanaje: desaduanaje,
+          impuestos: impuestosTotales,
+          total: total
+        };
+        
+        // Actualizar enlace de WhatsApp
+        actualizarEnlaceWhatsApp();
+        
+        // Mostrar resultados
+        document.getElementById("resultadoEnlace").classList.remove("hidden");
+        
+        document.getElementById("enlace-info").innerHTML = `
+          <p><strong>Producto:</strong> ${producto}</p>
+          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg (se redondea a ${pesoRedondeado} kg)</p>
+          <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
+          <p><small><a href="${enlace}" target="_blank">Ver producto</a></small></p>
+        `;
+        
+        document.getElementById("total-enlace").textContent = `$${total.toFixed(2)}`;
+        document.getElementById("costo-envio-enlace").textContent = `$${envio.toFixed(2)}`;
+        document.getElementById("desaduanaje-enlace").textContent = `$${desaduanaje.toFixed(2)}`;
+        document.getElementById("impuestos-totales-enlace").textContent = `$${impuestosTotales.toFixed(2)}`;
         
         btn.innerHTML = 'Calcular Costo';
         btn.disabled = false;
       }, 1500);
+    }
+    
+    // Función simulada para obtener datos de Amazon (para propósitos de demostración)
+    function obtenerDatosDeAmazon(enlace) {
+      // Esta es una simulación - en la práctica necesitarías un servicio backend
+      // que analice el enlace y devuelva peso, precio y nombre del producto
+      
+      // Simulación para enlaces de Amazon
+      if (enlace.includes("amazon.com") || enlace.includes("amazon.")) {
+        return {
+          nombre: "Producto de ejemplo (Amazon)",
+          precio: 201.00, // Valor de ejemplo
+          peso: 1.5 // Peso de ejemplo en kg
+        };
+      }
+      
+      // Simulación para otros enlaces
+      return {
+        nombre: "Producto de ejemplo",
+        precio: 150.00,
+        peso: 1.2
+      };
     }
     
     function actualizarEnlaceWhatsApp() {
@@ -331,12 +431,19 @@
         mensaje += `📦 Producto: ${ultimaCotizacion.producto}\n`;
       } else {
         mensaje += `🔗 Enlace: ${ultimaCotizacion.enlace}\n`;
+        mensaje += `📦 Producto: ${ultimaCotizacion.producto}\n`;
       }
       
       mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
       mensaje += `💰 Valor declarado: $${ultimaCotizacion.valor.toFixed(2)}\n`;
       mensaje += `✈️ Costo de envío: $${ultimaCotizacion.envio.toFixed(2)}\n`;
-      mensaje += `🏛️ Impuestos totales: $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
+      mensaje += `📦 Desaduanaje: $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
+      
+      if (ultimaCotizacion.impuestos > 0) {
+        mensaje += `🏛️ Impuestos totales (24%): $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
+      }
+      
+      mensaje += `------------------------------\n`;
       mensaje += `💵 TOTAL ESTIMADO: $${ultimaCotizacion.total.toFixed(2)}\n\n`;
       mensaje += "Por favor, necesito más información sobre este envío.";
       
