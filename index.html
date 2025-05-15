@@ -21,7 +21,7 @@
       margin: 2rem auto;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-    input, select, button {
+    input, button {
       padding: 0.7rem;
       margin: 0.5rem;
       width: 80%;
@@ -66,11 +66,6 @@
       margin-bottom: 0.3rem;
       font-weight: bold;
     }
-    .price-breakdown {
-      margin-top: 1rem;
-      border-top: 1px dashed #ccc;
-      padding-top: 1rem;
-    }
     .total-price {
       font-size: 1.3rem;
       font-weight: bold;
@@ -103,6 +98,9 @@
     .tab-content.active {
       display: block;
     }
+    .cost-item {
+      margin: 0.5rem 0;
+    }
   </style>
 </head>
 <body>
@@ -112,7 +110,7 @@
   <div class="card">
     <div class="tabs">
       <div class="tab active" onclick="switchTab('manual')">Cotización Manual</div>
-      <div class="tab" onclick="switchTab('amazon')">Búsqueda en Amazon</div>
+      <div class="tab" onclick="switchTab('amazon')">Cotización desde Enlace</div>
     </div>
     
     <div id="manual-tab" class="tab-content active">
@@ -128,16 +126,8 @@
       </div>
       
       <div class="form-group">
-        <label for="producto">Tipo de producto (opcional)</label>
+        <label for="producto">Descripción del producto (opcional)</label>
         <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-      </div>
-      
-      <div class="form-group">
-        <label for="tipo-envio">Tipo de envío</label>
-        <select id="tipo-envio">
-          <option value="estandar">Estándar (12 USD/kg)</option>
-          <option value="express">Express (18 USD/kg)</option>
-        </select>
       </div>
       
       <button onclick="calcular()">Calcular Costo Total</button>
@@ -150,12 +140,12 @@
           Total estimado: <span id="total-cotizacion">$0.00</span>
         </div>
         
-        <div class="price-breakdown">
-          <p><strong>Desglose de costos:</strong></p>
-          <p>• Costo de envío: <span id="costo-envio">$0.00</span></p>
-          <p>• Impuesto Ad Valorem (4%): <span id="ad-valorem">$0.00</span></p>
-          <p>• IGV (18% sobre valor + Ad Valorem): <span id="igv">$0.00</span></p>
-          <p>• Seguro (0.35% del valor): <span id="seguro">$0.00</span></p>
+        <div class="cost-item">
+          <p><strong>Costo de envío:</strong> <span id="costo-envio">$0.00</span></p>
+        </div>
+        
+        <div class="cost-item">
+          <p><strong>Impuestos totales:</strong> <span id="impuestos-totales">$0.00</span></p>
         </div>
         
         <p id="alerta" class="note" style="color: #7c0a02; margin-top: 1rem;"></p>
@@ -163,10 +153,10 @@
     </div>
     
     <div id="amazon-tab" class="tab-content">
-      <h2>Cotizador con Amazon</h2>
+      <h2>Cotizador desde Enlace</h2>
       <div class="form-group">
-        <label for="amazonQuery">Buscar producto en Amazon</label>
-        <input type="text" id="amazonQuery" placeholder="Ej: iPhone 13, zapatillas Nike">
+        <label for="enlace-producto">Enlace del producto (Amazon u otros)</label>
+        <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
       </div>
       
       <div class="form-group">
@@ -179,42 +169,37 @@
         <input type="number" id="valorAmazon" placeholder="Ej: 299" step="0.01" min="1">
       </div>
       
-      <div class="form-group">
-        <label for="tipo-envio-amazon">Tipo de envío</label>
-        <select id="tipo-envio-amazon">
-          <option value="estandar">Estándar (12 USD/kg)</option>
-          <option value="express">Express (18 USD/kg)</option>
-        </select>
-      </div>
-      
-      <button onclick="calcularAmazon()">Buscar y Calcular</button>
+      <button onclick="calcularAmazon()">Calcular Costo</button>
       
       <div id="resultadoAmazon" class="result-box hidden">
-        <h3>Resultado de búsqueda:</h3>
-        <p id="amazon-link"></p>
+        <h3>Resumen de Cotización</h3>
+        <div id="enlace-info"></div>
         
         <div class="total-price">
           Total estimado: <span id="total-amazon">$0.00</span>
         </div>
         
-        <div class="price-breakdown">
-          <p><strong>Desglose de costos:</strong></p>
-          <p>• Costo de envío: <span id="costo-envio-amazon">$0.00</span></p>
-          <p>• Impuesto Ad Valorem (4%): <span id="ad-valorem-amazon">$0.00</span></p>
-          <p>• IGV (18% sobre valor + Ad Valorem): <span id="igv-amazon">$0.00</span></p>
-          <p>• Seguro (0.35% del valor): <span id="seguro-amazon">$0.00</span></p>
+        <div class="cost-item">
+          <p><strong>Costo de envío:</strong> <span id="costo-envio-amazon">$0.00</span></p>
+        </div>
+        
+        <div class="cost-item">
+          <p><strong>Impuestos totales:</strong> <span id="impuestos-totales-amazon">$0.00</span></p>
         </div>
       </div>
     </div>
   </div>
 
   <div style="margin-top: 2rem;">
-    <a href="https://wa.me/51999999999?text=Hola%20SEA%20Express%2C%20quiero%20más%20info%20sobre%20un%20envío" target="_blank">
-      <button>📲 Consultar por WhatsApp</button>
+    <a id="whatsapp-link" href="https://wa.me/51999999999?text=Hola%20SEA%20Express%2C%20quiero%20más%20información" target="_blank">
+      <button>📲 Consultar por última cotización</button>
     </a>
   </div>
 
   <script>
+    // Variable para almacenar la última cotización
+    let ultimaCotizacion = null;
+    
     function switchTab(tabName) {
       // Oculta todos los contenidos de pestañas
       document.querySelectorAll('.tab-content').forEach(content => {
@@ -235,7 +220,6 @@
       const peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
       const producto = document.getElementById("producto").value;
-      const tipoEnvio = document.getElementById("tipo-envio").value;
       
       // Validaciones
       if (isNaN(peso) || peso <= 0) {
@@ -249,7 +233,7 @@
       }
       
       // Calcular costos
-      const tarifaBase = tipoEnvio === 'express' ? 18 : 12;
+      const tarifaBase = 12; // Solo un tipo de envío
       const envio = peso <= 1 ? tarifaBase : tarifaBase * peso;
       
       const adValorem = valor * 0.04;
@@ -257,6 +241,21 @@
       const impuestosTotales = adValorem + igv;
       const seguro = valor * 0.0035;
       const total = envio + impuestosTotales + seguro;
+      
+      // Guardar última cotización
+      ultimaCotizacion = {
+        tipo: "manual",
+        producto: producto || "Sin descripción",
+        peso: peso,
+        valor: valor,
+        envio: envio,
+        impuestos: impuestosTotales,
+        seguro: seguro,
+        total: total
+      };
+      
+      // Actualizar enlace de WhatsApp
+      actualizarEnlaceWhatsApp();
       
       // Mostrar resultados
       document.getElementById("resultado").classList.remove("hidden");
@@ -276,9 +275,7 @@
       
       document.getElementById("total-cotizacion").textContent = `$${total.toFixed(2)}`;
       document.getElementById("costo-envio").textContent = `$${envio.toFixed(2)}`;
-      document.getElementById("ad-valorem").textContent = `$${adValorem.toFixed(2)}`;
-      document.getElementById("igv").textContent = `$${igv.toFixed(2)}`;
-      document.getElementById("seguro").textContent = `$${seguro.toFixed(2)}`;
+      document.getElementById("impuestos-totales").textContent = `$${impuestosTotales.toFixed(2)}`;
       
       // Mostrar alertas si es necesario
       const productoLower = producto.toLowerCase();
@@ -291,13 +288,12 @@
     }
 
     function calcularAmazon() {
-      const query = document.getElementById("amazonQuery").value.trim();
+      const enlace = document.getElementById("enlace-producto").value.trim();
       const peso = parseFloat(document.getElementById("pesoAmazon").value);
       const valor = parseFloat(document.getElementById("valorAmazon").value);
-      const tipoEnvio = document.getElementById("tipo-envio-amazon").value;
       
-      if (query === "") {
-        alert("Por favor ingresa un término de búsqueda para Amazon.");
+      if (enlace === "") {
+        alert("Por favor ingresa un enlace válido.");
         return;
       }
       
@@ -312,7 +308,7 @@
       }
       
       // Calcular costos (misma lógica que la función calcular)
-      const tarifaBase = tipoEnvio === 'express' ? 18 : 12;
+      const tarifaBase = 12;
       const envio = peso <= 1 ? tarifaBase : tarifaBase * peso;
       
       const adValorem = valor * 0.04;
@@ -321,20 +317,59 @@
       const seguro = valor * 0.0035;
       const total = envio + impuestosTotales + seguro;
       
+      // Guardar última cotización
+      ultimaCotizacion = {
+        tipo: "amazon",
+        enlace: enlace,
+        peso: peso,
+        valor: valor,
+        envio: envio,
+        impuestos: impuestosTotales,
+        seguro: seguro,
+        total: total
+      };
+      
+      // Actualizar enlace de WhatsApp
+      actualizarEnlaceWhatsApp();
+      
       // Mostrar resultados
       document.getElementById("resultadoAmazon").classList.remove("hidden");
       
-      document.getElementById("amazon-link").innerHTML = `
-        <a href="https://www.amazon.com/s?k=${encodeURIComponent(query)}" target="_blank" rel="noopener noreferrer">
-          Ver resultados para: ${query}
-        </a>
+      // Acortar el enlace para mostrar (si es muy largo)
+      const enlaceMostrar = enlace.length > 50 ? enlace.substring(0, 50) + "..." : enlace;
+      
+      document.getElementById("enlace-info").innerHTML = `
+        <p><strong>Producto:</strong> <a href="${enlace}" target="_blank">${enlaceMostrar}</a></p>
+        <p><strong>Peso:</strong> ${peso.toFixed(2)} kg</p>
+        <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
       `;
       
       document.getElementById("total-amazon").textContent = `$${total.toFixed(2)}`;
       document.getElementById("costo-envio-amazon").textContent = `$${envio.toFixed(2)}`;
-      document.getElementById("ad-valorem-amazon").textContent = `$${adValorem.toFixed(2)}`;
-      document.getElementById("igv-amazon").textContent = `$${igv.toFixed(2)}`;
-      document.getElementById("seguro-amazon").textContent = `$${seguro.toFixed(2)}`;
+      document.getElementById("impuestos-totales-amazon").textContent = `$${impuestosTotales.toFixed(2)}`;
+    }
+    
+    function actualizarEnlaceWhatsApp() {
+      if (!ultimaCotizacion) return;
+      
+      let mensaje = "Hola SEA Express, quiero más información sobre esta cotización:\n\n";
+      
+      if (ultimaCotizacion.tipo === "manual") {
+        mensaje += `📦 Producto: ${ultimaCotizacion.producto}\n`;
+      } else {
+        mensaje += `🔗 Enlace: ${ultimaCotizacion.enlace}\n`;
+      }
+      
+      mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
+      mensaje += `💰 Valor declarado: $${ultimaCotizacion.valor.toFixed(2)}\n`;
+      mensaje += `✈️ Costo de envío: $${ultimaCotizacion.envio.toFixed(2)}\n`;
+      mensaje += `🏛️ Impuestos totales: $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
+      mensaje += `🛡️ Seguro: $${ultimaCotizacion.seguro.toFixed(2)}\n`;
+      mensaje += `💵 TOTAL ESTIMADO: $${ultimaCotizacion.total.toFixed(2)}\n\n`;
+      mensaje += "Por favor, necesito más información sobre este envío.";
+      
+      const encodedMessage = encodeURIComponent(mensaje);
+      document.getElementById("whatsapp-link").href = `https://wa.me/51999999999?text=${encodedMessage}`;
     }
   </script>
 </body>
