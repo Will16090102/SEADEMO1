@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SEA Express - Cotiza tu envío</title>
+  <title>SEA LOGISTICS GROUP - Cotiza tu envío</title>
   <style>
     :root {
-      --color-primary: #7c0a02;
-      --color-secondary: #b22222;
+      --color-primary: #BE1522;    /* Rojo principal */
+      --color-primary-dark: #801A1A; /* Rojo oscuro */
+      --color-secondary: #606060;   /* Gris */
       --color-whatsapp: #25D366;
       --color-whatsapp-hover: #128C7E;
       --color-text: #333;
-      --color-light: #f8f8f8;
-      --color-border: #ddd;
+      --color-light: #ffffff;       /* Blanco puro */
+      --color-border: #e0e0e0;
+      --color-background: #f9f9f9;
     }
     
     body {
@@ -31,7 +33,7 @@
       width: 100%;
       max-width: 1000px;
       margin: auto;
-      background: white;
+      background: var(--color-light);
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -44,11 +46,12 @@
       display: flex;
       flex-direction: column;
       transition: all 0.5s ease;
+      background-color: var(--color-light);
     }
     
     .result-section {
       width: 0;
-      background-color: var(--color-light);
+      background-color: var(--color-background);
       color: var(--color-text);
       display: flex;
       flex-direction: column;
@@ -62,6 +65,26 @@
       padding: 3rem;
     }
     
+    .logo-container {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--color-primary);
+      letter-spacing: 1px;
+    }
+    
+    .logo-subtext {
+      font-size: 1rem;
+      color: var(--color-secondary);
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: -0.5rem;
+    }
+    
     h1 {
       color: var(--color-primary);
       margin-bottom: 1rem;
@@ -71,9 +94,10 @@
     
     .slogan {
       text-align: center;
-      color: var(--color-primary);
+      color: var(--color-secondary);
       margin-bottom: 2rem;
       font-size: 1rem;
+      font-style: italic;
     }
     
     .form-group {
@@ -84,7 +108,7 @@
       display: block;
       margin-bottom: 0.6rem;
       font-weight: bold;
-      color: var(--color-primary);
+      color: var(--color-primary-dark);
       font-size: 0.9rem;
     }
     
@@ -94,16 +118,18 @@
       border: 1px solid var(--color-border);
       border-radius: 8px;
       font-size: 0.9rem;
-      transition: border 0.3s;
+      transition: all 0.3s;
+      background-color: var(--color-light);
     }
     
     input:focus {
       outline: none;
       border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(190, 21, 34, 0.2);
     }
     
     button {
-      background-color: var(--color-secondary);
+      background-color: var(--color-primary);
       color: white;
       border: none;
       padding: 1rem;
@@ -117,8 +143,9 @@
     }
     
     button:hover {
-      background-color: var(--color-primary);
+      background-color: var(--color-primary-dark);
       transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     
     .result-title {
@@ -150,7 +177,7 @@
     }
     
     .result-item strong {
-      color: var(--color-text);
+      color: var(--color-secondary);
     }
     
     .result-item span {
@@ -169,7 +196,7 @@
       font-weight: bold;
       text-align: center;
       margin: 1.5rem 0;
-      color: var(--color-secondary);
+      color: var(--color-primary);
     }
     
     .whatsapp-btn {
@@ -212,6 +239,7 @@
       cursor: pointer;
       transition: all 0.3s;
       font-size: 0.9rem;
+      color: var(--color-secondary);
     }
     
     .tab.active {
@@ -269,14 +297,27 @@
       .total-price {
         font-size: 1.3rem;
       }
+      
+      .logo {
+        font-size: 2rem;
+      }
+      
+      .logo-subtext {
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="calculator-container">
     <div class="form-section">
-      <h1>SEA Express</h1>
-      <p class="slogan">Elígelo y es tuyo</p>
+      <div class="logo-container">
+        <div class="logo">SEA</div>
+        <div class="logo-subtext">LOGISTICS GROUP</div>
+      </div>
+      
+      <h1>Cotiza tu envío</h1>
+      <p class="slogan">Soluciones logísticas integrales</p>
       
       <div class="tabs">
         <div class="tab active" onclick="switchTab('manual')">Manual</div>
@@ -400,13 +441,13 @@
         return;
       }
       
-      // Calcular costos según las reglas corregidas
+      // Calcular costos según las reglas corregidas (prorrateo exacto)
       const desaduanaje = 8; // $8 fijos de desaduanaje
       const primerKilo = 12; // $12 por el primer kg
       
-      // Kilos adicionales (redondeamos hacia arriba para cobrar por fracciones como kilos completos)
-      const kilosAdicionales = Math.ceil(Math.max(0, peso - 1)); 
-      const adicionalPorKilo = 12; // $12 por cada kg adicional
+      // Kilos adicionales (decimales exactos, sin redondeo)
+      const kilosAdicionales = Math.max(0, peso - 1); 
+      const adicionalPorKilo = 12; // $12 por cada kg adicional (prorrateado)
       
       const costoEnvio = primerKilo + (kilosAdicionales * adicionalPorKilo);
       const envioTotal = costoEnvio + desaduanaje;
@@ -503,7 +544,7 @@
     function actualizarEnlaceWhatsApp() {
       if (!ultimaCotizacion) return;
       
-      let mensaje = "Hola SEA Express, quiero aprovechar el descuento de primera compra para este envío:\n\n";
+      let mensaje = "Hola SEA Logistics Group, quiero aprovechar el descuento de primera compra para este envío:\n\n";
       
       if (ultimaCotizacion.tipo === "manual") {
         mensaje += `📦 Producto: ${ultimaCotizacion.producto || "Sin descripción"}\n`;
