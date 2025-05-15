@@ -3,263 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SEA Express - Cotiza tu envío</title>
+  <title>SEA Express - Calcula tu envío a Perú</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #7c0a02;
-      color: white;
+      background-color: #f5f5f5;
+      color: #333;
       text-align: center;
-      padding: 2rem;
+      margin: 0;
+      padding: 0;
     }
-    .card {
-      background: white;
-      color: #7c0a02;
-      padding: 2rem;
-      border-radius: 16px;
-      max-width: 600px;
+    .container {
+      max-width: 400px;
       margin: 2rem auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    input, button {
-      padding: 0.7rem;
-      margin: 0.5rem;
-      width: 80%;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-    button {
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s;
-    }
-    button:hover {
-      transform: translateY(-2px);
-    }
-    a {
-      text-decoration: none;
-      color: white;
-    }
-    .note {
-      font-size: 0.9rem;
-      color: #ffebcd;
-    }
-    .result-box {
-      background-color: #f8f8f8;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-top: 1rem;
-      text-align: left;
-      border-left: 4px solid #b22222;
-    }
-    .form-group {
+    h1 {
+      color: #7c0a02;
+      font-size: 1.5rem;
       margin-bottom: 1rem;
+    }
+    .description {
+      color: #666;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+    .input-group {
+      margin-bottom: 1.5rem;
       text-align: left;
-      padding: 0 10%;
     }
     label {
       display: block;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
       font-weight: bold;
+      color: #555;
     }
-    .total-price {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #b22222;
-      margin: 1rem 0;
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
     }
-    .hidden {
-      display: none;
-    }
-    .tabs {
+    .unit-selector {
       display: flex;
-      justify-content: center;
-      margin-bottom: 1rem;
+      margin-top: 0.5rem;
     }
-    .tab {
+    .unit-selector span {
       padding: 0.5rem 1rem;
-      background: #f0f0f0;
-      color: #7c0a02;
+      background: #eee;
+      margin-right: 0.5rem;
+      border-radius: 5px;
       cursor: pointer;
-      border-radius: 8px 8px 0 0;
-      margin: 0 0.2rem;
     }
-    .tab.active {
-      background: white;
+    .unit-selector span.active {
+      background: #7c0a02;
+      color: white;
+    }
+    button {
+      background-color: #7c0a02;
+      color: white;
+      border: none;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1rem;
       font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
     }
-    .tab-content {
-      display: none;
+    button:hover {
+      background-color: #5a0802;
     }
-    .tab-content.active {
-      display: block;
+    .result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #f9f9f9;
+      border-radius: 8px;
+      text-align: left;
     }
-    .cost-item {
+    .result p {
       margin: 0.5rem 0;
     }
-    .divider {
-      border-top: 1px dashed #ccc;
-      margin: 1rem 0;
-    }
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255,255,255,.3);
-      border-radius: 50%;
-      border-top-color: #7c0a02;
-      animation: spin 1s ease-in-out infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    /* Estilo especial para el botón de WhatsApp */
-    .whatsapp-btn {
-      background-color: #25D366;
-      padding: 0.8rem 1.5rem;
-      border-radius: 30px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      animation: pulse 1.5s infinite;
-    }
-    .whatsapp-btn:hover {
-      background-color: #128C7E;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    .whatsapp-icon {
-      margin-right: 8px;
-      font-size: 1.2rem;
+    .note {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 1rem;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
-  <h1>SEA Express</h1>
-  <p>Elígelo y es tuyo</p>
-
-  <div class="card">
-    <div class="tabs">
-      <div class="tab active" onclick="switchTab('manual')">Cotización Manual</div>
-      <div class="tab" onclick="switchTab('enlace')">Cotización por Enlace</div>
+  <div class="container">
+    <h1>Calcula tu envío a Perú</h1>
+    <p class="description">Una manera fácil que te brindamos para calcular el costo aproximado del servicio por todos los productos que desees traer de USA.</p>
+    
+    <div class="input-group">
+      <label for="valor">Valor declarado (USD)</label>
+      <input type="number" id="valor" placeholder="Ej: 100" step="0.01" min="1">
     </div>
     
-    <div id="manual-tab" class="tab-content active">
-      <h2>Calculadora de Envío</h2>
-      <div class="form-group">
-        <label for="peso">Peso del paquete (kg)*</label>
-        <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="valor">Valor declarado (USD)*</label>
-        <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="producto">Descripción del producto (opcional)</label>
-        <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-      </div>
-      
-      <button onclick="calcular()" style="background-color: #b22222;">Calcular Costo Total</button>
-      
-      <div id="resultado" class="result-box hidden">
-        <h3>Resumen de Cotización</h3>
-        <div id="producto-info"></div>
-        
-        <div class="cost-item">
-          <p><strong>Costo de envío:</strong> <span id="costo-envio">$0.00</span></p>
-        </div>
-        
-        <div class="cost-item">
-          <p><strong>Impuestos totales (24%):</strong> <span id="impuestos-totales">$0.00</span></p>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="total-price">
-          Total estimado: <span id="total-cotizacion">$0.00</span>
-        </div>
-        
-        <p id="alerta" class="note" style="color: #7c0a02; margin-top: 1rem;"></p>
+    <div class="input-group">
+      <label for="peso">Peso</label>
+      <input type="number" id="peso" placeholder="Ej: 6" step="0.01" min="0.1">
+      <div class="unit-selector">
+        <span class="active" id="kg">Kilos</span>
+        <span id="lb">Libras</span>
       </div>
     </div>
     
-    <div id="enlace-tab" class="tab-content">
-      <h2>Cotizador por Enlace</h2>
-      <div class="form-group">
-        <label for="enlace-producto">Enlace del producto*</label>
-        <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
-      </div>
-      
-      <button onclick="calcularPorEnlace()" id="btn-calcular-enlace" style="background-color: #b22222;">
-        Calcular Costo
-      </button>
-      
-      <div id="resultadoEnlace" class="result-box hidden">
-        <h3>Resumen de Cotización</h3>
-        <div id="enlace-info"></div>
-        
-        <div class="cost-item">
-          <p><strong>Costo de envío:</strong> <span id="costo-envio-enlace">$0.00</span></p>
-        </div>
-        
-        <div class="cost-item">
-          <p><strong>Impuestos totales (24%):</strong> <span id="impuestos-totales-enlace">$0.00</span></p>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <div class="total-price">
-          Total estimado: <span id="total-enlace">$0.00</span>
-        </div>
-      </div>
+    <button onclick="calcular()">Calcular</button>
+    
+    <div id="resultado" class="result hidden">
+      <p><strong>Valor aprox. de envío a Perú:</strong></p>
+      <p style="font-size: 1.5rem; font-weight: bold;" id="total-cotizacion">US$ 0.00</p>
+      <p class="note">Precio incluye US$ 5.00 de desaduanaje.</p>
+      <p class="note">Nota. Esta no es una cotización formal</p>
     </div>
-  </div>
-
-  <div style="margin-top: 2rem;">
-    <a id="whatsapp-link" href="https://wa.me/51923465624?text=Hola%20SEA%20Express%2C%20quiero%20más%20información" target="_blank">
-      <button class="whatsapp-btn">
-        <span class="whatsapp-icon">📲</span> Consultar por última cotización
-      </button>
-    </a>
   </div>
 
   <script>
-    // Variable para almacenar la última cotización
-    let ultimaCotizacion = null;
+    // Cambiar entre kilos y libras
+    document.getElementById('kg').addEventListener('click', function() {
+      this.classList.add('active');
+      document.getElementById('lb').classList.remove('active');
+    });
     
-    function switchTab(tabName) {
-      // Oculta todos los contenidos de pestañas
-      document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-      });
-      
-      // Desactiva todas las pestañas
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      
-      // Activa la pestaña seleccionada
-      document.getElementById(tabName + '-tab').classList.add('active');
-      document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
-    }
+    document.getElementById('lb').addEventListener('click', function() {
+      this.classList.add('active');
+      document.getElementById('kg').classList.remove('active');
+      // Convertir el valor actual de kg a lb si hay un valor
+      const pesoInput = document.getElementById('peso');
+      if (pesoInput.value) {
+        pesoInput.value = (parseFloat(pesoInput.value) * 2.20462).toFixed(2);
+      }
+    });
 
     function calcular() {
       const peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
-      const producto = document.getElementById("producto").value;
+      const esLibras = document.getElementById('lb').classList.contains('active');
       
       // Validaciones
       if (isNaN(peso) || peso <= 0) {
-        alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
+        alert("Por favor ingresa un peso válido (mínimo 0.1)");
         return;
       }
       
@@ -268,9 +158,12 @@
         return;
       }
       
-      // Calcular costos según las nuevas reglas
-      const tarifaBase = 20; // $20 por kg (incluye desaduanaje)
-      const pesoRedondeado = Math.ceil(peso); // Redondear hacia arriba
+      // Convertir libras a kilos si es necesario
+      const pesoEnKilos = esLibras ? peso / 2.20462 : peso;
+      const pesoRedondeado = Math.ceil(pesoEnKilos);
+      
+      // Calcular costos
+      const tarifaBase = 15; // $15 por kg (incluye $5 de desaduanaje)
       const envio = pesoRedondeado * tarifaBase;
       
       // Impuesto del 24% solo si el valor es mayor a $200
@@ -278,186 +171,9 @@
       
       const total = envio + impuestosTotales;
       
-      // Guardar última cotización
-      ultimaCotizacion = {
-        tipo: "manual",
-        producto: producto || "Sin descripción",
-        peso: peso,
-        valor: valor,
-        envio: envio,
-        impuestos: impuestosTotales,
-        total: total
-      };
-      
-      // Actualizar enlace de WhatsApp
-      actualizarEnlaceWhatsApp();
-      
       // Mostrar resultados
       document.getElementById("resultado").classList.remove("hidden");
-      
-      if (producto) {
-        document.getElementById("producto-info").innerHTML = `
-          <p><strong>Producto:</strong> ${producto}</p>
-          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg (se redondea a ${pesoRedondeado} kg)</p>
-          <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
-        `;
-      } else {
-        document.getElementById("producto-info").innerHTML = `
-          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg (se redondea a ${pesoRedondeado} kg)</p>
-          <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
-        `;
-      }
-      
-      document.getElementById("total-cotizacion").textContent = `$${total.toFixed(2)}`;
-      document.getElementById("costo-envio").textContent = `$${envio.toFixed(2)}`;
-      document.getElementById("impuestos-totales").textContent = `$${impuestosTotales.toFixed(2)}`;
-      
-      // Mostrar alertas si es necesario
-      const productoLower = producto.toLowerCase();
-      if (productoLower.includes("radiofrecuencia") || productoLower.includes("gps") || 
-          productoLower.includes("dron") || productoLower.includes("electrónico")) {
-        document.getElementById("alerta").innerHTML = "⚠ Atención: Este producto podría requerir documentación adicional (permisos de SUNAT u homologación).";
-      } else {
-        document.getElementById("alerta").innerHTML = "";
-      }
-    }
-
-    function calcularPorEnlace() {
-      const enlace = document.getElementById("enlace-producto").value.trim();
-      
-      if (enlace === "") {
-        alert("Por favor ingresa un enlace válido.");
-        return;
-      }
-      
-      // Validar que sea un enlace http/https
-      if (!enlace.startsWith('http://') && !enlace.startsWith('https://')) {
-        alert("Por favor ingresa un enlace válido (debe comenzar con http:// o https://)");
-        return;
-      }
-      
-      // Mostrar loading
-      const btn = document.getElementById("btn-calcular-enlace");
-      btn.innerHTML = '<span class="loading"></span> Procesando enlace...';
-      btn.disabled = true;
-      
-      // Simular obtención de datos del enlace
-      setTimeout(() => {
-        // En un caso real, aquí harías una llamada a tu backend
-        // Para este ejemplo, usaremos datos de ejemplo basados en Amazon
-        const datosProducto = obtenerDatosDeAmazon(enlace);
-        
-        if (!datosProducto) {
-          alert("No se pudo obtener información del producto. Por favor ingresa los datos manualmente.");
-          btn.innerHTML = 'Calcular Costo';
-          btn.disabled = false;
-          return;
-        }
-        
-        // Calcular costos con los datos obtenidos
-        const peso = parseFloat(datosProducto.peso);
-        const valor = parseFloat(datosProducto.precio);
-        const producto = datosProducto.nombre;
-        
-        if (isNaN(peso) || peso <= 0 || isNaN(valor) || valor <= 0) {
-          alert("No se pudieron obtener los datos necesarios del producto. Por favor ingrésalos manualmente.");
-          btn.innerHTML = 'Calcular Costo';
-          btn.disabled = false;
-          return;
-        }
-        
-        // Calcular costos según las nuevas reglas
-        const tarifaBase = 20; // $20 por kg (incluye desaduanaje)
-        const pesoRedondeado = Math.ceil(peso); // Redondear hacia arriba
-        const envio = pesoRedondeado * tarifaBase;
-        
-        // Impuesto del 24% solo si el valor es mayor a $200
-        const impuestosTotales = valor > 200 ? valor * 0.24 : 0;
-        
-        const total = envio + impuestosTotales;
-        
-        // Guardar última cotización
-        ultimaCotizacion = {
-          tipo: "enlace",
-          enlace: enlace,
-          producto: producto,
-          peso: peso,
-          valor: valor,
-          envio: envio,
-          impuestos: impuestosTotales,
-          total: total
-        };
-        
-        // Actualizar enlace de WhatsApp
-        actualizarEnlaceWhatsApp();
-        
-        // Mostrar resultados
-        document.getElementById("resultadoEnlace").classList.remove("hidden");
-        
-        document.getElementById("enlace-info").innerHTML = `
-          <p><strong>Producto:</strong> ${producto}</p>
-          <p><strong>Peso:</strong> ${peso.toFixed(2)} kg (se redondea a ${pesoRedondeado} kg)</p>
-          <p><strong>Valor declarado:</strong> $${valor.toFixed(2)}</p>
-          <p><small><a href="${enlace}" target="_blank">Ver producto</a></small></p>
-        `;
-        
-        document.getElementById("total-enlace").textContent = `$${total.toFixed(2)}`;
-        document.getElementById("costo-envio-enlace").textContent = `$${envio.toFixed(2)}`;
-        document.getElementById("impuestos-totales-enlace").textContent = `$${impuestosTotales.toFixed(2)}`;
-        
-        btn.innerHTML = 'Calcular Costo';
-        btn.disabled = false;
-      }, 1500);
-    }
-    
-    // Función simulada para obtener datos de Amazon (para propósitos de demostración)
-    function obtenerDatosDeAmazon(enlace) {
-      // Esta es una simulación - en la práctica necesitarías un servicio backend
-      // que analice el enlace y devuelva peso, precio y nombre del producto
-      
-      // Simulación para enlaces de Amazon
-      if (enlace.includes("amazon.com") || enlace.includes("amazon.")) {
-        return {
-          nombre: "Producto de ejemplo (Amazon)",
-          precio: 201.00, // Valor de ejemplo
-          peso: 1.5 // Peso de ejemplo en kg
-        };
-      }
-      
-      // Simulación para otros enlaces
-      return {
-        nombre: "Producto de ejemplo",
-        precio: 150.00,
-        peso: 1.2
-      };
-    }
-    
-    function actualizarEnlaceWhatsApp() {
-      if (!ultimaCotizacion) return;
-      
-      let mensaje = "Hola SEA Express, quiero más información sobre esta cotización:\n\n";
-      
-      if (ultimaCotizacion.tipo === "manual") {
-        mensaje += `📦 Producto: ${ultimaCotizacion.producto}\n`;
-      } else {
-        mensaje += `🔗 Enlace: ${ultimaCotizacion.enlace}\n`;
-        mensaje += `📦 Producto: ${ultimaCotizacion.producto}\n`;
-      }
-      
-      mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg (se redondea a ${Math.ceil(ultimaCotizacion.peso)} kg)\n`;
-      mensaje += `💰 Valor declarado: $${ultimaCotizacion.valor.toFixed(2)}\n`;
-      mensaje += `✈️ Costo de envío: $${ultimaCotizacion.envio.toFixed(2)}\n`;
-      
-      if (ultimaCotizacion.impuestos > 0) {
-        mensaje += `🏛️ Impuestos totales (24%): $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
-      }
-      
-      mensaje += `------------------------------\n`;
-      mensaje += `💵 TOTAL ESTIMADO: $${ultimaCotizacion.total.toFixed(2)}\n\n`;
-      mensaje += "Por favor, necesito más información sobre este envío.";
-      
-      const encodedMessage = encodeURIComponent(mensaje);
-      document.getElementById("whatsapp-link").href = `https://wa.me/51923465624?text=${encodedMessage}`;
+      document.getElementById("total-cotizacion").textContent = `US$ ${total.toFixed(2)}`;
     }
   </script>
 </body>
