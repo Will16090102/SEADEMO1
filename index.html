@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SEA Express</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #7c0a02;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    .card {
+      background: white;
+      color: #7c0a02;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: auto;
+    }
+    input, button {
+      padding: 0.5rem;
+      margin: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>SEA Express</h1>
+  <p>Calcula tu envío desde USA</p>
+
+  <div class="card">
+    <h3>Calculadora de Cotización</h3>
+    <input type="number" id="peso" placeholder="Peso (kg)" step="0.01"><br>
+    <input type="number" id="valor" placeholder="Valor del producto ($)" step="0.01"><br>
+    <button onclick="calcular()">Calcular</button>
+    <p id="resultado"></p>
+  </div>
+
+  <script>
+    function calcular() {
+      const peso = parseFloat(document.getElementById("peso").value);
+      const valor = parseFloat(document.getElementById("valor").value);
+      const envio = peso <= 1 ? 12 : 12 * peso;
+      const adValorem = valor * 0.04;
+      const igv = (valor + adValorem) * 0.18;
+      const seguro = valor * 0.0035;
+      const total = envio + adValorem + igv + seguro;
+      document.getElementById("resultado").innerHTML = 
+        `Total estimado: $${total.toFixed(2)} <br>(Envío: $${envio.toFixed(2)}, IGV: $${igv.toFixed(2)})`;
+    }
+  </script>
+</body>
+</html>
