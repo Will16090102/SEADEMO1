@@ -3,499 +3,567 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEA Logistics - Calculadora de Envíos a Perú</title>
+  <title>SEA LOGISTICS GROUP - Cotiza tu envío</title>
   <style>
     :root {
       --color-primary: #BE1522;
       --color-primary-dark: #801A1A;
       --color-secondary: #606060;
-      --color-accent: #2C3E50;
-      --color-light: #FFFFFF;
-      --color-bg: #F8F9FA;
-      --color-border: #E0E0E0;
+      --color-whatsapp: #25D366;
+      --color-whatsapp-hover: #128C7E;
       --color-text: #333333;
-      --color-success: #28A745;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      --color-light: #FFFFFF;
+      --color-border: #E0E0E0;
+      --color-bg: #F8F9FA;
     }
 
     body {
-      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--color-primary);
+      color: white;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      min-height: 100vh;
+      font-size: 14px;
+    }
+
+    .calculator-container {
+      display: flex;
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+      background: var(--color-light);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 3rem;
+      color: var(--color-primary);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.5s ease;
+    }
+
+    .result-section {
+      width: 0;
       background-color: var(--color-bg);
       color: var(--color-text);
-      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      transition: all 0.5s ease;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* Header */
-    .header {
-      background-color: var(--color-light);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 15px 0;
-      margin-bottom: 30px;
+    .result-section.expanded {
+      width: 350px;
+      padding: 3rem;
     }
 
     .logo-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
+      margin-bottom: 1.5rem;
     }
 
-    .logo-img {
-      height: 60px;
-      width: auto;
-    }
-
-    /* Calculator Section */
-    .calculator-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-
-    @media (max-width: 768px) {
-      .calculator-section {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .calculator-card {
-      background-color: var(--color-light);
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      padding: 30px;
-      transition: transform 0.3s ease;
-    }
-
-    .calculator-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card-header {
-      border-bottom: 2px solid var(--color-primary);
-      padding-bottom: 15px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-    }
-
-    .card-icon {
-      background-color: var(--color-primary);
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 15px;
-      font-size: 20px;
-    }
-
-    .card-title {
-      font-size: 1.5rem;
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
       color: var(--color-primary);
+      letter-spacing: 1px;
     }
 
-    .form-group {
-      margin-bottom: 20px;
+    .logo-subtext {
+      font-size: 1rem;
+      color: var(--color-secondary);
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: -0.5rem;
+      font-style: italic;
     }
 
-    .form-label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: var(--color-accent);
+    h1 {
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 1.8rem;
     }
 
-    .form-control {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid var(--color-border);
-      border-radius: 6px;
-      font-size: 16px;
-      transition: border 0.3s;
+    .slogan {
+      text-align: center;
+      color: var(--color-secondary);
+      margin-bottom: 2rem;
+      font-size: 1rem;
     }
 
-    .form-control:focus {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(190, 21, 34, 0.1);
+    .tabs {
+      display: flex;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f0f0f0;
     }
 
-    .btn {
-      display: inline-block;
-      background-color: var(--color-primary);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: 600;
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
       cursor: pointer;
       transition: all 0.3s;
-      text-align: center;
-      width: 100%;
-    }
-
-    .btn:hover {
-      background-color: var(--color-primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(190, 21, 34, 0.2);
-    }
-
-    /* Results Section */
-    .results-section {
-      background-color: var(--color-light);
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      padding: 30px;
-      margin-top: 30px;
-    }
-
-    .results-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .results-title {
-      font-size: 1.5rem;
-      color: var(--color-primary);
-    }
-
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .result-label {
-      font-weight: 600;
+      font-size: 0.9rem;
       color: var(--color-secondary);
     }
 
-    .result-value {
-      font-weight: 700;
+    .tab.active {
+      background: white;
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1.8rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: bold;
+      color: var(--color-primary-dark);
+      font-size: 0.9rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.9rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      background-color: var(--color-light);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(190, 21, 34, 0.2);
+    }
+
+    button {
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .result-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: var(--color-primary);
+    }
+
+    .result-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-out 0.3s;
+    }
+
+    .result-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .result-item {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .result-item strong {
+      color: var(--color-secondary);
+    }
+
+    .result-item span {
+      font-weight: bold;
       color: var(--color-primary);
     }
 
     .total-section {
-      margin-top: 20px;
-      padding-top: 20px;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
       border-top: 2px dashed var(--color-primary);
     }
 
     .total-price {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: bold;
       text-align: center;
+      margin: 1.5rem 0;
       color: var(--color-primary);
-      margin: 20px 0;
     }
 
     .whatsapp-btn {
-      background-color: #25D366;
+      background-color: var(--color-whatsapp);
       color: white;
+      border: none;
+      padding: 1.1rem;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      margin-top: 30px;
+      gap: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .whatsapp-btn:hover {
-      background-color: #128C7E;
+      background-color: var(--color-whatsapp-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
 
-    /* Features Section */
-    .features-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin: 50px 0;
-    }
-
-    .feature-card {
-      background-color: var(--color-light);
-      border-radius: 10px;
-      padding: 25px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      display: flex;
-      align-items: flex-start;
-    }
-
-    .feature-icon {
-      color: var(--color-primary);
-      font-size: 24px;
-      margin-right: 15px;
-      min-width: 40px;
-    }
-
-    .feature-title {
-      font-size: 1.1rem;
-      color: var(--color-primary);
-      margin-bottom: 10px;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 576px) {
-      .container {
-        padding: 15px;
+    @media (max-width: 900px) {
+      body {
+        padding: 1rem;
       }
       
-      .calculator-card, .results-section {
-        padding: 20px;
+      .calculator-container {
+        flex-direction: column;
       }
       
-      .card-title, .results-title {
+      .result-section {
+        width: 100%;
+        padding: 0;
+      }
+      
+      .result-section.expanded {
+        width: 100%;
+        padding: 2rem;
+      }
+      
+      .form-section {
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 13px;
+        padding: 0.5rem;
+      }
+      
+      .calculator-container {
+        border-radius: 10px;
+      }
+      
+      .form-section, .result-section.expanded {
+        padding: 1.5rem;
+      }
+      
+      .total-price {
         font-size: 1.3rem;
+      }
+      
+      .logo {
+        font-size: 2rem;
+      }
+      
+      .logo-subtext {
+        font-size: 0.8rem;
       }
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <header class="header">
-    <div class="container">
+  <div class="calculator-container">
+    <div class="form-section">
       <div class="logo-container">
-        <!-- Reemplaza con tu logo -->
-        <img src="logo-sea.png" alt="SEA Logistics" class="logo-img">
+        <div class="logo">SEA</div>
+        <div class="logo-subtext">LOGISTICS GROUP</div>
+      </div>
+      
+      <p class="slogan">Soluciones logísticas integrales</p>
+      
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('manual')">Manual</div>
+        <div class="tab" onclick="switchTab('enlace')">Por Enlace</div>
+      </div>
+      
+      <div id="manual-tab" class="tab-content active">
+        <div class="form-group">
+          <label for="valor">Valor declarado (USD)</label>
+          <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
+        </div>
+        
+        <div class="form-group">
+          <label for="peso">Peso del paquete (kg)</label>
+          <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
+        </div>
+        
+        <div class="form-group">
+          <label for="producto">Descripción del producto (opcional)</label>
+          <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
+        </div>
+        
+        <button onclick="calcular()">Calcular</button>
+      </div>
+      
+      <div id="enlace-tab" class="tab-content">
+        <div class="form-group">
+          <label for="enlace-producto">Enlace del producto</label>
+          <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
+        </div>
+        
+        <button onclick="calcularPorEnlace()">Calcular</button>
       </div>
     </div>
-  </header>
-
-  <main class="container">
-    <h1 style="text-align: center; margin-bottom: 30px; color: var(--color-primary);">Calculadora de Envíos a Perú</h1>
     
-    <div class="calculator-section">
-      <div class="calculator-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-box-open"></i>
-          </div>
-          <h2 class="card-title">Envío Estándar</h2>
-        </div>
-        <form id="standard-form">
-          <div class="form-group">
-            <label for="weight" class="form-label">Peso del paquete (kg)</label>
-            <input type="number" id="weight" class="form-control" placeholder="Ej: 1.5" step="0.1" min="0.1" required>
-          </div>
-          <div class="form-group">
-            <label for="value" class="form-label">Valor declarado (USD)</label>
-            <input type="number" id="value" class="form-control" placeholder="Ej: 120" step="0.01" min="1" required>
-          </div>
-          <div class="form-group">
-            <label for="description" class="form-label">Descripción del producto (opcional)</label>
-            <input type="text" id="description" class="form-control" placeholder="Ej: Celular, ropa, etc.">
-          </div>
-          <button type="button" onclick="calculateShipping()" class="btn">Calcular Envío</button>
-        </form>
-      </div>
-
-      <div class="calculator-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-link"></i>
-          </div>
-          <h2 class="card-title">Calcular por enlace</h2>
-        </div>
-        <form id="link-form">
-          <div class="form-group">
-            <label for="product-link" class="form-label">Enlace del producto</label>
-            <input type="url" id="product-link" class="form-control" placeholder="Ej: https://www.amazon.com/..." required>
-          </div>
-          <button type="button" onclick="calculateByLink()" class="btn">Obtener Datos</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="features-section">
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shipping-fast"></i>
-        </div>
-        <div>
-          <h3 class="feature-title">Envíos Rápidos</h3>
-          <p>Entrega express en 7-10 días hábiles desde que recibimos tu paquete.</p>
-        </div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <div>
-          <h3 class="feature-title">Seguro Incluido</h3>
-          <p>Todos nuestros envíos incluyen seguro básico contra pérdida o daño.</p>
-        </div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-headset"></i>
-        </div>
-        <div>
-          <h3 class="feature-title">Soporte 24/7</h3>
-          <p>Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
-        </div>
-      </div>
-    </div>
-
-    <div id="results" class="results-section" style="display: none;">
-      <div class="results-header">
-        <h2 class="results-title">Resumen de tu envío</h2>
-      </div>
-      <div id="results-content">
+    <div id="result-section" class="result-section">
+      <div class="result-title">Resumen de Cotización</div>
+      
+      <div id="result-content" class="result-content">
+        <div id="producto-info"></div>
+        
         <div class="result-item">
-          <span class="result-label">Peso:</span>
-          <span id="result-weight" class="result-value">0.00 kg</span>
+          <strong>Valor declarado:</strong>
+          <span id="valor-result">$0.00</span>
         </div>
+        
         <div class="result-item">
-          <span class="result-label">Valor declarado:</span>
-          <span id="result-value" class="result-value">$0.00</span>
+          <strong>Peso:</strong>
+          <span id="peso-result">0.00 kg</span>
         </div>
+        
         <div class="result-item">
-          <span class="result-label">Costo de envío:</span>
-          <span id="shipping-cost" class="result-value">$0.00</span>
+          <strong>Desaduanaje:</strong>
+          <span id="desaduanaje">$8.00</span>
         </div>
+        
         <div class="result-item">
-          <span class="result-label">Desaduanaje:</span>
-          <span id="customs-fee" class="result-value">$8.00</span>
+          <strong>Costo de envío:</strong>
+          <span id="costo-envio">$0.00</span>
         </div>
+        
         <div class="result-item">
-          <span class="result-label">Impuestos:</span>
-          <span id="taxes" class="result-value">$0.00</span>
+          <strong>Impuestos:</strong>
+          <span id="impuestos">$0.00</span>
         </div>
+        
         <div class="total-section">
           <div class="result-item">
-            <span class="result-label">Subtotal:</span>
-            <span id="subtotal" class="result-value">$0.00</span>
+            <strong>Total envío:</strong>
+            <span id="envio-total">$0.00</span>
           </div>
-          <div class="total-price">
-            <span>Total a pagar: </span>
-            <span id="total" class="result-value">$0.00</span>
+          
+          <div class="result-item">
+            <strong>Total con todo:</strong>
+            <span id="total">$0.00</span>
           </div>
         </div>
       </div>
-      <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank" class="btn whatsapp-btn">
-        <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+      
+      <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank">
+        <button class="whatsapp-btn">
+          <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+        </button>
       </a>
     </div>
-  </main>
+  </div>
 
   <script>
-    function calculateShipping() {
-      const weight = parseFloat(document.getElementById('weight').value);
-      const value = parseFloat(document.getElementById('value').value);
-      const description = document.getElementById('description').value;
+    // Variable para almacenar la última cotización
+    let ultimaCotizacion = null;
+    
+    function switchTab(tabName) {
+      // Oculta todos los contenidos de pestañas
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Desactiva todas las pestañas
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Activa la pestaña seleccionada
+      document.getElementById(tabName + '-tab').classList.add('active');
+      document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
+    }
+
+    function calcular() {
+      const peso = parseFloat(document.getElementById("peso").value);
+      const valor = parseFloat(document.getElementById("valor").value);
+      const producto = document.getElementById("producto").value;
       
       // Validaciones
-      if (isNaN(weight) || weight <= 0) {
-        alert('Por favor ingresa un peso válido (mínimo 0.1 kg)');
+      if (isNaN(peso) || peso <= 0) {
+        alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
         return;
       }
       
-      if (isNaN(value) || value <= 0) {
-        alert('Por favor ingresa un valor declarado válido (mínimo $1)');
+      if (isNaN(valor) || valor <= 0) {
+        alert("Por favor ingresa un valor declarado válido (mínimo $1)");
         return;
       }
       
-      // Cálculos según tus requerimientos
-      const customsFee = 8; // $8 fijos de desaduanaje
-      const firstKilo = 12; // $12 por el primer kg
-      const additionalKilos = Math.max(0, weight - 1); // Kilos adicionales
-      const additionalCost = additionalKilos * 12; // $12 por cada kg adicional
+      // Calcular costos según las reglas (prorrateo exacto)
+      const desaduanaje = 8; // $8 fijos de desaduanaje
+      const primerKilo = 12; // $12 por el primer kg
+      const kilosAdicionales = Math.max(0, peso - 1); // Kilos adicionales (decimales)
+      const adicionalPorKilo = 12; // $12 por cada kg adicional (prorrateado)
       
-      const shippingCost = firstKilo + additionalCost;
-      const subtotal = shippingCost + customsFee;
+      const costoEnvio = primerKilo + (kilosAdicionales * adicionalPorKilo);
+      const envioTotal = costoEnvio + desaduanaje;
       
-      // Impuesto del 24% si el valor es mayor a $200
-      const taxes = value > 200 ? value * 0.24 : 0;
+      // Impuesto del 24% solo si el valor es mayor a $200
+      const impuestos = valor > 200 ? valor * 0.24 : 0;
       
       // Total incluyendo el valor del producto
-      const total = value + subtotal + taxes;
+      const total = valor + envioTotal + impuestos;
       
-      // Mostrar resultados
-      document.getElementById('result-weight').textContent = weight.toFixed(2) + ' kg';
-      document.getElementById('result-value').textContent = '$' + value.toFixed(2);
-      document.getElementById('shipping-cost').textContent = '$' + shippingCost.toFixed(2);
-      document.getElementById('customs-fee').textContent = '$' + customsFee.toFixed(2);
-      document.getElementById('taxes').textContent = '$' + taxes.toFixed(2);
-      document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
-      document.getElementById('total').textContent = '$' + total.toFixed(2);
+      // Guardar última cotización
+      ultimaCotizacion = {
+        tipo: "manual",
+        producto: producto,
+        peso: peso,
+        valor: valor,
+        desaduanaje: desaduanaje,
+        costoEnvio: costoEnvio,
+        envioTotal: envioTotal,
+        impuestos: impuestos,
+        total: total
+      };
       
       // Actualizar enlace de WhatsApp
-      updateWhatsAppLink(description, weight, value, shippingCost, customsFee, taxes, total);
+      actualizarEnlaceWhatsApp();
       
-      // Mostrar sección de resultados
-      document.getElementById('results').style.display = 'block';
-      window.scrollTo({
-        top: document.getElementById('results').offsetTop - 20,
-        behavior: 'smooth'
-      });
+      // Mostrar resultados con animación
+      mostrarResultados();
     }
-    
-    function calculateByLink() {
-      const link = document.getElementById('product-link').value.trim();
+
+    function mostrarResultados() {
+      // Expandir la sección de resultados
+      const resultSection = document.getElementById("result-section");
+      resultSection.classList.add("expanded");
       
-      if (link === '') {
-        alert('Por favor ingresa un enlace válido');
+      // Ocultar resultados si ya estaban visibles
+      const resultContent = document.getElementById("result-content");
+      resultContent.classList.remove("visible");
+      
+      // Esperar un momento para reiniciar la animación
+      setTimeout(() => {
+        // Actualizar los valores
+        if (ultimaCotizacion.producto) {
+          document.getElementById("producto-info").innerHTML = `
+            <div class="result-item">
+              <strong>Producto:</strong>
+              <span>${ultimaCotizacion.producto}</span>
+            </div>
+          `;
+        } else {
+          document.getElementById("producto-info").innerHTML = '';
+        }
+        
+        document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
+        document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg`;
+        document.getElementById("desaduanaje").textContent = `$${ultimaCotizacion.desaduanaje.toFixed(2)}`;
+        document.getElementById("costo-envio").textContent = `$${ultimaCotizacion.costoEnvio.toFixed(2)}`;
+        document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
+        document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
+        document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
+        
+        // Mostrar con animación
+        resultContent.classList.add("visible");
+      }, 50);
+    }
+
+    function calcularPorEnlace() {
+      const enlace = document.getElementById("enlace-producto").value.trim();
+      
+      if (enlace === "") {
+        alert("Por favor ingresa un enlace válido.");
         return;
       }
       
-      // Simulación de obtención de datos (en un caso real, esto se haría con backend)
-      alert('Esta función requiere conexión con un servicio backend para extraer los datos del producto');
+      // Simular obtención de datos del enlace
+      alert("Esta función necesita conectarse con un servicio backend que analice el enlace y obtenga los datos del producto.");
       
-      // Datos de ejemplo para demostración
-      const exampleData = {
-        weight: 1.8,
-        value: 150,
-        description: 'Producto de ejemplo'
+      // Para propósitos de demostración, usaremos valores de ejemplo
+      const datosEjemplo = {
+        producto: "Producto de ejemplo",
+        peso: 1.5,
+        valor: 150
       };
       
-      // Llenar los campos automáticamente
-      document.getElementById('weight').value = exampleData.weight;
-      document.getElementById('value').value = exampleData.value;
-      document.getElementById('description').value = exampleData.description;
+      // Llenar los campos manuales con los datos de ejemplo
+      document.getElementById("peso").value = datosEjemplo.peso;
+      document.getElementById("valor").value = datosEjemplo.valor;
+      document.getElementById("producto").value = datosEjemplo.producto;
       
       // Calcular con los datos de ejemplo
-      calculateShipping();
+      calcular();
     }
     
-    function updateWhatsAppLink(description, weight, value, shippingCost, customsFee, taxes, total) {
-      let message = `Hola SEA Logistics, necesito información sobre este envío:\n\n`;
+    function actualizarEnlaceWhatsApp() {
+      if (!ultimaCotizacion) return;
       
-      if (description) {
-        message += `📦 Producto: ${description}\n`;
+      let mensaje = "Hola SEA Logistics Group, quiero aprovechar el descuento de primera compra para este envío:\n\n";
+      
+      if (ultimaCotizacion.tipo === "manual") {
+        mensaje += `📦 Producto: ${ultimaCotizacion.producto || "Sin descripción"}\n`;
+      } else {
+        mensaje += `🔗 Enlace: ${ultimaCotizacion.enlace}\n`;
       }
       
-      message += `⚖️ Peso: ${weight.toFixed(2)} kg\n`;
-      message += `💰 Valor declarado: $${value.toFixed(2)}\n`;
-      message += `🚚 Costo de envío: $${shippingCost.toFixed(2)}\n`;
-      message += `📦 Desaduanaje: $${customsFee.toFixed(2)}\n`;
+      mensaje += `💰 Valor declarado: $${ultimaCotizacion.valor.toFixed(2)}\n`;
+      mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
+      mensaje += `📦 Desaduanaje: $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
+      mensaje += `🚚 Costo de envío: $${ultimaCotizacion.costoEnvio.toFixed(2)}\n`;
+      mensaje += `✈️ Total envío: $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
       
-      if (taxes > 0) {
-        message += `🏛️ Impuestos: $${taxes.toFixed(2)}\n`;
+      if (ultimaCotizacion.impuestos > 0) {
+        mensaje += `🏛️ Impuestos: $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
       }
       
-      message += `💵 Total: $${total.toFixed(2)}\n\n`;
-      message += `Por favor, necesito más información sobre este envío.`;
+      mensaje += `💵 Total con todo: $${ultimaCotizacion.total.toFixed(2)}\n\n`;
+      mensaje += "Por favor, envíenme información sobre el descuento para primera compra.";
       
-      const encodedMessage = encodeURIComponent(message);
-      document.getElementById('whatsapp-link').href = `https://wa.me/51923465624?text=${encodedMessage}`;
+      const encodedMessage = encodeURIComponent(mensaje);
+      document.getElementById("whatsapp-link").href = `https://wa.me/51923465624?text=${encodedMessage}`;
     }
   </script>
 </body>
