@@ -18,7 +18,7 @@
       padding: 2rem;
       border-radius: 16px;
       max-width: 600px;
-      margin: auto;
+      margin: auto 0 2rem 0;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     input, button {
@@ -49,7 +49,7 @@
 </head>
 <body>
   <h1>SEA Express</h1>
-  <p>Lo quieres, lo tienes</p>
+  <p>Envíos desde USA a Perú con confianza</p>
 
   <div class="card">
     <h2>Calculadora de Cotización</h2>
@@ -61,14 +61,17 @@
     <p class="note" id="alerta"></p>
   </div>
 
-  <div class="card" style="margin-top: 2rem;">
-    <h3>Buscar producto en Amazon</h3>
-    <input type="text" id="amazonSearch" placeholder="Ej: celular Samsung, reloj Casio...">
-    <button onclick="buscarAmazon()">Cotizar en Amazon</button>
+  <div class="card">
+    <h2>Cotizador con búsqueda en Amazon</h2>
+    <input type="text" id="amazonQuery" placeholder="Buscar producto en Amazon (ej: celular Samsung)"><br>
+    <input type="number" id="pesoAmazon" placeholder="Peso (kg)" step="0.01"><br>
+    <input type="number" id="valorAmazon" placeholder="Valor del producto ($)" step="0.01"><br>
+    <button onclick="calcularAmazon()">Buscar y Calcular</button>
+    <p id="resultadoAmazon"></p>
   </div>
 
   <div style="margin-top: 2rem;">
-    <a href="https://wa.me/51923465624?text=Hola%20SEA%20Express%2C%20quiero%20más%20info%20sobre%20un%20envío" target="_blank">
+    <a href="https://wa.me/51999999999?text=Hola%20SEA%20Express%2C%20quiero%20más%20info%20sobre%20un%20envío" target="_blank">
       <button>📲 Consultar por WhatsApp</button>
     </a>
   </div>
@@ -78,6 +81,10 @@
       const peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
       const producto = document.getElementById("producto").value.toLowerCase();
+      if (isNaN(peso) || isNaN(valor) || peso <= 0 || valor <= 0) {
+        alert("Por favor ingresa peso y valor válidos.");
+        return;
+      }
       const envio = peso <= 1 ? 12 : 12 * peso;
 
       const adValorem = valor * 0.04;
@@ -100,11 +107,35 @@
       }
     }
 
-    function buscarAmazon() {
-      const query = document.getElementById("amazonSearch").value;
-      if (query.trim() === "") return;
-      const url = "https://www.amazon.com/s?k=" + encodeURIComponent(query);
-      window.open(url, "_blank");
+    function calcularAmazon() {
+      const query = document.getElementById("amazonQuery").value.trim();
+      const peso = parseFloat(document.getElementById("pesoAmazon").value);
+      const valor = parseFloat(document.getElementById("valorAmazon").value);
+      if (query === "") {
+        alert("Por favor ingresa un término para buscar en Amazon.");
+        return;
+      }
+      if (isNaN(peso) || isNaN(valor) || peso <= 0 || valor <= 0) {
+        alert("Por favor ingresa peso y valor válidos.");
+        return;
+      }
+
+      const envio = peso <= 1 ? 12 : 12 * peso;
+
+      const adValorem = valor * 0.04;
+      const igv = (valor + adValorem) * 0.18;
+      const impuestosTotales = adValorem + igv;
+      const seguro = valor * 0.0035;
+      const total = envio + impuestosTotales + seguro;
+
+      // Mostrar resultados
+      document.getElementById("resultadoAmazon").innerHTML = `
+        <strong>Resultado de búsqueda:</strong> <a href="https://www.amazon.com/s?k=${encodeURIComponent(query)}" target="_blank" rel="noopener noreferrer">${query}</a><br>
+        <strong>Total estimado de envío:</strong> $${total.toFixed(2)}<br>
+        Envío: $${envio.toFixed(2)}<br>
+        Impuestos totales (IGV + Ad Valorem): $${impuestosTotales.toFixed(2)}<br>
+        Seguro: $${seguro.toFixed(2)}
+      `;
     }
   </script>
 </body>
