@@ -5,60 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SEA Express - Cotiza tu envío</title>
   <style>
+    :root {
+      --color-primary: #7c0a02;
+      --color-secondary: #b22222;
+      --color-whatsapp: #25D366;
+      --color-whatsapp-hover: #128C7E;
+      --color-text: #333;
+      --color-light: #f8f8f8;
+      --color-border: #ddd;
+    }
+    
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #7c0a02;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--color-primary);
       color: white;
       margin: 0;
-      padding: 0;
+      padding: 2rem;
       display: flex;
       min-height: 100vh;
+      font-size: 14px;
     }
+    
     .calculator-container {
       display: flex;
       width: 100%;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: auto;
       background: white;
       border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
+    
     .form-section {
       flex: 1;
-      padding: 2rem;
-      color: #7c0a02;
-    }
-    .result-section {
-      width: 300px;
-      background-color: #f8f8f8;
-      padding: 2rem;
-      color: #333;
+      padding: 3rem;
+      color: var(--color-primary);
       display: flex;
       flex-direction: column;
     }
+    
+    .result-section {
+      width: 350px;
+      background-color: var(--color-light);
+      padding: 3rem;
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
     h1 {
-      color: #7c0a02;
-      margin-bottom: 1.5rem;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
       text-align: center;
+      font-size: 1.8rem;
     }
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-    input, select {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
+    
+    .slogan {
+      text-align: center;
+      color: var(--color-primary);
+      margin-bottom: 2rem;
       font-size: 1rem;
     }
+    
+    .form-group {
+      margin-bottom: 1.8rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: bold;
+      color: var(--color-primary);
+      font-size: 0.9rem;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.9rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: border 0.3s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+    
     button {
-      background-color: #b22222;
+      background-color: var(--color-secondary);
       color: white;
       border: none;
       padding: 1rem;
@@ -68,79 +108,70 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
+    
     button:hover {
-      background-color: #8b1a1a;
+      background-color: var(--color-primary);
+      transform: translateY(-2px);
     }
+    
     .result-title {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: bold;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       text-align: center;
-      color: #7c0a02;
-      border-bottom: 2px solid #7c0a02;
-      padding-bottom: 0.5rem;
+      color: var(--color-primary);
     }
-    .result-value {
-      font-size: 1.8rem;
-      font-weight: bold;
-      text-align: center;
-      margin: 1rem 0;
-      color: #b22222;
+    
+    .result-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-out;
     }
-    .result-details {
-      margin-top: 1rem;
+    
+    .result-content.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
+    
     .result-item {
-      margin-bottom: 0.8rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid #eee;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-border);
       display: flex;
       justify-content: space-between;
+      font-size: 0.9rem;
     }
+    
     .result-item strong {
-      color: #555;
+      color: var(--color-text);
     }
+    
     .result-item span {
       font-weight: bold;
-      color: #7c0a02;
+      color: var(--color-primary);
     }
-    .note {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 1rem;
-      font-style: italic;
+    
+    .total-section {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 2px dashed var(--color-primary);
     }
-    .tabs {
-      display: flex;
-      margin-bottom: 1.5rem;
-    }
-    .tab {
-      flex: 1;
-      text-align: center;
-      padding: 0.8rem;
-      background: #f0f0f0;
-      cursor: pointer;
-      border-radius: 5px 5px 0 0;
-      margin-right: 5px;
-    }
-    .tab.active {
-      background: white;
+    
+    .total-price {
+      font-size: 1.5rem;
       font-weight: bold;
-      border-bottom: 3px solid #b22222;
+      text-align: center;
+      margin: 1.5rem 0;
+      color: var(--color-secondary);
     }
-    .tab-content {
-      display: none;
-    }
-    .tab-content.active {
-      display: block;
-    }
+    
     .whatsapp-btn {
-      background-color: #25D366;
+      background-color: var(--color-whatsapp);
       color: white;
       border: none;
-      padding: 1rem;
+      padding: 1.1rem;
       width: 100%;
       border-radius: 8px;
       font-size: 1rem;
@@ -152,19 +183,81 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
+    
     .whatsapp-btn:hover {
-      background-color: #128C7E;
+      background-color: var(--color-whatsapp-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
-    @media (max-width: 768px) {
+    
+    .tabs {
+      display: flex;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+    
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+    
+    .tab.active {
+      background: white;
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    @media (max-width: 900px) {
       body {
         padding: 1rem;
       }
+      
       .calculator-container {
         flex-direction: column;
       }
+      
       .result-section {
         width: 100%;
+        padding: 2rem;
+      }
+      
+      .form-section {
+        padding: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        font-size: 13px;
+        padding: 0.5rem;
+      }
+      
+      .calculator-container {
+        border-radius: 10px;
+      }
+      
+      .form-section, .result-section {
+        padding: 1.5rem;
+      }
+      
+      .total-price {
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -173,7 +266,7 @@
   <div class="calculator-container">
     <div class="form-section">
       <h1>SEA Express</h1>
-      <p style="text-align: center; margin-bottom: 2rem; color: #7c0a02;">Elígelo y es tuyo</p>
+      <p class="slogan">Elígelo y es tuyo</p>
       
       <div class="tabs">
         <div class="tab active" onclick="switchTab('manual')">Manual</div>
@@ -210,42 +303,42 @@
     </div>
     
     <div class="result-section">
-      <div class="result-title">Total de la Importación</div>
-      <div class="result-value" id="total-cotizacion">US$ 0.00</div>
+      <div class="result-title">Resumen de Cotización</div>
       
-      <div class="result-details">
+      <div id="result-content" class="result-content">
+        <div id="producto-info"></div>
+        
         <div class="result-item">
-          <strong>Total de Servicio de Envío Franco</strong>
-          <span id="costo-envio">US$ 0.00</span>
+          <strong>Peso:</strong>
+          <span id="peso-result">0.00 kg</span>
         </div>
+        
         <div class="result-item">
-          <strong>Total de Impuestos</strong>
-          <span id="impuestos-totales">US$ 0.00</span>
+          <strong>Valor declarado:</strong>
+          <span id="valor-result">$0.00</span>
         </div>
+        
         <div class="result-item">
-          <strong>IGV (de trámite y delivery)</strong>
-          <span id="igv">US$ 0.00</span>
+          <strong>Impuestos totales (24%):</strong>
+          <span id="impuestos">$0.00</span>
         </div>
-        <div class="result-item">
-          <strong>Impuestos por pagar a SUNAT</strong>
-          <span id="sunat">US$ 0.00</span>
-        </div>
-        <div class="result-item">
-          <strong>Flete</strong>
-          <span id="flete">US$ 10.00</span>
-        </div>
-        <div class="result-item">
-          <strong>Trámite de Aduanas</strong>
-          <span id="tramite">US$ 8.00</span>
+        
+        <div class="total-section">
+          <div class="result-item">
+            <strong>Total estimado:</strong>
+            <span id="total">$0.00</span>
+          </div>
+          
+          <div class="result-item">
+            <strong>Envío total estimado:</strong>
+            <span id="envio-total">$0.00</span>
+          </div>
         </div>
       </div>
       
-      <div class="note" id="alerta"></div>
-      <div class="note">* Impuestos aplican solo para valores mayores a $200</div>
-      
       <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank">
         <button class="whatsapp-btn">
-          📲 Consultar por WhatsApp
+          📲 Obten tu descuento en tu primera compra
         </button>
       </a>
     </div>
@@ -288,21 +381,13 @@
       }
       
       // Calcular costos según las reglas originales
-      const flete = 10; // $10 fijo de flete
-      const tramiteAduanas = 8; // $8 fijo de trámite
       const pesoRedondeado = Math.ceil(peso); // Redondear hacia arriba
-      const costoEnvio = pesoRedondeado * 12; // $12 por kg
-      
-      // Costo total del servicio (flete + trámite + envío)
-      const totalServicio = flete + tramiteAduanas + costoEnvio;
-      
-      // IGV (18% sobre el servicio)
-      const igv = totalServicio * 0.18;
+      const envioTotal = pesoRedondeado * 20; // $20 por kg (incluye todo)
       
       // Impuesto del 24% solo si el valor es mayor a $200
-      const impuestosSunat = valor > 200 ? valor * 0.24 : 0;
+      const impuestos = valor > 200 ? valor * 0.24 : 0;
       
-      const total = totalServicio + igv + impuestosSunat;
+      const total = valor + impuestos;
       
       // Guardar última cotización
       ultimaCotizacion = {
@@ -310,35 +395,45 @@
         producto: producto || "Sin descripción",
         peso: peso,
         valor: valor,
-        flete: flete,
-        tramiteAduanas: tramiteAduanas,
-        costoEnvio: costoEnvio,
-        totalServicio: totalServicio,
-        igv: igv,
-        impuestosSunat: impuestosSunat,
+        envioTotal: envioTotal,
+        impuestos: impuestos,
         total: total
       };
       
       // Actualizar enlace de WhatsApp
       actualizarEnlaceWhatsApp();
       
-      // Mostrar resultados
-      document.getElementById("total-cotizacion").textContent = `US$ ${total.toFixed(2)}`;
-      document.getElementById("costo-envio").textContent = `US$ ${totalServicio.toFixed(2)}`;
-      document.getElementById("impuestos-totales").textContent = `US$ ${impuestosSunat.toFixed(2)}`;
-      document.getElementById("igv").textContent = `US$ ${igv.toFixed(2)}`;
-      document.getElementById("sunat").textContent = `US$ ${impuestosSunat.toFixed(2)}`;
-      document.getElementById("flete").textContent = `US$ ${flete.toFixed(2)}`;
-      document.getElementById("tramite").textContent = `US$ ${tramiteAduanas.toFixed(2)}`;
+      // Mostrar resultados con animación
+      mostrarResultados();
+    }
+
+    function mostrarResultados() {
+      // Ocultar resultados si ya estaban visibles
+      document.getElementById("result-content").classList.remove("visible");
       
-      // Mostrar alertas si es necesario
-      const productoLower = producto.toLowerCase();
-      if (productoLower.includes("radiofrecuencia") || productoLower.includes("gps") || 
-          productoLower.includes("dron") || productoLower.includes("electrónico")) {
-        document.getElementById("alerta").innerHTML = "⚠ Este producto podría requerir documentación adicional";
-      } else {
-        document.getElementById("alerta").innerHTML = "";
-      }
+      // Esperar un momento para reiniciar la animación
+      setTimeout(() => {
+        // Actualizar los valores
+        if (ultimaCotizacion.producto) {
+          document.getElementById("producto-info").innerHTML = `
+            <div class="result-item">
+              <strong>Producto:</strong>
+              <span>${ultimaCotizacion.producto}</span>
+            </div>
+          `;
+        } else {
+          document.getElementById("producto-info").innerHTML = '';
+        }
+        
+        document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg (se redondea a ${Math.ceil(ultimaCotizacion.peso)} kg)`;
+        document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
+        document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
+        document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
+        document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
+        
+        // Mostrar con animación
+        document.getElementById("result-content").classList.add("visible");
+      }, 50);
     }
 
     function calcularPorEnlace() {
@@ -371,28 +466,24 @@
     function actualizarEnlaceWhatsApp() {
       if (!ultimaCotizacion) return;
       
-      let mensaje = "Hola SEA Express, quiero más información sobre esta cotización:\n\n";
+      let mensaje = "Hola SEA Express, quiero aprovechar el descuento de primera compra para este envío:\n\n";
       
       if (ultimaCotizacion.tipo === "manual") {
-        mensaje += `📦 Producto: ${ultimaCotizacion.producto}\n`;
+        mensaje += `📦 Producto: ${ultimaCotizacion.producto || "Sin descripción"}\n`;
       } else {
         mensaje += `🔗 Enlace: ${ultimaCotizacion.enlace}\n`;
       }
       
       mensaje += `⚖️ Peso: ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
-      mensaje += `💰 Valor: $${ultimaCotizacion.valor.toFixed(2)}\n`;
-      mensaje += `✈️ Flete: $${ultimaCotizacion.flete.toFixed(2)}\n`;
-      mensaje += `📝 Trámite: $${ultimaCotizacion.tramiteAduanas.toFixed(2)}\n`;
-      mensaje += `🚚 Envío: $${ultimaCotizacion.costoEnvio.toFixed(2)}\n`;
-      mensaje += `🏛️ IGV: $${ultimaCotizacion.igv.toFixed(2)}\n`;
+      mensaje += `💰 Valor declarado: $${ultimaCotizacion.valor.toFixed(2)}\n`;
+      mensaje += `🚚 Envío total: $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
       
-      if (ultimaCotizacion.impuestosSunat > 0) {
-        mensaje += `💰 Impuestos SUNAT (24%): $${ultimaCotizacion.impuestosSunat.toFixed(2)}\n`;
+      if (ultimaCotizacion.impuestos > 0) {
+        mensaje += `🏛️ Impuestos (24%): $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
       }
       
-      mensaje += `------------------------------\n`;
-      mensaje += `💵 TOTAL: $${ultimaCotizacion.total.toFixed(2)}\n\n`;
-      mensaje += "Por favor, necesito más información sobre este envío.";
+      mensaje += `💵 Total estimado: $${ultimaCotizacion.total.toFixed(2)}\n\n`;
+      mensaje += "Por favor, envíenme información sobre el descuento para primera compra.";
       
       const encodedMessage = encodeURIComponent(mensaje);
       document.getElementById("whatsapp-link").href = `https://wa.me/51923465624?text=${encodedMessage}`;
