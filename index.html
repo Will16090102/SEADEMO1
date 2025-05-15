@@ -52,7 +52,6 @@
       color: var(--color-primary);
       display: flex;
       flex-direction: column;
-      transition: all 0.5s ease;
     }
 
     .result-section {
@@ -88,20 +87,6 @@
       font-weight: 500;
       letter-spacing: 2px;
       font-style: italic;
-    }
-
-    h1 {
-      color: var(--color-primary);
-      margin-bottom: 1rem;
-      text-align: center;
-      font-size: 1.8rem;
-    }
-
-    .slogan {
-      text-align: center;
-      color: var(--color-secondary);
-      margin-bottom: 2rem;
-      font-size: 1rem;
     }
 
     .tabs {
@@ -225,19 +210,20 @@
       background-color: rgba(190, 21, 34, 0.1);
       border-radius: 8px;
       padding: 1rem;
-      margin: 1rem 0;
-      border: 1px solid var(--color-primary);
+      margin: 1.5rem 0;
+      border: 2px solid var(--color-primary);
     }
 
     .highlight-title {
       color: var(--color-primary);
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 1.1rem;
       margin-bottom: 0.5rem;
+      text-align: center;
     }
 
     .highlight-value {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: bold;
       color: var(--color-primary);
       text-align: center;
@@ -330,16 +316,15 @@
       .features-section {
         grid-template-columns: 1fr;
       }
+
+      .highlight-value {
+        font-size: 1.4rem;
+      }
     }
 
     @media (max-width: 480px) {
       body {
-        font-size: 13px;
         padding: 0.5rem;
-      }
-      
-      .calculator-wrapper {
-        border-radius: 10px;
       }
       
       .form-section, .result-section.expanded {
@@ -351,7 +336,7 @@
       }
       
       .highlight-value {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -362,8 +347,10 @@
     <div class="calculator-wrapper">
       <div class="form-section">
         <div class="logo-container">
-          <!-- Cambia la URL por la de tu logo en GitHub -->
-          <img src="https://raw.githubusercontent.com/tu_usuario/tu_repositorio/main/ruta/al/logo.png" alt="SEA Express Logo" class="logo-img">
+          <!-- LOGO ACTUALIZADO (URL desde GitHub) -->
+          <img src="https://raw.githubusercontent.com/Will16090102/SEADEMO1/main/LOGOSEAE.png" 
+               alt="SEA Express Logo" 
+               class="logo-img">
           <div class="logo-text">Elígelo y es tuyo</div>
         </div>
         
@@ -432,6 +419,7 @@
             <span id="impuestos">$0.00</span>
           </div>
           
+          <!-- TOTALES RESALTADOS -->
           <div class="highlight-box">
             <div class="highlight-title">Total envío</div>
             <div class="highlight-value" id="envio-total">$0.00</div>
@@ -479,21 +467,17 @@
   </div>
 
   <script>
-    // Variable para almacenar la última cotización
     let ultimaCotizacion = null;
     
     function switchTab(tabName) {
-      // Oculta todos los contenidos de pestañas
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
       });
       
-      // Desactiva todas las pestañas
       document.querySelectorAll('.tab').forEach(tab => {
         tab.classList.remove('active');
       });
       
-      // Activa la pestaña seleccionada
       document.getElementById(tabName + '-tab').classList.add('active');
       document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
     }
@@ -503,7 +487,6 @@
       const valor = parseFloat(document.getElementById("valor").value);
       const producto = document.getElementById("producto").value;
       
-      // Validaciones
       if (isNaN(peso) || peso <= 0) {
         alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
         return;
@@ -514,20 +497,13 @@
         return;
       }
       
-      // Calcular costos según las reglas actualizadas
-      const desaduanaje = 8; // $8 fijos de desaduanaje
-      const costoPorKilo = 15; // $15 por cada kg
-      
+      const desaduanaje = 8;
+      const costoPorKilo = 15;
       const costoEnvio = peso * costoPorKilo;
       const envioTotal = costoEnvio + desaduanaje;
-      
-      // Impuesto del 25% si el valor es mayor a $200
       const impuestos = valor > 200 ? valor * 0.25 : 0;
-      
-      // Total incluyendo el valor del producto
       const total = valor + envioTotal + impuestos;
       
-      // Guardar última cotización
       ultimaCotizacion = {
         tipo: "manual",
         producto: producto,
@@ -540,25 +516,18 @@
         total: total
       };
       
-      // Actualizar enlace de WhatsApp
       actualizarEnlaceWhatsApp();
-      
-      // Mostrar resultados con animación
       mostrarResultados();
     }
 
     function mostrarResultados() {
-      // Expandir la sección de resultados
       const resultSection = document.getElementById("result-section");
       resultSection.classList.add("expanded");
       
-      // Ocultar resultados si ya estaban visibles
       const resultContent = document.getElementById("result-content");
       resultContent.classList.remove("visible");
       
-      // Esperar un momento para reiniciar la animación
       setTimeout(() => {
-        // Actualizar los valores
         if (ultimaCotizacion.producto) {
           document.getElementById("producto-info").innerHTML = `
             <div class="result-item">
@@ -578,7 +547,6 @@
         document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
         document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
         
-        // Mostrar con animación
         resultContent.classList.add("visible");
       }, 50);
     }
@@ -591,22 +559,18 @@
         return;
       }
       
-      // Simular obtención de datos del enlace
-      alert("Esta función necesita conectarse con un servicio backend que analice el enlace y obtenga los datos del producto.");
+      alert("Esta función necesita conectarse con un servicio backend.");
       
-      // Para propósitos de demostración, usaremos valores de ejemplo
       const datosEjemplo = {
         producto: "Producto de ejemplo",
         peso: 1.5,
         valor: 150
       };
       
-      // Llenar los campos manuales con los datos de ejemplo
       document.getElementById("peso").value = datosEjemplo.peso;
       document.getElementById("valor").value = datosEjemplo.valor;
       document.getElementById("producto").value = datosEjemplo.producto;
       
-      // Calcular con los datos de ejemplo
       calcular();
     }
     
@@ -617,8 +581,6 @@
       
       if (ultimaCotizacion.tipo === "manual") {
         mensaje += `📦 *Producto:* ${ultimaCotizacion.producto || "Sin descripción"}\n`;
-      } else {
-        mensaje += `🔗 *Enlace:* ${ultimaCotizacion.enlace}\n`;
       }
       
       mensaje += `💰 *Valor declarado:* $${ultimaCotizacion.valor.toFixed(2)}\n`;
