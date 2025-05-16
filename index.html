@@ -61,7 +61,7 @@
     }
     .form-section, .result-section {
       width: 100%;
-      padding: 2.7rem 3.2rem 2.2rem 3.2rem;
+      padding: 2.7rem 3.5rem 2.2rem 3.5rem;
       box-sizing: border-box;
       color: var(--color-primary);
       background: var(--color-light);
@@ -327,7 +327,13 @@
       background: var(--color-primary);
       border-radius: 6px;
     }
-    /* RESPONSIVE */
+    /* Responsive */
+    @media (min-width: 1000px) {
+      .form-section, .result-section {
+        padding-left: 4rem;
+        padding-right: 4rem;
+      }
+    }
     @media (max-width: 900px) {
       .main-container { max-width: 100vw; }
       .calculator-wrapper { max-width: 98vw; }
