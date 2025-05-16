@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEA Express - Calculadora de Envíos</title>
+  <meta name="description" content="Cotiza tu envío USA-Perú fácil y rápido con SEA Express. Envíos seguros, soporte 24/7, experiencia garantizada.">
+  <meta name="theme-color" content="#BE1522">
+  <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
+  <!-- Google Analytics (pon tu ID real en G-XXXXXXXXXX) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
@@ -30,6 +41,22 @@
       font-size: 16px;
       box-sizing: border-box;
       overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    a.skip-link {
+      position: absolute;
+      left: -999px;
+      top: 10px;
+      background: #fff;
+      color: #be1522;
+      padding: 8px 16px;
+      z-index: 999;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: left 0.3s;
+    }
+    a.skip-link:focus {
+      left: 10px;
     }
     .main-container {
       width: 100vw;
@@ -50,12 +77,14 @@
       display: flex;
       flex-direction: column;
       padding: 0;
+      animation: fadeInUp 0.7s;
     }
     .calc-flex {
       display: flex;
       flex-direction: column;
       width: 100%;
     }
+    /* LOGO ADAPTABLE Y ANIMADO */
     .logo-container {
       width: 100%;
       text-align: center;
@@ -76,7 +105,18 @@
       background: #fff;
       border-radius: 24px;
       box-shadow: 0 4px 24px rgba(190,21,34,0.12);
-      transition: width 0.3s, max-width 0.3s;
+      transition: width 0.3s, max-width 0.3s, box-shadow 0.35s, transform 0.17s;
+      animation: logoPop 1.2s cubic-bezier(.61,-0.01,.2,1.11);
+    }
+    .logo-img:focus, .logo-img:hover {
+      box-shadow: 0 8px 40px rgba(190,21,34,0.19);
+      transform: scale(1.07) rotate(-2deg);
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+    @keyframes logoPop {
+      from { opacity: 0; transform: translateY(-25px) scale(0.8);}
+      to   { opacity: 1; transform: translateY(0) scale(1);}
     }
     @media (max-width: 1200px) {
       .logo-img { width: 170px; max-width:210px; }
@@ -125,6 +165,16 @@
       background: white;
       font-weight: bold;
       color: var(--color-primary);
+      box-shadow: 0 3px 12px rgba(190,21,34,0.08);
+      animation: tabPulse 0.38s;
+    }
+    .tab:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 0;
+    }
+    @keyframes tabPulse {
+      0% { background: #ffeaea;}
+      100% { background: white;}
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
@@ -156,6 +206,7 @@
     .form-group {
       margin-bottom: 1.6rem;
       width: 100%;
+      animation: fadeInUp 0.7s;
     }
     .label-container {
       display: flex;
@@ -171,21 +222,27 @@
     input, select {
       width: 100%;
       padding: 1.08rem 1.1rem;
-      border: 1px solid var(--color-border);
+      border: 1.7px solid var(--color-border);
       border-radius: 9px;
       font-size: 1.09rem;
       margin-top: 0.1rem;
       margin-bottom: 0.1rem;
       background-color: #f7f8fa;
       box-sizing: border-box;
-      transition: border 0.2s, box-shadow 0.2s;
+      transition: border 0.22s, box-shadow 0.22s, background 0.22s;
       display: block;
     }
     input:focus, select:focus {
-      border: 1.5px solid var(--color-primary);
+      border: 2px solid var(--color-primary);
       outline: none;
       background: #fff;
-      box-shadow: 0 4px 16px rgba(190, 21, 34, 0.10);
+      box-shadow: 0 4px 16px rgba(190, 21, 34, 0.14);
+      animation: pulseInput 0.42s;
+    }
+    @keyframes pulseInput {
+      0% { box-shadow: 0 0 0 0 var(--color-primary);}
+      70% { box-shadow: 0 0 0 10px rgba(190,21,34,0.08);}
+      100% { box-shadow: 0 4px 16px rgba(190, 21, 34, 0.14);}
     }
     button {
       background-color: var(--color-primary);
@@ -197,16 +254,19 @@
       font-size: 1.23rem;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.22s;
       margin-top: 1.2rem;
       box-shadow: 0 2px 8px rgba(190,21,34,0.09);
       letter-spacing: 0.5px;
       margin-bottom: 0.5rem;
+      animation: fadeInUp 0.7s;
     }
     button:hover, button:focus {
       background-color: var(--color-primary-dark);
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 4px 16px rgba(190,21,34,0.16);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 22px rgba(190,21,34,0.13);
+      outline: 2px solid #be1522;
+      outline-offset: 2px;
     }
     .whatsapp-btn {
       background-color: var(--color-whatsapp);
@@ -225,11 +285,14 @@
       justify-content: center;
       gap: 8px;
       box-shadow: 0 4px 14px rgba(37,211,102,0.18);
+      animation: fadeInUp 0.7s;
     }
     .whatsapp-btn:hover, .whatsapp-btn:focus {
       background-color: var(--color-whatsapp-hover);
       box-shadow: 0 6px 20px rgba(18,140,126,0.22);
-      transform: translateY(-2px) scale(1.04);
+      transform: translateY(-2px) scale(1.04) rotate(-1.5deg);
+      outline: 2px solid #128C7E;
+      outline-offset: 2px;
     }
     .result-section {
       background: var(--color-bg);
@@ -273,6 +336,7 @@
       margin: 1.2rem 0;
       border: 2px solid var(--color-primary);
       text-align: center;
+      animation: fadeInUp 0.9s;
     }
     .highlight-title {
       color: var(--color-primary);
@@ -283,6 +347,64 @@
       font-size: 1.6rem;
       color: var(--color-primary);
       font-weight: bold;
+    }
+    /* CARDS DE VENTAJAS */
+    .features-container {
+      width: 100%;
+      background: #f7f7f7;
+      padding: 32px 0 24px 0;
+      margin: 0 auto;
+    }
+    .features-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .feature-card {
+      min-width:220px;
+      max-width:340px;
+      flex:1 1 280px;
+      background:var(--color-light);
+      border-radius:12px;
+      padding:20px 16px;
+      box-shadow:0 2px 10px rgba(190,21,34,0.09);
+      text-align:center;
+      margin: 0 8px 16px 8px;
+      transition: box-shadow 0.23s, transform 0.22s;
+      outline: none;
+    }
+    .feature-card:focus, .feature-card:hover {
+      box-shadow: 0 8px 30px rgba(190,21,34,0.13);
+      transform: translateY(-6px) scale(1.03) rotate(-1deg);
+      outline: 2px solid #be1522;
+      outline-offset: 2px;
+    }
+    .feature-icon {
+      font-size: 2.3rem;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-size: 1.22rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #222;
+    }
+    .feature-text {
+      font-size: 1.01rem;
+      color: #444;
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .features-section { gap: 14px; }
+      .feature-card { min-width: 170px; padding: 14px 8px;}
+    }
+    @media (max-width: 600px) {
+      .features-container { padding: 18px 0 8px 0;}
+      .feature-card { min-width: 120px; }
     }
     .info-icon {
       background-color: var(--color-tooltip);
@@ -297,6 +419,13 @@
       cursor: help;
       margin-left: 5px;
       font-style: normal;
+      transition: background 0.2s, color 0.2s;
+    }
+    .info-icon:focus, .info-icon:hover {
+      background: var(--color-primary);
+      color: #fff;
+      outline: 2px solid #be1522;
+      outline-offset: 2px;
     }
     .tooltip { position: relative; display: inline-block; }
     .tooltip .tooltiptext {
@@ -315,8 +444,14 @@
       opacity: 0;
       transition: opacity 0.3s;
       font-size: 0.9rem;
+      pointer-events: none;
     }
-    .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+    .tooltip:hover .tooltiptext, .tooltip:focus-within .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      animation: fadeInUp 0.4s;
+    }
     .result-content { opacity: 0; pointer-events:none; transform:translateY(20px); transition:opacity 0.5s, transform 0.5s;}
     .result-content.visible { animation: fadeInUp 0.6s; opacity:1; pointer-events:auto; transform:translateY(0);}
     @keyframes fadeInUp {
@@ -400,6 +535,7 @@
       margin-top: 45px;
       border-top: 1.5px solid #e4e4e4;
       width: 100vw;
+      animation: fadeInUp 0.7s;
     }
     .footer-main {
       max-width: 1420px;
@@ -445,21 +581,16 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-    .footer-links a:hover {
+    .footer-links a:hover, .footer-links a:focus {
       color: var(--color-primary);
+      text-decoration: underline;
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
     }
     .footer-countries {
       column-count: 2;
       column-gap: 28px;
       font-size: 1rem;
-    }
-    .footer-reclamos {
-      margin-top: 18px;
-    }
-    .footer-reclamos img {
-      height: 40px;
-      width: auto;
-      margin-top: 3px;
     }
     .footer-social {
       border-top: 1px solid #c9c9c9;
@@ -467,16 +598,20 @@
       text-align: center;
       padding: 18px 0 13px 0;
       margin: 0 0 0 0;
+      animation: fadeInUp 0.7s;
     }
     .footer-social i {
       font-size: 1.5rem;
       margin: 0 18px;
       color: #222;
-      transition: color 0.25s;
+      transition: color 0.25s, transform 0.20s;
       cursor: pointer;
     }
-    .footer-social i:hover {
+    .footer-social i:hover, .footer-social i:focus {
       color: var(--color-primary);
+      transform: scale(1.2) rotate(-8deg);
+      outline: 2px solid #be1522;
+      outline-offset: 2px;
     }
     .footer-bottom-bar {
       padding: 12px 2vw 14px 2vw;
@@ -489,6 +624,7 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      animation: fadeInUp 0.7s;
     }
     .footer-bottom-bar a {
       color: #222;
@@ -496,6 +632,13 @@
       text-decoration: none;
       margin-left: 7px;
       margin-right: 7px;
+      transition: color 0.2s;
+    }
+    .footer-bottom-bar a:hover, .footer-bottom-bar a:focus {
+      color: var(--color-primary);
+      text-decoration: underline;
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
     }
     .footer-logos {
       display: flex;
@@ -524,17 +667,19 @@
   </style>
 </head>
 <body>
-  <main class="main-container">
+  <!-- Accesibilidad: skip link -->
+  <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+  <main class="main-container" id="contenido-principal" tabindex="-1" aria-label="Contenido principal">
     <section class="calculator-wrapper">
       <div class="logo-container">
         <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" 
-             alt="Logo de SEA Express - Cotizador" 
-             class="logo-img">
+             alt="Logo de SEA Express, avión rojo y texto SEA Express" 
+             class="logo-img" tabindex="0">
         <div class="logo-text">Elígelo y es tuyo</div>
       </div>
       <nav class="tabs" aria-label="Tipo de cotización">
-        <div class="tab active" onclick="switchTab('manual')">Manual</div>
-        <div class="tab" onclick="switchTab('enlace')">Por Enlace</div>
+        <div class="tab active" onclick="switchTab('manual')" tabindex="0" role="button" aria-pressed="true">Manual</div>
+        <div class="tab" onclick="switchTab('enlace')" tabindex="0" role="button" aria-pressed="false">Por Enlace</div>
       </nav>
       <div class="calc-flex">
         <div class="form-section" id="form-section">
@@ -544,50 +689,50 @@
                 <div class="label-container">
                   <label for="valor">Valor del producto (USD)</label>
                   <div class="tooltip">
-                    <div class="info-icon">i</div>
+                    <div class="info-icon" tabindex="0" aria-label="Información sobre valor del producto">i</div>
                     <span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span>
                   </div>
                 </div>
-                <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required>
+                <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required aria-required="true">
               </div>
               <div class="form-group">
                 <div class="label-container">
                   <label for="peso">Peso del paquete (kg)</label>
                   <div class="tooltip">
-                    <div class="info-icon">i</div>
+                    <div class="info-icon" tabindex="0" aria-label="Información sobre peso del paquete">i</div>
                     <span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span>
                   </div>
                 </div>
-                <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required>
+                <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required aria-required="true">
               </div>
               <div class="form-group">
                 <div class="label-container">
                   <label for="producto">Tipo de producto (opcional)</label>
                   <div class="tooltip">
-                    <div class="info-icon">i</div>
+                    <div class="info-icon" tabindex="0" aria-label="Información sobre tipo de producto">i</div>
                     <span class="tooltiptext">Describe brevemente qué tipo de producto es</span>
                   </div>
                 </div>
                 <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
               </div>
-              <button id="btn-calcular" onclick="calcular()">Calcular</button>
+              <button id="btn-calcular" onclick="calcular()" aria-label="Calcular cotización">Calcular</button>
             </div>
             <div id="enlace-tab" class="tab-content">
               <div class="form-group">
                 <div class="label-container">
                   <label for="enlace-producto">Enlace del producto</label>
                   <div class="tooltip">
-                    <div class="info-icon">i</div>
+                    <div class="info-icon" tabindex="0" aria-label="Información sobre enlace del producto">i</div>
                     <span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span>
                   </div>
                 </div>
-                <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
+                <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required aria-required="true">
               </div>
-              <button id="btn-calcular-enlace" onclick="calcularPorEnlace()">Calcular</button>
+              <button id="btn-calcular-enlace" onclick="calcularPorEnlace()" aria-label="Calcular por enlace">Calcular</button>
             </div>
           </div>
         </div>
-        <section id="result-section" class="result-section">
+        <section id="result-section" class="result-section" aria-live="polite">
           <div class="result-title">Resumen de Cotización</div>
           <div id="result-content" class="result-content">
             <div id="producto-info"></div>
@@ -621,26 +766,26 @@
             </div>
           </div>
           <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener">
-            <button class="whatsapp-btn">
+            <button class="whatsapp-btn" aria-label="Contactar por WhatsApp">
               <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
             </button>
           </a>
         </section>
       </div>
     </section>
-    <section class="features-container">
-      <div class="features-section" style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
-        <div class="feature-card" style="min-width:220px;max-width:340px;flex:1 1 280px;background:var(--color-light);border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(190,21,34,0.06);text-align:center;">
+    <section class="features-container" aria-label="Ventajas de SEA Express">
+      <div class="features-section">
+        <div class="feature-card" tabindex="0" aria-label="Envío Express">
           <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
           <h3 class="feature-title">Envío Express</h3>
           <p class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</p>
         </div>
-        <div class="feature-card" style="min-width:220px;max-width:340px;flex:1 1 280px;background:var(--color-light);border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(190,21,34,0.06);text-align:center;">
+        <div class="feature-card" tabindex="0" aria-label="Envío Seguro">
           <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
           <h3 class="feature-title">Envío Seguro</h3>
           <p class="feature-text">Tus envíos siempre están seguros con nosotros.</p>
         </div>
-        <div class="feature-card" style="min-width:220px;max-width:340px;flex:1 1 280px;background:var(--color-light);border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(190,21,34,0.06);text-align:center;">
+        <div class="feature-card" tabindex="0" aria-label="Soporte 24/7">
           <div class="feature-icon"><i class="fas fa-headset"></i></div>
           <h3 class="feature-title">Soporte 24/7</h3>
           <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
@@ -648,7 +793,7 @@
       </div>
     </section>
     <!-- FOOTER CORPORATIVO INSPIRADO -->
-    <footer class="footer-corporate">
+    <footer class="footer-corporate" role="contentinfo">
       <div class="footer-main">
         <div class="footer-col">
           <div class="footer-title">SOMOS SEA EXPRESS</div>
@@ -663,10 +808,6 @@
             <li><a href="#">Tarifas</a></li>
             <li><a href="mailto:VENTA1@SEAGROUPPERU.COM">VENTA1@SEAGROUPPERU.COM</a></li>
           </ul>
-          <div class="footer-reclamos">
-            <img src="https://www.gob.pe/libroreclamaciones/assets/images/logo-libro-reclamaciones.svg" alt="Libro de reclamaciones" loading="lazy">
-            <span style="font-size:0.98rem;font-weight:bold;margin-left:7px;">Libro de<br>reclamaciones</span>
-          </div>
         </div>
         <div class="footer-col">
           <div class="footer-title">ENVÍOS A NIVEL NACIONAL</div>
@@ -688,14 +829,20 @@
           <div class="footer-contact"><a href="https://wa.me/51912140295" target="_blank" style="color:#222;text-decoration:none;"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:6px;"></i>912 140 295</a></div>
           <div class="footer-office">OFICINA</div>
           <div>AV. LOS PATRIOTAS 431, SAN MIGUEL, LIMA</div>
-          <div>Estados Unidos: <br> (Completa tu dirección)</div>
+          <div>Estados Unidos:<br>
+            7270 NW 35th Terrace Suite 602<br>
+            Miami, Florida 33122<br>
+            Tel: 786-628-8807
+          </div>
         </div>
       </div>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener"><i class="fab fa-facebook-square"></i></a>
-        <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-        <!-- <a href="#" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
-        <a href="#" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a> -->
+      <div class="footer-social" aria-label="Redes sociales">
+        <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+        <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <!--
+        <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        -->
       </div>
       <div class="footer-bottom-bar">
         <span>
@@ -704,12 +851,31 @@
         </span>
         <div class="footer-logos">
           <span style="font-size:0.99rem;">Somos expertos en lo que hacemos</span>
-          <img src="https://www.wex.pe/wp-content/uploads/2022/09/logo-wex-logistica-integral.png" alt="WEX logística" loading="lazy">
+          <img src="https://www.wex.pe/wp-content/uploads/2022/09/logo-wex-logistica-integral.png" alt="WEX logística integral" loading="lazy">
         </div>
       </div>
     </footer>
   </main>
   <script>
+    // Microanimación para tab con teclado (accesibilidad)
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('keydown', function(e) {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    });
+    // Microanimación para info-icon con teclado
+    document.querySelectorAll('.info-icon').forEach(icon => {
+      icon.addEventListener('keydown', function(e) {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.parentNode.classList.toggle('show-tooltip');
+        }
+      });
+    });
+
     let ultimaCotizacion = null;
     const resultSection = document.getElementById("result-section");
     resultSection.classList.remove("visible");
@@ -719,9 +885,11 @@
       });
       document.querySelectorAll('.tab').forEach(tab => {
         tab.classList.remove('active');
+        tab.setAttribute('aria-pressed', 'false');
       });
       document.getElementById(tabName + '-tab').classList.add('active');
       document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
+      document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).setAttribute('aria-pressed', 'true');
       ocultarResumen();
     }
     function animateButton(btn) {
