@@ -32,83 +32,58 @@
       overflow-x: hidden;
     }
     .main-container {
-      width: 100%;
+      width: 100vw;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      box-sizing: border-box;
-      padding: 0 0 32px 0;
+      padding-bottom: 32px;
     }
     .calculator-wrapper {
       width: 100%;
-      max-width: 950px;
+      max-width: 1050px;
       background: var(--color-light);
       box-shadow: var(--shadow-main);
-      border-radius: 24px;
-      margin: 40px 0 24px 0;
+      border-radius: 28px;
+      margin: 50px 0 32px 0;
       display: flex;
       flex-direction: column;
-      transition: max-width 0.3s;
+      padding: 0;
     }
     .calc-flex {
       display: flex;
       flex-direction: column;
       width: 100%;
     }
-    .form-section, .result-section {
-      padding: 2.5rem 3.2rem 2.5rem 3.2rem;
-      box-sizing: border-box;
-      background: var(--color-light);
-      border-radius: 0;
-      transition: width 0.35s, padding 0.35s;
-      width: 100%;
-    }
-    .form-section {
-      display: flex;
-      flex-direction: column;
-      flex: 1 1 0;
-    }
-    .result-section {
-      background: var(--color-bg);
-      border-left: 1px solid var(--color-border);
-      color: var(--color-text);
-      flex: 1 1 0;
-      display: none;
-      min-width: 320px;
-      max-width: 400px;
-      border-radius: 0 24px 24px 0;
-      justify-content: flex-start;
-    }
-    .result-section.visible {
-      display: flex;
-      flex-direction: column;
-      animation: fadeInRight 0.5s;
-    }
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(40px);}
-      to   { opacity: 1; transform: translateX(0);}
-    }
     .logo-container {
+      width: 100%;
       text-align: center;
-      margin-bottom: 1.2rem;
+      margin-top: 38px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .logo-img {
-      max-width: 180px;
-      width: 100%;
+      width: 160px;
+      max-width: 220px;
       height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(190,21,34,0.11);
+      display: block;
+      margin: 0 auto 8px auto;
       background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(190,21,34,0.12);
     }
     .logo-text {
-      font-size: 1rem;
+      font-size: 1.18rem;
       color: var(--color-secondary);
       font-weight: 500;
       letter-spacing: 2px;
       font-style: italic;
-      margin-top: 2px;
+      margin-top: 4px;
+      margin-bottom: 0;
     }
     .tabs {
       display: flex;
@@ -117,14 +92,17 @@
       background: #f0f0f0;
       border-radius: 8px;
       overflow: hidden;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .tab {
       flex: 1 1 0;
       text-align: center;
-      padding: 0.7rem;
+      padding: 0.8rem;
       cursor: pointer;
       transition: all 0.3s;
-      font-size: 1rem;
+      font-size: 1.08rem;
       color: var(--color-secondary);
       background: #f0f0f0;
       border: none;
@@ -138,8 +116,34 @@
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
+    .form-section, .result-section {
+      box-sizing: border-box;
+      background: var(--color-light);
+      border-radius: 0;
+      transition: width 0.35s, padding 0.35s;
+      flex: 1 1 0;
+    }
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0 0 0;
+      border-radius: 0 0 0 28px;
+      border-right: 1px solid var(--color-border);
+      min-width: 350px;
+      max-width: 600px;
+      width: 100%;
+    }
+    .form-inner {
+      width: 100%;
+      max-width: 550px;
+      padding: 2.2rem 2.5rem 2.2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+    }
     .form-group {
       margin-bottom: 1.6rem;
+      width: 100%;
     }
     .label-container {
       display: flex;
@@ -149,15 +153,15 @@
     label {
       font-weight: bold;
       color: var(--color-primary-dark);
-      font-size: 1rem;
+      font-size: 1.07rem;
       margin-right: 5px;
     }
     input, select {
       width: 100%;
-      padding: 0.8rem;
+      padding: 1.08rem 1.1rem;
       border: 1px solid var(--color-border);
-      border-radius: 8px;
-      font-size: 1rem;
+      border-radius: 9px;
+      font-size: 1.09rem;
       margin-top: 0.1rem;
       margin-bottom: 0.1rem;
       background-color: #f7f8fa;
@@ -175,16 +179,17 @@
       background-color: var(--color-primary);
       color: white;
       border: none;
-      padding: 0.95rem;
+      padding: 1.15rem;
       width: 100%;
-      border-radius: 12px;
-      font-size: 1.13rem;
+      border-radius: 13px;
+      font-size: 1.23rem;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.2s;
       margin-top: 1.2rem;
       box-shadow: 0 2px 8px rgba(190,21,34,0.09);
       letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
     }
     button:hover, button:focus {
       background-color: var(--color-primary-dark);
@@ -213,6 +218,26 @@
       background-color: var(--color-whatsapp-hover);
       box-shadow: 0 6px 20px rgba(18,140,126,0.22);
       transform: translateY(-2px) scale(1.04);
+    }
+    .result-section {
+      background: var(--color-bg);
+      border-left: 1px solid var(--color-border);
+      color: var(--color-text);
+      min-width: 350px;
+      max-width: 400px;
+      border-radius: 0 28px 28px 0;
+      display: none;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2.2rem 1.7rem 2.2rem 1.7rem;
+    }
+    .result-section.visible {
+      display: flex;
+      animation: fadeInRight 0.5s;
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px);}
+      to   { opacity: 1; transform: translateX(0);}
     }
     .result-title {
       font-size: 1.3rem;
@@ -287,24 +312,30 @@
       to   { opacity: 1; transform: translateY(0);}
     }
     .oculto { display: none !important; }
-    /* Nueva disposición en escritorio: formulario y resumen lado a lado */
-    @media (min-width: 900px) {
+    /* Side by side in desktop */
+    @media (min-width: 1020px) {
       .calc-flex {
         flex-direction: row;
         align-items: flex-start;
         justify-content: center;
       }
       .form-section {
-        border-radius: 24px 0 0 24px;
+        border-radius: 0 0 0 28px;
         border-right: 1px solid var(--color-border);
-        max-width: 400px;
-        min-width: 350px;
+        min-width: 400px;
+        max-width: 650px;
+      }
+      .form-inner {
+        padding-left: 3.3rem;
+        padding-right: 3.3rem;
       }
       .result-section {
         display: none;
         max-width: 400px;
         min-width: 350px;
-        border-radius: 0 24px 24px 0;
+        border-radius: 0 28px 28px 0;
+        padding-left: 1.7rem;
+        padding-right: 1.7rem;
       }
       .result-section.visible {
         display: flex;
@@ -314,22 +345,26 @@
         flex-direction: column;
       }
     }
-    /* Responsive para móvil: formulario arriba, resumen abajo */
-    @media (max-width: 899px) {
+    /* Mobile: stacked */
+    @media (max-width: 1019px) {
       .calc-flex {
         flex-direction: column;
       }
       .form-section, .result-section {
-        max-width: 100%;
+        max-width: 100vw;
         min-width: unset;
         border-radius: 0;
         border-right: none;
       }
+      .form-inner {
+        padding: 1.2rem 1.1rem 1.2rem 1.1rem;
+      }
       .result-section {
         border-top: 1px solid var(--color-border);
         border-left: none;
-        border-radius: 0 0 24px 24px;
+        border-radius: 0 0 28px 28px;
         margin-top: 0;
+        padding: 1.6rem 0.7rem 1.7rem 0.7rem;
       }
     }
     @media (max-width: 600px) {
@@ -338,14 +373,13 @@
         margin: 15px 0;
         border-radius: 16px;
       }
-      .form-section, .result-section {
-        padding: 1.3rem 0.5rem 0.9rem 0.5rem;
-      }
-      .logo-img { max-width: 120px; }
+      .logo-img { max-width: 120px; width: 100px;}
+      .logo-container { margin-top: 18px; }
+      .form-inner { padding: 1rem 0.3rem; }
       .highlight-value { font-size: 1.1rem; }
     }
     @media (max-width: 400px) {
-      .form-section, .result-section { padding: 0.6rem 0.1rem 0.4rem 0.1rem; }
+      .form-inner, .result-section { padding: 0.6rem 0.1rem 0.4rem 0.1rem; }
     }
   </style>
 </head>
@@ -353,7 +387,7 @@
   <main class="main-container">
     <section class="calculator-wrapper">
       <div class="logo-container">
-        <img src="https://raw.githubusercontent.com/Will16090102/SEADEMO1/main/LOGOSEAE.png" 
+        <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" 
              alt="Logo de SEA Express - Cotizador" 
              class="logo-img">
         <div class="logo-text">Elígelo y es tuyo</div>
@@ -364,51 +398,53 @@
       </nav>
       <div class="calc-flex">
         <div class="form-section" id="form-section">
-          <div id="manual-tab" class="tab-content active">
-            <div class="form-group">
-              <div class="label-container">
-                <label for="valor">Valor del producto (USD)</label>
-                <div class="tooltip">
-                  <div class="info-icon">i</div>
-                  <span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span>
+          <div class="form-inner">
+            <div id="manual-tab" class="tab-content active">
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="valor">Valor del producto (USD)</label>
+                  <div class="tooltip">
+                    <div class="info-icon">i</div>
+                    <span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span>
+                  </div>
                 </div>
+                <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required>
               </div>
-              <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required>
-            </div>
-            <div class="form-group">
-              <div class="label-container">
-                <label for="peso">Peso del paquete (kg)</label>
-                <div class="tooltip">
-                  <div class="info-icon">i</div>
-                  <span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span>
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="peso">Peso del paquete (kg)</label>
+                  <div class="tooltip">
+                    <div class="info-icon">i</div>
+                    <span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span>
+                  </div>
                 </div>
+                <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required>
               </div>
-              <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required>
-            </div>
-            <div class="form-group">
-              <div class="label-container">
-                <label for="producto">Tipo de producto (opcional)</label>
-                <div class="tooltip">
-                  <div class="info-icon">i</div>
-                  <span class="tooltiptext">Describe brevemente qué tipo de producto es</span>
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="producto">Tipo de producto (opcional)</label>
+                  <div class="tooltip">
+                    <div class="info-icon">i</div>
+                    <span class="tooltiptext">Describe brevemente qué tipo de producto es</span>
+                  </div>
                 </div>
+                <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
               </div>
-              <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
+              <button id="btn-calcular" onclick="calcular()">Calcular</button>
             </div>
-            <button id="btn-calcular" onclick="calcular()">Calcular</button>
-          </div>
-          <div id="enlace-tab" class="tab-content">
-            <div class="form-group">
-              <div class="label-container">
-                <label for="enlace-producto">Enlace del producto</label>
-                <div class="tooltip">
-                  <div class="info-icon">i</div>
-                  <span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span>
+            <div id="enlace-tab" class="tab-content">
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="enlace-producto">Enlace del producto</label>
+                  <div class="tooltip">
+                    <div class="info-icon">i</div>
+                    <span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span>
+                  </div>
                 </div>
+                <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
               </div>
-              <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
+              <button id="btn-calcular-enlace" onclick="calcularPorEnlace()">Calcular</button>
             </div>
-            <button id="btn-calcular-enlace" onclick="calcularPorEnlace()">Calcular</button>
           </div>
         </div>
         <section id="result-section" class="result-section">
@@ -453,25 +489,19 @@
       </div>
     </section>
     <section class="features-container">
-      <div class="features-section">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-shipping-fast"></i>
-          </div>
+      <div class="features-section" style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
+        <div class="feature-card" style="min-width:220px;max-width:340px;flex:1 1 280px;background:var(--color-light);border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(190,21,34,0.06);text-align:center;">
+          <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
           <h3 class="feature-title">Envío Express</h3>
           <p class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
+        <div class="feature-card" style="min-width:220px;max-width:340px;flex:1 1 280px;background:var(--color-light);border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(190,21,34,0.06);text-align:center;">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
           <h3 class="feature-title">Envío Seguro</h3>
           <p class="feature-text">Protegemos tu envío con seguro incluido contra pérdida o daño.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-headset"></i>
-          </div>
+        <div class="feature-card" style="min-width:220px;max-width:340px;flex:1 1 280px;background:var(--color-light);border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(190,21,34,0.06);text-align:center;">
+          <div class="feature-icon"><i class="fas fa-headset"></i></div>
           <h3 class="feature-title">Soporte 24/7</h3>
           <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
         </div>
@@ -484,7 +514,6 @@
   <script>
     let ultimaCotizacion = null;
     const resultSection = document.getElementById("result-section");
-    // Inicialmente oculta el resumen
     resultSection.classList.remove("visible");
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(content => {
@@ -520,10 +549,8 @@
       document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
       document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
       document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
-      // Animación de resumen
       const resumen = document.getElementById("result-content");
       resumen.classList.add("visible");
-      // Animación botón wsp
       const wspBtn = document.querySelector('.whatsapp-btn');
       wspBtn.classList.remove('bounce');
       void wspBtn.offsetWidth;
@@ -618,7 +645,6 @@
         const el = document.getElementById(id);
         if (el) { el.addEventListener('input', ocultarResumen); }
       });
-      // Oculta el resumen de cotización al inicio
       ocultarResumen();
     };
   </script>
