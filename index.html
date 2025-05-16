@@ -56,6 +56,7 @@
       flex-direction: column;
       width: 100%;
     }
+    /* LOGO ADAPTABLE */
     .logo-container {
       width: 100%;
       text-align: center;
@@ -67,14 +68,26 @@
       justify-content: center;
     }
     .logo-img {
-      width: 160px;
-      max-width: 220px;
+      width: 200px;
+      max-width: 270px;
+      min-width: 120px;
       height: auto;
       display: block;
       margin: 0 auto 8px auto;
       background: #fff;
-      border-radius: 18px;
+      border-radius: 24px;
       box-shadow: 0 4px 24px rgba(190,21,34,0.12);
+      transition: width 0.3s, max-width 0.3s;
+    }
+    @media (max-width: 1200px) {
+      .logo-img { width: 170px; max-width:210px; }
+    }
+    @media (max-width: 900px) {
+      .logo-img { width: 130px; max-width: 160px; }
+    }
+    @media (max-width: 600px) {
+      .logo-img { width: 90px; max-width: 120px; min-width: 70px;}
+      .logo-container { margin-top: 18px; }
     }
     .logo-text {
       font-size: 1.18rem;
@@ -237,7 +250,7 @@
     }
     @keyframes fadeInRight {
       from { opacity: 0; transform: translateX(40px);}
-      to   { opacity: 1; transform: translateX(0);}
+      to   { opacity: 1; transform: translateY(0);}
     }
     .result-title {
       font-size: 1.3rem;
@@ -373,13 +386,141 @@
         margin: 15px 0;
         border-radius: 16px;
       }
-      .logo-img { max-width: 120px; width: 100px;}
-      .logo-container { margin-top: 18px; }
       .form-inner { padding: 1rem 0.3rem; }
       .highlight-value { font-size: 1.1rem; }
     }
     @media (max-width: 400px) {
       .form-inner, .result-section { padding: 0.6rem 0.1rem 0.4rem 0.1rem; }
+    }
+
+    /* FOOTER INSPIRADO EN COMPRAONLINEUSA */
+    .footer-corporate {
+      background: #f7f7f7;
+      color: #222;
+      font-size: 1rem;
+      margin-top: 45px;
+      border-top: 1.5px solid #e4e4e4;
+      width: 100vw;
+    }
+    .footer-main {
+      max-width: 1420px;
+      margin: 0 auto;
+      padding: 32px 2vw 18px 2vw;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      justify-content: space-between;
+    }
+    .footer-col {
+      flex: 1 1 200px;
+      min-width: 180px;
+      max-width: 360px;
+      margin-bottom: 16px;
+    }
+    .footer-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      letter-spacing: 0.7px;
+    }
+    .footer-contact {
+      margin-bottom: 4px;
+      font-weight: bold;
+      letter-spacing: 0.3px;
+    }
+    .footer-office {
+      font-weight: bold;
+      margin-top: 7px;
+      margin-bottom: 2px;
+      font-size: 1.01rem;
+    }
+    .footer-links, .footer-countries {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-links li, .footer-countries li {
+      margin-bottom: 5px;
+    }
+    .footer-links a {
+      color: #222;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--color-primary);
+    }
+    .footer-countries {
+      column-count: 2;
+      column-gap: 28px;
+      font-size: 1rem;
+    }
+    .footer-reclamos {
+      margin-top: 18px;
+    }
+    .footer-reclamos img {
+      height: 40px;
+      width: auto;
+      margin-top: 3px;
+    }
+    .footer-social {
+      border-top: 1px solid #c9c9c9;
+      border-bottom: 1px solid #c9c9c9;
+      text-align: center;
+      padding: 18px 0 13px 0;
+      margin: 0 0 0 0;
+    }
+    .footer-social i {
+      font-size: 1.5rem;
+      margin: 0 18px;
+      color: #222;
+      transition: color 0.25s;
+      cursor: pointer;
+    }
+    .footer-social i:hover {
+      color: var(--color-primary);
+    }
+    .footer-bottom-bar {
+      padding: 12px 2vw 14px 2vw;
+      text-align: left;
+      color: #222;
+      font-size: 0.97rem;
+      letter-spacing: 0.2px;
+      border-top: 1px solid #c9c9c9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .footer-bottom-bar a {
+      color: #222;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 7px;
+      margin-right: 7px;
+    }
+    .footer-logos {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-logos img {
+      height: 36px;
+      width: auto;
+      margin-right: 8px;
+      vertical-align: middle;
+      filter: grayscale(0.15);
+      opacity: 0.92;
+    }
+    @media (max-width: 900px) {
+      .footer-main {
+        flex-direction: column;
+        gap: 8px;
+        padding: 24px 1vw 12px 1vw;
+      }
+      .footer-col {
+        max-width: 98vw;
+      }
+      .footer-bottom-bar { flex-direction: column; gap: 8px; text-align: center;}
     }
   </style>
 </head>
@@ -507,8 +648,66 @@
         </div>
       </div>
     </section>
-    <footer style="width:100%;text-align:center;padding:1rem 0;color:#fff;font-size:0.94rem;opacity:.75;">
-      <span>SEA Express &copy; 2025. Cotizador Amazon & WhatsApp</span>
+    <!-- FOOTER CORPORATIVO INSPIRADO -->
+    <footer class="footer-corporate">
+      <div class="footer-main">
+        <div class="footer-col">
+          <div class="footer-title">SOMOS SEA EXPRESS</div>
+          <div>Te conectamos con lo mejor de USA, para que compres lo que más te guste y recibas en Perú sin complicaciones. Nuestro servicio abre un mundo de oportunidades para tus compras y regalos increíbles.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">SOPORTE</div>
+          <ul class="footer-links">
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Calcula tu envío</a></li>
+            <li><a href="#">Preguntas Frecuentes</a></li>
+            <li><a href="#">Tarifas</a></li>
+            <li><a href="mailto:ventas@seaexpress.com">ventas@seaexpress.com</a></li>
+          </ul>
+          <div class="footer-reclamos">
+            <img src="https://www.gob.pe/libroreclamaciones/assets/images/logo-libro-reclamaciones.svg" alt="Libro de reclamaciones" loading="lazy">
+            <span style="font-size:0.98rem;font-weight:bold;margin-left:7px;">Libro de<br>reclamaciones</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">LATINOAMÉRICA</div>
+          <ul class="footer-countries">
+            <li>Perú</li>
+            <li>Ecuador</li>
+            <li>Colombia</li>
+            <li>Venezuela</li>
+            <li>Costa Rica</li>
+            <li>Chile</li>
+            <li>Bolivia</li>
+            <li>Guatemala</li>
+            <li>México</li>
+            <li>Panamá</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">CONTACTO</div>
+          <div class="footer-contact">01 220-6365</div>
+          <div class="footer-office">OFICINA</div>
+          <div>Av. La Paz 1420 San Miguel, Lima, Perú</div>
+          <div>8584 NW 56 ST Doral Florida 33166 - USA</div>
+        </div>
+      </div>
+      <div class="footer-social">
+        <a href="#" target="_blank" rel="noopener"><i class="fab fa-facebook-square"></i></a>
+        <a href="#" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+        <a href="#" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="footer-bottom-bar">
+        <span>
+          Copyright &copy; 2025 SEA Express.<br>
+          Todos los Derechos Reservados | Site design by <a href="https://brsstudio.com" target="_blank" rel="noopener">BRS Studio</a>
+        </span>
+        <div class="footer-logos">
+          <span style="font-size:0.99rem;">Somos un operador logístico directo</span>
+          <img src="https://www.wex.pe/wp-content/uploads/2022/09/logo-wex-logistica-integral.png" alt="WEX logística" loading="lazy">
+        </div>
+      </div>
     </footer>
   </main>
   <script>
