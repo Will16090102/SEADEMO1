@@ -563,7 +563,7 @@
     function calcular() {
       animateButton(document.getElementById('btn-calcular'));
       ocultarResumen();
-      const peso = parseFloat(document.getElementById("peso").value);
+      let peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
       const producto = document.getElementById("producto").value;
       if (isNaN(peso) || peso <= 0) {
@@ -574,9 +574,12 @@
         alert("Por favor ingresa un valor declarado válido (mínimo $1)");
         return;
       }
+      // Redondear peso menor a 1kg a 1
+      if (peso < 1) peso = 1;
       const desaduanaje = 8;
       const costoPorKilo = 15;
-      const costoEnvio = peso * costoPorKilo;
+      let costoEnvio = peso * costoPorKilo;
+      if (costoEnvio < 12) costoEnvio = 12; // Precio mínimo de envío
       const envioTotal = costoEnvio + desaduanaje;
       const impuestos = valor > 200 ? valor * 0.25 : 0;
       const total = valor + envioTotal + impuestos;
