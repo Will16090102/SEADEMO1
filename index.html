@@ -23,7 +23,7 @@
       background-color: var(--color-primary);
       color: white;
       margin: 0;
-      padding: 2rem;
+      padding: 1rem;
       display: flex;
       min-height: 100vh;
       font-size: 14px;
@@ -44,29 +44,25 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      flex-direction: column;
     }
 
     .form-section {
       flex: 1;
-      padding: 3rem;
+      padding: 2rem;
       color: var(--color-primary);
       display: flex;
       flex-direction: column;
     }
 
     .result-section {
-      width: 0;
+      width: 100%;
       background-color: var(--color-bg);
       color: var(--color-text);
       display: flex;
       flex-direction: column;
       justify-content: center;
       overflow: hidden;
-      transition: all 0.5s ease;
-    }
-
-    .result-section.expanded {
-      width: 40%;
       padding: 2rem;
     }
 
@@ -76,9 +72,10 @@
     }
 
     .logo-img {
-      max-width: 200px;
+      max-width: 180px;
       height: auto;
       margin-bottom: 0.5rem;
+      width: 100%;
     }
 
     .logo-text {
@@ -178,12 +175,6 @@
     }
 
     .result-content {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.5s ease-out 0.3s;
-    }
-
-    .result-content.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -261,7 +252,7 @@
 
     .features-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: 1fr;
       gap: 20px;
     }
 
@@ -290,35 +281,25 @@
       color: var(--color-secondary);
     }
 
-    @media (max-width: 900px) {
-      body {
-        padding: 1rem;
-      }
-      
+    .total-normal {
+      font-weight: bold;
+      color: var(--color-primary);
+      text-align: right;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: 768px) {
       .calculator-wrapper {
-        flex-direction: column;
+        flex-direction: row;
       }
       
       .result-section {
-        width: 100%;
-        padding: 0;
+        width: 40%;
       }
       
-      .result-section.expanded {
-        width: 100%;
-        padding: 2rem;
-      }
-      
-      .form-section {
-        padding: 2rem;
-      }
-
       .features-section {
-        grid-template-columns: 1fr;
-      }
-
-      .highlight-value {
-        font-size: 1.4rem;
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -327,7 +308,7 @@
         padding: 0.5rem;
       }
       
-      .form-section, .result-section.expanded {
+      .form-section, .result-section {
         padding: 1.5rem;
       }
       
@@ -361,7 +342,7 @@
         
         <div id="manual-tab" class="tab-content active">
           <div class="form-group">
-            <label for="valor">Valor declarado (USD)</label>
+            <label for="valor">Valor del producto (USD)</label>
             <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
           </div>
           
@@ -371,7 +352,7 @@
           </div>
           
           <div class="form-group">
-            <label for="producto">Descripción del producto (opcional)</label>
+            <label for="producto">Tipo de producto (opcional)</label>
             <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
           </div>
           
@@ -395,7 +376,7 @@
           <div id="producto-info"></div>
           
           <div class="result-item">
-            <strong>Valor declarado:</strong>
+            <strong>Valor del producto:</strong>
             <span id="valor-result">$0.00</span>
           </div>
           
@@ -425,9 +406,9 @@
             <div class="highlight-value" id="envio-total">$0.00</div>
           </div>
           
-          <div class="highlight-box">
-            <div class="highlight-title">Costo total</div>
-            <div class="highlight-value" id="total">$0.00</div>
+          <div class="total-normal">
+            <strong>Costo total: </strong>
+            <span id="total">$0.00</span>
           </div>
         </div>
         
@@ -521,34 +502,26 @@
     }
 
     function mostrarResultados() {
-      const resultSection = document.getElementById("result-section");
-      resultSection.classList.add("expanded");
-      
       const resultContent = document.getElementById("result-content");
-      resultContent.classList.remove("visible");
       
-      setTimeout(() => {
-        if (ultimaCotizacion.producto) {
-          document.getElementById("producto-info").innerHTML = `
-            <div class="result-item">
-              <strong>Producto:</strong>
-              <span>${ultimaCotizacion.producto}</span>
-            </div>
-          `;
-        } else {
-          document.getElementById("producto-info").innerHTML = '';
-        }
-        
-        document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
-        document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg`;
-        document.getElementById("desaduanaje").textContent = `$${ultimaCotizacion.desaduanaje.toFixed(2)}`;
-        document.getElementById("costo-envio").textContent = `$${ultimaCotizacion.costoEnvio.toFixed(2)}`;
-        document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
-        document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
-        document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
-        
-        resultContent.classList.add("visible");
-      }, 50);
+      if (ultimaCotizacion.producto) {
+        document.getElementById("producto-info").innerHTML = `
+          <div class="result-item">
+            <strong>Producto:</strong>
+            <span>${ultimaCotizacion.producto}</span>
+          </div>
+        `;
+      } else {
+        document.getElementById("producto-info").innerHTML = '';
+      }
+      
+      document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
+      document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg`;
+      document.getElementById("desaduanaje").textContent = `$${ultimaCotizacion.desaduanaje.toFixed(2)}`;
+      document.getElementById("costo-envio").textContent = `$${ultimaCotizacion.costoEnvio.toFixed(2)}`;
+      document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
+      document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
+      document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
     }
 
     function calcularPorEnlace() {
@@ -583,7 +556,7 @@
         mensaje += `📦 *Producto:* ${ultimaCotizacion.producto || "Sin descripción"}\n`;
       }
       
-      mensaje += `💰 *Valor declarado:* $${ultimaCotizacion.valor.toFixed(2)}\n`;
+      mensaje += `💰 *Valor del producto:* $${ultimaCotizacion.valor.toFixed(2)}\n`;
       mensaje += `⚖️ *Peso:* ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
       mensaje += `📦 *Desaduanaje:* $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
       mensaje += `🚚 *Costo de envío:* $${ultimaCotizacion.costoEnvio.toFixed(2)}\n`;
