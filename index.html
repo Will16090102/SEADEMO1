@@ -16,6 +16,7 @@
       --color-border: #E0E0E0;
       --color-bg: #F8F9FA;
       --color-highlight: #BE1522;
+      --color-tooltip: #777777;
     }
 
     body {
@@ -49,7 +50,7 @@
 
     .form-section {
       flex: 1;
-      padding: 1.5rem;
+      padding: 2rem;
       color: var(--color-primary);
       display: flex;
       flex-direction: column;
@@ -63,12 +64,12 @@
       flex-direction: column;
       justify-content: center;
       overflow: hidden;
-      padding: 1.5rem;
+      padding: 2rem;
     }
 
     .logo-container {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .logo-img {
@@ -119,20 +120,29 @@
     }
 
     .form-group {
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
       position: relative;
     }
 
-    .info-tooltip {
+    .info-icon {
       position: absolute;
       right: 10px;
       top: 35px;
-      color: var(--color-secondary);
+      background-color: var(--color-tooltip);
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
       cursor: help;
     }
 
     label {
-      display: block;
+      display: flex;
+      align-items: center;
       margin-bottom: 0.5rem;
       font-weight: bold;
       color: var(--color-primary-dark);
@@ -176,9 +186,9 @@
     }
 
     .result-title {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: bold;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       text-align: center;
       color: var(--color-primary);
     }
@@ -186,7 +196,6 @@
     .result-content {
       opacity: 1;
       transform: translateY(0);
-      padding: 0 0.5rem;
     }
 
     .result-item {
@@ -210,21 +219,21 @@
     .highlight-box {
       background-color: rgba(190, 21, 34, 0.1);
       border-radius: 8px;
-      padding: 0.8rem;
-      margin: 1rem 0;
+      padding: 1rem;
+      margin: 1.5rem 0;
       border: 2px solid var(--color-primary);
     }
 
     .highlight-title {
       color: var(--color-primary);
       font-weight: bold;
-      font-size: 0.95rem;
-      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
       text-align: center;
     }
 
     .highlight-value {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: bold;
       color: var(--color-primary);
       text-align: center;
@@ -257,7 +266,7 @@
 
     .features-container {
       width: 100%;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
     }
 
     .features-section {
@@ -295,52 +304,21 @@
       font-weight: bold;
       color: var(--color-primary);
       text-align: right;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
       font-size: 0.9rem;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    @media (min-width: 768px) {
-      body {
-        padding: 2rem;
-      }
-      
-      .calculator-wrapper {
-        flex-direction: row;
-      }
-      
-      .form-section, .result-section {
-        padding: 2rem;
-      }
-      
-      .result-section {
-        width: 40%;
-      }
-      
-      .features-section {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      
-      .logo-img {
-        max-width: 250px;
-      }
-      
-      .highlight-value {
-        font-size: 1.4rem;
-      }
     }
 
     .tooltip {
       position: relative;
       display: inline-block;
+      margin-left: 5px;
     }
 
     .tooltip .tooltiptext {
       visibility: hidden;
       width: 200px;
-      background-color: #555;
-      color: #fff;
+      background-color: var(--color-tooltip);
+      color: white;
       text-align: center;
       border-radius: 6px;
       padding: 8px;
@@ -357,6 +335,43 @@
     .tooltip:hover .tooltiptext {
       visibility: visible;
       opacity: 1;
+    }
+
+    @media (min-width: 768px) {
+      .calculator-wrapper {
+        flex-direction: row;
+      }
+      
+      .form-section {
+        padding: 3rem;
+      }
+      
+      .result-section {
+        width: 40%;
+        padding: 2rem;
+      }
+      
+      .features-section {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .logo-img {
+        max-width: 250px;
+      }
+      
+      .highlight-value {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem;
+      }
+      
+      .form-section, .result-section {
+        padding: 1.5rem;
+      }
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -379,27 +394,36 @@
         
         <div id="manual-tab" class="tab-content active">
           <div class="form-group">
-            <label for="valor">Valor del producto (USD)</label>
-            <div class="tooltip">
-              <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
-              <span class="info-tooltip tooltip">ℹ️<span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span></span>
-            </div>
+            <label for="valor">
+              Valor del producto (USD)
+              <div class="tooltip">
+                <div class="info-icon">i</div>
+                <span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span>
+              </div>
+            </label>
+            <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
           </div>
           
           <div class="form-group">
-            <label for="peso">Peso del paquete (kg)</label>
-            <div class="tooltip">
-              <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
-              <span class="info-tooltip tooltip">ℹ️<span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span></span>
-            </div>
+            <label for="peso">
+              Peso del paquete (kg)
+              <div class="tooltip">
+                <div class="info-icon">i</div>
+                <span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span>
+              </div>
+            </label>
+            <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
           </div>
           
           <div class="form-group">
-            <label for="producto">Tipo de producto (opcional)</label>
-            <div class="tooltip">
-              <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-              <span class="info-tooltip tooltip">ℹ️<span class="tooltiptext">Describe brevemente qué tipo de producto es</span></span>
-            </div>
+            <label for="producto">
+              Tipo de producto (opcional)
+              <div class="tooltip">
+                <div class="info-icon">i</div>
+                <span class="tooltiptext">Describe brevemente qué tipo de producto es</span>
+              </div>
+            </label>
+            <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
           </div>
           
           <button onclick="calcular()">Calcular</button>
@@ -407,11 +431,14 @@
         
         <div id="enlace-tab" class="tab-content">
           <div class="form-group">
-            <label for="enlace-producto">Enlace del producto</label>
-            <div class="tooltip">
-              <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
-              <span class="info-tooltip tooltip">ℹ️<span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span></span>
-            </div>
+            <label for="enlace-producto">
+              Enlace del producto
+              <div class="tooltip">
+                <div class="info-icon">i</div>
+                <span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span>
+              </div>
+            </label>
+            <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
           </div>
           
           <button onclick="calcularPorEnlace()">Calcular</button>
@@ -454,9 +481,9 @@
             <div class="highlight-value" id="envio-total">$0.00</div>
           </div>
           
-          <div class="total-normal">
-            <strong>Costo total:</strong>
-            <span id="total">$0.00</span>
+          <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
+            <strong style="font-size: 0.95rem;">Costo total:</strong>
+            <span id="total" style="font-size: 0.95rem;">$0.00</span>
           </div>
         </div>
         
