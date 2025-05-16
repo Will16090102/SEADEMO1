@@ -64,6 +64,7 @@
       background: var(--color-bg);
       color: var(--color-text);
       padding-bottom: 2rem;
+      /* Oculto por defecto, controlado por la clase .oculto */
     }
 
     .logo-container {
@@ -289,6 +290,11 @@
     @keyframes bounceIn { 0%{transform:scale(0.7);opacity:0;}60%{transform:scale(1.1);opacity:1;}80%{transform:scale(0.95);}100%{transform:scale(1);} }
     .whatsapp-btn.bounce { animation: bounceIn 0.5s; }
 
+    /* Ocultar sección de resumen */
+    .oculto {
+      display: none !important;
+    }
+
     /* RESPONSIVE */
     @media (min-width: 768px) {
       .calculator-wrapper {
@@ -381,7 +387,7 @@
           <button id="btn-calcular-enlace" onclick="calcularPorEnlace()">Calcular</button>
         </div>
       </div>
-      <div id="result-section" class="result-section">
+      <div id="result-section" class="result-section oculto">
         <div class="result-title">Resumen de Cotización</div>
         <div id="result-content" class="result-content">
           <div id="producto-info"></div>
@@ -459,6 +465,8 @@
       });
       document.getElementById(tabName + '-tab').classList.add('active');
       document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
+      // Oculta el resumen si cambias de tab
+      document.getElementById("result-section").classList.add("oculto");
     }
 
     function animateButton(btn) {
@@ -467,6 +475,8 @@
     }
 
     function mostrarResultados() {
+      // Mostrar la sección de resumen
+      document.getElementById("result-section").classList.remove("oculto");
       if (ultimaCotizacion.producto) {
         document.getElementById("producto-info").innerHTML = `
           <div class="result-item">
@@ -576,6 +586,18 @@
       const encodedMessage = encodeURIComponent(mensaje);
       document.getElementById("whatsapp-link").href = `https://wa.me/51912140295?text=${encodedMessage}`;
     }
+
+    // Oculta el resumen si el usuario edita algún campo del formulario
+    window.onload = function() {
+      ['valor', 'peso', 'producto', 'enlace-producto'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('input', () => {
+            document.getElementById("result-section").classList.add("oculto");
+          });
+        }
+      });
+    };
   </script>
 </body>
 </html>
