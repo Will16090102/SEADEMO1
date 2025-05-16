@@ -50,6 +50,7 @@
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       margin-bottom: 20px;
+      transition: flex-direction 0.35s;
     }
 
     .form-section, .result-section {
@@ -58,6 +59,7 @@
       box-sizing: border-box;
       color: var(--color-primary);
       background: var(--color-light);
+      transition: width 0.35s, padding 0.35s;
     }
 
     .result-section {
@@ -295,6 +297,14 @@
       display: none !important;
     }
 
+    /* Solo formulario: forzar columna única en desktop cuando resumen está oculto */
+    .calculator-wrapper.solo-form {
+      flex-direction: column !important;
+    }
+    .form-section.full-width {
+      width: 100% !important;
+      padding-right: 0 !important;
+    }
     /* RESPONSIVE */
     @media (min-width: 768px) {
       .calculator-wrapper {
@@ -328,8 +338,8 @@
 </head>
 <body>
   <div class="main-container">
-    <div class="calculator-wrapper">
-      <div class="form-section">
+    <div class="calculator-wrapper solo-form">
+      <div class="form-section full-width">
         <div class="logo-container">
           <img src="https://raw.githubusercontent.com/Will16090102/SEADEMO1/main/LOGOSEAE.png" 
                alt="SEA Express Logo" 
@@ -465,8 +475,8 @@
       });
       document.getElementById(tabName + '-tab').classList.add('active');
       document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
-      // Oculta el resumen si cambias de tab
-      document.getElementById("result-section").classList.add("oculto");
+      // Oculta el resumen si cambias de tab y pone solo-form/full-width
+      ocultarResumen();
     }
 
     function animateButton(btn) {
@@ -475,8 +485,10 @@
     }
 
     function mostrarResultados() {
-      // Mostrar la sección de resumen
+      // Mostrar la sección de resumen y quitar solo-form/full-width
       document.getElementById("result-section").classList.remove("oculto");
+      document.querySelector('.calculator-wrapper').classList.remove('solo-form');
+      document.querySelector('.form-section').classList.remove('full-width');
       if (ultimaCotizacion.producto) {
         document.getElementById("producto-info").innerHTML = `
           <div class="result-item">
@@ -504,9 +516,16 @@
       wspBtn.classList.add('bounce');
     }
 
+    function ocultarResumen() {
+      document.getElementById("result-section").classList.add("oculto");
+      document.querySelector('.calculator-wrapper').classList.add('solo-form');
+      document.querySelector('.form-section').classList.add('full-width');
+      document.getElementById("result-content").classList.remove("visible");
+    }
+
     function calcular() {
       animateButton(document.getElementById('btn-calcular'));
-      document.getElementById("result-content").classList.remove("visible");
+      ocultarResumen();
       const peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
       const producto = document.getElementById("producto").value;
@@ -541,7 +560,7 @@
 
     async function calcularPorEnlace() {
       animateButton(document.getElementById('btn-calcular-enlace'));
-      document.getElementById("result-content").classList.remove("visible");
+      ocultarResumen();
       const enlace = document.getElementById("enlace-producto").value.trim();
       if (enlace === "") {
         alert("Por favor ingresa un enlace válido.");
@@ -592,9 +611,7 @@
       ['valor', 'peso', 'producto', 'enlace-producto'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
-          el.addEventListener('input', () => {
-            document.getElementById("result-section").classList.add("oculto");
-          });
+          el.addEventListener('input', ocultarResumen);
         }
       });
     };
