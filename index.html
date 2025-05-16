@@ -19,64 +19,62 @@
       --color-tooltip: #777777;
     }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100vh;
       background-color: var(--color-primary);
       color: white;
-      margin: 0;
-      padding: 1rem;
-      display: flex;
-      min-height: 100vh;
-      font-size: 14px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
 
     .main-container {
-      display: flex;
-      flex-direction: column;
       width: 100%;
       max-width: 1000px;
       margin: auto;
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
     }
 
     .calculator-wrapper {
       display: flex;
+      flex-direction: column;
       width: 100%;
       background: var(--color-light);
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      flex-direction: column;
+      margin-bottom: 20px;
     }
 
-    .form-section {
-      flex: 1;
-      padding: 2rem;
+    .form-section, .result-section {
+      width: 100%;
+      padding: 1.2rem;
+      box-sizing: border-box;
       color: var(--color-primary);
-      display: flex;
-      flex-direction: column;
+      background: var(--color-light);
     }
 
     .result-section {
-      width: 100%;
-      background-color: var(--color-bg);
+      background: var(--color-bg);
       color: var(--color-text);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      overflow: hidden;
-      padding: 2rem;
+      padding-bottom: 2rem;
     }
 
     .logo-container {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .logo-img {
-      max-width: 220px;
+      max-width: 180px;
+      width: 100%;
       height: auto;
-      margin-bottom: 0.5rem;
-      width: auto;
     }
 
     .logo-text {
@@ -89,141 +87,72 @@
 
     .tabs {
       display: flex;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
+      background: #f0f0f0;
       border-radius: 8px;
       overflow: hidden;
-      background: #f0f0f0;
     }
-
     .tab {
       flex: 1;
       text-align: center;
-      padding: 0.8rem;
+      padding: 0.7rem;
       cursor: pointer;
       transition: all 0.3s;
-      font-size: 0.85rem;
+      font-size: 1rem;
       color: var(--color-secondary);
+      background: #f0f0f0;
     }
-
     .tab.active {
       background: white;
       font-weight: bold;
       color: var(--color-primary);
     }
 
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.1rem;
     }
-
     .label-container {
       display: flex;
       align-items: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.2rem;
     }
-
     label {
       font-weight: bold;
       color: var(--color-primary-dark);
-      font-size: 0.85rem;
+      font-size: 1rem;
       margin-right: 5px;
     }
 
     input, select {
       width: 100%;
-      padding: 0.8rem;
+      padding: 0.75rem;
       border: 1px solid var(--color-border);
       border-radius: 8px;
-      font-size: 0.85rem;
-      transition: all 0.3s;
+      font-size: 1rem;
+      margin-top: 0.1rem;
       background-color: var(--color-light);
-    }
-
-    input:focus {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 2px rgba(190, 21, 34, 0.2);
+      box-sizing: border-box;
     }
 
     button {
       background-color: var(--color-primary);
       color: white;
       border: none;
-      padding: 0.9rem;
+      padding: 0.85rem;
       width: 100%;
       border-radius: 8px;
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s;
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
     }
-
     button:hover {
       background-color: var(--color-primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .result-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      color: var(--color-primary);
-    }
-
-    .result-content {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.8rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .result-item strong {
-      color: var(--color-secondary);
-      font-weight: bold;
-    }
-
-    .result-item span {
-      font-weight: bold;
-      color: var(--color-primary);
-    }
-
-    .highlight-box {
-      background-color: rgba(190, 21, 34, 0.1);
-      border-radius: 8px;
-      padding: 1rem;
-      margin: 1.5rem 0;
-      border: 2px solid var(--color-primary);
-    }
-
-    .highlight-title {
-      color: var(--color-primary);
-      font-weight: bold;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-
-    .highlight-value {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: var(--color-primary);
-      text-align: center;
     }
 
     .whatsapp-btn {
@@ -233,58 +162,86 @@
       padding: 0.9rem;
       width: 100%;
       border-radius: 8px;
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s;
-      margin-top: 1.5rem;
+      margin-top: 1.1rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-
     .whatsapp-btn:hover {
       background-color: var(--color-whatsapp-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .result-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      color: var(--color-primary);
+    }
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 1rem;
+    }
+    .highlight-box {
+      background-color: rgba(190, 21, 34, 0.08);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1.2rem 0;
+      border: 2px solid var(--color-primary);
+      text-align: center;
+    }
+    .highlight-title {
+      color: var(--color-primary);
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .highlight-value {
+      font-size: 1.6rem;
+      color: var(--color-primary);
+      font-weight: bold;
     }
 
     .features-container {
       width: 100%;
-      margin-top: 2rem;
+      margin-top: 1.3rem;
+      padding: 0 0.5rem;
+      box-sizing: border-box;
     }
-
     .features-section {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 15px;
+      gap: 12px;
     }
-
     .feature-card {
       background-color: var(--color-light);
       border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 13px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+      text-align: center;
     }
-
+    .feature-title {
+      font-size: 1rem;
+      color: var(--color-primary);
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    .feature-text {
+      font-size: 0.95rem;
+      color: var(--color-secondary);
+    }
     .feature-icon {
       color: var(--color-primary);
       font-size: 22px;
-      margin-bottom: 8px;
-    }
-
-    .feature-title {
-      font-size: 0.95rem;
-      color: var(--color-primary);
       margin-bottom: 6px;
-      font-weight: bold;
-    }
-
-    .feature-text {
-      font-size: 0.8rem;
-      color: var(--color-secondary);
     }
 
     .info-icon {
@@ -300,15 +257,10 @@
       cursor: help;
       margin-left: 5px;
     }
-
-    .tooltip {
-      position: relative;
-      display: inline-block;
-    }
-
+    .tooltip { position: relative; display: inline-block; }
     .tooltip .tooltiptext {
       visibility: hidden;
-      width: 200px;
+      width: 180px;
       background-color: var(--color-tooltip);
       color: white;
       text-align: center;
@@ -318,52 +270,40 @@
       z-index: 1;
       bottom: 125%;
       left: 50%;
-      margin-left: -100px;
+      margin-left: -90px;
       opacity: 0;
       transition: opacity 0.3s;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
+    .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
 
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
-      opacity: 1;
-    }
-
+    /* RESPONSIVE */
     @media (min-width: 768px) {
       .calculator-wrapper {
         flex-direction: row;
       }
-      
-      .form-section {
-        padding: 3rem;
+      .form-section, .result-section {
+        width: 60%;
+        padding: 2.3rem;
       }
-      
       .result-section {
         width: 40%;
-        padding: 2rem;
       }
-      
       .features-section {
         grid-template-columns: repeat(3, 1fr);
       }
-      
-      .logo-img {
-        max-width: 250px;
-      }
-      
-      .highlight-value {
-        font-size: 1.6rem;
-      }
+      .logo-img { max-width: 250px; }
     }
 
     @media (max-width: 480px) {
-      body {
-        padding: 0.5rem;
+      html, body {
+        font-size: 15px;
       }
-      
       .form-section, .result-section {
-        padding: 1.5rem;
+        padding: 0.85rem;
       }
+      .logo-img { max-width: 150px; }
+      .highlight-value { font-size: 1.25rem; }
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -378,12 +318,10 @@
                class="logo-img">
           <div class="logo-text">Elígelo y es tuyo</div>
         </div>
-        
         <div class="tabs">
           <div class="tab active" onclick="switchTab('manual')">Manual</div>
           <div class="tab" onclick="switchTab('enlace')">Por Enlace</div>
         </div>
-        
         <div id="manual-tab" class="tab-content active">
           <div class="form-group">
             <div class="label-container">
@@ -395,7 +333,6 @@
             </div>
             <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
           </div>
-          
           <div class="form-group">
             <div class="label-container">
               <label for="peso">Peso del paquete (kg)</label>
@@ -406,7 +343,6 @@
             </div>
             <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
           </div>
-          
           <div class="form-group">
             <div class="label-container">
               <label for="producto">Tipo de producto (opcional)</label>
@@ -417,10 +353,8 @@
             </div>
             <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
           </div>
-          
           <button onclick="calcular()">Calcular</button>
         </div>
-        
         <div id="enlace-tab" class="tab-content">
           <div class="form-group">
             <div class="label-container">
@@ -432,53 +366,42 @@
             </div>
             <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
           </div>
-          
           <button onclick="calcularPorEnlace()">Calcular</button>
         </div>
       </div>
-      
       <div id="result-section" class="result-section">
         <div class="result-title">Resumen de Cotización</div>
-        
         <div id="result-content" class="result-content">
           <div id="producto-info"></div>
-          
           <div class="result-item">
             <strong>Valor del producto:</strong>
             <span id="valor-result">$0.00</span>
           </div>
-          
           <div class="result-item">
             <strong>Peso:</strong>
             <span id="peso-result">0.00 kg</span>
           </div>
-          
           <div class="result-item">
             <strong>Desaduanaje:</strong>
             <span id="desaduanaje">$8.00</span>
           </div>
-          
           <div class="result-item">
             <strong>Costo de envío:</strong>
             <span id="costo-envio">$0.00</span>
           </div>
-          
           <div class="result-item">
             <strong>Impuestos:</strong>
             <span id="impuestos">$0.00</span>
           </div>
-          
           <div class="highlight-box">
             <div class="highlight-title">Total envío</div>
             <div class="highlight-value" id="envio-total">$0.00</div>
           </div>
-          
           <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
             <strong style="font-size: 0.95rem;">Costo total:</strong>
             <span id="total" style="font-size: 0.95rem;">$0.00</span>
           </div>
         </div>
-        
         <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank">
           <button class="whatsapp-btn">
             <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
@@ -486,7 +409,6 @@
         </a>
       </div>
     </div>
-    
     <div class="features-container">
       <div class="features-section">
         <div class="feature-card">
@@ -513,45 +435,36 @@
       </div>
     </div>
   </div>
-
   <script>
     let ultimaCotizacion = null;
-    
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
       });
-      
       document.querySelectorAll('.tab').forEach(tab => {
         tab.classList.remove('active');
       });
-      
       document.getElementById(tabName + '-tab').classList.add('active');
       document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
     }
-
     function calcular() {
       const peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
       const producto = document.getElementById("producto").value;
-      
       if (isNaN(peso) || peso <= 0) {
         alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
         return;
       }
-      
       if (isNaN(valor) || valor <= 0) {
         alert("Por favor ingresa un valor declarado válido (mínimo $1)");
         return;
       }
-      
       const desaduanaje = 8;
       const costoPorKilo = 15;
       const costoEnvio = peso * costoPorKilo;
       const envioTotal = costoEnvio + desaduanaje;
       const impuestos = valor > 200 ? valor * 0.25 : 0;
       const total = valor + envioTotal + impuestos;
-      
       ultimaCotizacion = {
         tipo: "manual",
         producto: producto,
@@ -563,14 +476,10 @@
         impuestos: impuestos,
         total: total
       };
-      
       actualizarEnlaceWhatsApp();
       mostrarResultados();
     }
-
     function mostrarResultados() {
-      const resultContent = document.getElementById("result-content");
-      
       if (ultimaCotizacion.producto) {
         document.getElementById("producto-info").innerHTML = `
           <div class="result-item">
@@ -581,7 +490,6 @@
       } else {
         document.getElementById("producto-info").innerHTML = '';
       }
-      
       document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
       document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg`;
       document.getElementById("desaduanaje").textContent = `$${ultimaCotizacion.desaduanaje.toFixed(2)}`;
@@ -590,52 +498,47 @@
       document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
       document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
     }
-
-    function calcularPorEnlace() {
+    async function calcularPorEnlace() {
       const enlace = document.getElementById("enlace-producto").value.trim();
-      
       if (enlace === "") {
         alert("Por favor ingresa un enlace válido.");
         return;
       }
-      
-      alert("Esta función necesita conectarse con un servicio backend.");
-      
-      const datosEjemplo = {
-        producto: "Producto de ejemplo",
-        peso: 1.5,
-        valor: 150
-      };
-      
-      document.getElementById("peso").value = datosEjemplo.peso;
-      document.getElementById("valor").value = datosEjemplo.valor;
-      document.getElementById("producto").value = datosEjemplo.producto;
-      
-      calcular();
+      try {
+        const response = await fetch('http://localhost:3000/api/amazon', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: enlace })
+        });
+        const data = await response.json();
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        document.getElementById("peso").value = data.peso;
+        document.getElementById("valor").value = data.valor;
+        document.getElementById("producto").value = data.producto;
+        calcular();
+      } catch (err) {
+        alert("Error al conectar con el backend.");
+      }
     }
-    
     function actualizarEnlaceWhatsApp() {
       if (!ultimaCotizacion) return;
-      
       let mensaje = "¡Hola SEA Express! 👋\n\nQuiero aprovechar mi *descuento especial* para este envío:\n\n";
-      
       if (ultimaCotizacion.tipo === "manual") {
         mensaje += `📦 *Producto:* ${ultimaCotizacion.producto || "Sin descripción"}\n`;
       }
-      
       mensaje += `💰 *Valor del producto:* $${ultimaCotizacion.valor.toFixed(2)}\n`;
       mensaje += `⚖️ *Peso:* ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
       mensaje += `📦 *Desaduanaje:* $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
       mensaje += `🚚 *Costo de envío:* $${ultimaCotizacion.costoEnvio.toFixed(2)}\n`;
       mensaje += `✈️ *Total envío:* $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
-      
       if (ultimaCotizacion.impuestos > 0) {
         mensaje += `🏛️ *Impuestos:* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
       }
-      
       mensaje += `💵 *Costo total:* $${ultimaCotizacion.total.toFixed(2)}\n\n`;
       mensaje += "Por favor, envíenme información sobre *mi descuento especial* para proceder con el envío. ¡Gracias!";
-      
       const encodedMessage = encodeURIComponent(mensaje);
       document.getElementById("whatsapp-link").href = `https://wa.me/51912140295?text=${encodedMessage}`;
     }
