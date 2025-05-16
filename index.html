@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEA Express - Calculadora de Envíos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
       --color-primary: #BE1522;
@@ -11,27 +12,29 @@
       --color-secondary: #606060;
       --color-whatsapp: #25D366;
       --color-whatsapp-hover: #128C7E;
-      --color-text: #333333;
+      --color-text: #1A1A1A;
       --color-light: #FFFFFF;
       --color-border: #E0E0E0;
       --color-bg: #F8F9FA;
       --color-highlight: #BE1522;
       --color-tooltip: #777777;
+      --shadow-main: 0 10px 30px rgba(0,0,0,0.10);
+      --shadow-card: 0 2px 10px rgba(190, 21, 34, 0.06);
+      --shadow-hover: 0 8px 24px rgba(190,21,34,0.12);
     }
-
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       min-height: 100vh;
       background-color: var(--color-primary);
-      color: white;
+      color: var(--color-text);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       font-size: 16px;
       box-sizing: border-box;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
-
     .main-container {
       width: 100%;
       max-width: 1000px;
@@ -44,55 +47,50 @@
       min-height: 100vh;
       justify-content: flex-start;
     }
-
     .calculator-wrapper {
       width: 100%;
       max-width: 700px;
       display: flex;
       flex-direction: column;
       background: var(--color-light);
-      border-radius: 15px;
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      margin-bottom: 20px;
+      box-shadow: var(--shadow-main);
+      margin-bottom: 24px;
       transition: flex-direction 0.35s;
     }
-
     .form-section, .result-section {
       width: 100%;
-      padding: 1.2rem;
+      padding: 1.5rem;
       box-sizing: border-box;
       color: var(--color-primary);
       background: var(--color-light);
       transition: width 0.35s, padding 0.35s;
     }
-
     .result-section {
       background: var(--color-bg);
       color: var(--color-text);
       padding-bottom: 2rem;
-      /* Oculto por defecto, controlado por la clase .oculto */
     }
-
     .logo-container {
       text-align: center;
       margin-bottom: 1.2rem;
     }
-
     .logo-img {
       max-width: 180px;
       width: 100%;
       height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(190,21,34,0.11);
     }
-
     .logo-text {
       font-size: 1rem;
       color: var(--color-secondary);
       font-weight: 500;
       letter-spacing: 2px;
       font-style: italic;
+      margin-top: 2px;
     }
-
     .tabs {
       display: flex;
       width: 100%;
@@ -112,19 +110,16 @@
       background: #f0f0f0;
       border: none;
       outline: none;
+      user-select: none;
     }
     .tab.active {
       background: white;
       font-weight: bold;
       color: var(--color-primary);
     }
-
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-
-    .form-group {
-      margin-bottom: 1.1rem;
-    }
+    .form-group { margin-bottom: 1.1rem; }
     .label-container {
       display: flex;
       align-items: center;
@@ -136,7 +131,6 @@
       font-size: 1rem;
       margin-right: 5px;
     }
-
     input, select {
       width: 100%;
       padding: 0.75rem;
@@ -146,47 +140,57 @@
       margin-top: 0.1rem;
       background-color: var(--color-light);
       box-sizing: border-box;
+      box-shadow: var(--shadow-card);
+      transition: border 0.2s, box-shadow 0.2s;
     }
-
+    input:focus, select:focus {
+      border: 1.5px solid var(--color-primary);
+      outline: none;
+      box-shadow: 0 4px 16px rgba(190, 21, 34, 0.14);
+    }
     button {
       background-color: var(--color-primary);
       color: white;
       border: none;
       padding: 0.85rem;
       width: 100%;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.2s;
       margin-top: 0.6rem;
+      box-shadow: 0 2px 8px rgba(190,21,34,0.09);
+      letter-spacing: 0.5px;
     }
-    button:hover {
+    button:hover, button:focus {
       background-color: var(--color-primary-dark);
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 4px 16px rgba(190,21,34,0.16);
     }
-
     .whatsapp-btn {
       background-color: var(--color-whatsapp);
       color: white;
       border: none;
-      padding: 0.9rem;
+      padding: 0.95rem;
       width: 100%;
-      border-radius: 8px;
-      font-size: 1.1rem;
+      border-radius: 10px;
+      font-size: 1.12rem;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.2s;
       margin-top: 1.1rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      box-shadow: 0 4px 14px rgba(37,211,102,0.18);
     }
-    .whatsapp-btn:hover {
+    .whatsapp-btn:hover, .whatsapp-btn:focus {
       background-color: var(--color-whatsapp-hover);
+      box-shadow: 0 6px 20px rgba(18,140,126,0.22);
+      transform: translateY(-2px) scale(1.04);
     }
-
     .result-title {
       font-size: 1.3rem;
       font-weight: bold;
@@ -204,11 +208,12 @@
     }
     .highlight-box {
       background-color: rgba(190, 21, 34, 0.08);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 1rem;
       margin: 1.2rem 0;
       border: 2px solid var(--color-primary);
       text-align: center;
+      box-shadow: 0 2px 12px rgba(190,21,34,0.10);
     }
     .highlight-title {
       color: var(--color-primary);
@@ -220,8 +225,6 @@
       color: var(--color-primary);
       font-weight: bold;
     }
-
-    /* NUEVO: Tarjetas centradas y separadas */
     .features-container {
       width: 100%;
       margin-top: 1.3rem;
@@ -239,27 +242,32 @@
       max-width: 340px;
       flex: 1 1 280px;
       background-color: var(--color-light);
-      border-radius: 8px;
-      padding: 13px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--shadow-card);
       text-align: center;
+      transition: box-shadow 0.3s, transform 0.22s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px) scale(1.03);
     }
     .feature-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--color-primary);
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       font-weight: bold;
     }
     .feature-text {
-      font-size: 0.95rem;
+      font-size: 0.97rem;
       color: var(--color-secondary);
+      margin-bottom: 0;
     }
     .feature-icon {
       color: var(--color-primary);
-      font-size: 22px;
-      margin-bottom: 6px;
+      font-size: 26px;
+      margin-bottom: 7px;
     }
-
     .info-icon {
       background-color: var(--color-tooltip);
       color: white;
@@ -272,6 +280,7 @@
       font-size: 0.7rem;
       cursor: help;
       margin-left: 5px;
+      font-style: normal;
     }
     .tooltip { position: relative; display: inline-block; }
     .tooltip .tooltiptext {
@@ -292,90 +301,62 @@
       font-size: 0.9rem;
     }
     .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
-
-    /* Animaciones */
+    .result-content { opacity: 0; pointer-events:none; transform:translateY(20px); transition:opacity 0.5s, transform 0.5s;}
+    .result-content.visible { animation: fadeInUp 0.6s; opacity:1; pointer-events:auto; transform:translateY(0);}
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(40px);}
       to   { opacity: 1; transform: translateY(0);}
     }
-    .result-content { opacity: 0; pointer-events:none; transform:translateY(20px); transition:opacity 0.5s, transform 0.5s;}
-    .result-content.visible { animation: fadeInUp 0.6s; opacity:1; pointer-events:auto; transform:translateY(0);}
-    @keyframes pulse { 0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);} }
-    button.pulse { animation: pulse 0.3s; }
-    @keyframes bounceIn { 0%{transform:scale(0.7);opacity:0;}60%{transform:scale(1.1);opacity:1;}80%{transform:scale(0.95);}100%{transform:scale(1);} }
-    .whatsapp-btn.bounce { animation: bounceIn 0.5s; }
-
-    /* Ocultar sección de resumen */
-    .oculto {
-      display: none !important;
-    }
-
-    /* Solo formulario: forzar columna única en desktop cuando resumen está oculto */
-    .calculator-wrapper.solo-form {
-      flex-direction: column !important;
-    }
+    .oculto { display: none !important; }
+    .calculator-wrapper.solo-form { flex-direction: column !important; }
     .form-section.full-width {
       width: 100% !important;
       padding-right: 0 !important;
     }
+    /* Scrollbar custom */
+    ::-webkit-scrollbar {
+      width: 8px;
+      background: #f0f0f0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-primary);
+      border-radius: 6px;
+    }
     /* RESPONSIVE */
     @media (min-width: 768px) {
-      .calculator-wrapper {
-        flex-direction: row;
-      }
-      .form-section, .result-section {
-        width: 60%;
-        padding: 2.3rem;
-      }
-      .result-section {
-        width: 40%;
-      }
+      .calculator-wrapper { flex-direction: row; }
+      .form-section, .result-section { width: 60%; padding: 2.3rem; }
+      .result-section { width: 40%; }
       .logo-img { max-width: 250px; }
     }
-
-    /* Tarjetas de features en línea solo en PC, en columna en móvil */
     @media (min-width: 900px) {
-      .features-section {
-        flex-wrap: nowrap;
-        gap: 32px;
-      }
-      .feature-card {
-        max-width: 320px;
-        min-width: 240px;
-        flex: 1 1 0;
-      }
+      .features-section { flex-wrap: nowrap; gap: 32px; }
+      .feature-card { max-width: 320px; min-width: 240px; flex: 1 1 0; }
     }
-
     @media (max-width: 480px) {
-      html, body {
-        font-size: 15px;
-      }
-      .form-section, .result-section {
-        padding: 0.85rem;
-      }
-      .logo-img { max-width: 150px; }
-      .highlight-value { font-size: 1.25rem; }
-      .features-container {
-        padding: 0 1vw;
-      }
+      html, body { font-size: 15px; }
+      .form-section, .result-section { padding: 0.85rem; }
+      .logo-img { max-width: 135px; }
+      .highlight-value { font-size: 1.2rem; }
+      .features-container { padding: 0 1vw; }
+      .feature-card { padding: 8px; }
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <div class="main-container">
-    <div class="calculator-wrapper solo-form">
+  <main class="main-container">
+    <section class="calculator-wrapper solo-form">
       <div class="form-section full-width">
         <div class="logo-container">
           <img src="https://raw.githubusercontent.com/Will16090102/SEADEMO1/main/LOGOSEAE.png" 
-               alt="SEA Express Logo" 
+               alt="Logo de SEA Express - Cotizador" 
                class="logo-img">
           <div class="logo-text">Elígelo y es tuyo</div>
         </div>
-        <div class="tabs">
+        <nav class="tabs" aria-label="Tipo de cotización">
           <div class="tab active" onclick="switchTab('manual')">Manual</div>
           <div class="tab" onclick="switchTab('enlace')">Por Enlace</div>
-        </div>
+        </nav>
         <div id="manual-tab" class="tab-content active">
           <div class="form-group">
             <div class="label-container">
@@ -385,7 +366,7 @@
                 <span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span>
               </div>
             </div>
-            <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
+            <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required>
           </div>
           <div class="form-group">
             <div class="label-container">
@@ -395,7 +376,7 @@
                 <span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span>
               </div>
             </div>
-            <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
+            <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required>
           </div>
           <div class="form-group">
             <div class="label-container">
@@ -418,12 +399,12 @@
                 <span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span>
               </div>
             </div>
-            <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
+            <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
           </div>
           <button id="btn-calcular-enlace" onclick="calcularPorEnlace()">Calcular</button>
         </div>
       </div>
-      <div id="result-section" class="result-section oculto">
+      <section id="result-section" class="result-section oculto">
         <div class="result-title">Resumen de Cotización</div>
         <div id="result-content" class="result-content">
           <div id="producto-info"></div>
@@ -456,14 +437,14 @@
             <span id="total" style="font-size: 0.95rem;">$0.00</span>
           </div>
         </div>
-        <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank">
+        <a id="whatsapp-link" href="https://wa.me/51923465624" target="_blank" rel="noopener">
           <button class="whatsapp-btn">
             <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
           </button>
         </a>
-      </div>
-    </div>
-    <div class="features-container">
+      </section>
+    </section>
+    <section class="features-container">
       <div class="features-section">
         <div class="feature-card">
           <div class="feature-icon">
@@ -487,11 +468,13 @@
           <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
+    <footer style="width:100%;text-align:center;padding:1rem 0;color:#fff;font-size:0.94rem;opacity:.75;">
+      <span>SEA Express &copy; 2025. Cotizador Amazon & WhatsApp</span>
+    </footer>
+  </main>
   <script>
     let ultimaCotizacion = null;
-
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -501,17 +484,13 @@
       });
       document.getElementById(tabName + '-tab').classList.add('active');
       document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
-      // Oculta el resumen si cambias de tab y pone solo-form/full-width
       ocultarResumen();
     }
-
     function animateButton(btn) {
       btn.classList.add('pulse');
       setTimeout(() => btn.classList.remove('pulse'), 350);
     }
-
     function mostrarResultados() {
-      // Mostrar la sección de resumen y quitar solo-form/full-width
       document.getElementById("result-section").classList.remove("oculto");
       document.querySelector('.calculator-wrapper').classList.remove('solo-form');
       document.querySelector('.form-section').classList.remove('full-width');
@@ -541,14 +520,12 @@
       void wspBtn.offsetWidth; // hack para reiniciar animación
       wspBtn.classList.add('bounce');
     }
-
     function ocultarResumen() {
       document.getElementById("result-section").classList.add("oculto");
       document.querySelector('.calculator-wrapper').classList.add('solo-form');
       document.querySelector('.form-section').classList.add('full-width');
       document.getElementById("result-content").classList.remove("visible");
     }
-
     function calcular() {
       animateButton(document.getElementById('btn-calcular'));
       ocultarResumen();
@@ -583,7 +560,6 @@
       actualizarEnlaceWhatsApp();
       setTimeout(mostrarResultados, 100);
     }
-
     async function calcularPorEnlace() {
       animateButton(document.getElementById('btn-calcular-enlace'));
       ocultarResumen();
@@ -612,7 +588,6 @@
         alert("Error al conectar con el backend.");
       }
     }
-
     function actualizarEnlaceWhatsApp() {
       if (!ultimaCotizacion) return;
       let mensaje = "¡Hola SEA Express! 👋\n\nQuiero aprovechar mi *descuento especial* para este envío:\n\n";
@@ -632,8 +607,6 @@
       const encodedMessage = encodeURIComponent(mensaje);
       document.getElementById("whatsapp-link").href = `https://wa.me/51912140295?text=${encodedMessage}`;
     }
-
-    // Oculta el resumen si el usuario edita algún campo del formulario
     window.onload = function() {
       ['valor', 'peso', 'producto', 'enlace-producto'].forEach(id => {
         const el = document.getElementById(id);
