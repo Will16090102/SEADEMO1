@@ -49,7 +49,7 @@
 
     .form-section {
       flex: 1;
-      padding: 2rem;
+      padding: 1.5rem;
       color: var(--color-primary);
       display: flex;
       flex-direction: column;
@@ -63,19 +63,19 @@
       flex-direction: column;
       justify-content: center;
       overflow: hidden;
-      padding: 2rem;
+      padding: 1.5rem;
     }
 
     .logo-container {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .logo-img {
-      max-width: 180px;
+      max-width: 220px;
       height: auto;
       margin-bottom: 0.5rem;
-      width: 100%;
+      width: auto;
     }
 
     .logo-text {
@@ -88,7 +88,7 @@
 
     .tabs {
       display: flex;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       border-radius: 8px;
       overflow: hidden;
       background: #f0f0f0;
@@ -97,10 +97,10 @@
     .tab {
       flex: 1;
       text-align: center;
-      padding: 1rem;
+      padding: 0.8rem;
       cursor: pointer;
       transition: all 0.3s;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--color-secondary);
     }
 
@@ -119,23 +119,32 @@
     }
 
     .form-group {
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+
+    .info-tooltip {
+      position: absolute;
+      right: 10px;
+      top: 35px;
+      color: var(--color-secondary);
+      cursor: help;
     }
 
     label {
       display: block;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       font-weight: bold;
       color: var(--color-primary-dark);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     input, select {
       width: 100%;
-      padding: 0.9rem;
+      padding: 0.8rem;
       border: 1px solid var(--color-border);
       border-radius: 8px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       transition: all 0.3s;
       background-color: var(--color-light);
     }
@@ -150,10 +159,10 @@
       background-color: var(--color-primary);
       color: white;
       border: none;
-      padding: 1rem;
+      padding: 0.9rem;
       width: 100%;
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s;
@@ -167,9 +176,9 @@
     }
 
     .result-title {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       font-weight: bold;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       text-align: center;
       color: var(--color-primary);
     }
@@ -177,15 +186,16 @@
     .result-content {
       opacity: 1;
       transform: translateY(0);
+      padding: 0 0.5rem;
     }
 
     .result-item {
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.8rem;
       border-bottom: 1px solid var(--color-border);
       display: flex;
       justify-content: space-between;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .result-item strong {
@@ -200,21 +210,21 @@
     .highlight-box {
       background-color: rgba(190, 21, 34, 0.1);
       border-radius: 8px;
-      padding: 1rem;
-      margin: 1.5rem 0;
+      padding: 0.8rem;
+      margin: 1rem 0;
       border: 2px solid var(--color-primary);
     }
 
     .highlight-title {
       color: var(--color-primary);
       font-weight: bold;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
       text-align: center;
     }
 
     .highlight-value {
-      font-size: 1.6rem;
+      font-size: 1.2rem;
       font-weight: bold;
       color: var(--color-primary);
       text-align: center;
@@ -224,14 +234,14 @@
       background-color: var(--color-whatsapp);
       color: white;
       border: none;
-      padding: 1.1rem;
+      padding: 0.9rem;
       width: 100%;
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -247,37 +257,37 @@
 
     .features-container {
       width: 100%;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
 
     .features-section {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 15px;
     }
 
     .feature-card {
       background-color: var(--color-light);
       border-radius: 8px;
-      padding: 20px;
+      padding: 15px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
     .feature-icon {
       color: var(--color-primary);
-      font-size: 24px;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 8px;
     }
 
     .feature-title {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       color: var(--color-primary);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-weight: bold;
     }
 
     .feature-text {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: var(--color-secondary);
     }
 
@@ -285,13 +295,23 @@
       font-weight: bold;
       color: var(--color-primary);
       text-align: right;
-      margin-top: 1rem;
-      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
     }
 
     @media (min-width: 768px) {
+      body {
+        padding: 2rem;
+      }
+      
       .calculator-wrapper {
         flex-direction: row;
+      }
+      
+      .form-section, .result-section {
+        padding: 2rem;
       }
       
       .result-section {
@@ -301,24 +321,42 @@
       .features-section {
         grid-template-columns: repeat(3, 1fr);
       }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 0.5rem;
-      }
-      
-      .form-section, .result-section {
-        padding: 1.5rem;
-      }
       
       .logo-img {
-        max-width: 150px;
+        max-width: 250px;
       }
       
       .highlight-value {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
       }
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #555;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.8rem;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -328,7 +366,6 @@
     <div class="calculator-wrapper">
       <div class="form-section">
         <div class="logo-container">
-          <!-- LOGO ACTUALIZADO (URL desde GitHub) -->
           <img src="https://raw.githubusercontent.com/Will16090102/SEADEMO1/main/LOGOSEAE.png" 
                alt="SEA Express Logo" 
                class="logo-img">
@@ -343,17 +380,26 @@
         <div id="manual-tab" class="tab-content active">
           <div class="form-group">
             <label for="valor">Valor del producto (USD)</label>
-            <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
+            <div class="tooltip">
+              <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1">
+              <span class="info-tooltip tooltip">ℹ️<span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span></span>
+            </div>
           </div>
           
           <div class="form-group">
             <label for="peso">Peso del paquete (kg)</label>
-            <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
+            <div class="tooltip">
+              <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
+              <span class="info-tooltip tooltip">ℹ️<span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span></span>
+            </div>
           </div>
           
           <div class="form-group">
             <label for="producto">Tipo de producto (opcional)</label>
-            <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
+            <div class="tooltip">
+              <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
+              <span class="info-tooltip tooltip">ℹ️<span class="tooltiptext">Describe brevemente qué tipo de producto es</span></span>
+            </div>
           </div>
           
           <button onclick="calcular()">Calcular</button>
@@ -362,7 +408,10 @@
         <div id="enlace-tab" class="tab-content">
           <div class="form-group">
             <label for="enlace-producto">Enlace del producto</label>
-            <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
+            <div class="tooltip">
+              <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
+              <span class="info-tooltip tooltip">ℹ️<span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span></span>
+            </div>
           </div>
           
           <button onclick="calcularPorEnlace()">Calcular</button>
@@ -400,14 +449,13 @@
             <span id="impuestos">$0.00</span>
           </div>
           
-          <!-- TOTALES RESALTADOS -->
           <div class="highlight-box">
             <div class="highlight-title">Total envío</div>
             <div class="highlight-value" id="envio-total">$0.00</div>
           </div>
           
           <div class="total-normal">
-            <strong>Costo total: </strong>
+            <strong>Costo total:</strong>
             <span id="total">$0.00</span>
           </div>
         </div>
