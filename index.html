@@ -277,6 +277,18 @@
     }
     .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
 
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    .result-content { opacity: 0; pointer-events:none; transform:translateY(20px); transition:opacity 0.5s, transform 0.5s;}
+    .result-content.visible { animation: fadeInUp 0.6s; opacity:1; pointer-events:auto; transform:translateY(0);}
+    @keyframes pulse { 0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);} }
+    button.pulse { animation: pulse 0.3s; }
+    @keyframes bounceIn { 0%{transform:scale(0.7);opacity:0;}60%{transform:scale(1.1);opacity:1;}80%{transform:scale(0.95);}100%{transform:scale(1);} }
+    .whatsapp-btn.bounce { animation: bounceIn 0.5s; }
+
     /* RESPONSIVE */
     @media (min-width: 768px) {
       .calculator-wrapper {
@@ -353,7 +365,7 @@
             </div>
             <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
           </div>
-          <button onclick="calcular()">Calcular</button>
+          <button id="btn-calcular" onclick="calcular()">Calcular</button>
         </div>
         <div id="enlace-tab" class="tab-content">
           <div class="form-group">
@@ -366,7 +378,7 @@
             </div>
             <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/...">
           </div>
-          <button onclick="calcularPorEnlace()">Calcular</button>
+          <button id="btn-calcular-enlace" onclick="calcularPorEnlace()">Calcular</button>
         </div>
       </div>
       <div id="result-section" class="result-section">
@@ -437,6 +449,7 @@
   </div>
   <script>
     let ultimaCotizacion = null;
+
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -447,7 +460,43 @@
       document.getElementById(tabName + '-tab').classList.add('active');
       document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
     }
+
+    function animateButton(btn) {
+      btn.classList.add('pulse');
+      setTimeout(() => btn.classList.remove('pulse'), 350);
+    }
+
+    function mostrarResultados() {
+      if (ultimaCotizacion.producto) {
+        document.getElementById("producto-info").innerHTML = `
+          <div class="result-item">
+            <strong>Producto:</strong>
+            <span>${ultimaCotizacion.producto}</span>
+          </div>
+        `;
+      } else {
+        document.getElementById("producto-info").innerHTML = '';
+      }
+      document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
+      document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg`;
+      document.getElementById("desaduanaje").textContent = `$${ultimaCotizacion.desaduanaje.toFixed(2)}`;
+      document.getElementById("costo-envio").textContent = `$${ultimaCotizacion.costoEnvio.toFixed(2)}`;
+      document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
+      document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
+      document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
+      // Animación de resumen
+      const resumen = document.getElementById("result-content");
+      resumen.classList.add("visible");
+      // Animación botón wsp
+      const wspBtn = document.querySelector('.whatsapp-btn');
+      wspBtn.classList.remove('bounce');
+      void wspBtn.offsetWidth; // hack para reiniciar animación
+      wspBtn.classList.add('bounce');
+    }
+
     function calcular() {
+      animateButton(document.getElementById('btn-calcular'));
+      document.getElementById("result-content").classList.remove("visible");
       const peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
       const producto = document.getElementById("producto").value;
@@ -477,28 +526,12 @@
         total: total
       };
       actualizarEnlaceWhatsApp();
-      mostrarResultados();
+      setTimeout(mostrarResultados, 100);
     }
-    function mostrarResultados() {
-      if (ultimaCotizacion.producto) {
-        document.getElementById("producto-info").innerHTML = `
-          <div class="result-item">
-            <strong>Producto:</strong>
-            <span>${ultimaCotizacion.producto}</span>
-          </div>
-        `;
-      } else {
-        document.getElementById("producto-info").innerHTML = '';
-      }
-      document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
-      document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg`;
-      document.getElementById("desaduanaje").textContent = `$${ultimaCotizacion.desaduanaje.toFixed(2)}`;
-      document.getElementById("costo-envio").textContent = `$${ultimaCotizacion.costoEnvio.toFixed(2)}`;
-      document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
-      document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
-      document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
-    }
+
     async function calcularPorEnlace() {
+      animateButton(document.getElementById('btn-calcular-enlace'));
+      document.getElementById("result-content").classList.remove("visible");
       const enlace = document.getElementById("enlace-producto").value.trim();
       if (enlace === "") {
         alert("Por favor ingresa un enlace válido.");
@@ -523,6 +556,7 @@
         alert("Error al conectar con el backend.");
       }
     }
+
     function actualizarEnlaceWhatsApp() {
       if (!ultimaCotizacion) return;
       let mensaje = "¡Hola SEA Express! 👋\n\nQuiero aprovechar mi *descuento especial* para este envío:\n\n";
