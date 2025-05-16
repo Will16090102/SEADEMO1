@@ -567,7 +567,8 @@
         return;
       }
       try {
-        const response = await fetch('http://localhost:3000/api/amazon', {
+        // <-- CAMBIA ESTA URL por la de tu Glitch (ejemplo: https://tranquil-gold-area.glitch.me/api/amazon) -->
+        const response = await fetch('https://tranquil-gold-area.glitch.me/api/amazon', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ url: enlace })
