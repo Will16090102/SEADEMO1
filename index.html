@@ -7,13 +7,13 @@
   <meta name="description" content="Cotiza tu envío USA-Perú fácil y rápido con SEA Express. Envíos seguros, soporte 24/7, experiencia garantizada.">
   <meta name="theme-color" content="#BE1522">
   <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL4N1HLKD9"></script>
+  <!-- Google Analytics (pon tu ID real en G-XXXXXXXXXX) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XL4N1HLKD9');
+    gtag('config', 'G-XXXXXXXXXX');
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
@@ -348,6 +348,7 @@
       color: var(--color-primary);
       font-weight: bold;
     }
+    /* CARDS DE VENTAJAS */
     .features-container {
       width: 100%;
       background: #f7f7f7;
@@ -458,6 +459,7 @@
       to   { opacity: 1; transform: translateY(0);}
     }
     .oculto { display: none !important; }
+    /* Side by side in desktop */
     @media (min-width: 1020px) {
       .calc-flex {
         flex-direction: row;
@@ -490,6 +492,7 @@
         flex-direction: column;
       }
     }
+    /* Mobile: stacked */
     @media (max-width: 1019px) {
       .calc-flex {
         flex-direction: column;
@@ -523,45 +526,337 @@
     @media (max-width: 400px) {
       .form-inner, .result-section { padding: 0.6rem 0.1rem 0.4rem 0.1rem; }
     }
+
+    /* FOOTER INSPIRADO EN COMPRAONLINEUSA */
+    .footer-corporate {
+      background: #f7f7f7;
+      color: #222;
+      font-size: 1rem;
+      margin-top: 45px;
+      border-top: 1.5px solid #e4e4e4;
+      width: 100vw;
+      animation: fadeInUp 0.7s;
+    }
+    .footer-main {
+      max-width: 1420px;
+      margin: 0 auto;
+      padding: 32px 2vw 18px 2vw;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      justify-content: space-between;
+    }
+    .footer-col {
+      flex: 1 1 200px;
+      min-width: 180px;
+      max-width: 360px;
+      margin-bottom: 16px;
+    }
+    .footer-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      letter-spacing: 0.7px;
+    }
+    .footer-contact {
+      margin-bottom: 4px;
+      font-weight: bold;
+      letter-spacing: 0.3px;
+    }
+    .footer-office {
+      font-weight: bold;
+      margin-top: 7px;
+      margin-bottom: 2px;
+      font-size: 1.01rem;
+    }
+    .footer-links, .footer-countries {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-links li, .footer-countries li {
+      margin-bottom: 5px;
+    }
+    .footer-links a {
+      color: #222;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover, .footer-links a:focus {
+      color: var(--color-primary);
+      text-decoration: underline;
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+    .footer-countries {
+      column-count: 2;
+      column-gap: 28px;
+      font-size: 1rem;
+    }
+    .footer-social {
+      border-top: 1px solid #c9c9c9;
+      border-bottom: 1px solid #c9c9c9;
+      text-align: center;
+      padding: 18px 0 13px 0;
+      margin: 0 0 0 0;
+      animation: fadeInUp 0.7s;
+    }
+    .footer-social i {
+      font-size: 1.5rem;
+      margin: 0 18px;
+      color: #222;
+      transition: color 0.25s, transform 0.20s;
+      cursor: pointer;
+    }
+    .footer-social i:hover, .footer-social i:focus {
+      color: var(--color-primary);
+      transform: scale(1.2) rotate(-8deg);
+      outline: 2px solid #be1522;
+      outline-offset: 2px;
+    }
+    .footer-bottom-bar {
+      padding: 12px 2vw 14px 2vw;
+      text-align: left;
+      color: #222;
+      font-size: 0.97rem;
+      letter-spacing: 0.2px;
+      border-top: 1px solid #c9c9c9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.7s;
+    }
+    .footer-bottom-bar a {
+      color: #222;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 7px;
+      margin-right: 7px;
+      transition: color 0.2s;
+    }
+    .footer-bottom-bar a:hover, .footer-bottom-bar a:focus {
+      color: var(--color-primary);
+      text-decoration: underline;
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+    .footer-logos {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-logos img {
+      height: 36px;
+      width: auto;
+      margin-right: 8px;
+      vertical-align: middle;
+      filter: grayscale(0.15);
+      opacity: 0.92;
+    }
+    @media (max-width: 900px) {
+      .footer-main {
+        flex-direction: column;
+        gap: 8px;
+        padding: 24px 1vw 12px 1vw;
+      }
+      .footer-col {
+        max-width: 98vw;
+      }
+      .footer-bottom-bar { flex-direction: column; gap: 8px; text-align: center;}
+    }
   </style>
 </head>
 <body>
+  <!-- Accesibilidad: skip link -->
   <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
   <main class="main-container" id="contenido-principal" tabindex="-1" aria-label="Contenido principal">
-    <!-- Botones para abrir los modales -->
-    <div style="text-align:center; margin: 24px 0 0 0;">
-      <button onclick="openModal('faq-modal')" class="modal-btn">Preguntas Frecuentes</button>
-      <button onclick="openModal('testimonios-modal')" class="modal-btn">Clientes Felices</button>
-    </div>
-    <!-- ----- TU CALCULADORA, TABS, Y FOOTER ORIGINALES AQUÍ ----- -->
-    <!-- (Pega aquí toda la parte principal de tu HTML original, como en tu repo) -->
-    <!-- ------------------- MODALES ------------------- -->
-    <div class="custom-modal-bg" id="faq-modal-bg" onclick="closeModal('faq-modal')">
-      <div class="custom-modal" id="faq-modal" onclick="event.stopPropagation();">
-        <button class="close-modal" onclick="closeModal('faq-modal')">&times;</button>
-        <h2>Preguntas Frecuentes</h2>
-        <ul>
-          <li><strong>¿En cuánto tiempo llega mi envío?</strong> 7-10 días hábiles luego de recibido el paquete en Miami.</li>
-          <li><strong>¿Qué puedo traer?</strong> Electrónica, ropa, accesorios, etc.</li>
-          <li><strong>¿Cómo rastreo mi paquete?</strong> Te enviamos tu código de seguimiento por WhatsApp.</li>
-          <li><strong>¿Puedo pagar contra entrega?</strong> El pago es anticipado para procesar tu envío.</li>
-        </ul>
+    <section class="calculator-wrapper">
+      <div class="logo-container">
+        <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" 
+             alt="Logo de SEA Express, avión rojo y texto SEA Express" 
+             class="logo-img" tabindex="0">
+        <div class="logo-text">Elígelo y es tuyo</div>
       </div>
-    </div>
-    <div class="custom-modal-bg" id="testimonios-modal-bg" onclick="closeModal('testimonios-modal')">
-      <div class="custom-modal" id="testimonios-modal" onclick="event.stopPropagation();">
-        <button class="close-modal" onclick="closeModal('testimonios-modal')">&times;</button>
-        <h2>Clientes Felices</h2>
-        <ul>
-          <li>“¡Excelente servicio! Mi paquete llegó rápido.” – Ana</li>
-          <li>“Me ayudaron en todo el proceso.” – Carlos</li>
-          <li>“Repetiría sin dudarlo.” – Lucía</li>
-        </ul>
+      <nav class="tabs" aria-label="Tipo de cotización">
+        <div class="tab active" onclick="switchTab('manual')" tabindex="0" role="button" aria-pressed="true">Manual</div>
+        <div class="tab" onclick="switchTab('enlace')" tabindex="0" role="button" aria-pressed="false">Por Enlace</div>
+      </nav>
+      <div class="calc-flex">
+        <div class="form-section" id="form-section">
+          <div class="form-inner">
+            <div id="manual-tab" class="tab-content active">
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="valor">Valor del producto (USD)</label>
+                  <div class="tooltip">
+                    <div class="info-icon" tabindex="0" aria-label="Información sobre valor del producto">i</div>
+                    <span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span>
+                  </div>
+                </div>
+                <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required aria-required="true">
+              </div>
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="peso">Peso del paquete (kg)</label>
+                  <div class="tooltip">
+                    <div class="info-icon" tabindex="0" aria-label="Información sobre peso del paquete">i</div>
+                    <span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span>
+                  </div>
+                </div>
+                <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required aria-required="true">
+              </div>
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="producto">Tipo de producto (opcional)</label>
+                  <div class="tooltip">
+                    <div class="info-icon" tabindex="0" aria-label="Información sobre tipo de producto">i</div>
+                    <span class="tooltiptext">Describe brevemente qué tipo de producto es</span>
+                  </div>
+                </div>
+                <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
+              </div>
+              <button id="btn-calcular" onclick="calcular()" aria-label="Calcular cotización">Calcular</button>
+            </div>
+            <div id="enlace-tab" class="tab-content">
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="enlace-producto">Enlace del producto</label>
+                  <div class="tooltip">
+                    <div class="info-icon" tabindex="0" aria-label="Información sobre enlace del producto">i</div>
+                    <span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span>
+                  </div>
+                </div>
+                <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required aria-required="true">
+              </div>
+              <button id="btn-calcular-enlace" onclick="calcularPorEnlace()" aria-label="Calcular por enlace">Calcular</button>
+            </div>
+          </div>
+        </div>
+        <section id="result-section" class="result-section" aria-live="polite">
+          <div class="result-title">Resumen de Cotización</div>
+          <div id="result-content" class="result-content">
+            <div id="producto-info"></div>
+            <div class="result-item">
+              <strong>Valor del producto:</strong>
+              <span id="valor-result">$0.00</span>
+            </div>
+            <div class="result-item">
+              <strong>Peso:</strong>
+              <span id="peso-result">0.00 kg</span>
+            </div>
+            <div class="result-item">
+              <strong>Desaduanaje:</strong>
+              <span id="desaduanaje">$8.00</span>
+            </div>
+            <div class="result-item">
+              <strong>Costo de envío:</strong>
+              <span id="costo-envio">$0.00</span>
+            </div>
+            <div class="result-item">
+              <strong>Impuestos:</strong>
+              <span id="impuestos">$0.00</span>
+            </div>
+            <div class="highlight-box">
+              <div class="highlight-title">Total envío</div>
+              <div class="highlight-value" id="envio-total">$0.00</div>
+            </div>
+            <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
+              <strong style="font-size: 0.95rem;">Costo total:</strong>
+              <span id="total" style="font-size: 0.95rem;">$0.00</span>
+            </div>
+          </div>
+          <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener">
+            <button class="whatsapp-btn" aria-label="Contactar por WhatsApp">
+              <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
+            </button>
+          </a>
+        </section>
       </div>
-    </div>
+    </section>
+    <section class="features-container" aria-label="Ventajas de SEA Express">
+      <div class="features-section">
+        <div class="feature-card" tabindex="0" aria-label="Envío Express">
+          <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+          <h3 class="feature-title">Envío Express</h3>
+          <p class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</p>
+        </div>
+        <div class="feature-card" tabindex="0" aria-label="Envío Seguro">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3 class="feature-title">Envío Seguro</h3>
+          <p class="feature-text">Tus envíos siempre están seguros con nosotros.</p>
+        </div>
+        <div class="feature-card" tabindex="0" aria-label="Soporte 24/7">
+          <div class="feature-icon"><i class="fas fa-headset"></i></div>
+          <h3 class="feature-title">Soporte 24/7</h3>
+          <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
+        </div>
+      </div>
+    </section>
+    <!-- FOOTER CORPORATIVO INSPIRADO -->
+    <footer class="footer-corporate" role="contentinfo">
+      <div class="footer-main">
+        <div class="footer-col">
+          <div class="footer-title">SOMOS SEA EXPRESS</div>
+          <div>Te conectamos con lo mejor de USA, para que compres lo que más te guste y recibas en Perú sin complicaciones. Nuestro servicio abre un mundo de oportunidades para tus compras y regalos increíbles.</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">SOPORTE</div>
+          <ul class="footer-links">
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Calcula tu envío</a></li>
+            <li><a href="#">Preguntas Frecuentes</a></li>
+            <li><a href="#">Tarifas</a></li>
+            <li><a href="mailto:VENTA1@SEAGROUPPERU.COM">VENTA1@SEAGROUPPERU.COM</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">ENVÍOS A NIVEL NACIONAL</div>
+          <ul class="footer-countries">
+            <li>Lima Metropolitana</li>
+            <li>Arequipa</li>
+            <li>Trujillo</li>
+            <li>Piura</li>
+            <li>Chiclayo</li>
+            <li>Cusco</li>
+            <li>La Libertad</li>
+            <li>Junín</li>
+            <li>Lambayeque</li>
+            <li>Tacna</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">CONTACTO</div>
+          <div class="footer-contact"><a href="https://wa.me/51912140295" target="_blank" style="color:#222;text-decoration:none;"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:6px;"></i>912 140 295</a></div>
+          <div class="footer-office">OFICINA</div>
+          <div>AV. LOS PATRIOTAS 431, SAN MIGUEL, LIMA</div>
+          <div>Estados Unidos:<br>
+            7270 NW 35th Terrace Suite 602<br>
+            Miami, Florida 33122<br>
+            Tel: 786-628-8807
+          </div>
+        </div>
+      </div>
+      <div class="footer-social" aria-label="Redes sociales">
+        <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+        <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <!--
+        <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        -->
+      </div>
+      <div class="footer-bottom-bar">
+        <span>
+          Copyright &copy; 2025 SEA Express.<br>
+          Todos los Derechos Reservados | Site design by <a href="#">Sea Group</a>
+        </span>
+        <div class="footer-logos">
+          <span style="font-size:0.99rem;">Somos expertos en lo que hacemos</span>
+          <img src="https://www.wex.pe/wp-content/uploads/2022/09/logo-wex-logistica-integral.png" alt="WEX logística integral" loading="lazy">
+        </div>
+      </div>
+    </footer>
   </main>
   <script>
-    // ------ TU JS ORIGINAL AQUÍ ------
     // Microanimación para tab con teclado (accesibilidad)
     document.querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('keydown', function(e) {
@@ -645,11 +940,12 @@
         alert("Por favor ingresa un valor declarado válido (mínimo $1)");
         return;
       }
+      // Redondear peso menor a 1kg a 1
       if (peso < 1) peso = 1;
       const desaduanaje = 8;
       const costoPorKilo = 15;
       let costoEnvio = peso * costoPorKilo;
-      if (costoEnvio < 12) costoEnvio = 12;
+      if (costoEnvio < 12) costoEnvio = 12; // Precio mínimo de envío
       const envioTotal = costoEnvio + desaduanaje;
       const impuestos = valor > 200 ? valor * 0.25 : 0;
       const total = valor + envioTotal + impuestos;
@@ -720,29 +1016,6 @@
       });
       ocultarResumen();
     };
-
-    // ---- MODALES + ANALYTICS ----
-    function openModal(id) {
-      document.getElementById(id + '-bg').classList.add('active');
-      if (typeof gtag === "function") {
-        let label = (id === 'faq-modal') ? 'Preguntas Frecuentes'
-                  : (id === 'testimonios-modal') ? 'Clientes Felices'
-                  : id;
-        gtag('event', 'open_modal', {
-          'event_category': 'Interacción',
-          'event_label': label
-        });
-      }
-    }
-    function closeModal(id) {
-      document.getElementById(id + '-bg').classList.remove('active');
-    }
-    document.addEventListener('keydown', function(e){
-      if(e.key === "Escape") {
-        closeModal('faq-modal');
-        closeModal('testimonios-modal');
-      }
-    });
   </script>
 </body>
 </html>
