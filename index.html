@@ -7,6 +7,37 @@
   <meta name="description" content="Cotiza tu envío USA-Perú fácil y rápido con SEA Express. Envíos seguros, soporte 24/7, experiencia garantizada.">
   <meta name="theme-color" content="#BE1522">
   <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL4N1HLKD9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XL4N1HLKD9');
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --color-primary: #BE1522;
+      --color-primary-dark: #801A1A;
+      --color-secondary: #606060;
+      --color-whatsapp: #25D366;
+      --color-whatsapp-hover: #128C7E;
+      --color-text: #1A1A1A;
+      --color-light: #FFFFFF;
+      --color-border: #E0E0E0;
+      --color-bg: #F8F9FA;
+      --color-tooltip: #777777;
+      --shadow-main: 0 10px 30px rgba(0,0,0,0.10);
+    }<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEA Express - Calculadora de Envíos</title>
+  <meta name="description" content="Cotiza tu envío USA-Perú fácil y rápido con SEA Express. Envíos seguros, soporte 24/7, experiencia garantizada.">
+  <meta name="theme-color" content="#BE1522">
+  <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
   <!-- Google Analytics (pon tu ID real en G-XXXXXXXXXX) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
@@ -1016,6 +1047,118 @@
       });
       ocultarResumen();
     };
+  </script>
+</body>
+</html>
+  .custom-modal-bg {
+      display: none;
+      position: fixed; z-index: 9999; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+    .custom-modal-bg.active { display: flex; }
+    .custom-modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 22px;
+      max-width: 90vw;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      position: relative;
+      animation: fadeInUp 0.38s;
+    }
+    .close-modal {
+      position: absolute;
+      right: 15px; top: 10px;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: #be1522;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .modal-btn {
+      background: #be1522;
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1.1rem;
+      margin: 6px;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .modal-btn:hover, .modal-btn:focus { background: #801a1a; }
+  </style>
+</head>
+<body>
+  <!-- Accesibilidad: skip link -->
+  <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+  <main class="main-container" id="contenido-principal" tabindex="-1" aria-label="Contenido principal">
+
+    <!-- Botones para abrir los modales -->
+    <div style="text-align:center; margin: 24px 0 0 0;">
+      <button onclick="openModal('faq-modal')" class="modal-btn">Preguntas Frecuentes</button>
+      <button onclick="openModal('testimonios-modal')" class="modal-btn">Clientes Felices</button>
+    </div>
+
+    <!-- AQUÍ VA TODO TU CONTENIDO ORIGINAL (calculadora, tabs, footer, etc) -->
+    <!-- ... PEGA AQUÍ EL CONTENIDO COMPLETO DE TU INDEX.HTML (calculadora, tabs, footer, etc) ... -->
+
+    <!-- Modales FAQ y Testimonios -->
+    <div class="custom-modal-bg" id="faq-modal-bg" onclick="closeModal('faq-modal')">
+      <div class="custom-modal" id="faq-modal" onclick="event.stopPropagation();">
+        <button class="close-modal" onclick="closeModal('faq-modal')">&times;</button>
+        <h2>Preguntas Frecuentes</h2>
+        <ul>
+          <li><strong>¿En cuánto tiempo llega mi envío?</strong> 7-10 días hábiles luego de recibido el paquete en Miami.</li>
+          <li><strong>¿Qué puedo traer?</strong> Electrónica, ropa, accesorios, etc.</li>
+          <li><strong>¿Cómo rastreo mi paquete?</strong> Te enviamos tu código de seguimiento por WhatsApp.</li>
+          <li><strong>¿Puedo pagar contra entrega?</strong> El pago es anticipado para procesar tu envío.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="custom-modal-bg" id="testimonios-modal-bg" onclick="closeModal('testimonios-modal')">
+      <div class="custom-modal" id="testimonios-modal" onclick="event.stopPropagation();">
+        <button class="close-modal" onclick="closeModal('testimonios-modal')">&times;</button>
+        <h2>Clientes Felices</h2>
+        <ul>
+          <li>“¡Excelente servicio! Mi paquete llegó rápido.” – Ana</li>
+          <li>“Me ayudaron en todo el proceso.” – Carlos</li>
+          <li>“Repetiría sin dudarlo.” – Lucía</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Fin de los modales -->
+  </main>
+  <script>
+    // ... (todo tu JS original aquí, sin cambios. Asegúrate de incluir todo el script de la calculadora, tabs, etc.) ...
+
+    // MODALES + ANALYTICS
+    function openModal(id) {
+      document.getElementById(id + '-bg').classList.add('active');
+      // Google Analytics event tracking
+      if (typeof gtag === "function") {
+        let label = (id === 'faq-modal') ? 'Preguntas Frecuentes' 
+                  : (id === 'testimonios-modal') ? 'Clientes Felices' 
+                  : id;
+        gtag('event', 'open_modal', {
+          'event_category': 'Interacción',
+          'event_label': label
+        });
+      }
+    }
+    function closeModal(id) {
+      document.getElementById(id + '-bg').classList.remove('active');
+    }
+    document.addEventListener('keydown', function(e){
+      if(e.key === "Escape") {
+        closeModal('faq-modal');
+        closeModal('testimonios-modal');
+      }
+    });
   </script>
 </body>
 </html>
