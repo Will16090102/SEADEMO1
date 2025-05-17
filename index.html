@@ -1034,5 +1034,30 @@
     }
   });
 </script>
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/51912140295" class="whatsapp-float" target="_blank" title="¿Necesitas ayuda?">
+  <i class="fab fa-whatsapp"></i>
+</a>
+<style>
+.whatsapp-float {
+  position: fixed;
+  width: 60px; height: 60px;
+  bottom: 24px; right: 24px;
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 2.8rem;
+  box-shadow: 0 4px 16px rgba(50,50,50,0.25);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.18s;
+}
+.whatsapp-float:hover {
+  background: #128C7E;
+  transform: scale(1.07);
+  color: #fff;
+}
+</style>
 </body>
 </html>
