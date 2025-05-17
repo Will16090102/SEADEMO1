@@ -8,13 +8,13 @@
   <meta name="theme-color" content="#BE1522">
   <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
   <!-- Google Analytics (pon tu ID real en G-XXXXXXXXXX) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XL4N1HLKD9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XL4N1HLKD9');
+</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
@@ -1017,5 +1017,22 @@
       ocultarResumen();
     };
   </script>
+<script>
+  // Rastrear clics en el botón de WhatsApp usando Google Analytics
+  document.addEventListener("DOMContentLoaded", function() {
+    var wspBtn = document.querySelector('.whatsapp-btn');
+    if (wspBtn) {
+      wspBtn.addEventListener('click', function() {
+        if (typeof gtag === "function") {
+          gtag('event', 'click', {
+            'event_category': 'Boton',
+            'event_label': 'WhatsApp',
+            'value': 1
+          });
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>
