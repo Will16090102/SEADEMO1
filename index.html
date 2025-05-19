@@ -84,7 +84,6 @@
       flex-direction: column;
       width: 100%;
     }
-    /* LOGO ADAPTABLE Y ANIMADO */
     .logo-container {
       width: 100%;
       text-align: center;
@@ -291,7 +290,17 @@
       overflow: hidden;
     }
     .whatsapp-btn i {
-      font-size: 2.1rem;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .whatsapp-btn span, .whatsapp-btn i {
+      line-height: 1.1;
+      vertical-align: middle;
+      display: flex;
+      align-items: center;
     }
     .whatsapp-btn:hover, .whatsapp-btn:focus {
       background-color: var(--color-whatsapp-hover);
@@ -375,7 +384,6 @@
       color: var(--color-primary);
       font-weight: bold;
     }
-    /* CARDS DE VENTAJAS */
     .features-container {
       width: 100%;
       background: #f7f7f7;
@@ -486,7 +494,6 @@
       to   { opacity: 1; transform: translateY(0);}
     }
     .oculto { display: none !important; }
-    /* Side by side in desktop */
     @media (min-width: 1020px) {
       .calc-flex {
         flex-direction: row;
@@ -519,7 +526,6 @@
         flex-direction: column;
       }
     }
-    /* Mobile: stacked */
     @media (max-width: 1019px) {
       .calc-flex {
         flex-direction: column;
@@ -553,8 +559,6 @@
     @media (max-width: 400px) {
       .form-inner, .result-section { padding: 0.6rem 0.1rem 0.4rem 0.1rem; }
     }
-
-    /* FOOTER INSPIRADO EN COMPRAONLINEUSA */
     .footer-corporate {
       background: #f7f7f7;
       color: #222;
@@ -694,7 +698,6 @@
   </style>
 </head>
 <body>
-  <!-- Accesibilidad: skip link -->
   <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
   <main class="main-container" id="contenido-principal" tabindex="-1" aria-label="Contenido principal">
     <section class="calculator-wrapper">
@@ -759,7 +762,6 @@
             </div>
           </div>
         </div>
-        <!-- RESULTADO Y BOTÓN WHATSAPP MEJORADO -->
         <section id="result-section" class="result-section" aria-live="polite">
           <div class="result-title">Resumen de Cotización</div>
           <div id="result-content" class="result-content">
@@ -792,13 +794,14 @@
               <strong style="font-size: 0.95rem;">Costo total:</strong>
               <span id="total" style="font-size: 0.95rem;">$0.00</span>
             </div>
+            <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
+              <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
+                <span class="whatsapp-glow"></span>
+                <i class="fab fa-whatsapp"></i>
+                <span>¡Quiero mi descuento especial!</span>
+              </button>
+            </a>
           </div>
-          <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener">
-            <button class="whatsapp-btn" aria-label="Contactar por WhatsApp">
-              <span class="whatsapp-glow"></span>
-              <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
-            </button>
-          </a>
         </section>
       </div>
     </section>
@@ -821,7 +824,6 @@
         </div>
       </div>
     </section>
-    <!-- FOOTER CORPORATIVO INSPIRADO -->
     <footer class="footer-corporate" role="contentinfo">
       <div class="footer-main">
         <div class="footer-col">
