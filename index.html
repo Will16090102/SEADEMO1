@@ -8,13 +8,13 @@
   <meta name="theme-color" content="#BE1522">
   <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
   <!-- Google Analytics (pon tu ID real en G-XXXXXXXXXX) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XL4N1HLKD9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XL4N1HLKD9');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL4N1HLKD9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XL4N1HLKD9');
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
@@ -268,58 +268,59 @@
       outline: 2px solid #be1522;
       outline-offset: 2px;
     }
+    /* BOTÓN WHATSAPP MEJORADO */
     .whatsapp-btn {
-  background-color: var(--color-whatsapp);
-  color: white;
-  border: none;
-  padding: 1.5rem 0; /* MÁS ALTO */
-  width: 100%;
-  border-radius: 18px; /* MÁS REDONDO */
-  font-size: 1.37rem; /* TEXTO MÁS GRANDE */
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.24s, box-shadow 0.33s;
-  margin-top: 1.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  box-shadow: 0 6px 32px 0 rgba(37,211,102,0.28), 0 0 0 6px rgba(37,211,102,0.06);
-  animation: fadeInUp 0.7s;
-  position: relative;
-  overflow: hidden;
-}
-.whatsapp-btn i {
-  font-size: 2.1rem; /* ÍCONO MÁS GRANDE */
-}
-.whatsapp-btn:hover, .whatsapp-btn:focus {
-  background-color: var(--color-whatsapp-hover);
-  box-shadow: 0 10px 34px 0 rgba(18,140,126,0.33), 0 0 0 14px rgba(37,211,102,0.12);
-  transform: scale(1.07) rotate(-2deg);
-  outline: 2.5px solid #128C7E;
-  outline-offset: 2px;
-}
-.whatsapp-glow {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 130%;
-  height: 130%;
-  background: radial-gradient(circle, rgba(37,211,102,0.22) 0%, rgba(255,255,255,0) 80%);
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  pointer-events: none;
-  animation: whatsappPulse 2s infinite;
-}
-@keyframes whatsappPulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.65; }
-  100% { opacity: 1; }
-}
-.whatsapp-btn > * {
-  z-index: 1;
-}
+      background-color: var(--color-whatsapp);
+      color: white;
+      border: none;
+      padding: 1.5rem 0;
+      width: 100%;
+      border-radius: 18px;
+      font-size: 1.37rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.24s, box-shadow 0.33s;
+      margin-top: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      box-shadow: 0 6px 32px 0 rgba(37,211,102,0.28), 0 0 0 6px rgba(37,211,102,0.06);
+      animation: fadeInUp 0.7s;
+      position: relative;
+      overflow: hidden;
+    }
+    .whatsapp-btn i {
+      font-size: 2.1rem;
+    }
+    .whatsapp-btn:hover, .whatsapp-btn:focus {
+      background-color: var(--color-whatsapp-hover);
+      box-shadow: 0 10px 34px 0 rgba(18,140,126,0.33), 0 0 0 14px rgba(37,211,102,0.12);
+      transform: scale(1.07) rotate(-2deg);
+      outline: 2.5px solid #128C7E;
+      outline-offset: 2px;
+    }
+    .whatsapp-glow {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 130%;
+      height: 130%;
+      background: radial-gradient(circle, rgba(37,211,102,0.22) 0%, rgba(255,255,255,0) 80%);
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+      animation: whatsappPulse 2s infinite;
+    }
+    @keyframes whatsappPulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.65; }
+      100% { opacity: 1; }
+    }
+    .whatsapp-btn > * {
+      z-index: 1;
+    }
     .result-section {
       background: var(--color-bg);
       border-left: 1px solid var(--color-border);
@@ -758,46 +759,47 @@
             </div>
           </div>
         </div>
+        <!-- RESULTADO Y BOTÓN WHATSAPP MEJORADO -->
         <section id="result-section" class="result-section" aria-live="polite">
-  <div class="result-title">Resumen de Cotización</div>
-  <div id="result-content" class="result-content">
-    <div id="producto-info"></div>
-    <div class="result-item">
-      <strong>Valor del producto:</strong>
-      <span id="valor-result">$0.00</span>
-    </div>
-    <div class="result-item">
-      <strong>Peso:</strong>
-      <span id="peso-result">0.00 kg</span>
-    </div>
-    <div class="result-item">
-      <strong>Desaduanaje:</strong>
-      <span id="desaduanaje">$8.00</span>
-    </div>
-    <div class="result-item">
-      <strong>Costo de envío:</strong>
-      <span id="costo-envio">$0.00</span>
-    </div>
-    <div class="result-item">
-      <strong>Impuestos:</strong>
-      <span id="impuestos">$0.00</span>
-    </div>
-    <div class="highlight-box">
-      <div class="highlight-title">Total envío</div>
-      <div class="highlight-value" id="envio-total">$0.00</div>
-    </div>
-    <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
-      <strong style="font-size: 0.95rem;">Costo total:</strong>
-      <span id="total" style="font-size: 0.95rem;">$0.00</span>
-    </div>
-  </div>
-  <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener">
-    <button class="whatsapp-btn" aria-label="Contactar por WhatsApp">
-      <span class="whatsapp-glow"></span>
-      <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
-    </button>
-  </a>
-</section>
+          <div class="result-title">Resumen de Cotización</div>
+          <div id="result-content" class="result-content">
+            <div id="producto-info"></div>
+            <div class="result-item">
+              <strong>Valor del producto:</strong>
+              <span id="valor-result">$0.00</span>
+            </div>
+            <div class="result-item">
+              <strong>Peso:</strong>
+              <span id="peso-result">0.00 kg</span>
+            </div>
+            <div class="result-item">
+              <strong>Desaduanaje:</strong>
+              <span id="desaduanaje">$8.00</span>
+            </div>
+            <div class="result-item">
+              <strong>Costo de envío:</strong>
+              <span id="costo-envio">$0.00</span>
+            </div>
+            <div class="result-item">
+              <strong>Impuestos:</strong>
+              <span id="impuestos">$0.00</span>
+            </div>
+            <div class="highlight-box">
+              <div class="highlight-title">Total envío</div>
+              <div class="highlight-value" id="envio-total">$0.00</div>
+            </div>
+            <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
+              <strong style="font-size: 0.95rem;">Costo total:</strong>
+              <span id="total" style="font-size: 0.95rem;">$0.00</span>
+            </div>
+          </div>
+          <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener">
+            <button class="whatsapp-btn" aria-label="Contactar por WhatsApp">
+              <span class="whatsapp-glow"></span>
+              <i class="fab fa-whatsapp"></i> ¡Quiero mi descuento especial!
+            </button>
+          </a>
+        </section>
       </div>
     </section>
     <section class="features-container" aria-label="Ventajas de SEA Express">
@@ -824,7 +826,7 @@
       <div class="footer-main">
         <div class="footer-col">
           <div class="footer-title">SOMOS SEA EXPRESS</div>
-          <div>Te conectamos con lo mejor de USA, para que compres lo que más te guste y recibas en Perú sin complicaciones. Nuestro servicio abre un mundo de oportunidades para tus compras y regalos increíbles.</div>
+          <div>Te conectamos con lo mejor de USA, para que compres lo que más te guste y recibas en Perú sin complicaciones. Nuestro servicio abre un mundo de oportunidades para tus compras y regalos.</div>
         </div>
         <div class="footer-col">
           <div class="footer-title">SOPORTE</div>
@@ -853,7 +855,7 @@
         </div>
         <div class="footer-col">
           <div class="footer-title">CONTACTO</div>
-          <div class="footer-contact"><a href="https://wa.me/51912140295" target="_blank" style="color:#222;text-decoration:none;"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:6px;"></i>912 140 295</a></div>
+          <div class="footer-contact"><a href="https://wa.me/51912140295" target="_blank" style="color:#222;text-decoration:none;"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:6px;"></i> WhatsApp: 912 140 295</a></div>
           <div class="footer-office">OFICINA</div>
           <div>AV. LOS PATRIOTAS 431, SAN MIGUEL, LIMA</div>
           <div>Estados Unidos:<br>
@@ -866,10 +868,6 @@
       <div class="footer-social" aria-label="Redes sociales">
         <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
         <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <!--
-        <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-        <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        -->
       </div>
       <div class="footer-bottom-bar">
         <span>
@@ -1025,66 +1023,15 @@
       }
       mensaje += `💰 *Valor del producto:* $${ultimaCotizacion.valor.toFixed(2)}\n`;
       mensaje += `⚖️ *Peso:* ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
-      mensaje += `📦 *Desaduanaje:* $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
       mensaje += `🚚 *Costo de envío:* $${ultimaCotizacion.costoEnvio.toFixed(2)}\n`;
-      mensaje += `✈️ *Total envío:* $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
-      if (ultimaCotizacion.impuestos > 0) {
-        mensaje += `🏛️ *Impuestos:* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
-      }
-      mensaje += `💵 *Costo total:* $${ultimaCotizacion.total.toFixed(2)}\n\n`;
-      mensaje += "Por favor, envíenme información sobre *mi descuento especial* para proceder con el envío. ¡Gracias!";
-      const encodedMessage = encodeURIComponent(mensaje);
-      document.getElementById("whatsapp-link").href = `https://wa.me/51912140295?text=${encodedMessage}`;
+      mensaje += `🛃 *Desaduanaje:* $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
+      mensaje += `💵 *Impuestos:* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
+      mensaje += `🔖 *Total envío:* $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
+      mensaje += `💲 *Costo total:* $${ultimaCotizacion.total.toFixed(2)}\n\n`;
+      mensaje += "¡Por favor contáctame para coordinar mi envío! 🚀";
+      const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensaje)}`;
+      document.getElementById("whatsapp-link").href = wspUrl;
     }
-    window.onload = function() {
-      ['valor', 'peso', 'producto', 'enlace-producto'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.addEventListener('input', ocultarResumen); }
-      });
-      ocultarResumen();
-    };
   </script>
-<script>
-  // Rastrear clics en el botón de WhatsApp usando Google Analytics
-  document.addEventListener("DOMContentLoaded", function() {
-    var wspBtn = document.querySelector('.whatsapp-btn');
-    if (wspBtn) {
-      wspBtn.addEventListener('click', function() {
-        if (typeof gtag === "function") {
-          gtag('event', 'click', {
-            'event_category': 'Boton',
-            'event_label': 'WhatsApp',
-            'value': 1
-          });
-        }
-      });
-    }
-  });
-</script>
-<!-- Botón flotante de WhatsApp -->
-<a href="https://wa.me/51912140295" class="whatsapp-float" target="_blank" title="¿Necesitas ayuda?">
-  <i class="fab fa-whatsapp"></i>
-</a>
-<style>
-.whatsapp-float {
-  position: fixed;
-  width: 60px; height: 60px;
-  bottom: 24px; right: 24px;
-  background: #25d366;
-  color: #fff;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 2.8rem;
-  box-shadow: 0 4px 16px rgba(50,50,50,0.25);
-  z-index: 1000;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, transform 0.18s;
-}
-.whatsapp-float:hover {
-  background: #128C7E;
-  transform: scale(1.07);
-  color: #fff;
-}
-</style>
 </body>
 </html>
