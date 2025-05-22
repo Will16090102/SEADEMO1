@@ -16,196 +16,109 @@
     gtag('config', 'G-XL4N1HLKD9');
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Google Fonts for modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --color-primary: #BE1522;
-      --color-primary-dark: #801A1A;
-      --color-secondary: #606060;
-      --color-whatsapp: #25D366;
-      --color-whatsapp-hover: #128C7E;
-      --color-text: #1A1A1A;
-      --color-light: #FFFFFF;
-      --color-border: #E0E0E0;
-      --color-bg: #F8F9FA;
-      --color-tooltip: #777777;
-      --shadow-main: 0 10px 30px rgba(0,0,0,0.10);
-    }
-    html, body {
+    body {
+      background: #f7f1e7;
       margin: 0;
-      padding: 0;
-      width: 100%;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #1a2630;
       min-height: 100vh;
-      background-color: var(--color-primary);
-      color: var(--color-text);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 16px;
-      box-sizing: border-box;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-    a.skip-link {
-      position: absolute;
-      left: -999px;
-      top: 10px;
-      background: #fff;
-      color: #be1522;
-      padding: 8px 16px;
-      z-index: 999;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: left 0.3s;
-    }
-    a.skip-link:focus {
-      left: 10px;
     }
     .main-container {
-      width: 100vw;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding-bottom: 32px;
-    }
-    .calculator-wrapper {
-      width: 100%;
-      max-width: 1050px;
-      background: var(--color-light);
-      box-shadow: var(--shadow-main);
-      border-radius: 28px;
-      margin: 50px 0 32px 0;
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-      animation: fadeInUp 0.7s;
-    }
-    .calc-flex {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 0 16px;
+      text-align: center;
     }
     .logo-container {
-      width: 100%;
-      text-align: center;
-      margin-top: 38px;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
+      margin-top: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
     .logo-img {
-      width: 200px;
-      max-width: 270px;
-      min-width: 120px;
-      height: auto;
-      display: block;
-      margin: 0 auto 8px auto;
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 4px 24px rgba(190,21,34,0.12);
-      transition: width 0.3s, max-width 0.3s, box-shadow 0.35s, transform 0.17s;
-      animation: logoPop 1.2s cubic-bezier(.61,-0.01,.2,1.11);
-    }
-    .logo-img:focus, .logo-img:hover {
-      box-shadow: 0 8px 40px rgba(190,21,34,0.19);
-      transform: scale(1.07) rotate(-2deg);
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-    @keyframes logoPop {
-      from { opacity: 0; transform: translateY(-25px) scale(0.8);}
-      to   { opacity: 1; transform: translateY(0) scale(1);}
-    }
-    @media (max-width: 1200px) {
-      .logo-img { width: 170px; max-width:210px; }
-    }
-    @media (max-width: 900px) {
-      .logo-img { width: 130px; max-width: 160px; }
-    }
-    @media (max-width: 600px) {
-      .logo-img { width: 90px; max-width: 120px; min-width: 70px;}
-      .logo-container { margin-top: 18px; }
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: #25324a;
+      padding: 14px;
+      object-fit: contain;
     }
     .logo-text {
-      font-size: 1.18rem;
-      color: var(--color-secondary);
-      font-weight: 500;
-      letter-spacing: 2px;
-      font-style: italic;
-      margin-top: 4px;
-      margin-bottom: 0;
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #454545;
+      letter-spacing: 0.01em;
     }
-    .tabs {
-      display: flex;
-      width: 100%;
-      margin-bottom: 1.2rem;
-      background: #f0f0f0;
-      border-radius: 8px;
-      overflow: hidden;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin: 10px 0 8px 0;
+      color: #223050;
+      line-height: 1.13;
     }
-    .tab {
-      flex: 1 1 0;
-      text-align: center;
-      padding: 0.8rem;
-      cursor: pointer;
-      transition: all 0.3s;
+    .desc {
       font-size: 1.08rem;
-      color: var(--color-secondary);
-      background: #f0f0f0;
+      color: #5f5f5f;
+      margin-bottom: 30px;
+    }
+    .calculator-wrapper,
+    .cotizador-box {
+      background: #fff;
+      box-shadow: 0 4px 32px 0 rgba(50,50,93,0.09);
+      border-radius: 24px;
+      padding: 32px 18px 24px 18px;
+      margin-bottom: 32px;
+      display: inline-block;
+      width: 100%;
+      max-width: 400px;
+      text-align: left;
+    }
+    .tab-buttons, .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+      gap: 8px;
+      background: none;
+      border-radius: 16px;
       border: none;
-      outline: none;
-      user-select: none;
+      box-shadow: none;
+      max-width: 100%;
     }
-    .tab.active {
-      background: white;
-      font-weight: bold;
-      color: var(--color-primary);
-      box-shadow: 0 3px 12px rgba(190,21,34,0.08);
-      animation: tabPulse 0.38s;
+    .tab-btn, .tab {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      padding: 6px 20px;
+      border-radius: 16px;
+      font-weight: 600;
+      color: #25324a;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      margin-right: 6px;
     }
-    .tab:focus {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 0;
-    }
-    @keyframes tabPulse {
-      0% { background: #ffeaea;}
-      100% { background: white;}
+    .tab-btn.active, .tab.active {
+      background: #25324a;
+      color: #fff;
     }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .form-section, .result-section {
-      box-sizing: border-box;
-      background: var(--color-light);
-      border-radius: 0;
-      transition: width 0.35s, padding 0.35s;
-      flex: 1 1 0;
-    }
-    .form-section {
+    .form-section, .form-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 0 0 0;
-      border-radius: 0 0 0 28px;
-      border-right: 1px solid var(--color-border);
-      min-width: 350px;
-      max-width: 600px;
       width: 100%;
-    }
-    .form-inner {
-      width: 100%;
-      max-width: 550px;
-      padding: 2.2rem 2.5rem 2.2rem 2.5rem;
-      display: flex;
-      flex-direction: column;
+      max-width: 390px;
+      margin: 0 auto;
+      text-align: left;
     }
     .form-group {
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.4rem;
       width: 100%;
-      animation: fadeInUp 0.7s;
     }
     .label-container {
       display: flex;
@@ -214,68 +127,154 @@
     }
     label {
       font-weight: bold;
-      color: var(--color-primary-dark);
-      font-size: 1.07rem;
+      color: #223050;
+      font-size: 1rem;
       margin-right: 5px;
     }
-    input, select {
+    input[type="number"], input[type="text"] {
       width: 100%;
-      padding: 1.08rem 1.1rem;
-      border: 1.7px solid var(--color-border);
-      border-radius: 9px;
-      font-size: 1.09rem;
-      margin-top: 0.1rem;
-      margin-bottom: 0.1rem;
-      background-color: #f7f8fa;
+      padding: 10px 12px;
+      border: 1.5px solid #e0dfdf;
+      border-radius: 13px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      background: #f6f5f2;
+      color: #223050;
+      font-family: inherit;
       box-sizing: border-box;
-      transition: border 0.22s, box-shadow 0.22s, background 0.22s;
-      display: block;
-    }
-    input:focus, select:focus {
-      border: 2px solid var(--color-primary);
       outline: none;
-      background: #fff;
-      box-shadow: 0 4px 16px rgba(190, 21, 34, 0.14);
-      animation: pulseInput 0.42s;
+      transition: border .2s;
     }
-    @keyframes pulseInput {
-      0% { box-shadow: 0 0 0 0 var(--color-primary);}
-      70% { box-shadow: 0 0 0 10px rgba(190,21,34,0.08);}
-      100% { box-shadow: 0 4px 16px rgba(190, 21, 34, 0.14);}
+    input[type="number"]:focus, input[type="text"]:focus {
+      border: 1.5px solid #25324a;
     }
     button {
-      background-color: var(--color-primary);
-      color: white;
-      border: none;
-      padding: 1.15rem;
       width: 100%;
-      border-radius: 13px;
-      font-size: 1.23rem;
-      font-weight: bold;
+      background: #223050;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 13px 0;
+      border: none;
+      border-radius: 10px;
+      margin-top: 5px;
       cursor: pointer;
-      transition: all 0.22s;
-      margin-top: 1.2rem;
-      box-shadow: 0 2px 8px rgba(190,21,34,0.09);
-      letter-spacing: 0.5px;
-      margin-bottom: 0.5rem;
-      animation: fadeInUp 0.7s;
+      transition: background .2s;
     }
     button:hover, button:focus {
-      background-color: var(--color-primary-dark);
-      transform: translateY(-2px) scale(1.04);
-      box-shadow: 0 6px 22px rgba(190,21,34,0.13);
-      outline: 2px solid #be1522;
+      background: #1a2630;
+    }
+    .result-section {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px 0 rgba(50,50,93,0.09);
+      margin: 20px auto 0 auto;
+      padding: 20px 18px;
+      max-width: 390px;
+      text-align: left;
+      display: none;
+    }
+    .result-section.visible { display: block; }
+    .result-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      color: #223050;
+    }
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid #e0dfdf;
+      font-size: 1rem;
+    }
+    .highlight-box {
+      background-color: rgba(190, 21, 34, 0.08);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1.2rem 0;
+      border: 2px solid #25324a;
+      text-align: center;
+    }
+    .highlight-title {
+      color: #25324a;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    .highlight-value {
+      font-size: 1.6rem;
+      color: #223050;
+      font-weight: bold;
+    }
+    .testimonial {
+      font-style: italic;
+      color: #223050;
+      margin: 28px auto 16px auto;
+      font-size: 1.09rem;
+      max-width: 420px;
+    }
+    .testimonial strong {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .features-container {
+      width: 100%;
+      padding: 32px 0 24px 0;
+      margin: 0 auto;
+    }
+    .features-section {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .feature-card {
+      min-width:200px;
+      max-width:260px;
+      flex:1 1 180px;
+      background:#fff;
+      border-radius:12px;
+      padding:20px 16px;
+      box-shadow:0 2px 10px rgba(34,50,80,0.09);
+      text-align:center;
+      margin: 0 8px 16px 8px;
+      transition: box-shadow 0.23s, transform 0.22s;
+    }
+    .feature-card:focus, .feature-card:hover {
+      box-shadow: 0 8px 30px rgba(34,50,80,0.13);
+      transform: translateY(-6px) scale(1.03) rotate(-1deg);
+      outline: 2px solid #25324a;
       outline-offset: 2px;
     }
-    /* BOTÓN WHATSAPP MEJORADO */
+    .feature-icon {
+      font-size: 2.1rem;
+      color: #25324a;
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-size: 1.12rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #223050;
+    }
+    .feature-text {
+      font-size: 1.01rem;
+      color: #4d4d4d;
+      margin: 0;
+    }
     .whatsapp-btn {
-      background-color: var(--color-whatsapp);
+      background-color: #25D366;
       color: white;
       border: none;
-      padding: 1.5rem 0;
+      padding: 1.2rem 0;
       width: 100%;
       border-radius: 18px;
-      font-size: 1.37rem;
+      font-size: 1.15rem;
       font-weight: bold;
       cursor: pointer;
       transition: all 0.24s, box-shadow 0.33s;
@@ -283,9 +282,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      box-shadow: 0 6px 32px 0 rgba(37,211,102,0.28), 0 0 0 6px rgba(37,211,102,0.06);
-      animation: fadeInUp 0.7s;
+      gap: 12px;
+      box-shadow: 0 6px 32px 0 rgba(37,211,102,0.18), 0 0 0 6px rgba(37,211,102,0.06);
       position: relative;
       overflow: hidden;
     }
@@ -296,633 +294,154 @@
       justify-content: center;
       line-height: 1;
     }
-    .whatsapp-btn span, .whatsapp-btn i {
-      line-height: 1.1;
-      vertical-align: middle;
-      display: flex;
-      align-items: center;
-    }
     .whatsapp-btn:hover, .whatsapp-btn:focus {
-      background-color: var(--color-whatsapp-hover);
-      box-shadow: 0 10px 34px 0 rgba(18,140,126,0.33), 0 0 0 14px rgba(37,211,102,0.12);
-      transform: scale(1.07) rotate(-2deg);
+      background-color: #128C7E;
+      box-shadow: 0 10px 34px 0 rgba(18,140,126,0.23), 0 0 0 14px rgba(37,211,102,0.09);
+      transform: scale(1.04) rotate(-2deg);
       outline: 2.5px solid #128C7E;
       outline-offset: 2px;
     }
-    .whatsapp-glow {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 130%;
-      height: 130%;
-      background: radial-gradient(circle, rgba(37,211,102,0.22) 0%, rgba(255,255,255,0) 80%);
-      transform: translate(-50%, -50%);
-      z-index: 0;
-      pointer-events: none;
-      animation: whatsappPulse 2s infinite;
-    }
-    @keyframes whatsappPulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.65; }
-      100% { opacity: 1; }
-    }
-    .whatsapp-btn > * {
-      z-index: 1;
-    }
-    .result-section {
-      background: var(--color-bg);
-      border-left: 1px solid var(--color-border);
-      color: var(--color-text);
-      min-width: 350px;
-      max-width: 400px;
-      border-radius: 0 28px 28px 0;
-      display: none;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 2.2rem 1.7rem 2.2rem 1.7rem;
-    }
-    .result-section.visible {
-      display: flex;
-      animation: fadeInRight 0.5s;
-    }
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(40px);}
-      to   { opacity: 1; transform: translateY(0);}
-    }
-    .result-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 1.2rem;
-      text-align: center;
-      color: var(--color-primary);
-    }
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.9rem;
-      padding-bottom: 0.7rem;
-      border-bottom: 1px solid var(--color-border);
-      font-size: 1rem;
-    }
-    .highlight-box {
-      background-color: rgba(190, 21, 34, 0.08);
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 1.2rem 0;
-      border: 2px solid var(--color-primary);
-      text-align: center;
-      animation: fadeInUp 0.9s;
-    }
-    .highlight-title {
-      color: var(--color-primary);
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-    .highlight-value {
-      font-size: 1.6rem;
-      color: var(--color-primary);
-      font-weight: bold;
-    }
-    .features-container {
-      width: 100%;
-      background: #f7f7f7;
-      padding: 32px 0 24px 0;
-      margin: 0 auto;
-    }
-    .features-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .feature-card {
-      min-width:220px;
-      max-width:340px;
-      flex:1 1 280px;
-      background:var(--color-light);
-      border-radius:12px;
-      padding:20px 16px;
-      box-shadow:0 2px 10px rgba(190,21,34,0.09);
-      text-align:center;
-      margin: 0 8px 16px 8px;
-      transition: box-shadow 0.23s, transform 0.22s;
-      outline: none;
-    }
-    .feature-card:focus, .feature-card:hover {
-      box-shadow: 0 8px 30px rgba(190,21,34,0.13);
-      transform: translateY(-6px) scale(1.03) rotate(-1deg);
-      outline: 2px solid #be1522;
-      outline-offset: 2px;
-    }
-    .feature-icon {
-      font-size: 2.3rem;
-      color: var(--color-primary);
-      margin-bottom: 12px;
-    }
-    .feature-title {
-      font-size: 1.22rem;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: #222;
-    }
-    .feature-text {
-      font-size: 1.01rem;
-      color: #444;
-      margin: 0;
-    }
-    @media (max-width: 900px) {
-      .features-section { gap: 14px; }
-      .feature-card { min-width: 170px; padding: 14px 8px;}
-    }
-    @media (max-width: 600px) {
-      .features-container { padding: 18px 0 8px 0;}
-      .feature-card { min-width: 120px; }
-    }
-    .info-icon {
-      background-color: var(--color-tooltip);
-      color: white;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      cursor: help;
-      margin-left: 5px;
-      font-style: normal;
-      transition: background 0.2s, color 0.2s;
-    }
-    .info-icon:focus, .info-icon:hover {
-      background: var(--color-primary);
-      color: #fff;
-      outline: 2px solid #be1522;
-      outline-offset: 2px;
-    }
-    .tooltip { position: relative; display: inline-block; }
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 180px;
-      background-color: var(--color-tooltip);
-      color: white;
-      text-align: center;
-      border-radius: 6px;
-      padding: 8px;
-      position: absolute;
-      z-index: 1;
-      bottom: 125%;
-      left: 50%;
-      margin-left: -90px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 0.9rem;
-      pointer-events: none;
-    }
-    .tooltip:hover .tooltiptext, .tooltip:focus-within .tooltiptext {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
-      animation: fadeInUp 0.4s;
-    }
-    .result-content { opacity: 0; pointer-events:none; transform:translateY(20px); transition:opacity 0.5s, transform 0.5s;}
-    .result-content.visible { animation: fadeInUp 0.6s; opacity:1; pointer-events:auto; transform:translateY(0);}
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px);}
-      to   { opacity: 1; transform: translateY(0);}
-    }
-    .oculto { display: none !important; }
-    @media (min-width: 1020px) {
-      .calc-flex {
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: center;
-      }
-      .form-section {
-        border-radius: 0 0 0 28px;
-        border-right: 1px solid var(--color-border);
-        min-width: 400px;
-        max-width: 650px;
-      }
-      .form-inner {
-        padding-left: 3.3rem;
-        padding-right: 3.3rem;
-      }
-      .result-section {
-        display: none;
-        max-width: 400px;
-        min-width: 350px;
-        border-radius: 0 28px 28px 0;
-        padding-left: 1.7rem;
-        padding-right: 1.7rem;
-      }
-      .result-section.visible {
-        display: flex;
-      }
-      .calculator-wrapper {
-        min-height: 560px;
-        flex-direction: column;
-      }
-    }
-    @media (max-width: 1019px) {
-      .calc-flex {
-        flex-direction: column;
-      }
-      .form-section, .result-section {
-        max-width: 100vw;
-        min-width: unset;
-        border-radius: 0;
-        border-right: none;
-      }
-      .form-inner {
-        padding: 1.2rem 1.1rem 1.2rem 1.1rem;
-      }
-      .result-section {
-        border-top: 1px solid var(--color-border);
-        border-left: none;
-        border-radius: 0 0 28px 28px;
-        margin-top: 0;
-        padding: 1.6rem 0.7rem 1.7rem 0.7rem;
-      }
-    }
-    @media (max-width: 600px) {
-      .calculator-wrapper {
-        max-width: 99vw;
-        margin: 15px 0;
-        border-radius: 16px;
-      }
-      .form-inner { padding: 1rem 0.3rem; }
-      .highlight-value { font-size: 1.1rem; }
-    }
-    @media (max-width: 400px) {
-      .form-inner, .result-section { padding: 0.6rem 0.1rem 0.4rem 0.1rem; }
-    }
-    .footer-corporate {
-      background: #f7f7f7;
-      color: #222;
-      font-size: 1rem;
-      margin-top: 45px;
-      border-top: 1.5px solid #e4e4e4;
-      width: 100vw;
-      animation: fadeInUp 0.7s;
-    }
-    .footer-main {
-      max-width: 1420px;
-      margin: 0 auto;
-      padding: 32px 2vw 18px 2vw;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 48px;
-      justify-content: space-between;
-    }
-    .footer-col {
-      flex: 1 1 200px;
-      min-width: 180px;
-      max-width: 360px;
-      margin-bottom: 16px;
-    }
-    .footer-title {
-      font-weight: bold;
-      margin-bottom: 8px;
-      letter-spacing: 0.7px;
-    }
-    .footer-contact {
-      margin-bottom: 4px;
-      font-weight: bold;
-      letter-spacing: 0.3px;
-    }
-    .footer-office {
-      font-weight: bold;
-      margin-top: 7px;
-      margin-bottom: 2px;
-      font-size: 1.01rem;
-    }
-    .footer-links, .footer-countries {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .footer-links li, .footer-countries li {
-      margin-bottom: 5px;
-    }
-    .footer-links a {
-      color: #222;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover, .footer-links a:focus {
-      color: var(--color-primary);
-      text-decoration: underline;
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-    .footer-countries {
-      column-count: 2;
-      column-gap: 28px;
-      font-size: 1rem;
-    }
-    .footer-social {
-      border-top: 1px solid #c9c9c9;
-      border-bottom: 1px solid #c9c9c9;
-      text-align: center;
-      padding: 18px 0 13px 0;
-      margin: 0 0 0 0;
-      animation: fadeInUp 0.7s;
-    }
-    .footer-social i {
-      font-size: 1.5rem;
-      margin: 0 18px;
-      color: #222;
-      transition: color 0.25s, transform 0.20s;
-      cursor: pointer;
-    }
-    .footer-social i:hover, .footer-social i:focus {
-      color: var(--color-primary);
-      transform: scale(1.2) rotate(-8deg);
-      outline: 2px solid #be1522;
-      outline-offset: 2px;
-    }
-    .footer-bottom-bar {
-      padding: 12px 2vw 14px 2vw;
-      text-align: left;
-      color: #222;
-      font-size: 0.97rem;
-      letter-spacing: 0.2px;
-      border-top: 1px solid #c9c9c9;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      animation: fadeInUp 0.7s;
-    }
-    .footer-bottom-bar a {
-      color: #222;
-      font-weight: bold;
-      text-decoration: none;
-      margin-left: 7px;
-      margin-right: 7px;
-      transition: color 0.2s;
-    }
-    .footer-bottom-bar a:hover, .footer-bottom-bar a:focus {
-      color: var(--color-primary);
-      text-decoration: underline;
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-    .footer-logos {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .footer-logos img {
-      height: 36px;
-      width: auto;
-      margin-right: 8px;
-      vertical-align: middle;
-      filter: grayscale(0.15);
-      opacity: 0.92;
-    }
-    @media (max-width: 900px) {
-      .footer-main {
-        flex-direction: column;
-        gap: 8px;
-        padding: 24px 1vw 12px 1vw;
-      }
-      .footer-col {
-        max-width: 98vw;
-      }
-      .footer-bottom-bar { flex-direction: column; gap: 8px; text-align: center;}
+    @media (max-width: 650px) {
+      .main-container { max-width: 100%; }
+      .cotizador-box, .calculator-wrapper, .result-section { max-width: 100%; }
+      .features-section { flex-direction: column; align-items: center; gap: 18px; }
     }
   </style>
 </head>
 <body>
-  <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
-  <main class="main-container" id="contenido-principal" tabindex="-1" aria-label="Contenido principal">
-    <section class="calculator-wrapper">
-      <div class="logo-container">
-        <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" 
-             alt="Logo de SEA Express, avión rojo y texto SEA Express" 
-             class="logo-img" tabindex="0">
-        <div class="logo-text">Elígelo y es tuyo</div>
+  <div class="main-container">
+    <div class="logo-container">
+      <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" 
+           alt="Logo de SEA Express, avión rojo y texto SEA Express" 
+           class="logo-img" tabindex="0">
+      <div class="logo-text">Elígelo y es tuyo</div>
+    </div>
+    <h1>SEA EXPRESS<br>
+      Cotiza tu envío USA-Perú en segundos
+    </h1>
+    <div class="desc">
+      Simplemente ingresa el valor, peso y tipo de producto.
+    </div>
+    <div class="calculator-wrapper cotizador-box">
+      <div class="tab-buttons tabs">
+        <button class="tab-btn tab active" id="manualTab" onclick="switchTab('manual')">Manual</button>
+        <button class="tab-btn tab" id="enlaceTab" onclick="switchTab('enlace')">Por Enlace</button>
       </div>
-      <nav class="tabs" aria-label="Tipo de cotización">
-        <div class="tab active" onclick="switchTab('manual')" tabindex="0" role="button" aria-pressed="true">Manual</div>
-        <div class="tab" onclick="switchTab('enlace')" tabindex="0" role="button" aria-pressed="false">Por Enlace</div>
-      </nav>
-      <div class="calc-flex">
-        <div class="form-section" id="form-section">
-          <div class="form-inner">
-            <div id="manual-tab" class="tab-content active">
-              <div class="form-group">
-                <div class="label-container">
-                  <label for="valor">Valor del producto (USD)</label>
-                  <div class="tooltip">
-                    <div class="info-icon" tabindex="0" aria-label="Información sobre valor del producto">i</div>
-                    <span class="tooltiptext">Ingresa el valor en dólares del producto que deseas enviar</span>
-                  </div>
-                </div>
-                <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required aria-required="true">
+      <div class="form-section">
+        <div class="form-inner">
+          <div id="manual-tab" class="tab-content active">
+            <div class="form-group">
+              <div class="label-container">
+                <label for="valor">Valor del producto (USD)</label>
               </div>
-              <div class="form-group">
-                <div class="label-container">
-                  <label for="peso">Peso del paquete (kg)</label>
-                  <div class="tooltip">
-                    <div class="info-icon" tabindex="0" aria-label="Información sobre peso del paquete">i</div>
-                    <span class="tooltiptext">Peso aproximado incluyendo empaque (mínimo 0.1kg)</span>
-                  </div>
-                </div>
-                <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required aria-required="true">
-              </div>
-              <div class="form-group">
-                <div class="label-container">
-                  <label for="producto">Tipo de producto (opcional)</label>
-                  <div class="tooltip">
-                    <div class="info-icon" tabindex="0" aria-label="Información sobre tipo de producto">i</div>
-                    <span class="tooltiptext">Describe brevemente qué tipo de producto es</span>
-                  </div>
-                </div>
-                <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-              </div>
-              <button id="btn-calcular" onclick="calcular()" aria-label="Calcular cotización">Calcular</button>
+              <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required aria-required="true">
             </div>
-            <div id="enlace-tab" class="tab-content">
-              <div class="form-group">
-                <div class="label-container">
-                  <label for="enlace-producto">Enlace del producto</label>
-                  <div class="tooltip">
-                    <div class="info-icon" tabindex="0" aria-label="Información sobre enlace del producto">i</div>
-                    <span class="tooltiptext">Pega el enlace del producto para calcular automáticamente</span>
-                  </div>
-                </div>
-                <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required aria-required="true">
+            <div class="form-group">
+              <div class="label-container">
+                <label for="peso">Peso del paquete (kg)</label>
               </div>
-              <button id="btn-calcular-enlace" onclick="calcularPorEnlace()" aria-label="Calcular por enlace">Calcular</button>
+              <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required aria-required="true">
             </div>
+            <div class="form-group">
+              <div class="label-container">
+                <label for="producto">Tipo de producto (opcional)</label>
+              </div>
+              <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
+            </div>
+            <button id="btn-calcular" onclick="calcular()" aria-label="Calcular cotización">Calcular</button>
+          </div>
+          <div id="enlace-tab" class="tab-content">
+            <div class="form-group">
+              <div class="label-container">
+                <label for="enlace-producto">Enlace del producto</label>
+              </div>
+              <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required aria-required="true">
+            </div>
+            <button id="btn-calcular-enlace" onclick="calcularPorEnlace()" aria-label="Calcular por enlace">Calcular</button>
           </div>
         </div>
-        <section id="result-section" class="result-section" aria-live="polite">
-          <div class="result-title">Resumen de Cotización</div>
-          <div id="result-content" class="result-content">
-            <div id="producto-info"></div>
-            <div class="result-item">
-              <strong>Valor del producto:</strong>
-              <span id="valor-result">$0.00</span>
-            </div>
-            <div class="result-item">
-              <strong>Peso:</strong>
-              <span id="peso-result">0.00 kg</span>
-            </div>
-            <div class="result-item">
-              <strong>Desaduanaje:</strong>
-              <span id="desaduanaje">$8.00</span>
-            </div>
-            <div class="result-item">
-              <strong>Costo de envío:</strong>
-              <span id="costo-envio">$0.00</span>
-            </div>
-            <div class="result-item">
-              <strong>Impuestos:</strong>
-              <span id="impuestos">$0.00</span>
-            </div>
-            <div class="highlight-box">
-              <div class="highlight-title">Total envío</div>
-              <div class="highlight-value" id="envio-total">$0.00</div>
-            </div>
-            <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
-              <strong style="font-size: 0.95rem;">Costo total:</strong>
-              <span id="total" style="font-size: 0.95rem;">$0.00</span>
-            </div>
-            <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
-              <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
-                <span class="whatsapp-glow"></span>
-                <i class="fab fa-whatsapp"></i>
-                <span>¡Quiero mi descuento especial!</span>
-              </button>
-            </a>
-          </div>
-        </section>
       </div>
-    </section>
+      <section id="result-section" class="result-section" aria-live="polite">
+        <div class="result-title">Resumen de Cotización</div>
+        <div id="result-content">
+          <div id="producto-info"></div>
+          <div class="result-item">
+            <strong>Valor del producto:</strong>
+            <span id="valor-result">$0.00</span>
+          </div>
+          <div class="result-item">
+            <strong>Peso:</strong>
+            <span id="peso-result">0.00 kg</span>
+          </div>
+          <div class="result-item">
+            <strong>Desaduanaje:</strong>
+            <span id="desaduanaje">$8.00</span>
+          </div>
+          <div class="result-item">
+            <strong>Costo de envío:</strong>
+            <span id="costo-envio">$0.00</span>
+          </div>
+          <div class="result-item">
+            <strong>Impuestos:</strong>
+            <span id="impuestos">$0.00</span>
+          </div>
+          <div class="highlight-box">
+            <div class="highlight-title">Total envío</div>
+            <div class="highlight-value" id="envio-total">$0.00</div>
+          </div>
+          <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
+            <strong style="font-size: 0.95rem;">Costo total:</strong>
+            <span id="total" style="font-size: 0.95rem;">$0.00</span>
+          </div>
+          <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
+            <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
+              <i class="fab fa-whatsapp"></i>
+              <span>¡Quiero mi descuento especial!</span>
+            </button>
+          </a>
+        </div>
+      </section>
+    </div>
+    <div class="testimonial">
+      “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
+      <strong>—Carlos R.</strong>
+    </div>
     <section class="features-container" aria-label="Ventajas de SEA Express">
       <div class="features-section">
         <div class="feature-card" tabindex="0" aria-label="Envío Express">
-          <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
-          <h3 class="feature-title">Envío Express</h3>
-          <p class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</p>
+          <div class="feature-icon">🚚</div>
+          <div class="feature-title">Envío Express</div>
+          <div class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</div>
         </div>
         <div class="feature-card" tabindex="0" aria-label="Envío Seguro">
-          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3 class="feature-title">Envío Seguro</h3>
-          <p class="feature-text">Tus envíos siempre están seguros con nosotros.</p>
+          <div class="feature-icon">🍏</div>
+          <div class="feature-title">Envío Seguro</div>
+          <div class="feature-text">Tus envíos siempre están seguros con nosotros.</div>
         </div>
         <div class="feature-card" tabindex="0" aria-label="Soporte 24/7">
-          <div class="feature-icon"><i class="fas fa-headset"></i></div>
-          <h3 class="feature-title">Soporte 24/7</h3>
-          <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
+          <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+          <div class="feature-title">Soporte 24/7</div>
+          <div class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</div>
         </div>
       </div>
     </section>
-    <footer class="footer-corporate" role="contentinfo">
-      <div class="footer-main">
-        <div class="footer-col">
-          <div class="footer-title">SOMOS SEA EXPRESS</div>
-          <div>Te conectamos con lo mejor de USA, para que compres lo que más te guste y recibas en Perú sin complicaciones. Nuestro servicio abre un mundo de oportunidades para tus compras y regalos.</div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">SOPORTE</div>
-          <ul class="footer-links">
-            <li><a href="#">Contacto</a></li>
-            <li><a href="#">Calcula tu envío</a></li>
-            <li><a href="#">Preguntas Frecuentes</a></li>
-            <li><a href="#">Tarifas</a></li>
-            <li><a href="mailto:VENTA1@SEAGROUPPERU.COM">VENTA1@SEAGROUPPERU.COM</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">ENVÍOS A NIVEL NACIONAL</div>
-          <ul class="footer-countries">
-            <li>Lima Metropolitana</li>
-            <li>Arequipa</li>
-            <li>Trujillo</li>
-            <li>Piura</li>
-            <li>Chiclayo</li>
-            <li>Cusco</li>
-            <li>La Libertad</li>
-            <li>Junín</li>
-            <li>Lambayeque</li>
-            <li>Tacna</li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-title">CONTACTO</div>
-          <div class="footer-contact"><a href="https://wa.me/51912140295" target="_blank" style="color:#222;text-decoration:none;"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:6px;"></i> WhatsApp: 912 140 295</a></div>
-          <div class="footer-office">OFICINA</div>
-          <div>AV. LOS PATRIOTAS 431, SAN MIGUEL, LIMA</div>
-          <div>Estados Unidos:<br>
-            7270 NW 35th Terrace Suite 602<br>
-            Miami, Florida 33122<br>
-            Tel: 786-628-8807
-          </div>
-        </div>
-      </div>
-      <div class="footer-social" aria-label="Redes sociales">
-        <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
-        <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      </div>
-      <div class="footer-bottom-bar">
-        <span>
-          Copyright &copy; 2025 SEA Express.<br>
-          Todos los Derechos Reservados | Site design by <a href="#">Sea Group</a>
-        </span>
-        <div class="footer-logos">
-          <span style="font-size:0.99rem;">Somos expertos en lo que hacemos</span>
-          <img src="https://www.wex.pe/wp-content/uploads/2022/09/logo-wex-logistica-integral.png" alt="WEX logística integral" loading="lazy">
-        </div>
-      </div>
-    </footer>
-  </main>
+  </div>
   <script>
-    // Microanimación para tab con teclado (accesibilidad)
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('keydown', function(e) {
-        if(e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.click();
-        }
-      });
-    });
-    // Microanimación para info-icon con teclado
-    document.querySelectorAll('.info-icon').forEach(icon => {
-      icon.addEventListener('keydown', function(e) {
-        if(e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.parentNode.classList.toggle('show-tooltip');
-        }
-      });
-    });
-
-    let ultimaCotizacion = null;
-    const resultSection = document.getElementById("result-section");
-    resultSection.classList.remove("visible");
+    // Tab switching
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
       });
-      document.querySelectorAll('.tab').forEach(tab => {
+      document.querySelectorAll('.tab-btn').forEach(tab => {
         tab.classList.remove('active');
-        tab.setAttribute('aria-pressed', 'false');
       });
       document.getElementById(tabName + '-tab').classList.add('active');
-      document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
-      document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).setAttribute('aria-pressed', 'true');
+      document.getElementById(tabName + 'Tab').classList.add('active');
       ocultarResumen();
     }
-    function animateButton(btn) {
-      btn.classList.add('pulse');
-      setTimeout(() => btn.classList.remove('pulse'), 350);
-    }
+    let ultimaCotizacion = null;
+    const resultSection = document.getElementById("result-section");
+    resultSection.classList.remove("visible");
     function mostrarResultados() {
       resultSection.classList.add("visible");
       if (ultimaCotizacion.producto) {
@@ -942,19 +461,11 @@
       document.getElementById("impuestos").textContent = `$${ultimaCotizacion.impuestos.toFixed(2)}`;
       document.getElementById("envio-total").textContent = `$${ultimaCotizacion.envioTotal.toFixed(2)}`;
       document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
-      const resumen = document.getElementById("result-content");
-      resumen.classList.add("visible");
-      const wspBtn = document.querySelector('.whatsapp-btn');
-      wspBtn.classList.remove('bounce');
-      void wspBtn.offsetWidth;
-      wspBtn.classList.add('bounce');
     }
     function ocultarResumen() {
       resultSection.classList.remove("visible");
-      document.getElementById("result-content").classList.remove("visible");
     }
     function calcular() {
-      animateButton(document.getElementById('btn-calcular'));
       ocultarResumen();
       let peso = parseFloat(document.getElementById("peso").value);
       const valor = parseFloat(document.getElementById("valor").value);
@@ -967,12 +478,11 @@
         alert("Por favor ingresa un valor declarado válido (mínimo $1)");
         return;
       }
-      // Redondear peso menor a 1kg a 1
       if (peso < 1) peso = 1;
       const desaduanaje = 8;
       const costoPorKilo = 15;
       let costoEnvio = peso * costoPorKilo;
-      if (costoEnvio < 12) costoEnvio = 12; // Precio mínimo de envío
+      if (costoEnvio < 12) costoEnvio = 12;
       const envioTotal = costoEnvio + desaduanaje;
       const impuestos = valor > 200 ? valor * 0.25 : 0;
       const total = valor + envioTotal + impuestos;
@@ -991,7 +501,6 @@
       setTimeout(mostrarResultados, 100);
     }
     async function calcularPorEnlace() {
-      animateButton(document.getElementById('btn-calcular-enlace'));
       ocultarResumen();
       const enlace = document.getElementById("enlace-producto").value.trim();
       if (enlace === "") {
