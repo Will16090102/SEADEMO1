@@ -7,16 +7,7 @@
   <meta name="description" content="Cotiza tu envío USA-Perú fácil y rápido con SEA Express. Envíos seguros, soporte 24/7, experiencia garantizada.">
   <meta name="theme-color" content="#BE1522">
   <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
-  <!-- Google Analytics (pon tu ID real en G-XXXXXXXXXX) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL4N1HLKD9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XL4N1HLKD9');
-  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <!-- Google Fonts for modern look -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -220,7 +211,7 @@
       color: #A31217;
       margin: 28px auto 16px auto;
       font-size: 1.09rem;
-      max-width: 420px;
+      max-width: 900px;
     }
     .testimonial strong {
       display: block;
@@ -234,26 +225,37 @@
       width: 100%;
       padding: 32px 0 24px 0;
       margin: 0 auto;
+      background: none;
     }
     .features-section {
       display: flex;
+      flex-wrap: wrap;
       gap: 24px;
       justify-content: center;
-      flex-wrap: wrap;
+      align-items: stretch;
+      margin-bottom: 0;
+      width: 100%;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .feature-card {
-      min-width:200px;
-      max-width:260px;
-      flex:1 1 180px;
-      background:#fff;
-      border-radius:12px;
-      padding:20px 16px;
-      box-shadow:0 2px 10px rgba(34,50,80,0.09);
-      text-align:center;
-      margin: 0 8px 16px 8px;
+      flex: 1 1 300px;
+      max-width: 340px;
+      min-width: 240px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 26px 20px;
+      box-shadow: 0 2px 10px rgba(34,50,80,0.09);
+      text-align: center;
+      margin: 0;
       transition: box-shadow 0.23s, transform 0.22s;
       color: #A31217;
       border: 1.2px solid #F8E2E2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .feature-card:focus, .feature-card:hover {
       box-shadow: 0 8px 30px rgba(34,50,80,0.13);
@@ -311,16 +313,27 @@
       outline: 2.5px solid #128C7E;
       outline-offset: 2px;
     }
-
-    /* Responsive Logo and Layout */
     @media (max-width: 900px) {
       .main-container { max-width: 95vw; }
       .logo-img { width: 140px; }
+      .features-section { gap: 16px; }
+      .feature-card { max-width: 320px; }
+    }
+    @media (max-width: 700px) {
+      .features-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+      }
+      .feature-card {
+        max-width: 98vw;
+        min-width: 0;
+        width: 100%;
+      }
     }
     @media (max-width: 650px) {
       .main-container { max-width: 100%; }
       .cotizador-box, .calculator-wrapper, .result-section { max-width: 100%; }
-      .features-section { flex-direction: column; align-items: center; gap: 18px; }
       .logo-img { width: 100px; }
       .logo-container { margin-top: 22px; }
     }
@@ -345,7 +358,6 @@
     <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
-    <!-- ... el resto permanece igual ... -->
     <div class="calculator-wrapper cotizador-box">
       <div class="tab-buttons tabs">
         <button class="tab-btn tab active" id="manualTab" onclick="switchTab('manual')">Manual</button>
