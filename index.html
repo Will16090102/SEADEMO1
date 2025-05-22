@@ -15,10 +15,12 @@
       --color-dark: #23304b;
       --color-bg: #faf5ec;
       --color-card: #fff;
-      --color-border: #efefef;
-      --color-card-shadow: 0 18px 40px 0 rgba(34, 48, 75, 0.19), 0 3px 22px 0 rgba(190,21,34,0.09);
-      --color-card-shadow-strong: 0 10px 34px 0 rgba(34,48,75,0.22), 0 6px 28px rgba(190,21,34,0.14);
-      --radius-card: 21px;
+      --color-border: #ebebeb;
+      --shadow-card: 0 18px 40px 0 rgba(34, 48, 75, 0.18), 0 3px 22px 0 rgba(190,21,34,0.09);
+      --shadow-card-strong: 0 10px 38px 0 rgba(34,48,75,0.21), 0 7px 24px rgba(190,21,34,0.13);
+      --radius-card: 22px;
+      --color-green: #25D366;
+      --color-green-dark: #128C7E;
     }
     html, body {
       margin: 0;
@@ -30,6 +32,7 @@
       font-size: 16px;
       box-sizing: border-box;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
     .main-container {
       min-height: 100vh;
@@ -37,7 +40,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 0 38px 0;
+      position: relative;
+      padding-bottom: 50px;
     }
     .logo-container {
       margin: 40px 0 8px 0;
@@ -73,32 +77,32 @@
     }
     .desc {
       font-size: 1.1rem;
-      color: var(--color-accent, #23304b);
+      color: var(--color-dark);
       margin-bottom: 30px;
       font-weight: 500;
       text-align: center;
       letter-spacing: 0.01em;
     }
-
-    /* CALCULADORA CENTRADA SIEMPRE */
+    /* CENTRADO ABSOLUTO CALCULADORA */
     .calculator-center-container {
-      width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      transition: min-height 0.4s;
-      min-height: 390px;
       position: relative;
+      width: 100vw;
+      height: 420px;
+      min-height: 370px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
       margin-bottom: 32px;
-      z-index: 3;
+      pointer-events: none;
     }
-    /* La card */
     .calculator-wrapper {
+      pointer-events: auto;
       background: var(--color-card);
       border-radius: var(--radius-card);
-      box-shadow: var(--color-card-shadow-strong);
-      border: 1.7px solid #e7e2d8;
-      padding: 2.4rem 2.5rem 2.2rem 2.5rem;
+      box-shadow: var(--shadow-card-strong);
+      border: 1.9px solid #e7e2d8;
+      padding: 2.35rem 2.5rem 2.2rem 2.5rem;
       max-width: 420px;
       min-width: 290px;
       width: 100%;
@@ -109,155 +113,42 @@
       justify-content: center;
       margin: 0 auto;
       transition: box-shadow 0.35s, transform 0.35s;
-      position: relative;
-      z-index: 4;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      z-index: 3;
       animation: fadeInUp 0.7s;
     }
     .calculator-wrapper:focus-within, .calculator-wrapper:hover {
-      box-shadow: 0 18px 44px 0 rgba(190,21,34,0.16), 0 12px 32px 0 rgba(34,48,75,0.18);
-      transform: scale(1.018);
+      box-shadow: 0 18px 44px 0 rgba(190,21,34,0.17), 0 12px 33px 0 rgba(34,48,75,0.17);
+      transform: translate(-50%,-50%) scale(1.018);
     }
-    .tabs {
-      display: flex;
-      width: 100%;
-      margin-bottom: 1.25rem;
-      background: #f6f7f9;
-      border-radius: 13px;
-      overflow: hidden;
-      max-width: 410px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .tab {
-      flex: 1 1 0;
-      text-align: center;
-      padding: 0.7rem 0;
-      cursor: pointer;
-      transition: all 0.28s;
-      font-size: 1.05rem;
-      font-family: 'Montserrat', Arial, sans-serif;
-      color: var(--color-dark);
-      background: #f6f7f9;
-      border: none;
-      outline: none;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-    .tab.active {
-      background: var(--color-dark);
-      color: #fff;
-      font-weight: bold;
-      box-shadow: 0 3px 12px rgba(34,48,75,0.09);
-    }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .form-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: none;
-      border-radius: 0;
-      width: 100%;
-      max-width: 410px;
-      margin: 0 auto;
-    }
-    .form-inner {
-      width: 100%;
-      max-width: 410px;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .form-group {
-      margin-bottom: 1.18rem;
-      width: 100%;
-    }
-    .label-container {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.18rem;
-      font-family: 'Montserrat', Arial, sans-serif;
-    }
-    label {
-      font-weight: 700;
-      color: var(--color-dark);
-      font-size: 1.08rem;
-      margin-right: 5px;
-    }
-    input[type="number"], input[type="text"] {
-      width: 100%;
-      padding: 1rem 1.1rem;
-      border: 1.7px solid #e8e6e0;
-      border-radius: 9px;
-      font-size: 1.13rem;
-      background-color: #f7f8fa;
-      color: #23304b;
-      box-sizing: border-box;
-      outline: none;
-      transition: border 0.22s, box-shadow 0.22s, background 0.22s;
-      font-family: 'Montserrat', Arial, sans-serif;
-      margin-bottom: 0.15rem;
-    }
-    input[type="number"]:focus, input[type="text"]:focus {
-      border: 2px solid var(--color-dark);
-      background: #fff;
-      box-shadow: 0 2px 12px rgba(34,48,75, 0.09);
-    }
-    .form-inner button,
-    .form-inner #btn-calcular,
-    .form-inner #btn-calcular-enlace {
-      margin-top: 0.85rem;
-      margin-bottom: 0.1rem;
-      width: 100%;
-      padding: 1.15rem 0;
-      border-radius: 12px;
-      font-size: 1.18rem;
-      font-weight: bold;
-      background: var(--color-primary);
-      color: #fff;
-      border: none;
-      box-shadow: 0 3px 16px rgba(190,21,34,0.18);
-      letter-spacing: 0.04em;
-      transition: all 0.22s;
-      cursor: pointer;
-      display: block;
-      position: relative;
-      z-index: 1;
-      font-family: 'Montserrat', Arial, sans-serif;
-      outline: none;
-    }
-    .form-inner button:hover,
-    .form-inner button:focus {
-      background: #b10b17;
-      outline: 2px solid #be1522;
-      outline-offset: 2px;
-      color: #fff;
-    }
-    /* --- RESUMEN --- */
+    /* PANEL RESUMEN FLOTANTE */
     .resume-float-container {
+      position: absolute;
+      top: 0; left: 50%; height: 100%;
       width: 0;
-      transition: width 0.7s cubic-bezier(.48,-0.01,.41,1.18);
       overflow: visible;
-      position: relative;
-      z-index: 2;
       display: flex;
-      flex-direction: row;
+      align-items: flex-start;
       justify-content: flex-start;
+      z-index: 5;
+      pointer-events: none;
     }
     .resume-float-container.visible {
-      width: 430px;
-      transition-delay: 0.09s;
+      width: 450px;
+      pointer-events: all;
     }
     .resume-section {
       background: var(--color-card);
       border-radius: var(--radius-card);
-      box-shadow: var(--color-card-shadow-strong);
+      box-shadow: var(--shadow-card-strong);
       border: 1.9px solid #e2dcd0;
       padding: 2.3rem 1.2rem 2.3rem 1.2rem;
       max-width: 410px;
-      width: 100%;
-      min-width: 290px;
+      min-width: 300px;
+      width: 400px;
       text-align: left;
       display: flex;
       flex-direction: column;
@@ -265,23 +156,23 @@
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transform: translateX(70px);
-      transition: opacity 0.6s, transform 0.7s, display 0s linear 0.5s;
+      transform: translate(60px, 30px) scale(0.96);
+      transition: opacity 0.6s, transform 0.8s cubic-bezier(.48,-0.01,.41,1.18);
       position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 10;
+      left: 35px; top: 0;
+      z-index: 12;
+      border-left: 5px solid #be1522;
     }
     .resume-section.visible {
       opacity: 1;
       pointer-events: auto;
-      transform: translateX(0);
+      transform: translate(0,0) scale(1);
       transition-delay: 0s;
-      animation: fadeInRight 0.8s;
+      animation: fadeInRight 0.9s cubic-bezier(.48,-0.01,.41,1.18);
       display: flex;
     }
     .result-title {
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       color: var(--color-primary);
       font-weight: 700;
       margin-bottom: 1.1rem;
@@ -298,7 +189,7 @@
       margin-bottom: 0.7rem;
       padding-bottom: 0.35rem;
       border-bottom: 1px solid #f3eeee;
-      font-size: 1rem;
+      font-size: 1.09rem;
       color: #333;
       font-family: 'Montserrat', Arial, sans-serif;
     }
@@ -312,13 +203,14 @@
     }
     .highlight-title {
       color: var(--color-primary);
-      font-size: 1.03rem;
+      font-size: 1.08rem;
       font-weight: 600;
     }
     .highlight-value {
-      font-size: 1.29rem;
+      font-size: 1.37rem;
       color: var(--color-primary-dark);
       font-weight: bold;
+      letter-spacing: 0.01em;
     }
     .whatsapp-btn {
       background: var(--color-green);
@@ -379,7 +271,7 @@
       text-align: center;
       font-style: italic;
       font-size: 1.14rem;
-      color: var(--color-accent);
+      color: var(--color-accent, #23304b);
       padding: 18px 18px 12px 18px;
       transition: opacity 0.4s;
       opacity: 1;
@@ -397,7 +289,7 @@
       font-style: normal;
       font-size: 1rem;
       font-weight: 700;
-      color: var(--color-accent);
+      color: var(--color-accent, #23304b);
       font-family: 'Montserrat', Arial, sans-serif;
     }
     /* FEATURES ROW */
@@ -436,14 +328,14 @@
     }
     .feature-icon {
       font-size: 2.1rem;
-      color: var(--color-accent);
+      color: var(--color-accent, #23304b);
       margin-bottom: 12px;
     }
     .feature-title {
       font-size: 1.13rem;
       font-weight: bold;
       margin-bottom: 5px;
-      color: var(--color-accent);
+      color: var(--color-accent, #23304b);
       font-family: 'Montserrat', Arial, sans-serif;
     }
     .feature-text {
@@ -453,39 +345,31 @@
       line-height: 1.35;
       font-family: 'Montserrat', Arial, sans-serif;
     }
-    @media (max-width: 1100px) {
-      .main-container { max-width: 98vw; }
-      .calculator-center-container { min-height: 0;}
-      .resume-float-container,
-      .resume-section { max-width: 98vw; min-width: 0; }
-      .features-row { max-width: 97vw; }
+    @media (max-width: 1200px) {
+      .resume-float-container.visible { width: 100vw;}
+      .resume-section { left: 50vw; min-width: 270px;}
     }
     @media (max-width: 900px) {
+      .resume-section { left: 0; right: 0; margin: 0 auto;}
+      .resume-float-container.visible { width: 100vw;}
       .features-row { flex-direction: column; gap: 18px;}
       .feature-card { min-width: 0; max-width: 97vw; }
       .calculator-wrapper, .resume-section { max-width: 97vw; min-width: 0; }
-      .resume-float-container { width: 97vw;}
     }
-    @media (max-width: 700px) {
-      .main-container { max-width: 100vw; }
-      .logo-img { width: 85px; }
-      .features-row { flex-direction: column; gap: 13px;}
-      .feature-card { min-width: 0; max-width: 97vw; }
-      .calculator-wrapper, .resume-section { max-width: 100vw;}
-      .resume-float-container { width: 100vw;}
-    }
-    @media (max-width: 500px) {
-      .calculator-wrapper, .resume-section { border-radius: 12px;}
-      .logo-img { width: 62px;}
-      .form-inner { padding: 0;}
+    @media (max-width: 650px) {
+      .calculator-center-container { height: auto; min-height: 0;}
+      .calculator-wrapper { position: static; left: unset; top: unset; transform:none;}
+      .resume-section { position: static; left: unset; top: unset; transform: translateY(20px);}
+      .resume-float-container { position: static; width: 100vw; justify-content: center;}
+      .resume-float-container.visible { width: 100vw;}
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(28px);}
       to   { opacity: 1; transform: translateY(0);}
     }
     @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(70px);}
-      to   { opacity: 1; transform: translateX(0);}
+      from { opacity: 0; transform: translate(60px,30px) scale(0.96);}
+      to   { opacity: 1; transform: translate(0,0) scale(1);}
     }
   </style>
 </head>
@@ -503,9 +387,9 @@
     <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
-    <!-- CALCULADORA CENTRADA SIEMPRE -->
+    <!-- CALCULADORA ABSOLUTAMENTE CENTRADA -->
     <div class="calculator-center-container">
-      <section class="calculator-wrapper strong-shadow" id="calculatorWrapper">
+      <section class="calculator-wrapper" id="calculatorWrapper">
         <nav class="tabs" aria-label="Tipo de cotización">
           <div class="tab active" onclick="switchTab('manual')" tabindex="0" role="button" aria-pressed="true">Manual</div>
           <div class="tab" onclick="switchTab('enlace')" tabindex="0" role="button" aria-pressed="false">Por Enlace</div>
@@ -551,6 +435,10 @@
           <div class="result-title">Resumen de Cotización</div>
           <div id="producto-info"></div>
           <div class="result-item">
+            <strong>Producto:</strong>
+            <span id="valor-producto">-</span>
+          </div>
+          <div class="result-item">
             <strong>Valor del producto:</strong>
             <span id="valor-result">$0.00</span>
           </div>
@@ -575,8 +463,8 @@
             <div class="highlight-value" id="envio-total">$0.00</div>
           </div>
           <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
-            <strong style="font-size: 0.95rem;">Costo total:</strong>
-            <span id="total" style="font-size: 0.95rem;">$0.00</span>
+            <strong style="font-size: 1.09rem;">Costo total:</strong>
+            <span id="total" style="font-size: 1.09rem;">$0.00</span>
           </div>
           <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
             <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
@@ -631,16 +519,7 @@
       const resultSection = document.getElementById("result-section");
       resultSection.classList.add("visible");
       document.getElementById("resumeFloatContainer").classList.add("visible");
-      if (ultimaCotizacion.producto) {
-        document.getElementById("producto-info").innerHTML = `
-          <div class="result-item">
-            <strong>Producto:</strong>
-            <span>${ultimaCotizacion.producto}</span>
-          </div>
-        `;
-      } else {
-        document.getElementById("producto-info").innerHTML = '';
-      }
+      document.getElementById("valor-producto").textContent = ultimaCotizacion.producto || "-";
       document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
       document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg`;
       document.getElementById("desaduanaje").textContent = `$${ultimaCotizacion.desaduanaje.toFixed(2)}`;
@@ -692,7 +571,7 @@
         total: total
       };
       actualizarEnlaceWhatsApp();
-      setTimeout(mostrarResultados, 130);
+      setTimeout(mostrarResultados, 120);
     }
     async function calcularPorEnlace() {
       ocultarResumen();
