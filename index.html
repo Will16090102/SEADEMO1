@@ -22,6 +22,8 @@
       margin: 0 auto;
       padding: 0 16px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
     .logo-container {
       margin-bottom: 8px;
@@ -161,6 +163,8 @@
     button:hover, button:focus {
       background: #D32F2F;
     }
+
+    /* --- Animación para el resumen de cotización (solo PC) --- */
     .result-section {
       background: #fff;
       border-radius: 18px;
@@ -170,57 +174,59 @@
       max-width: 390px;
       text-align: left;
       display: none;
+      position: relative;
+      z-index: 2;
+      /* Para animación: */
+      opacity: 0;
+      transform: translateX(120%);
+      transition: opacity 0.5s cubic-bezier(.5,1.5,.5,1), transform 0.5s cubic-bezier(.5,1.5,.5,1);
     }
-    .result-section.visible { display: block; }
-    .result-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 1.2rem;
-      text-align: center;
-      color: #A31217;
-    }
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.9rem;
-      padding-bottom: 0.7rem;
-      border-bottom: 1px solid #e0dfdf;
-      font-size: 1rem;
-      color: #A31217;
-    }
-    .highlight-box {
-      background-color: rgba(190, 21, 34, 0.10);
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 1.2rem 0;
-      border: 2px solid #A31217;
-      text-align: center;
-    }
-    .highlight-title {
-      color: #A31217;
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-    .highlight-value {
-      font-size: 1.6rem;
-      color: #A31217;
-      font-weight: bold;
-    }
-    .testimonial {
-      font-style: italic;
-      color: #A31217;
-      margin: 28px auto 16px auto;
-      font-size: 1.09rem;
-      max-width: 900px;
-    }
-    .testimonial strong {
+    .result-section.visible {
       display: block;
-      margin-top: 10px;
-      font-style: normal;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #D32F2F;
+      opacity: 1;
+      transform: translateX(0);
     }
+
+    @media (max-width: 900px) {
+      .main-container { max-width: 95vw; }
+      .logo-img { width: 140px; }
+      .features-section { gap: 16px; }
+      .feature-card { max-width: 320px; }
+    }
+    @media (max-width: 700px) {
+      .features-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+      }
+      .feature-card {
+        max-width: 98vw;
+        min-width: 0;
+        width: 100%;
+      }
+      /* En móvil: resultado aparece normal debajo */
+      .result-section {
+        margin: 20px auto 0 auto;
+        max-width: 390px;
+        left: 0 !important;
+        right: 0 !important;
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+        transition: none !important;
+      }
+    }
+    @media (max-width: 650px) {
+      .main-container { max-width: 100%; }
+      .cotizador-box, .calculator-wrapper, .result-section { max-width: 100%; }
+      .logo-img { width: 100px; }
+      .logo-container { margin-top: 22px; }
+    }
+    @media (max-width: 400px) {
+      .logo-img { width: 70vw; }
+      h1 { font-size: 1.25rem; }
+      .logo-text { font-size: 14px; }
+    }
+    /* Tarjetas de features igual que antes... */
     .features-container {
       width: 100%;
       padding: 32px 0 24px 0;
@@ -312,35 +318,6 @@
       transform: scale(1.04) rotate(-2deg);
       outline: 2.5px solid #128C7E;
       outline-offset: 2px;
-    }
-    @media (max-width: 900px) {
-      .main-container { max-width: 95vw; }
-      .logo-img { width: 140px; }
-      .features-section { gap: 16px; }
-      .feature-card { max-width: 320px; }
-    }
-    @media (max-width: 700px) {
-      .features-section {
-        flex-direction: column;
-        align-items: center;
-        gap: 18px;
-      }
-      .feature-card {
-        max-width: 98vw;
-        min-width: 0;
-        width: 100%;
-      }
-    }
-    @media (max-width: 650px) {
-      .main-container { max-width: 100%; }
-      .cotizador-box, .calculator-wrapper, .result-section { max-width: 100%; }
-      .logo-img { width: 100px; }
-      .logo-container { margin-top: 22px; }
-    }
-    @media (max-width: 400px) {
-      .logo-img { width: 70vw; }
-      h1 { font-size: 1.25rem; }
-      .logo-text { font-size: 14px; }
     }
   </style>
 </head>
@@ -477,8 +454,15 @@
     }
     let ultimaCotizacion = null;
     const resultSection = document.getElementById("result-section");
+    // Inicialmente oculto y sin animación
     resultSection.classList.remove("visible");
     function mostrarResultados() {
+      // Solo para desktop: forzar reflow para asegurar animación
+      if(window.innerWidth > 700) {
+        resultSection.style.display = "block";
+        // fuerza el reflow para que la transición funcione cada vez
+        void resultSection.offsetWidth;
+      }
       resultSection.classList.add("visible");
       if (ultimaCotizacion.producto) {
         document.getElementById("producto-info").innerHTML = `
@@ -500,6 +484,10 @@
     }
     function ocultarResumen() {
       resultSection.classList.remove("visible");
+      // Para escritorio, ocultar luego de la transición
+      if(window.innerWidth > 700) {
+        setTimeout(()=>{ resultSection.style.display = "none"; }, 500);
+      }
     }
     function calcular() {
       ocultarResumen();
