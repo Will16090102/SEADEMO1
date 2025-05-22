@@ -82,6 +82,7 @@
       letter-spacing: 0.01em;
       text-align: center;
     }
+    /* Layout: fila solo cuando hay resumen */
     .calculator-resume-row {
       display: flex;
       justify-content: center;
@@ -92,6 +93,13 @@
       margin: 0 auto 38px auto;
       min-height: 390px;
       position: relative;
+      transition: justify-content 0.3s;
+    }
+    .calculator-resume-row.solo {
+      justify-content: center;
+    }
+    .calculator-resume-row.con-resumen {
+      justify-content: center;
     }
     .calculator-wrapper {
       background: var(--color-card);
@@ -109,118 +117,9 @@
       justify-content: center;
       animation: fadeInUp 0.8s;
       z-index: 2;
-    }
-    .tabs {
-      display: flex;
-      width: 100%;
-      margin-bottom: 1.1rem;
-      background: #f0f0f0;
-      border-radius: 10px;
-      overflow: hidden;
-      max-width: 410px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .tab {
-      flex: 1 1 0;
-      text-align: center;
-      padding: 0.8rem 0;
-      cursor: pointer;
-      transition: all 0.28s;
-      font-size: 1.02rem;
-      color: #888;
-      background: #f0f0f0;
-      border: none;
-      outline: none;
-      font-weight: 600;
-    }
-    .tab.active {
-      background: var(--color-light);
-      color: var(--color-primary);
-      box-shadow: 0 3px 12px rgba(190,21,34,0.06);
-    }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .form-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: none;
-      border-radius: 0;
-      width: 100%;
-      max-width: 410px;
       margin: 0 auto;
+      transition: margin 0.5s;
     }
-    .form-inner {
-      width: 100%;
-      max-width: 410px;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .form-group {
-      margin-bottom: 1.1rem;
-      width: 100%;
-    }
-    .label-container {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.2rem;
-    }
-    label {
-      font-weight: 600;
-      color: var(--color-primary-dark);
-      font-size: 1.03rem;
-      margin-right: 5px;
-    }
-    input[type="number"], input[type="text"] {
-      width: 100%;
-      padding: 0.82rem 1rem;
-      border: 1.5px solid var(--color-border);
-      border-radius: 8px;
-      font-size: 1.01rem;
-      background-color: #f7f8fa;
-      color: var(--color-text);
-      box-sizing: border-box;
-      outline: none;
-      transition: border 0.22s, box-shadow 0.22s, background 0.22s;
-      margin-bottom: 0.7rem;
-    }
-    input[type="number"]:focus, input[type="text"]:focus {
-      border: 1.7px solid var(--color-primary);
-      background: #fff;
-      box-shadow: 0 2px 12px rgba(190, 21, 34, 0.09);
-    }
-    .form-inner button,
-    .form-inner #btn-calcular,
-    .form-inner #btn-calcular-enlace {
-      margin-top: 0.6rem;
-      margin-bottom: 0.2rem;
-      width: 100%;
-      padding: 1.1rem 0;
-      border-radius: 9px;
-      font-size: 1.13rem;
-      font-weight: bold;
-      background: var(--color-primary);
-      color: #fff;
-      border: none;
-      box-shadow: 0 2px 8px rgba(190,21,34,0.06);
-      letter-spacing: 0.4px;
-      transition: all 0.22s;
-      cursor: pointer;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-    .form-inner button:hover,
-    .form-inner button:focus {
-      background: var(--color-primary-dark);
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-
-    /* --- RESUMEN --- */
     .resume-section {
       background: var(--color-card);
       border-radius: 20px;
@@ -238,7 +137,7 @@
       opacity: 0;
       pointer-events: none;
       transform: translateX(60px);
-      transition: opacity var(--transition), transform var(--transition);
+      transition: opacity var(--transition), transform var(--transition), display 0s linear 0.5s;
       position: relative;
       z-index: 2;
     }
@@ -246,6 +145,7 @@
       opacity: 1;
       pointer-events: auto;
       transform: translateX(0);
+      transition-delay: 0s;
       animation: fadeInRight 0.7s;
     }
     .result-title {
@@ -332,6 +232,88 @@
     @keyframes pulseWsp {
       0%,100%{filter:brightness(1);}
       50%{filter:brightness(1.5);}
+    }
+    .tabs {
+      display: flex;
+      width: 100%;
+      margin-bottom: 1.1rem;
+      background: #f0f0f0;
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 410px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tab {
+      flex: 1 1 0;
+      text-align: center;
+      padding: 0.8rem 0;
+      cursor: pointer;
+      transition: all 0.28s;
+      font-size: 1.02rem;
+      color: #888;
+      background: #f0f0f0;
+      border: none;
+      outline: none;
+      font-weight: 600;
+    }
+    .tab.active {
+      background: var(--color-light);
+      color: var(--color-primary);
+      box-shadow: 0 3px 12px rgba(190,21,34,0.06);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: none;
+      border-radius: 0;
+      width: 100%;
+      max-width: 410px;
+      margin: 0 auto;
+    }
+    .form-inner {
+      width: 100%;
+      max-width: 410px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .form-group {
+      margin-bottom: 1.1rem;
+      width: 100%;
+    }
+    .label-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.2rem;
+    }
+    label {
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      font-size: 1.03rem;
+      margin-right: 5px;
+    }
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 0.82rem 1rem;
+      border: 1.5px solid var(--color-border);
+      border-radius: 8px;
+      font-size: 1.01rem;
+      background-color: #f7f8fa;
+      color: var(--color-text);
+      box-sizing: border-box;
+      outline: none;
+      transition: border 0.22s, box-shadow 0.22s, background 0.22s;
+      margin-bottom: 0.7rem;
+    }
+    input[type="number"]:focus, input[type="text"]:focus {
+      border: 1.7px solid var(--color-primary);
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(190, 21, 34, 0.09);
     }
     /* EXPERIENCIAS/TESTIMONIOS */
     .experiencias-box {
@@ -432,6 +414,7 @@
       .features-row { flex-direction: column; gap: 13px;}
       .feature-card { min-width: 0; max-width: 97vw; }
       .calculator-wrapper, .resume-section { max-width: 100vw;}
+      .calculator-resume-row { gap: 0;}
     }
     @media (max-width: 500px) {
       .calculator-wrapper, .resume-section { border-radius: 12px;}
@@ -462,8 +445,8 @@
     <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
-    <!-- CALCULADORA Y RESUMEN LADO A LADO EN PC -->
-    <div class="calculator-resume-row">
+    <!-- CALCULADORA Y RESUMEN: fila solo si hay resumen -->
+    <div class="calculator-resume-row solo" id="calculatorResumeRow">
       <!-- CALCULADORA -->
       <section class="calculator-wrapper">
         <nav class="tabs" aria-label="Tipo de cotización">
@@ -589,6 +572,8 @@
     function mostrarResultados() {
       const resultSection = document.getElementById("result-section");
       resultSection.classList.add("visible");
+      document.getElementById("calculatorResumeRow").classList.remove("solo");
+      document.getElementById("calculatorResumeRow").classList.add("con-resumen");
       if (ultimaCotizacion.producto) {
         document.getElementById("producto-info").innerHTML = `
           <div class="result-item">
@@ -615,6 +600,8 @@
     function ocultarResumen() {
       const resultSection = document.getElementById("result-section");
       if(resultSection) resultSection.classList.remove("visible");
+      document.getElementById("calculatorResumeRow").classList.remove("con-resumen");
+      document.getElementById("calculatorResumeRow").classList.add("solo");
     }
     function calcular() {
       ocultarResumen();
