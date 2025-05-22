@@ -12,17 +12,16 @@
     :root {
       --color-primary: #be1522;
       --color-primary-dark: #962221;
-      --color-accent: #2176ae;
-      --color-gradient: linear-gradient(90deg, #fff 0%, #f7f7f7 100%);
       --color-bg: #fcfaf7;
-      --color-bg-card: #fff;
-      --color-border: #e6e6e6;
-      --color-light: #fff;
-      --color-gray: #747474;
-      --color-text: #262626;
+      --color-card: #fff;
+      --color-border: #ececec;
+      --color-accent: #2176ae;
+      --color-text: #232323;
+      --color-secondary: #444;
+      --color-gray: #b2b2b2;
       --color-green: #25D366;
       --color-green-dark: #128C7E;
-      --shadow-main: 0 4px 32px 0 rgba(50, 50, 93, 0.09);
+      --shadow-main: 0 4px 18px 0 rgba(50, 50, 93, 0.09);
       --shadow-card: 0 2px 10px rgba(34,50,80,0.08);
     }
 
@@ -37,28 +36,32 @@
       box-sizing: border-box;
       scroll-behavior: smooth;
     }
+    /* CONTENEDOR MÁS ANCHO EN PC */
     .main-container {
-      max-width: 540px;
+      max-width: 1100px;
+      min-height: 100vh;
       margin: 0 auto;
-      padding: 0 12px;
-      text-align: center;
-      position: relative;
+      padding: 0 24px 40px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+    /* LOGO Y TITULO */
     .logo-container {
-      margin: 32px 0 6px 0;
+      margin: 36px 0 8px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     .logo-img {
-      width: 150px;
-      max-width: 90vw;
+      width: 155px;
+      max-width: 95vw;
       height: auto;
       display: block;
       margin-bottom: 8px;
     }
     .logo-text {
-      font-size: 1.08rem;
+      font-size: 1.13rem;
       color: var(--color-primary-dark);
       font-weight: 500;
       letter-spacing: 1.1px;
@@ -67,26 +70,39 @@
     }
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 700;
       margin: 10px 0 8px 0;
       color: var(--color-primary);
       line-height: 1.11;
+      text-align: center;
     }
     .desc {
-      font-size: 1.06rem;
+      font-size: 1.01rem;
       color: #555;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       font-weight: 500;
       letter-spacing: 0.01em;
+      text-align: center;
     }
-
-    /* --- CARD --- */
+    /* WRAPPER PARA FORM Y FEATURES EN FILA EN PC */
+    .top-section {
+      width: 100%;
+      display: flex;
+      gap: 36px;
+      align-items: flex-start;
+      justify-content: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
     .calculator-wrapper {
-      background: var(--color-bg-card);
+      background: var(--color-card);
       box-shadow: var(--shadow-main);
       border-radius: 22px;
-      margin: 30px 0 24px 0;
+      max-width: 410px;
+      min-width: 320px;
+      width: 100%;
+      margin: 0;
       display: flex;
       flex-direction: column;
       align-items: stretch;
@@ -94,7 +110,6 @@
       transition: box-shadow 0.25s;
       animation: fadeInUp 1.1s;
     }
-
     .tabs {
       display: flex;
       width: 100%;
@@ -102,22 +117,21 @@
       background: #f0f0f0;
       border-radius: 10px;
       overflow: hidden;
-      max-width: 450px;
+      max-width: 410px;
       margin-left: auto;
       margin-right: auto;
     }
     .tab {
       flex: 1 1 0;
       text-align: center;
-      padding: 0.8rem;
+      padding: 0.8rem 0;
       cursor: pointer;
       transition: all 0.28s;
-      font-size: 1.04rem;
+      font-size: 1.02rem;
       color: #888;
       background: #f0f0f0;
       border: none;
       outline: none;
-      user-select: none;
       font-weight: 600;
     }
     .tab.active {
@@ -125,15 +139,8 @@
       color: var(--color-primary);
       box-shadow: 0 3px 12px rgba(190,21,34,0.06);
     }
-
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .calc-flex {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      align-items: stretch;
-    }
     .form-section {
       display: flex;
       flex-direction: column;
@@ -141,7 +148,7 @@
       background: none;
       border-radius: 0;
       width: 100%;
-      max-width: 440px;
+      max-width: 410px;
       margin: 0 auto;
     }
     .form-inner {
@@ -153,7 +160,7 @@
       align-items: stretch;
     }
     .form-group {
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.2rem;
       width: 100%;
     }
     .label-container {
@@ -205,146 +212,32 @@
       outline: 2px solid var(--color-primary);
       outline-offset: 2px;
     }
-    /* --- WHATSAPP BUTTON --- */
-    .whatsapp-btn {
-      background: var(--color-green);
-      color: white;
-      border: none;
-      padding: 1.2rem 0;
-      width: 100%;
-      border-radius: 15px;
-      font-size: 1.17rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.23s, box-shadow 0.27s;
-      margin-top: 1.1rem;
-      margin-bottom: 0.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-      box-shadow: 0 3px 16px 0 rgba(37,211,102,0.15);
-      position: relative;
-      overflow: hidden;
-    }
-    .whatsapp-btn i {
-      font-size: 1.7rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-    }
-    .whatsapp-btn:hover, .whatsapp-btn:focus {
-      background: var(--color-green-dark);
-      outline: 2px solid #128C7E;
-      outline-offset: 2px;
-      transform: scale(1.04) rotate(-1.8deg);
-    }
-
-    /* --- RESUMEN DE COTIZACIÓN --- */
-    .result-section {
-      background: var(--color-bg-card);
-      border-radius: 15px;
-      box-shadow: var(--shadow-card);
-      border: 1.4px solid #f0e1e1;
-      margin: 18px auto 0 auto;
-      padding: 1.3rem 1.1rem 1.5rem 1.1rem;
-      max-width: 410px;
-      text-align: left;
-      display: none;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.45s, transform 0.45s;
-    }
-    .result-section.visible {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-      animation: fadeInUp 0.7s;
-    }
-    .result-title {
-      font-size: 1.13rem;
-      color: var(--color-primary);
-      font-weight: 700;
-      margin-bottom: 1.1rem;
-      text-align: center;
-      border-bottom: 1px solid #f0e1e1;
-      padding-bottom: 0.6rem;
-      letter-spacing: 0.01em;
-    }
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.7rem;
-      padding-bottom: 0.35rem;
-      border-bottom: 1px solid #f3eeee;
-      font-size: 1rem;
-      color: #333;
-    }
-    .highlight-box {
-      background: #f8f8f8;
-      border-radius: 8px;
-      padding: 0.9rem 0.7rem;
-      margin: 1.1rem 0 0.7rem 0;
-      border: 1px solid #ebe1e1;
-      text-align: center;
-    }
-    .highlight-title {
-      color: var(--color-primary);
-      font-size: 1.03rem;
-      font-weight: 600;
-    }
-    .highlight-value {
-      font-size: 1.29rem;
-      color: var(--color-primary-dark);
-      font-weight: bold;
-    }
-    .testimonial {
-      font-style: italic;
-      color: var(--color-primary-dark);
-      margin: 30px auto 10px auto;
-      font-size: 1.09rem;
-      max-width: 800px;
-      background: #fff;
-      border-radius: 10px;
-      padding: 16px 16px 8px 16px;
-      box-shadow: 0 2px 12px rgba(190,21,34,0.06);
-    }
-    .testimonial strong {
-      display: block;
-      margin-top: 8px;
-      font-style: normal;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--color-accent);
-    }
-    .features-container {
-      width: 100%;
-      background: #f7f7f7;
-      padding: 28px 0 18px 0;
-      margin: 0 auto;
-    }
+    /* FEATURES EN FILA EN PC */
     .features-section {
-      max-width: 1100px;
-      margin: 0 auto;
       display: flex;
+      flex-direction: row;
       gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      width: 100%;
+      max-width: 630px;
+      margin: 0;
     }
     .feature-card {
-      min-width:210px;
-      max-width:330px;
-      flex:1 1 220px;
-      background:var(--color-light);
-      border-radius:10px;
-      padding:18px 15px;
-      box-shadow:0 2px 10px rgba(190,21,34,0.06);
-      text-align:center;
-      margin: 0 8px 16px 8px;
+      flex: 1 1 0;
+      min-width: 180px;
+      background: var(--color-card);
+      border-radius: 10px;
+      padding: 18px 15px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      margin: 0 0 16px 0;
       transition: box-shadow 0.2s, transform 0.19s;
       outline: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .feature-card:focus, .feature-card:hover {
       box-shadow: 0 8px 30px rgba(190,21,34,0.13);
@@ -367,25 +260,53 @@
       font-size: 0.99rem;
       color: #444;
       margin: 0;
+      line-height: 1.35;
     }
-    @media (max-width: 900px) {
-      .main-container { max-width: 97vw; }
-      .logo-img { width: 110px; }
+    /* TESTIMONIAL */
+    .testimonial {
+      font-style: italic;
+      color: var(--color-primary-dark);
+      margin: 30px auto 10px auto;
+      font-size: 1.09rem;
+      max-width: 800px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 16px 8px 16px;
+      box-shadow: 0 2px 12px rgba(190,21,34,0.06);
     }
-    @media (max-width: 700px) {
-      .features-section { flex-direction: column; gap: 13px;}
-      .feature-card { min-width: 0; max-width: 97vw; }
-      .main-container { max-width: 100vw; }
-      .logo-img { width: 85px; }
-    }
-    @media (max-width: 500px) {
-      .calculator-wrapper { border-radius: 12px;}
-      .result-section { border-radius: 9px;}
-      .logo-img { width: 62px;}
+    .testimonial strong {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-accent);
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(28px);}
       to   { opacity: 1; transform: translateY(0);}
+    }
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .main-container { max-width: 98vw; }
+      .features-section { max-width: 97vw; }
+    }
+    @media (max-width: 900px) {
+      .top-section { flex-direction: column; gap: 20px; align-items: center; }
+      .features-section { flex-direction: row; flex-wrap: wrap; }
+      .feature-card { min-width: 140px; }
+    }
+    @media (max-width: 700px) {
+      .main-container { max-width: 100vw; }
+      .logo-img { width: 85px; }
+      .features-section { flex-direction: column; gap: 13px;}
+      .feature-card { min-width: 0; max-width: 97vw; }
+      .calculator-wrapper, .form-section { max-width: 100vw; }
+    }
+    @media (max-width: 500px) {
+      .calculator-wrapper { border-radius: 12px;}
+      .logo-img { width: 62px;}
+      .form-inner { padding: 0.7rem 0.1rem; }
     }
   </style>
 </head>
@@ -403,12 +324,13 @@
     <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
-    <section class="calculator-wrapper">
-      <nav class="tabs" aria-label="Tipo de cotización">
-        <div class="tab active" onclick="switchTab('manual')" tabindex="0" role="button" aria-pressed="true">Manual</div>
-        <div class="tab" onclick="switchTab('enlace')" tabindex="0" role="button" aria-pressed="false">Por Enlace</div>
-      </nav>
-      <div class="calc-flex">
+    <!-- SECCIÓN EN FILA EN PC -->
+    <div class="top-section">
+      <section class="calculator-wrapper">
+        <nav class="tabs" aria-label="Tipo de cotización">
+          <div class="tab active" onclick="switchTab('manual')" tabindex="0" role="button" aria-pressed="true">Manual</div>
+          <div class="tab" onclick="switchTab('enlace')" tabindex="0" role="button" aria-pressed="false">Por Enlace</div>
+        </nav>
         <div class="form-section" id="form-section">
           <div class="form-inner">
             <div id="manual-tab" class="tab-content active">
@@ -443,52 +365,8 @@
             </div>
           </div>
         </div>
-        <section id="result-section" class="result-section" aria-live="polite">
-          <div class="result-title">Resumen de Cotización</div>
-          <div id="producto-info"></div>
-          <div class="result-item">
-            <strong>Valor del producto:</strong>
-            <span id="valor-result">$0.00</span>
-          </div>
-          <div class="result-item">
-            <strong>Peso:</strong>
-            <span id="peso-result">0.00 kg</span>
-          </div>
-          <div class="result-item">
-            <strong>Desaduanaje:</strong>
-            <span id="desaduanaje">$8.00</span>
-          </div>
-          <div class="result-item">
-            <strong>Costo de envío:</strong>
-            <span id="costo-envio">$0.00</span>
-          </div>
-          <div class="result-item">
-            <strong>Impuestos:</strong>
-            <span id="impuestos">$0.00</span>
-          </div>
-          <div class="highlight-box">
-            <div class="highlight-title">Total envío</div>
-            <div class="highlight-value" id="envio-total">$0.00</div>
-          </div>
-          <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
-            <strong style="font-size: 0.95rem;">Costo total:</strong>
-            <span id="total" style="font-size: 0.95rem;">$0.00</span>
-          </div>
-          <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
-            <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
-              <i class="fab fa-whatsapp"></i>
-              <span>¡Quiero mi descuento especial!</span>
-            </button>
-          </a>
-        </section>
-      </div>
-    </section>
-    <div class="testimonial">
-      “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
-      <strong>—Carlos R.</strong>
-    </div>
-    <section class="features-container" aria-label="Ventajas de SEA Express">
-      <div class="features-section">
+      </section>
+      <section class="features-section">
         <div class="feature-card" tabindex="0" aria-label="Envío Express">
           <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
           <h3 class="feature-title">Envío Express</h3>
@@ -504,11 +382,14 @@
           <h3 class="feature-title">Soporte 24/7</h3>
           <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+    <div class="testimonial">
+      “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
+      <strong>—Carlos R.</strong>
+    </div>
   </div>
   <script>
-    // Tab switching
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -523,10 +404,8 @@
       ocultarResumen();
     }
     let ultimaCotizacion = null;
-    const resultSection = document.getElementById("result-section");
-    ocultarResumen(); // Inicialmente oculto
-
     function mostrarResultados() {
+      const resultSection = document.getElementById("result-section");
       resultSection.classList.add("visible");
       if (ultimaCotizacion.producto) {
         document.getElementById("producto-info").innerHTML = `
@@ -547,7 +426,8 @@
       document.getElementById("total").textContent = `$${ultimaCotizacion.total.toFixed(2)}`;
     }
     function ocultarResumen() {
-      resultSection.classList.remove("visible");
+      const resultSection = document.getElementById("result-section");
+      if(resultSection) resultSection.classList.remove("visible");
     }
     function calcular() {
       ocultarResumen();
@@ -627,6 +507,54 @@
       const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensaje)}`;
       document.getElementById("whatsapp-link").href = wspUrl;
     }
+    // El resumen aparece debajo del formulario, pero puedes colocarlo donde prefieras
+    window.addEventListener('DOMContentLoaded', ()=>{
+      // Crear el resumen y agregarlo después del formulario
+      const resumen = document.createElement('section');
+      resumen.id = "result-section";
+      resumen.className = "result-section";
+      resumen.setAttribute("aria-live","polite");
+      resumen.innerHTML = `
+        <div class="result-title">Resumen de Cotización</div>
+        <div id="producto-info"></div>
+        <div class="result-item">
+          <strong>Valor del producto:</strong>
+          <span id="valor-result">$0.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Peso:</strong>
+          <span id="peso-result">0.00 kg</span>
+        </div>
+        <div class="result-item">
+          <strong>Desaduanaje:</strong>
+          <span id="desaduanaje">$8.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Costo de envío:</strong>
+          <span id="costo-envio">$0.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Impuestos:</strong>
+          <span id="impuestos">$0.00</span>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-title">Total envío</div>
+          <div class="highlight-value" id="envio-total">$0.00</div>
+        </div>
+        <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
+          <strong style="font-size: 0.95rem;">Costo total:</strong>
+          <span id="total" style="font-size: 0.95rem;">$0.00</span>
+        </div>
+        <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
+          <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
+            <i class="fab fa-whatsapp"></i>
+            <span>¡Quiero mi descuento especial!</span>
+          </button>
+        </a>
+      `;
+      document.querySelector('.form-section').appendChild(resumen);
+      ocultarResumen();
+    });
   </script>
 </body>
 </html>
