@@ -22,8 +22,6 @@
       margin: 0 auto;
       padding: 0 16px;
       text-align: center;
-      position: relative;
-      z-index: 1;
     }
     .logo-container {
       margin-bottom: 8px;
@@ -123,7 +121,7 @@
       margin-bottom: 0.2rem;
     }
     label {
-      font-weight: bold;
+      font-weight: 600;
       color: #A31217;
       font-size: 1rem;
       margin-right: 5px;
@@ -169,15 +167,15 @@
       background: #fff;
       border-radius: 18px;
       box-shadow: 0 4px 32px 0 rgba(50,50,93,0.09);
-      margin: 24px auto 0 auto;
+      margin: 22px auto 0 auto;
       padding: 18px 20px 18px 20px;
       max-width: 390px;
       text-align: left;
       display: none;
       opacity: 0;
-      transform: translateX(80px);
-      transition: opacity 0.6s cubic-bezier(.5,1.5,.5,1), transform 0.6s cubic-bezier(.5,1.5,.5,1);
-      border: 1.5px solid #f2e6e6;
+      transform: translateX(60px);
+      transition: opacity 0.7s cubic-bezier(.5,1.5,.5,1), transform 0.7s cubic-bezier(.5,1.5,.5,1);
+      border: 1px solid #f2e6e6;
     }
     .result-section.visible {
       display: block;
@@ -199,7 +197,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       font-size: 1rem;
       color: #3A2626;
       font-weight: 500;
@@ -208,39 +206,41 @@
     .result-item strong {
       min-width: 120px;
       text-align: left;
-      color: #3A2626;
+      color: #5f5f5f;
       font-weight: 600;
     }
     .result-item:not(:last-child) {
       border-bottom: 1px solid #f1ecec;
-      padding-bottom: 0.3rem;
+      padding-bottom: 0.2rem;
     }
     .highlight-box {
-      background-color: #FFF2F2;
+      background-color: #FAF6F6;
       border-radius: 10px;
-      padding: 1rem;
-      margin: 1.2rem 0 0.8rem 0;
-      border: 1.5px solid #FADADA;
+      padding: 1rem 0.5rem;
+      margin: 1rem 0 0.7rem 0;
+      border: 1.2px solid #FADADA;
       text-align: center;
     }
     .highlight-title {
       color: #A31217;
-      font-size: 1.07rem;
+      font-size: 1.03rem;
       margin-bottom: 0.2rem;
+      font-weight: 600;
     }
     .highlight-value {
-      font-size: 1.45rem;
+      font-size: 1.32rem;
       color: #A31217;
       font-weight: bold;
+      letter-spacing: 0.02em;
     }
     .result-section .whatsapp-btn {
-      margin-top: 0.9rem;
-      font-size: 1.08rem;
-      padding: 1.05rem 0;
+      margin-top: 0.8rem;
+      font-size: 1.09rem;
+      padding: 1rem 0;
       border-radius: 14px;
     }
     .result-section .whatsapp-btn i {
-      font-size: 1.5rem;
+      font-size: 1.38rem;
     }
     /* En móvil: sin animación, aparece normal */
     @media (max-width: 700px) {
@@ -548,7 +548,7 @@
       resultSection.style.display = 'none';
       setTimeout(()=>{
         resultSection.style.display = '';
-      }, 600);
+      }, 700);
     }
     function calcular() {
       ocultarResumen();
@@ -583,7 +583,7 @@
         total: total
       };
       actualizarEnlaceWhatsApp();
-      setTimeout(mostrarResultados, 200);
+      setTimeout(mostrarResultados, 250);
     }
     async function calcularPorEnlace() {
       ocultarResumen();
