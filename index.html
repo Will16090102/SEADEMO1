@@ -174,59 +174,41 @@
       max-width: 390px;
       text-align: left;
       display: none;
-      position: relative;
-      z-index: 2;
-      /* Para animación: */
       opacity: 0;
-      transform: translateX(120%);
-      transition: opacity 0.5s cubic-bezier(.5,1.5,.5,1), transform 0.5s cubic-bezier(.5,1.5,.5,1);
+      transform: translateX(100px);
+      transition: opacity 0.6s cubic-bezier(.5,1.5,.5,1), transform 0.6s cubic-bezier(.5,1.5,.5,1);
     }
     .result-section.visible {
       display: block;
       opacity: 1;
       transform: translateX(0);
     }
-
-    @media (max-width: 900px) {
-      .main-container { max-width: 95vw; }
-      .logo-img { width: 140px; }
-      .features-section { gap: 16px; }
-      .feature-card { max-width: 320px; }
-    }
+    /* En móvil: sin animación, aparece normal */
     @media (max-width: 700px) {
-      .features-section {
-        flex-direction: column;
-        align-items: center;
-        gap: 18px;
-      }
-      .feature-card {
-        max-width: 98vw;
-        min-width: 0;
-        width: 100%;
-      }
-      /* En móvil: resultado aparece normal debajo */
-      .result-section {
-        margin: 20px auto 0 auto;
-        max-width: 390px;
-        left: 0 !important;
-        right: 0 !important;
-        transform: translateX(0) !important;
+      .result-section,
+      .result-section.visible {
+        display: block;
         opacity: 1 !important;
+        transform: none !important;
         transition: none !important;
       }
     }
-    @media (max-width: 650px) {
-      .main-container { max-width: 100%; }
-      .cotizador-box, .calculator-wrapper, .result-section { max-width: 100%; }
-      .logo-img { width: 100px; }
-      .logo-container { margin-top: 22px; }
+    /* Otros estilos igual que antes (logo, testimonial, features...) */
+    .testimonial {
+      font-style: italic;
+      color: #A31217;
+      margin: 28px auto 16px auto;
+      font-size: 1.09rem;
+      max-width: 900px;
     }
-    @media (max-width: 400px) {
-      .logo-img { width: 70vw; }
-      h1 { font-size: 1.25rem; }
-      .logo-text { font-size: 14px; }
+    .testimonial strong {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #D32F2F;
     }
-    /* Tarjetas de features igual que antes... */
     .features-container {
       width: 100%;
       padding: 32px 0 24px 0;
@@ -318,6 +300,35 @@
       transform: scale(1.04) rotate(-2deg);
       outline: 2.5px solid #128C7E;
       outline-offset: 2px;
+    }
+    @media (max-width: 900px) {
+      .main-container { max-width: 95vw; }
+      .logo-img { width: 140px; }
+      .features-section { gap: 16px; }
+      .feature-card { max-width: 320px; }
+    }
+    @media (max-width: 700px) {
+      .features-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+      }
+      .feature-card {
+        max-width: 98vw;
+        min-width: 0;
+        width: 100%;
+      }
+    }
+    @media (max-width: 650px) {
+      .main-container { max-width: 100%; }
+      .cotizador-box, .calculator-wrapper, .result-section { max-width: 100%; }
+      .logo-img { width: 100px; }
+      .logo-container { margin-top: 22px; }
+    }
+    @media (max-width: 400px) {
+      .logo-img { width: 70vw; }
+      h1 { font-size: 1.25rem; }
+      .logo-text { font-size: 14px; }
     }
   </style>
 </head>
@@ -440,7 +451,6 @@
     </section>
   </div>
   <script>
-    // Tab switching
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
@@ -454,15 +464,9 @@
     }
     let ultimaCotizacion = null;
     const resultSection = document.getElementById("result-section");
-    // Inicialmente oculto y sin animación
-    resultSection.classList.remove("visible");
+    ocultarResumen(); // Inicialmente oculto
+
     function mostrarResultados() {
-      // Solo para desktop: forzar reflow para asegurar animación
-      if(window.innerWidth > 700) {
-        resultSection.style.display = "block";
-        // fuerza el reflow para que la transición funcione cada vez
-        void resultSection.offsetWidth;
-      }
       resultSection.classList.add("visible");
       if (ultimaCotizacion.producto) {
         document.getElementById("producto-info").innerHTML = `
@@ -484,10 +488,10 @@
     }
     function ocultarResumen() {
       resultSection.classList.remove("visible");
-      // Para escritorio, ocultar luego de la transición
-      if(window.innerWidth > 700) {
-        setTimeout(()=>{ resultSection.style.display = "none"; }, 500);
-      }
+      resultSection.style.display = 'none';
+      setTimeout(()=>{
+        resultSection.style.display = '';
+      }, 600); // Para reiniciar animación en desktop
     }
     function calcular() {
       ocultarResumen();
@@ -522,7 +526,7 @@
         total: total
       };
       actualizarEnlaceWhatsApp();
-      setTimeout(mostrarResultados, 100);
+      setTimeout(mostrarResultados, 200); // Da tiempo a la animación a reiniciarse
     }
     async function calcularPorEnlace() {
       ocultarResumen();
