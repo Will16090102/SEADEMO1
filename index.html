@@ -82,7 +82,6 @@
       letter-spacing: 0.01em;
       text-align: center;
     }
-    /* Layout: calculadora y resumen lado a lado en PC */
     .calculator-resume-row {
       display: flex;
       justify-content: center;
@@ -110,82 +109,6 @@
       justify-content: center;
       animation: fadeInUp 0.8s;
       z-index: 2;
-    }
-    .resume-section {
-      background: var(--color-card);
-      border-radius: 20px;
-      box-shadow: var(--shadow-card);
-      border: 1.4px solid #f0e1e1;
-      padding: 2.2rem 1.3rem 2.2rem 1.3rem;
-      max-width: 385px;
-      min-width: 300px;
-      width: 100%;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: center;
-      /* Animación slide-in derecha */
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(60px);
-      transition: opacity var(--transition), transform var(--transition);
-      position: relative;
-      z-index: 2;
-    }
-    .resume-section.visible {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(0);
-      animation: fadeInRight 0.7s;
-    }
-    /* WhatsApp botón animado */
-    .whatsapp-btn {
-      background: var(--color-green);
-      color: white;
-      border: none;
-      padding: 1.07rem 0;
-      width: 100%;
-      border-radius: 11px;
-      font-size: 1.09rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.24s, box-shadow 0.27s, transform 0.28s;
-      margin-top: 1.1rem;
-      margin-bottom: 0.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-      box-shadow: 0 3px 16px 0 rgba(37,211,102,0.15);
-      position: relative;
-      overflow: hidden;
-      outline: none;
-      animation: popWsp 1.3s cubic-bezier(.48,-0.01,.41,1.18);
-    }
-    .whatsapp-btn:active, .whatsapp-btn:focus, .whatsapp-btn:hover {
-      background: var(--color-green-dark);
-      outline: 2px solid #128C7E;
-      outline-offset: 2px;
-      transform: scale(1.09) rotate(-2deg);
-      box-shadow: 0 8px 30px rgba(37,211,102,0.19);
-    }
-    .whatsapp-btn i {
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      animation: pulseWsp 1.9s infinite;
-    }
-    @keyframes popWsp {
-      0% { transform: scale(0.7);}
-      60% { transform: scale(1.12) rotate(-3deg);}
-      100% { transform: scale(1);}
-    }
-    @keyframes pulseWsp {
-      0%,100%{filter:brightness(1);}
-      50%{filter:brightness(1.5);}
     }
     .tabs {
       display: flex;
@@ -262,13 +185,69 @@
       box-sizing: border-box;
       outline: none;
       transition: border 0.22s, box-shadow 0.22s, background 0.22s;
+      margin-bottom: 0.7rem;
     }
     input[type="number"]:focus, input[type="text"]:focus {
       border: 1.7px solid var(--color-primary);
       background: #fff;
       box-shadow: 0 2px 12px rgba(190, 21, 34, 0.09);
     }
+    .form-inner button,
+    .form-inner #btn-calcular,
+    .form-inner #btn-calcular-enlace {
+      margin-top: 0.6rem;
+      margin-bottom: 0.2rem;
+      width: 100%;
+      padding: 1.1rem 0;
+      border-radius: 9px;
+      font-size: 1.13rem;
+      font-weight: bold;
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 8px rgba(190,21,34,0.06);
+      letter-spacing: 0.4px;
+      transition: all 0.22s;
+      cursor: pointer;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    .form-inner button:hover,
+    .form-inner button:focus {
+      background: var(--color-primary-dark);
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
     /* --- RESUMEN --- */
+    .resume-section {
+      background: var(--color-card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
+      border: 1.4px solid #f0e1e1;
+      padding: 2.2rem 1.3rem 2.2rem 1.3rem;
+      max-width: 385px;
+      min-width: 300px;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(60px);
+      transition: opacity var(--transition), transform var(--transition);
+      position: relative;
+      z-index: 2;
+    }
+    .resume-section.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+      animation: fadeInRight 0.7s;
+    }
     .result-title {
       font-size: 1.13rem;
       color: var(--color-primary);
@@ -306,6 +285,53 @@
       font-size: 1.29rem;
       color: var(--color-primary-dark);
       font-weight: bold;
+    }
+    .whatsapp-btn {
+      background: var(--color-green);
+      color: white;
+      border: none;
+      padding: 1.07rem 0;
+      width: 100%;
+      border-radius: 11px;
+      font-size: 1.09rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.24s, box-shadow 0.27s, transform 0.28s;
+      margin-top: 1.1rem;
+      margin-bottom: 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      box-shadow: 0 3px 16px 0 rgba(37,211,102,0.15);
+      position: relative;
+      overflow: hidden;
+      outline: none;
+      animation: popWsp 1.3s cubic-bezier(.48,-0.01,.41,1.18);
+    }
+    .whatsapp-btn:active, .whatsapp-btn:focus, .whatsapp-btn:hover {
+      background: var(--color-green-dark);
+      outline: 2px solid #128C7E;
+      outline-offset: 2px;
+      transform: scale(1.09) rotate(-2deg);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.19);
+    }
+    .whatsapp-btn i {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      animation: pulseWsp 1.9s infinite;
+    }
+    @keyframes popWsp {
+      0% { transform: scale(0.7);}
+      60% { transform: scale(1.12) rotate(-3deg);}
+      100% { transform: scale(1);}
+    }
+    @keyframes pulseWsp {
+      0%,100%{filter:brightness(1);}
+      50%{filter:brightness(1.5);}
     }
     /* EXPERIENCIAS/TESTIMONIOS */
     .experiencias-box {
