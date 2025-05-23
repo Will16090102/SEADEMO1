@@ -83,181 +83,63 @@
       text-align: center;
       letter-spacing: 0.01em;
     }
-    /* CENTRADO ABSOLUTO CALCULADORA */
+    /* CONTENEDOR FLEX CENTRAL */
     .calculadora-layout {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      position: relative;
-      width: 100vw;
-      min-height: 400px;
+      gap: 48px;
       margin-bottom: 38px;
+      width: 100vw;
+      max-width: 1020px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
       z-index: 2;
     }
-    .calculator-center-container {
-      width: 100%;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-    }
-    .calculator-wrapper {
+    .calculator-wrapper,
+    .resume-section {
       background: var(--color-card);
       border-radius: var(--radius-card);
       box-shadow: var(--shadow-card-strong);
       border: 1.9px solid var(--color-border);
-      padding: 2.35rem 2.5rem 2.2rem 2.5rem;
+      min-width: 320px;
       max-width: 430px;
-      min-width: 300px;
       width: 100%;
-      text-align: left;
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: center;
-      margin: 0 auto;
-      z-index: 3;
-      animation: fadeInUp 0.7s;
+      margin: 0;
+      position: relative;
       transition: box-shadow 0.35s, transform 0.35s;
+    }
+    .calculator-wrapper {
+      padding: 2.35rem 2.5rem 2.2rem 2.5rem;
+      animation: fadeInUp 0.7s;
+      z-index: 3;
     }
     .calculator-wrapper:focus-within, .calculator-wrapper:hover {
       box-shadow: 0 18px 44px 0 rgba(190,21,34,0.17), 0 12px 33px 0 rgba(34,48,75,0.17);
       transform: scale(1.018);
     }
-    /* PANEL RESUMEN FLOTANTE */
-    .resume-float-container {
-      position: relative;
-      width: 0;
-      height: 0;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      z-index: 5;
-    }
-    .resume-float-container.visible {
-      width: 430px;
-      height: auto;
-      min-height: 0;
-      pointer-events: all;
-    }
     .resume-section {
-      background: var(--color-card);
-      border-radius: var(--radius-card);
-      box-shadow: var(--shadow-card-strong);
-      border: 2.5px solid #be1522;
       padding: 2.3rem 1.2rem 2.3rem 1.2rem;
-      max-width: 410px;
-      min-width: 290px;
-      width: 400px;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: center;
+      border: 2.5px solid #be1522;
       opacity: 0;
       pointer-events: none;
-      transform: translateX(80px) scale(0.97);
-      transition: opacity 0.6s, transform 0.8s cubic-bezier(.48,-0.01,.41,1.18);
-      position: absolute;
-      left: 36px; top: 0;
-      z-index: 12;
+      transform: translateY(30px) scale(0.96);
+      transition: opacity 0.6s, transform 0.7s cubic-bezier(.48,-0.01,.41,1.18);
+      z-index: 3;
     }
     .resume-section.visible {
       opacity: 1;
       pointer-events: auto;
-      transform: translateX(0) scale(1);
-      transition-delay: 0s;
-      animation: fadeInRight 0.9s cubic-bezier(.48,-0.01,.41,1.18);
+      transform: translateY(0) scale(1);
+      animation: fadeInRight 0.8s cubic-bezier(.48,-0.01,.41,1.18);
       display: flex;
     }
-    .result-title {
-      font-size: 1.18rem;
-      color: var(--color-primary);
-      font-weight: 700;
-      margin-bottom: 1.1rem;
-      text-align: center;
-      border-bottom: 1px solid #f0e1e1;
-      padding-bottom: 0.6rem;
-      letter-spacing: 0.01em;
-      font-family: 'Montserrat', Arial, sans-serif;
-    }
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.7rem;
-      padding-bottom: 0.35rem;
-      border-bottom: 1px solid #f3eeee;
-      font-size: 1.09rem;
-      color: #333;
-      font-family: 'Montserrat', Arial, sans-serif;
-    }
-    .highlight-box {
-      background: #f8f8f8;
-      border-radius: 8px;
-      padding: 0.9rem 0.7rem;
-      margin: 1.1rem 0 0.7rem 0;
-      border: 1px solid #ebe1e1;
-      text-align: center;
-    }
-    .highlight-title {
-      color: var(--color-primary);
-      font-size: 1.08rem;
-      font-weight: 600;
-    }
-    .highlight-value {
-      font-size: 1.37rem;
-      color: var(--color-primary-dark, #be1522);
-      font-weight: bold;
-      letter-spacing: 0.01em;
-    }
-    .whatsapp-btn {
-      background: var(--color-green);
-      color: white;
-      border: none;
-      padding: 1.07rem 0;
-      width: 100%;
-      border-radius: 11px;
-      font-size: 1.09rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.24s, box-shadow 0.27s, transform 0.28s;
-      margin-top: 1.1rem;
-      margin-bottom: 0.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-      box-shadow: 0 3px 16px 0 rgba(37,211,102,0.15);
-      position: relative;
-      overflow: hidden;
-      outline: none;
-      animation: popWsp 1.3s cubic-bezier(.48,-0.01,.41,1.18);
-    }
-    .whatsapp-btn:active, .whatsapp-btn:focus, .whatsapp-btn:hover {
-      background: var(--color-green-dark);
-      outline: 2px solid #128C7E;
-      outline-offset: 2px;
-      transform: scale(1.09) rotate(-2deg);
-      box-shadow: 0 8px 30px rgba(37,211,102,0.19);
-    }
-    .whatsapp-btn i {
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      animation: pulseWsp 1.9s infinite;
-    }
-    @keyframes popWsp {
-      0% { transform: scale(0.7);}
-      60% { transform: scale(1.12) rotate(-3deg);}
-      100% { transform: scale(1);}
-    }
-    @keyframes pulseWsp {
-      0%,100%{filter:brightness(1);}
-      50%{filter:brightness(1.5);}
-    }
-    /* FORMULARIO */
+    /* FORMULARIO Y BOTÓN */
     .tabs {
       display: flex;
       width: 100%;
@@ -375,6 +257,95 @@
       outline-offset: 2px;
       color: #fff;
     }
+    /* RESUMEN */
+    .result-title {
+      font-size: 1.18rem;
+      color: var(--color-primary);
+      font-weight: 700;
+      margin-bottom: 1.1rem;
+      text-align: center;
+      border-bottom: 1px solid #f0e1e1;
+      padding-bottom: 0.6rem;
+      letter-spacing: 0.01em;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.7rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid #f3eeee;
+      font-size: 1.09rem;
+      color: #333;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .highlight-box {
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 0.9rem 0.7rem;
+      margin: 1.1rem 0 0.7rem 0;
+      border: 1px solid #ebe1e1;
+      text-align: center;
+    }
+    .highlight-title {
+      color: var(--color-primary);
+      font-size: 1.08rem;
+      font-weight: 600;
+    }
+    .highlight-value {
+      font-size: 1.37rem;
+      color: var(--color-primary-dark, #be1522);
+      font-weight: bold;
+      letter-spacing: 0.01em;
+    }
+    .whatsapp-btn {
+      background: var(--color-green);
+      color: white;
+      border: none;
+      padding: 1.07rem 0;
+      width: 100%;
+      border-radius: 11px;
+      font-size: 1.09rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.24s, box-shadow 0.27s, transform 0.28s;
+      margin-top: 1.1rem;
+      margin-bottom: 0.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      box-shadow: 0 3px 16px 0 rgba(37,211,102,0.15);
+      position: relative;
+      overflow: hidden;
+      outline: none;
+      animation: popWsp 1.3s cubic-bezier(.48,-0.01,.41,1.18);
+    }
+    .whatsapp-btn:active, .whatsapp-btn:focus, .whatsapp-btn:hover {
+      background: var(--color-green-dark);
+      outline: 2px solid #128C7E;
+      outline-offset: 2px;
+      transform: scale(1.09) rotate(-2deg);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.19);
+    }
+    .whatsapp-btn i {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      animation: pulseWsp 1.9s infinite;
+    }
+    @keyframes popWsp {
+      0% { transform: scale(0.7);}
+      60% { transform: scale(1.12) rotate(-3deg);}
+      100% { transform: scale(1);}
+    }
+    @keyframes pulseWsp {
+      0%,100%{filter:brightness(1);}
+      50%{filter:brightness(1.5);}
+    }
     /* EXPERIENCIAS/TESTIMONIOS */
     .experiencias-box {
       width: 100%;
@@ -461,24 +432,31 @@
       line-height: 1.35;
       font-family: 'Montserrat', Arial, sans-serif;
     }
-    @media (max-width: 1200px) {
-      .resume-float-container.visible { width: 100vw;}
-      .resume-section { left: 50vw; min-width: 270px;}
+    @media (max-width: 1050px) {
+      .calculadora-layout {
+        max-width: 98vw;
+        gap: 24px;
+      }
     }
     @media (max-width: 900px) {
-      .calculadora-layout { flex-direction: column; align-items: center;}
-      .resume-section { left: 0; right: 0; margin: 0 auto;}
-      .resume-float-container.visible { width: 100vw;}
-      .features-row { flex-direction: column; gap: 18px;}
-      .feature-card { min-width: 0; max-width: 97vw; }
-      .calculator-wrapper, .resume-section { max-width: 97vw; min-width: 0; }
+      .calculadora-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+      }
+      .resume-section, .calculator-wrapper {
+        max-width: 97vw;
+        min-width: 0;
+        width: 100%;
+      }
+      .resume-section {
+        align-self: center;
+      }
     }
     @media (max-width: 700px) {
       .calculator-wrapper { padding: 1.2rem 0.5rem 1.2rem 0.5rem;}
       .resume-section { padding: 1.2rem 0.3rem 1.2rem 0.3rem;}
       .resume-section, .calculator-wrapper { max-width: 100vw;}
-      .resume-float-container { position: static; width: 100vw;}
-      .resume-float-container.visible { width: 100vw;}
     }
     @media (max-width: 500px) {
       .calculator-wrapper, .resume-section { border-radius: 12px;}
@@ -490,8 +468,8 @@
       to   { opacity: 1; transform: translateY(0);}
     }
     @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(80px) scale(0.97);}
-      to   { opacity: 1; transform: translateX(0) scale(1);}
+      from { opacity: 0; transform: translateY(30px) scale(0.96);}
+      to   { opacity: 1; transform: translateY(0) scale(1);}
     }
   </style>
 </head>
@@ -509,94 +487,90 @@
     <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
-    <!-- CALCULADORA CENTRADA SIEMPRE -->
+    <!-- CONTENEDOR FLEX PREMIUM -->
     <div class="calculadora-layout">
-      <div class="calculator-center-container">
-        <section class="calculator-wrapper" id="calculatorWrapper">
-          <nav class="tabs" aria-label="Tipo de cotización">
-            <div class="tab active" onclick="switchTab('manual')" tabindex="0" role="button" aria-pressed="true">Manual</div>
-            <div class="tab" onclick="switchTab('enlace')" tabindex="0" role="button" aria-pressed="false">Por Enlace</div>
-          </nav>
-          <div class="form-section" id="form-section">
-            <div class="form-inner">
-              <div id="manual-tab" class="tab-content active">
-                <div class="form-group">
-                  <div class="label-container">
-                    <label for="valor">Valor del producto (USD)</label>
-                  </div>
-                  <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required aria-required="true">
+      <section class="calculator-wrapper" id="calculatorWrapper">
+        <nav class="tabs" aria-label="Tipo de cotización">
+          <div class="tab active" onclick="switchTab('manual')" tabindex="0" role="button" aria-pressed="true">Manual</div>
+          <div class="tab" onclick="switchTab('enlace')" tabindex="0" role="button" aria-pressed="false">Por Enlace</div>
+        </nav>
+        <div class="form-section" id="form-section">
+          <div class="form-inner">
+            <div id="manual-tab" class="tab-content active">
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="valor">Valor del producto (USD)</label>
                 </div>
-                <div class="form-group">
-                  <div class="label-container">
-                    <label for="peso">Peso del paquete (kg)</label>
-                  </div>
-                  <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required aria-required="true">
-                </div>
-                <div class="form-group">
-                  <div class="label-container">
-                    <label for="producto">Tipo de producto (opcional)</label>
-                  </div>
-                  <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-                </div>
-                <button id="btn-calcular" onclick="calcular()" aria-label="Calcular cotización">Calcular</button>
+                <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required aria-required="true">
               </div>
-              <div id="enlace-tab" class="tab-content">
-                <div class="form-group">
-                  <div class="label-container">
-                    <label for="enlace-producto">Enlace del producto</label>
-                  </div>
-                  <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required aria-required="true">
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="peso">Peso del paquete (kg)</label>
                 </div>
-                <button id="btn-calcular-enlace" onclick="calcularPorEnlace()" aria-label="Calcular por enlace">Calcular</button>
+                <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required aria-required="true">
               </div>
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="producto">Tipo de producto (opcional)</label>
+                </div>
+                <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
+              </div>
+              <button id="btn-calcular" onclick="calcular()" aria-label="Calcular cotización">Calcular</button>
+            </div>
+            <div id="enlace-tab" class="tab-content">
+              <div class="form-group">
+                <div class="label-container">
+                  <label for="enlace-producto">Enlace del producto</label>
+                </div>
+                <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required aria-required="true">
+              </div>
+              <button id="btn-calcular-enlace" onclick="calcularPorEnlace()" aria-label="Calcular por enlace">Calcular</button>
             </div>
           </div>
-        </section>
-      </div>
-      <!-- RESUMEN flotante animado al calcular -->
-      <div class="resume-float-container" id="resumeFloatContainer">
-        <section id="result-section" class="resume-section" aria-live="polite">
-          <div class="result-title">Resumen de Cotización</div>
-          <div class="result-item">
-            <strong>Producto:</strong>
-            <span id="valor-producto">-</span>
-          </div>
-          <div class="result-item">
-            <strong>Valor del producto:</strong>
-            <span id="valor-result">$0.00</span>
-          </div>
-          <div class="result-item">
-            <strong>Peso:</strong>
-            <span id="peso-result">0.00 kg</span>
-          </div>
-          <div class="result-item">
-            <strong>Desaduanaje:</strong>
-            <span id="desaduanaje">$8.00</span>
-          </div>
-          <div class="result-item">
-            <strong>Costo de envío:</strong>
-            <span id="costo-envio">$0.00</span>
-          </div>
-          <div class="result-item">
-            <strong>Impuestos:</strong>
-            <span id="impuestos">$0.00</span>
-          </div>
-          <div class="highlight-box">
-            <div class="highlight-title">Total envío</div>
-            <div class="highlight-value" id="envio-total">$0.00</div>
-          </div>
-          <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
-            <strong style="font-size: 1.09rem;">Costo total:</strong>
-            <span id="total" style="font-size: 1.09rem;">$0.00</span>
-          </div>
-          <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
-            <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
-              <i class="fab fa-whatsapp"></i>
-              <span>¡Quiero mi descuento especial!</span>
-            </button>
-          </a>
-        </section>
-      </div>
+        </div>
+      </section>
+      <!-- RESUMEN animado alineado -->
+      <section id="result-section" class="resume-section" aria-live="polite">
+        <div class="result-title">Resumen de Cotización</div>
+        <div class="result-item">
+          <strong>Producto:</strong>
+          <span id="valor-producto">-</span>
+        </div>
+        <div class="result-item">
+          <strong>Valor del producto:</strong>
+          <span id="valor-result">$0.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Peso:</strong>
+          <span id="peso-result">0.00 kg</span>
+        </div>
+        <div class="result-item">
+          <strong>Desaduanaje:</strong>
+          <span id="desaduanaje">$8.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Costo de envío:</strong>
+          <span id="costo-envio">$0.00</span>
+        </div>
+        <div class="result-item">
+          <strong>Impuestos:</strong>
+          <span id="impuestos">$0.00</span>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-title">Total envío</div>
+          <div class="highlight-value" id="envio-total">$0.00</div>
+        </div>
+        <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
+          <strong style="font-size: 1.09rem;">Costo total:</strong>
+          <span id="total" style="font-size: 1.09rem;">$0.00</span>
+        </div>
+        <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
+          <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
+            <i class="fab fa-whatsapp"></i>
+            <span>¡Quiero mi descuento especial!</span>
+          </button>
+        </a>
+      </section>
     </div>
     <!-- EXPERIENCIAS DE USUARIOS ROTATIVAS -->
     <div class="experiencias-box" id="experiencias-box">
@@ -641,7 +615,6 @@
     function mostrarResultados() {
       const resultSection = document.getElementById("result-section");
       resultSection.classList.add("visible");
-      document.getElementById("resumeFloatContainer").classList.add("visible");
       document.getElementById("valor-producto").textContent = ultimaCotizacion.producto || "-";
       document.getElementById("valor-result").textContent = `$${ultimaCotizacion.valor.toFixed(2)}`;
       document.getElementById("peso-result").textContent = `${ultimaCotizacion.peso.toFixed(2)} kg`;
@@ -659,7 +632,6 @@
     function ocultarResumen() {
       const resultSection = document.getElementById("result-section");
       if(resultSection) resultSection.classList.remove("visible");
-      document.getElementById("resumeFloatContainer").classList.remove("visible");
     }
     function calcular() {
       ocultarResumen();
