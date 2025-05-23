@@ -55,7 +55,7 @@
       padding: 7px;
       object-fit: contain;
       box-shadow: 0 4px 20px rgba(34,48,80,0.05);
-      border: 6px solid #fff; /* Barra de borde gruesa y clara */
+      border: 6px solid #fff;
       transition: width 0.2s, height 0.2s, padding 0.2s, border 0.2s;
       box-sizing: border-box;
     }
@@ -383,6 +383,196 @@
       .features-section { flex-direction: column; align-items: center; gap: 18px; }
       .calculator-center-area { padding: 0; }
     }
+
+    /* ========== FOOTER STYLES ========== */
+    .sea-footer {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #f7f1e7;
+      color: #223050;
+      padding: 44px 0 18px 0;
+      margin-top: 56px;
+      border-top: 1.5px solid #e5e0d0;
+    }
+    .sea-footer-top {
+      max-width: 1100px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 0 18px;
+    }
+    .sea-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 16px;
+      flex: 1 1 260px;
+    }
+    .sea-footer-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #25324a;
+      padding: 7px;
+      border: 3.5px solid #fff;
+      object-fit: contain;
+      box-shadow: 0 4px 14px 0 rgba(34,48,80,0.08);
+    }
+    .sea-footer-brandtext {
+      font-size: 1.14rem;
+      font-weight: 700;
+      color: #25324a;
+      letter-spacing: 0.02em;
+    }
+    .sea-footer-trust {
+      font-size: .99rem;
+      color: #b59a4d;
+      font-weight: 600;
+      margin-left: 7px;
+    }
+    .sea-footer-apps {
+      text-align: center;
+      flex: 1 1 290px;
+      margin-bottom: 12px;
+    }
+    .sea-footer-appstitle {
+      font-size: 1.01rem;
+      margin-bottom: 8px;
+      color: #25324a;
+      font-weight: 600;
+    }
+    .sea-footer-appicons {
+      display: flex;
+      gap: 11px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .sea-footer-appicon {
+      height: 36px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(34,48,80,0.03);
+      padding: 2.5px 7px;
+    }
+    .sea-footer-chrome { height: 34px; }
+    .sea-footer-social {
+      flex: 1 1 210px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .sea-footer-socialtitle {
+      font-size: 1.01rem;
+      margin-bottom: 8px;
+      color: #25324a;
+      font-weight: 600;
+    }
+    .sea-footer-socialicons a {
+      margin: 0 6px;
+      font-size: 2.1rem;
+      color: #25324a;
+      transition: color .2s;
+    }
+    .sea-footer-socialicons a:hover {
+      color: #25D366;
+    }
+    .sea-footer-divider {
+      border: none;
+      border-top: 1.2px solid #e0dfdf;
+      margin: 26px auto 18px auto;
+      width: 96%;
+      max-width: 1200px;
+    }
+    .sea-footer-links {
+      max-width: 1200px;
+      margin: 0 auto 18px auto;
+      display: flex;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 0 18px;
+    }
+    .sea-footer-col {
+      flex: 1 1 160px;
+      min-width: 150px;
+      margin-bottom: 18px;
+    }
+    .sea-footer-coltitle {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #25324a;
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+    .sea-footer-col a {
+      display: block;
+      color: #223050;
+      font-size: .99rem;
+      text-decoration: none;
+      margin-bottom: 6px;
+      transition: color .2s;
+    }
+    .sea-footer-col a:hover {
+      color: #25D366;
+      text-decoration: underline;
+    }
+    .sea-footer-trustpilot {
+      display: flex;
+      align-items: center;
+      margin-top: 12px;
+      gap: 8px;
+    }
+    .sea-footer-trusticon {
+      width: 65px;
+      height: 18px;
+      object-fit: contain;
+    }
+    .sea-footer-trustscore {
+      font-size: .99rem;
+      color: #25D366;
+      font-weight: 700;
+    }
+    .sea-footer-reviews {
+      font-size: .92rem;
+      color: #25324a;
+    }
+    .sea-footer-copy {
+      color: #b0a692;
+      font-size: .97rem;
+      text-align: center;
+      margin-top: 6px;
+      padding-bottom: 3px;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 900px) {
+      .sea-footer-top, .sea-footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        text-align: center;
+      }
+      .sea-footer-col {
+        min-width: 190px;
+        margin-bottom: 12px;
+      }
+      .sea-footer-brand, .sea-footer-apps, .sea-footer-social {
+        justify-content: center;
+      }
+    }
+    @media (max-width: 650px) {
+      .sea-footer {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .sea-footer-links, .sea-footer-top {
+        padding: 0 4vw;
+      }
+      .sea-footer-col {
+        min-width: 140px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -503,6 +693,80 @@
       </div>
     </section>
   </div>
+  <!-- FOOTER -->
+  <footer class="sea-footer">
+    <div class="sea-footer-top">
+      <div class="sea-footer-brand">
+        <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" alt="SEA Express" class="sea-footer-logo">
+        <span class="sea-footer-brandtext">SEA Express</span>
+        <span class="sea-footer-trust">es confiable</span>
+      </div>
+      <div class="sea-footer-apps">
+        <div class="sea-footer-appstitle">Próximamente en</div>
+        <div class="sea-footer-appicons">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="sea-footer-appicon">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_ES.svg" alt="Google Play" class="sea-footer-appicon">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome extension" class="sea-footer-appicon sea-footer-chrome">
+        </div>
+      </div>
+      <div class="sea-footer-social">
+        <div class="sea-footer-socialtitle">Síguenos en:</div>
+        <div class="sea-footer-socialicons">
+          <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr class="sea-footer-divider">
+    <div class="sea-footer-links">
+      <div class="sea-footer-col">
+        <div class="sea-footer-coltitle">La compañía</div>
+        <a href="#">Servicios</a>
+        <a href="#">Opiniones de los usuarios</a>
+        <a href="#">Términos de Uso</a>
+        <a href="#">Información legal</a>
+        <a href="#">Noticias</a>
+      </div>
+      <div class="sea-footer-col">
+        <div class="sea-footer-coltitle">Información</div>
+        <a href="#">Preguntas frecuentes</a>
+        <a href="#">Cómo funciona</a>
+        <a href="#">Tiendas populares</a>
+        <a href="#">Compras Asistidas</a>
+        <a href="#">Seguro</a>
+        <a href="#">Lista de productos prohibidos</a>
+      </div>
+      <div class="sea-footer-col">
+        <div class="sea-footer-coltitle">Personal útil</div>
+        <a href="#">Calculadora SEA Express</a>
+        <a href="#">Opciones de pago</a>
+        <a href="#">Seguimiento de envío</a>
+        <a href="#">Soporte 24/7</a>
+      </div>
+      <div class="sea-footer-col">
+        <div class="sea-footer-coltitle">Cooperación</div>
+        <a href="#">Contacto</a>
+        <a href="#">Programa de referidos</a>
+        <a href="#">Oferta para mayoristas</a>
+        <a href="#">SEA Express Logistics</a>
+        <div class="sea-footer-trustpilot">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Trustpilot_logo.png" alt="Trustpilot" class="sea-footer-trusticon">
+          <div>
+            <span class="sea-footer-trustscore">TrustScore <b>4.8</b></span><br>
+            <span class="sea-footer-reviews">Reviews <b>210</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sea-footer-copy">
+      © 2025 SEA Express. Todos los derechos reservados.
+    </div>
+  </footer>
+  <!-- /FOOTER -->
   <script>
     function switchTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(content => {
