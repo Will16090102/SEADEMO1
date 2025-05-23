@@ -3,645 +3,486 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEA EXPRESS - Cotiza tu envío USA-Perú</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <title>SEA Express - Calculadora de Envíos</title>
+  <meta name="description" content="Cotiza tu envío USA-Perú fácil y rápido con SEA Express. Envíos seguros, soporte 24/7, experiencia garantizada.">
+  <meta name="theme-color" content="#25324a">
+  <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
+  <!-- Google Fonts: Montserrat como sustituto visual -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
-      --azul-main: #202e45;
-      --azul-sec: #314366;
-      --gris-bg: #f8f5f0;
-      --gris-card: #f7fafd;
-      --gris-input: #f4f6fa;
-      --gris-borde: #e2e3ea;
-      --acento: #2ec4b6;
-      --verde: #1dd1a1;
-      --rojo: #ff3f34;
-      --blanco: #fff;
-      --sombra: 0 12px 44px 0 rgba(32,46,69,0.14), 0 2px 8px 0 rgba(49,67,102,0.04);
+      --azul-logo: #223050;
+      --azul-boton: #25324a;
+      --beige-fondo: #f7f1e7;
+      --gris-form: #f6f5f2;
+      --gris-borde: #e0dfdf;
+      --negro-texto: #1a2630;
+      --azul-icono: #25324a;
+      --azul-destacado: #223050;
+      --fuente: 'Montserrat', Arial, sans-serif;
     }
-    body {
-      background: var(--gris-bg);
-      min-height: 100vh;
+    html, body {
+      background: var(--beige-fondo);
       margin: 0;
-      font-family: 'Montserrat', Arial, sans-serif;
-      color: var(--azul-main);
-      box-sizing: border-box;
+      padding: 0;
+      color: var(--negro-texto);
+      font-family: var(--fuente);
+      min-height: 100vh;
+      scroll-behavior: smooth;
     }
     .main-container {
-      width: 100vw;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .logo-container {
-      margin: 48px 0 0 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .logo-img {
-      width: 110px;
-      max-width: 95vw;
-      height: auto;
-    }
-    .logo-text {
-      font-size: 1.09rem;
-      color: var(--azul-main);
-      font-weight: 600;
-      letter-spacing: 1.1px;
-      font-style: italic;
-      margin-top: 10px;
-      margin-bottom: 0;
+      max-width: 530px;
+      margin: 0 auto;
+      padding: 0 10px;
       text-align: center;
     }
-    .main-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.3rem;
-      font-weight: 700;
-      margin: 26px 0 8px 0;
-      color: var(--azul-main);
-      text-align: center;
-      letter-spacing: -1px;
-      line-height: 1.13;
-      animation: fadeInDown 1.2s;
+    .logo {
+      margin-top: 55px;
+      margin-bottom: 18px;
+    }
+    .logo img {
+      width: 97px;
+      height: 97px;
+      border-radius: 50%;
+      background: var(--azul-logo);
+      padding: 11px;
+      object-fit: contain;
+      box-shadow: 0 4px 20px rgba(34,48,80,0.05);
     }
     .subtitle {
-      font-size: 1.14rem;
-      color: var(--azul-sec);
-      margin-bottom: 32px;
-      font-weight: 500;
-      text-align: center;
+      font-size: 15px;
+      margin-bottom: 17px;
+      color: #25324a;
       letter-spacing: 0.01em;
-      animation: fadeInDown 1.4s;
+      font-weight: 500;
     }
-    /* Cards (calculadora + resumen) */
-    .zona-main {
-      width: 850px;
-      max-width: 99vw;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 32px;
-      margin: 35px auto 0 auto;
-      flex-wrap: wrap;
+    .sea-express-text {
+      font-family: var(--fuente);
+      font-weight: 700;
+      font-size: 2.1rem;
+      color: var(--azul-logo);
+      margin: 8px 0 0 0;
+      letter-spacing: 0.07em;
     }
-    .form-card, .card-resumen {
-      background: var(--blanco, #fff);
-      border-radius: 22px;
-      box-shadow: var(--sombra);
-      padding: 2.2rem 2.35rem 2.1rem 2.35rem;
-      width: 410px;
-      max-width: 98vw;
-      border: 1.6px solid var(--gris-borde);
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      transition: box-shadow 0.22s, border 0.18s;
+    .hero-title {
+      font-family: var(--fuente);
+      font-size: 2.19rem;
+      font-weight: 700;
+      margin: 13px 0 7px 0;
+      color: var(--azul-destacado);
+      line-height: 1.14;
+    }
+    .desc {
+      font-size: 1.08rem;
+      color: #4b4b4b;
+      margin-bottom: 32px;
+    }
+    .cotizador-box {
+      background: #fff;
+      box-shadow: 0 10px 42px 0 rgba(50,50,93,0.11);
+      border-radius: 27px;
+      padding: 34px 19px 28px 19px;
+      margin-bottom: 32px;
+      display: inline-block;
+      width: 100%;
+      max-width: 420px;
+      text-align: left;
       position: relative;
-      min-height: 430px;
-      animation: fadeInUp 0.9s cubic-bezier(.48,-0.01,.41,1.18);
     }
-    .form-card {
-      z-index: 2;
-      margin-bottom: 0;
-      border: 1.7px solid var(--acento);
-    }
-    .card-resumen {
-      z-index: 2;
-      border: 1.7px solid var(--azul-main);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(46px) scale(0.98);
-      animation: none;
-      transition: opacity 0.5s, transform 0.6s cubic-bezier(.48,-0.01,.41,1.18);
-      margin-bottom: 0;
-    }
-    .card-resumen.visible {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0) scale(1);
-      animation: fadeInUp 0.7s;
-    }
-    /* Tabs */
-    .tab-nav {
+    .tab-buttons {
       display: flex;
-      gap: 0;
-      margin-bottom: 1.6em;
-      border-bottom: 1.5px solid var(--gris-borde);
-      justify-content: flex-start;
+      gap: 10px;
+      margin-bottom: 29px;
+      justify-content: center;
     }
     .tab-btn {
-      font-weight: bold;
-      padding: 0.53em 1.85em;
+      background: none;
       border: none;
-      border-radius: 16px 16px 0 0;
-      background: transparent;
-      color: var(--azul-main);
-      font-size: 1.07em;
+      font-size: 1.07rem;
+      padding: 7px 26px;
+      border-radius: 16px;
+      font-weight: 600;
+      color: var(--azul-boton);
       cursor: pointer;
-      outline: none;
-      margin-right: 2px;
-      margin-bottom: -2px;
-      border-bottom: 3px solid transparent;
-      transition: all 0.22s;
-      position: relative;
-      z-index: 2;
+      letter-spacing: 0.01em;
+      transition: background .2s, color .2s;
     }
     .tab-btn.active {
-      background: var(--azul-main);
+      background: var(--azul-boton);
       color: #fff;
-      border-bottom: 3px solid var(--acento);
-      transform: translateY(2px) scale(1.04);
-      box-shadow: 0 4px 19px -6px rgba(32,46,69,0.07);
+      box-shadow: 0 2px 12px 0 rgba(34,48,80,0.08);
     }
-    .tab-btn:not(.active):hover {
-      background: #e8f6f5;
-      color: var(--azul-main);
+    .tab-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
     }
-    /* Inputs */
-    .form-card label {
+    .form-lbl {
+      font-size: 1.025rem;
       font-weight: 600;
-      font-size: 1.04em;
-      margin-bottom: 0.2em;
-      color: var(--azul-main);
-      margin-top: 0.3em;
-    }
-    .form-card input[type="number"], .form-card input[type="text"] {
-      width: 100%;
+      margin-bottom: 5px;
       display: block;
-      box-sizing: border-box;
-      padding: 1em;
-      font-size: 1.10em;
-      border: 1.6px solid var(--gris-borde);
-      border-radius: 10px;
-      background: var(--gris-input);
-      margin-top: 0.17em;
-      margin-bottom: 1.19em;
-      outline: none;
-      transition: border 0.22s, background 0.22s, box-shadow 0.21s;
-    }
-    .form-card input:focus {
-      border-color: var(--acento);
-      background: #fff;
-      box-shadow: 0 2px 12px 0 rgba(46,196,182,0.09);
-    }
-    /* Botón calcular */
-    .btn {
-      width: 100%;
-      background: var(--azul-main);
-      color: #fff;
-      font-weight: bold;
-      padding: 1.09em 0;
-      border: none;
-      border-radius: 12px;
-      margin-top: 0.65em;
-      font-size: 1.15em;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      transition: background 0.23s, box-shadow 0.18s, transform 0.18s;
-      box-shadow: 0 2px 10px rgba(32,46,69,0.10);
-      font-family: inherit;
-    }
-    .btn:active, .btn:focus, .btn:hover {
-      background: var(--azul-sec);
-      transform: scale(1.03) translateY(-1px);
-      box-shadow: 0 6px 18px -4px rgba(32,46,69,0.13);
-    }
-    /* Resumen de Cotización */
-    .result-title {
-      font-size: 1.22rem;
-      color: var(--azul-main);
-      font-weight: 700;
-      text-align: center;
+      color: var(--azul-destacado);
       letter-spacing: 0.01em;
-      margin-bottom: 1.1rem;
-      border-bottom: 1.5px solid var(--gris-borde);
-      padding-bottom: 0.6rem;
     }
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.65rem;
-      padding-bottom: 0.32rem;
-      border-bottom: 1px solid #f3eeee;
-      font-size: 1.04rem;
-      color: var(--azul-main);
-      font-family: 'Montserrat', Arial, sans-serif;
-      font-weight: 600;
-    }
-    .result-item span {
-      font-weight: 400;
-    }
-    .highlight-box {
-      background: #f2fbfa;
-      border-radius: 10px;
-      padding: 0.85rem 0.7rem;
-      margin: 1.05rem 0 0.7rem 0;
-      border: 1.2px solid var(--acento);
-      text-align: center;
-    }
-    .highlight-title {
-      color: var(--azul-sec);
-      font-size: 1.09rem;
-      font-weight: 600;
-    }
-    .highlight-value {
-      font-size: 1.38rem;
-      color: var(--acento);
-      font-weight: bold;
-      letter-spacing: 0.01em;
-      margin-top: 0.2em;
-    }
-    .whatsapp-btn {
-      background: var(--verde);
-      color: white;
-      border: none;
-      padding: 1.07rem 0;
+    .form-inp {
       width: 100%;
-      border-radius: 11px;
-      font-size: 1.09rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.24s, box-shadow 0.27s, transform 0.28s;
-      margin-top: 1.05rem;
-      margin-bottom: 0.15rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 3px 16px 0 rgba(46, 196, 182, 0.10);
-      outline: none;
-    }
-    .whatsapp-btn:active, .whatsapp-btn:focus, .whatsapp-btn:hover {
-      background: #12b894;
-      outline: 2px solid #12b894;
-      outline-offset: 2px;
-      transform: scale(1.08) rotate(-2deg);
-      box-shadow: 0 7px 24px rgba(46, 196, 182, 0.14);
-    }
-    .whatsapp-btn i {
-      font-size: 1.3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-    }
-    /* Botón cerrar */
-    .cerrar-btn {
-      background: var(--azul-sec);
-      margin-top: 1.4em;
-      font-weight: 700;
-      font-size: 1.07em;
-      border-radius: 12px;
-      border: none;
-    }
-    .cerrar-btn:hover, .cerrar-btn:focus {
-      background: var(--azul-main);
-    }
-    /* Testimonio */
-    .testimonio {
-      margin: 38px auto 0 auto;
-      max-width: 600px;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.23rem;
-      font-style: italic;
-      text-align: center;
-      color: var(--azul-main);
-      animation: fadeInUp 1.2s 0.2s backwards;
-      font-weight: 400;
-    }
-    .testimonio strong {
-      display: block;
-      margin-top: 8px;
-      font-family: 'Montserrat', Arial, sans-serif;
-      font-style: normal;
-      font-size: 1.01rem;
-      font-weight: 700;
-      color: var(--azul-main);
-    }
-    /* Features */
-    .features-row {
-      width: 100%;
-      max-width: 900px;
-      margin: 39px auto 28px auto;
-      display: flex;
-      gap: 27px;
-      justify-content: center;
-      align-items: stretch;
-      flex-wrap: wrap;
-      font-family: 'Montserrat', Arial, sans-serif;
-    }
-    .feature-card {
-      min-width: 230px;
-      max-width: 300px;
-      flex: 1 1 220px;
-      background: var(--blanco, #fff);
+      padding: 11px 14px;
+      border: 1.5px solid var(--gris-borde);
       border-radius: 13px;
-      padding: 20px 14px 18px 14px;
-      box-shadow: 0 2px 12px rgba(49,67,102,0.08);
-      text-align: left;
-      border: 1.2px solid var(--gris-borde);
+      margin-bottom: 19px;
+      font-size: 1.07rem;
+      background: var(--gris-form);
+      color: var(--azul-destacado);
+      font-family: var(--fuente);
+      box-sizing: border-box;
+      outline: none;
+      transition: border .2s;
+    }
+    .form-inp:focus {
+      border: 1.5px solid var(--azul-boton);
+      background: #fff;
+    }
+    .submit-btn {
+      width: 100%;
+      background: var(--azul-boton);
+      color: #fff;
+      font-size: 1.13rem;
+      font-weight: 700;
+      padding: 13px 0;
+      border: none;
+      border-radius: 12px;
+      margin-top: 7px;
+      margin-bottom: 0;
+      cursor: pointer;
+      transition: background .2s;
+      box-shadow: 0 2px 16px 0 rgba(34,48,80,0.07);
+      letter-spacing:0.03em;
+    }
+    .submit-btn:hover, .submit-btn:focus {
+      background: var(--azul-logo);
+    }
+    .resultado-cotizador {
+      margin-top: 22px;
+      font-weight: 600;
+      color: var(--azul-logo);
+      font-size: 1.13rem;
+      text-align: center;
+      background: #f7f1e7;
+      border-radius: 13px;
+      padding: 14px 8px;
+      box-shadow: 0 3px 16px 0 rgba(50,50,93,0.07);
+      min-height: 24px;
+    }
+    .testimonial {
+      font-style: italic;
+      color: var(--azul-logo);
+      margin: 36px auto 14px auto;
+      font-size: 1.09rem;
+      max-width: 450px;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .testimonial strong {
+      display: block;
+      margin-top: 12px;
+      font-style: normal;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--azul-boton);
+    }
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 38px;
+      margin: 36px auto 0 auto;
+      flex-wrap: wrap;
+      max-width: 900px;
+    }
+    .feature {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      transition: box-shadow 0.20s, border 0.17s;
-      font-size: 1.04rem;
-      margin-bottom: 10px;
-    }
-    .feature-card:hover {
-      box-shadow: 0 8px 30px rgba(49,67,102,0.13);
-      border-color: var(--acento);
-    }
-    .feature-icon {
-      font-size: 1.6rem;
-      color: var(--azul-main);
-      margin-bottom: 7px;
-      margin-top: 2px;
-      display: inline-block;
-      width: 28px;
+      align-items: center;
+      max-width: 200px;
+      font-family: var(--fuente);
       text-align: center;
     }
+    .feature-icon {
+      background: none;
+      color: var(--azul-icono);
+      border-radius: 13px;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      border: 2px solid var(--azul-icono);
+      box-sizing: border-box;
+    }
     .feature-title {
-      font-size: 1.07rem;
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+      color: var(--azul-boton);
+      letter-spacing: 0.01em;
+    }
+    .feature-desc {
+      font-size: 0.98rem;
+      color: #444b59;
+      margin-bottom: 0;
+      margin-top: 1px;
+      font-weight: 400;
+    }
+    footer {
+      background: var(--beige-fondo);
+      color: var(--azul-logo);
+      border: none;
+      margin-top: 60px;
+      font-family: var(--fuente);
+      border-top: 2.5px solid var(--azul-logo);
+    }
+    .footer-main {
+      max-width:1200px; 
+      margin:auto; 
+      padding:36px 12px 10px 12px; 
+      display:flex; 
+      flex-wrap:wrap; 
+      justify-content:space-between; 
+      gap:16px;
+    }
+    .footer-col {
+      flex:1 1 220px; 
+      min-width:180px; 
+      max-width:300px;
+      margin-bottom: 12px;
+    }
+    .footer-title {
+      font-size:1.13rem;
+      color: var(--azul-boton);
+      letter-spacing:0.03em;
       font-weight: bold;
-      margin-bottom: 3px;
-      color: var(--azul-main);
+      margin-bottom: 8px;
     }
-    .feature-text {
-      font-size: 1.01rem;
-      color: #222;
-      margin: 0;
-      line-height: 1.32;
-      font-family: 'Montserrat', Arial, sans-serif;
-      font-weight: 500;
+    .footer-col ul {
+      list-style:none;
+      padding:0;
+      margin:8px 0 0 0;
+      font-size:1rem;
+      color:var(--azul-logo);
     }
-    /* Animaciones */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(38px);}
-      to   { opacity: 1; transform: translateY(0);}
+    .footer-col ul li {
+      margin-bottom: 2px;
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-32px);}
-      to   { opacity: 1; transform: translateY(0);}
+    .footer-contact {
+      color: #25D366;
+      font-weight: 700;
+      font-size: 1rem;
     }
-    /* Responsive */
-    @media (max-width: 1100px) {
-      .zona-main {
-        flex-direction: column;
-        align-items: center;
-        gap: 28px;
-        width: 98vw;
-      }
-      .form-card, .card-resumen {
-        width: 97vw;
-        min-width: unset;
-        max-width: 99vw;
-      }
+    .footer-office {
+      font-weight:bold; 
+      margin:5px 0 2px 0;
+      font-size:1rem;
+      color: var(--azul-logo);
     }
-    @media (max-width: 700px) {
-      .main-title { font-size: 1.19rem; }
-      .form-card, .card-resumen { padding: 1.2rem 0.7rem; }
-      .features-row { gap: 13px; }
-      .feature-card { min-width: 90vw; }
+    .footer-bottom-bar {
+      border-top:1px solid #ddd; 
+      margin-top:18px; 
+      padding:10px 12px 0 12px; 
+      display:flex; 
+      flex-wrap:wrap; 
+      align-items:center; 
+      justify-content:space-between; 
+      max-width:1200px; 
+      margin-left:auto; 
+      margin-right:auto;
+      font-size:0.98rem;
+      background: var(--beige-fondo);
+    }
+    .footer-bottom-bar a {
+      color: var(--azul-logo);
+      text-decoration: none;
+      font-weight: 700;
+      margin-right: 10px;
+      font-size: 1.3rem;
+    }
+    .footer-bottom-bar a:hover {
+      color: var(--azul-boton);
+    }
+    .footer-logos img {
+      height:28px;
+      margin-left:10px;
+      vertical-align:middle;
+      opacity:.88;
+    }
+    .footer-logos {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.97rem;
+      color: var(--azul-logo);
+    }
+    .footer-social {
+      border-top: 1px solid #c9c9c9;
+      border-bottom: 1px solid #c9c9c9;
+      text-align: center;
+      padding: 18px 0 13px 0;
+      margin: 0 0 0 0;
+    }
+    .footer-social i {
+      font-size: 1.5rem;
+      margin: 0 18px;
+      color: var(--azul-boton);
+      transition: color 0.25s, transform 0.20s;
+      cursor: pointer;
+    }
+    .footer-social i:hover, .footer-social i:focus {
+      color: var(--azul-logo);
+      transform: scale(1.2) rotate(-8deg);
+      outline: 2px solid var(--azul-logo);
+      outline-offset: 2px;
+    }
+    @media (max-width: 650px) {
+      .main-container { max-width: 100%; }
+      .cotizador-box { max-width: 100%; }
+      .features { flex-direction: column; align-items: center; gap: 18px; }
+      .footer-main { padding: 20px 4px 8px 4px; }
+      .footer-col { min-width: 100px; max-width:100vw;}
+      .footer-bottom-bar { flex-direction: column; gap: 10px; text-align: center;}
     }
   </style>
 </head>
 <body>
   <div class="main-container">
-    <div class="logo-container">
-      <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" 
-           alt="Logo de SEA Express" 
-           class="logo-img" tabindex="0">
-      <div class="logo-text">Elígete y te acelera</div>
+    <div class="logo">
+      <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" alt="SEA EXPRESS Logo">
     </div>
-    <div class="main-title">
-      SEA EXPRESS <br>
-      Cotiza tu envío USA-<wbr>Perú en segundos
-    </div>
-    <div class="subtitle">
+    <div class="subtitle">Elígete y te ace</div>
+    <div class="sea-express-text">SEA EXPRESS</div>
+    <h1 class="hero-title">
+      Cotiza tu envío USA-<br>Perú en segundos
+    </h1>
+    <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
-    <!-- Formulario y Resumen -->
-    <div class="zona-main" id="zonaMain">
-      <!-- Formulario -->
-      <form class="form-card" autocomplete="off" onsubmit="event.preventDefault();mostrarResumen();">
-        <div class="tab-nav">
-          <button id="tab-manual" class="tab-btn active" type="button">Manual</button>
-          <button id="tab-enlace" class="tab-btn" type="button">Por enlace</button>
-        </div>
-        <div id="manual-content">
-          <label for="valor">Valor del producto (USD)</label>
-          <input type="number" id="valor" placeholder="Ej: 120" min="1">
-          <label for="peso">Peso del paquete (kg)</label>
-          <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
-          <label for="producto">Tipo de producto (opcional)</label>
-          <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-          <button class="btn" type="submit">Calcular mi envío</button>
-        </div>
-        <div id="enlace-content" style="display:none;">
-          <label for="enlace-producto">Enlace del producto</label>
-          <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
-          <button class="btn" type="button" onclick="calcularPorEnlace()">Calcular mi envío</button>
-        </div>
-      </form>
-      <!-- Resumen -->
-      <div class="card-resumen" id="resumenBox">
-        <div class="result-title">Resumen de Cotización</div>
-        <div class="result-item">
-          <span>Producto:</span>
-          <span id="valor-producto">-</span>
-        </div>
-        <div class="result-item">
-          <span>Valor del producto:</span>
-          <span id="valor-result">$0.00</span>
-        </div>
-        <div class="result-item">
-          <span>Peso:</span>
-          <span id="peso-result">0.00 kg</span>
-        </div>
-        <div class="result-item">
-          <span>Desaduanaje:</span>
-          <span id="desaduanaje">$8.00</span>
-        </div>
-        <div class="result-item">
-          <span>Costo de envío:</span>
-          <span id="costo-envio">$0.00</span>
-        </div>
-        <div class="result-item">
-          <span>Impuestos:</span>
-          <span id="impuestos">$0.00</span>
-        </div>
-        <div class="highlight-box">
-          <div class="highlight-title">Total envío</div>
-          <div class="highlight-value" id="envio-total">$0.00</div>
-        </div>
-        <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
-          <span style="font-size: 1.09rem;">Costo total:</span>
-          <span id="total" style="font-size: 1.09rem;">$0.00</span>
-        </div>
-        <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
-          <button class="whatsapp-btn" aria-label="Contactar por WhatsApp" style="width:100%;">
-            <i class="fab fa-whatsapp"></i>
-            <span>¡Quiero mi descuento especial!</span>
-          </button>
-        </a>
-        <button class="btn cerrar-btn" onclick="ocultarResumen()">Cerrar</button>
+    <div class="cotizador-box">
+      <div class="tab-buttons">
+        <button class="tab-btn active" id="manualTab" type="button">Manual</button>
+        <button class="tab-btn" disabled>Por enlace</button>
       </div>
+      <form id="calculator-form" autocomplete="off">
+        <label class="form-lbl" for="valor">Valor del producto (USD)</label>
+        <input class="form-inp" id="valor" name="valor" type="number" min="0" step="any" placeholder="Ejemplo: 120" required>
+        <label class="form-lbl" for="peso">Peso del paquete (kg)</label>
+        <input class="form-inp" id="peso" name="peso" type="number" min="0" step="any" placeholder="Ejemplo: 2.5" required>
+        <label class="form-lbl" for="tipo">Tipo de producto (opcional)</label>
+        <input class="form-inp" id="tipo" name="tipo" type="text" placeholder="Ejemplo: Ropa, Electrónica">
+        <button class="submit-btn" type="submit">Calcular mi envío</button>
+      </form>
+      <div id="resultado" class="resultado-cotizador"></div>
     </div>
-    <!-- Testimonio -->
-    <div class="testimonio" id="experiencias-box">
+    <div class="testimonial">
       “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
       <strong>—Carlos R.</strong>
     </div>
-    <!-- Features -->
-    <div class="features-row">
-      <div class="feature-card" tabindex="0" aria-label="Envío Express">
-        <span class="feature-icon"><i class="fas fa-shipping-fast"></i></span>
-        <span class="feature-title">Envío Express</span>
-        <span class="feature-text">Entrega en un plazo de 7-10 días hábiles.</span>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+        <div class="feature-title">Envío Express</div>
+        <div class="feature-desc">Entrego en 7-10 días hábiles.</div>
       </div>
-      <div class="feature-card" tabindex="0" aria-label="Envío Seguro">
-        <span class="feature-icon"><i class="fas fa-shield-alt"></i></span>
-        <span class="feature-title">Envío Seguro</span>
-        <span class="feature-text">Tu envío está protegido y asegurado.</span>
+      <div class="feature">
+        <div class="feature-icon"><i class="fab fa-apple"></i></div>
+        <div class="feature-title">Envío Seguro</div>
+        <div class="feature-desc">Tu envío está protegido y asegurado.</div>
       </div>
-      <div class="feature-card" tabindex="0" aria-label="Soporte 24/7">
-        <span class="feature-icon"><i class="fas fa-headset"></i></span>
-        <span class="feature-title">Soporte 24/7</span>
-        <span class="feature-text">Asistencia disponible en cualquier momento.</span>
+      <div class="feature">
+        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+        <div class="feature-title">Soporte 24/7</div>
+        <div class="feature-desc">Asistencia disponible en cualquier momento.</div>
       </div>
     </div>
   </div>
+  <footer>
+    <div class="footer-main">
+      <div class="footer-col">
+        <div class="footer-title">SOMOS SEA EXPRESS</div>
+        <div>Te conectamos con lo mejor de USA, para que compres lo que más te guste y recibas en Perú sin complicaciones. Nuestro servicio abre un mundo de oportunidades para tus compras y regalos.</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">SOPORTE</div>
+        <ul>
+          <li>Contacto</li>
+          <li>Calcula tu envío</li>
+          <li>Preguntas Frecuentes</li>
+          <li>Tarifas</li>
+          <li>VENTA1@SEAGROUPPERU.COM</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">ENVÍOS A NIVEL NACIONAL</div>
+        <div style="display:flex; gap:18px; margin-top:8px; justify-content:center;">
+          <ul>
+            <li>Lima Metropolitana</li>
+            <li>Arequipa</li>
+            <li>Trujillo</li>
+            <li>Piura</li>
+            <li>Chiclayo</li>
+          </ul>
+          <ul>
+            <li>Cusco</li>
+            <li>La Libertad</li>
+            <li>Junín</li>
+            <li>Lambayeque</li>
+            <li>Tacna</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-title">CONTACTO</div>
+        <div class="footer-contact"><a href="https://wa.me/51912140295" target="_blank" style="color:#222;text-decoration:none;"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:6px;"></i> WhatsApp: 912 140 295</a></div>
+        <div class="footer-office">OFICINA</div>
+        <div>AV. LOS PATRIOTAS 431, SAN MIGUEL, LIMA</div>
+        <div>Estados Unidos:<br>
+          7270 NW 35th Terrace Suite 602<br>
+          Miami, Florida 33122<br>
+          Tel: 786-628-8807
+        </div>
+      </div>
+    </div>
+    <div class="footer-social" aria-label="Redes sociales">
+      <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-square"></i></a>
+      <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="footer-bottom-bar">
+      <span>
+        Copyright &copy; 2025 SEA Express.<br>
+        Todos los Derechos Reservados | Site design by <a href="#">Sea Group</a>
+      </span>
+      <div class="footer-logos">
+        <span style="font-size:0.99rem;">Somos expertos en lo que hacemos</span>
+        <img src="https://www.wex.pe/wp-content/uploads/2022/09/logo-wex-logistica-integral.png" alt="WEX logística integral" loading="lazy">
+      </div>
+    </div>
+  </footer>
   <script>
-    // Tabs animados
-    document.getElementById('tab-manual').onclick = function() {
-      document.getElementById('manual-content').style.display = '';
-      document.getElementById('enlace-content').style.display = 'none';
-      this.classList.add('active');
-      document.getElementById('tab-enlace').classList.remove('active');
-    };
-    document.getElementById('tab-enlace').onclick = function() {
-      document.getElementById('manual-content').style.display = 'none';
-      document.getElementById('enlace-content').style.display = '';
-      this.classList.add('active');
-      document.getElementById('tab-manual').classList.remove('active');
-    };
-    // Testimonios animados
-    const experiencias = [
-      {
-        text: "¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.",
-        author: "Carlos R."
-      },
-      {
-        text: "Súper fácil de cotizar y recibir mis compras. El equipo responde rápido y todo llegó seguro.",
-        author: "Daniela P."
-      },
-      {
-        text: "Me encantó la rapidez y la atención personalizada. Seguiré usando SEA Express.",
-        author: "Luis G."
-      },
-      {
-        text: "Rápidos y confiables, el mejor servicio para traer cosas de USA a Perú.",
-        author: "Andrea V."
+    // Calculadora funcional: $20 por kilo + 10% del valor del producto
+    document.getElementById('calculator-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const valor = parseFloat(document.getElementById('valor').value);
+      const peso = parseFloat(document.getElementById('peso').value);
+      const tipo = document.getElementById('tipo').value;
+      let total = 0;
+      let mensaje = "";
+      if(!isNaN(valor) && !isNaN(peso) && peso > 0 && valor > 0){
+        // Ejemplo: $20 por kilo + 10% del valor del producto
+        total = (peso * 20) + (valor * 0.10);
+        mensaje = `Estimado de envío para <b>${tipo ? tipo : 'tu producto'}</b>:<br>
+        <span style="font-size:1.25rem;color:#25324a;font-weight:700;">$${total.toFixed(2)} USD</span>`;
+      } else {
+        mensaje = "<span style='color:#bd1823'>Por favor completa los campos requeridos correctamente.</span>";
       }
-    ];
-    let currentExp = 0;
-    function showExperiencia(idx) {
-      const t = experiencias[idx];
-      const box = document.getElementById("experiencias-box");
-      box.style.opacity = "0";
-      setTimeout(()=>{
-        box.innerHTML = `“${t.text}”<strong>—${t.author}</strong>`;
-        box.style.opacity = "1";
-      }, 320);
-    }
-    setInterval(function(){
-      currentExp = (currentExp + 1) % experiencias.length;
-      showExperiencia(currentExp);
-    }, 7000);
-    window.onload = function() {
-      showExperiencia(0);
-      ocultarResumen();
-    };
-
-    // Cálculo y resumen
-    let ultimaCotizacion = null;
-    function mostrarResumen() {
-      // Solo muestra el resumen si está en manual
-      if(document.getElementById('manual-content').style.display !== 'none') {
-        let peso = parseFloat(document.getElementById("peso").value);
-        const valor = parseFloat(document.getElementById("valor").value);
-        const producto = document.getElementById("producto").value;
-        if (isNaN(peso) || peso <= 0) {
-          alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
-          return;
-        }
-        if (isNaN(valor) || valor <= 0) {
-          alert("Por favor ingresa un valor declarado válido (mínimo $1)");
-          return;
-        }
-        if (peso < 1) peso = 1;
-        const desaduanaje = 8;
-        const costoPorKilo = 15;
-        let costoEnvio = peso * costoPorKilo;
-        if (costoEnvio < 12) costoEnvio = 12;
-        const envioTotal = costoEnvio + desaduanaje;
-        const impuestos = valor > 200 ? valor * 0.25 : 0;
-        const total = valor + envioTotal + impuestos;
-        ultimaCotizacion = {
-          tipo: "manual",
-          producto: producto,
-          peso: peso,
-          valor: valor,
-          desaduanaje: desaduanaje,
-          costoEnvio: costoEnvio,
-          envioTotal: envioTotal,
-          impuestos: impuestos,
-          total: total
-        };
-        document.getElementById("valor-producto").textContent = producto || "-";
-        document.getElementById("valor-result").textContent = `$${valor.toFixed(2)}`;
-        document.getElementById("peso-result").textContent = `${peso.toFixed(2)} kg`;
-        document.getElementById("desaduanaje").textContent = `$${desaduanaje.toFixed(2)}`;
-        document.getElementById("costo-envio").textContent = `$${costoEnvio.toFixed(2)}`;
-        document.getElementById("impuestos").textContent = `$${impuestos.toFixed(2)}`;
-        document.getElementById("envio-total").textContent = `$${envioTotal.toFixed(2)}`;
-        document.getElementById("total").textContent = `$${total.toFixed(2)}`;
-        actualizarEnlaceWhatsApp();
-        document.getElementById('resumenBox').classList.add('visible');
-      }
-    }
-    function ocultarResumen() {
-      document.getElementById('resumenBox').classList.remove('visible');
-    }
-    function actualizarEnlaceWhatsApp() {
-      if (!ultimaCotizacion) return;
-      let mensaje = "¡Hola SEA Express! 👋\n\nQuiero aprovechar mi *descuento especial* para este envío:\n\n";
-      if (ultimaCotizacion.tipo === "manual") {
-        mensaje += `📦 *Producto:* ${ultimaCotizacion.producto || "Sin descripción"}\n`;
-      }
-      mensaje += `💰 *Valor del producto:* $${ultimaCotizacion.valor.toFixed(2)}\n`;
-      mensaje += `⚖️ *Peso:* ${ultimaCotizacion.peso.toFixed(2)} kg\n`;
-      mensaje += `🚚 *Costo de envío:* $${ultimaCotizacion.costoEnvio.toFixed(2)}\n`;
-      mensaje += `🛃 *Desaduanaje:* $${ultimaCotizacion.desaduanaje.toFixed(2)}\n`;
-      mensaje += `💵 *Impuestos:* $${ultimaCotizacion.impuestos.toFixed(2)}\n`;
-      mensaje += `🔖 *Total envío:* $${ultimaCotizacion.envioTotal.toFixed(2)}\n`;
-      mensaje += `💲 *Costo total:* $${ultimaCotizacion.total.toFixed(2)}\n\n`;
-      mensaje += "¡Por favor contáctame para coordinar mi envío! 🚀";
-      const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensaje)}`;
-      document.getElementById("whatsapp-link").href = wspUrl;
-    }
-    function calcularPorEnlace() {
-      alert("Simulación de búsqueda por enlace. En versión real, se llenaría la calculadora con datos del enlace.");
-      document.getElementById('manual-content').style.display = '';
-      document.getElementById('enlace-content').style.display = 'none';
-      document.getElementById('tab-manual').classList.add('active');
-      document.getElementById('tab-enlace').classList.remove('active');
-    }
+      document.getElementById('resultado').innerHTML = mensaje;
+    });
   </script>
 </body>
 </html>
