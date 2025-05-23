@@ -4,17 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEA Express - Calculadora de Envíos</title>
-  <meta name="description" content="Cotiza tu envío USA-Perú fácil y rápido con SEA Express. Envíos seguros, soporte 24/7, experiencia garantizada.">
-  <meta name="theme-color" content="#23304b">
-  <link rel="icon" type="image/png" href="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
       background: #faf5ec;
       min-height: 100vh;
       margin: 0;
       font-family: 'Montserrat', Arial, sans-serif;
+      box-sizing: border-box;
     }
     .main-container {
       width: 100vw;
@@ -22,7 +19,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-bottom: 50px;
+      padding-bottom: 45px;
     }
     .logo-container {
       margin: 40px 0 8px 0;
@@ -63,18 +60,21 @@
       text-align: center;
       letter-spacing: 0.01em;
     }
-    /* Layout principal: calculadora y resumen simétricos */
+
+    /* CONTENEDOR DE AMBOS CUADROS */
     .zona-main {
       width: 950px;
-      max-width: 98vw;
+      max-width: 99vw;
+      min-height: 440px;
+      margin: 55px auto 0 auto;
       display: flex;
-      flex-direction: row;
       justify-content: center;
       align-items: flex-start;
       gap: 48px;
-      margin: 55px auto 0 auto;
-      min-height: 440px;
+      position: relative;
+      transition: gap 0.4s;
     }
+
     .card-calc, .card-resumen {
       width: 420px;
       min-width: 320px;
@@ -89,27 +89,44 @@
       flex-direction: column;
       align-items: stretch;
       justify-content: center;
-      transition: box-shadow 0.3s, transform 0.3s;
-      border: 2px solid #ece7df;
-      position: relative;
-    }
-    .card-calc {
       border: 2.2px solid #be1522;
-      box-shadow: 0 10px 38px 0 rgba(190,21,34,0.10);
-      animation: fadeInUp 0.7s;
+      /* Ocultar la transición para la calculadora al aparecer/disaparecer el resumen */
+      transition: box-shadow 0.3s, transform 0.3s, opacity 0.3s;
     }
+
     .card-resumen {
-      border: 2.2px solid #be1522;
-      box-shadow: 0 10px 38px 0 rgba(34,48,75,0.13);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(30px) scale(0.97);
+      transition: opacity 0.5s, transform 0.6s cubic-bezier(.48,-0.01,.41,1.18);
+      z-index: 2;
+    }
+    .card-resumen.visible {
       opacity: 1;
       pointer-events: auto;
+      transform: translateY(0) scale(1);
       animation: fadeInRight 0.7s;
     }
-    /* Responsive: apilar en móvil */
+
+    /* Solo la calculadora centrada cuando inicia */
+    .zona-main.solo-calc {
+      justify-content: center;
+    }
+    .zona-main.solo-calc .card-resumen {
+      display: none;
+    }
+    .zona-main.dos-cajas {
+      justify-content: center;
+    }
+    .zona-main.dos-cajas .card-resumen {
+      display: flex;
+    }
+
     @media (max-width: 950px) {
       .zona-main { flex-direction: column; align-items: center; gap: 28px; width: 98vw; }
       .card-calc, .card-resumen { width: 97vw; min-width: unset; }
     }
+
     /* Experiencias abajo y centradas */
     .experiencias-box {
       width: 420px;
@@ -123,7 +140,7 @@
       font-size: 1.23rem;
       color: #23304b;
       padding: 22px 22px 16px 22px;
-      margin: 60px auto 0 auto;
+      margin: 90px auto 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -325,8 +342,9 @@
     <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
+
     <!-- Zona principal: calculadora y resumen, simétricos -->
-    <div class="zona-main">
+    <div class="zona-main solo-calc" id="zonaMain">
       <!-- Calculadora -->
       <div class="card-calc" id="calculadoraBox">
         <div style="text-align:center;">
@@ -402,7 +420,8 @@
         <button class="btn cerrar-btn" onclick="ocultarResumen()">Cerrar</button>
       </div>
     </div>
-    <!-- Experiencias de usuarios, siempre abajo y centrado -->
+
+    <!-- Experiencias de usuarios, siempre más abajo y centrado -->
     <div class="experiencias-box" id="experiencias-box">
       “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
       <strong>—Carlos R.</strong>
@@ -444,7 +463,7 @@
       document.getElementById('tab-manual').style.background = '#fff';
       document.getElementById('tab-manual').style.color = '#be1522';
     };
-    // Experiencias
+    // Experiencias de usuarios
     const experiencias = [
       {
         text: "¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.",
@@ -481,6 +500,7 @@
       showExperiencia(0);
       ocultarResumen();
     };
+
     // Lógica calculadora y resumen
     let ultimaCotizacion = null;
     function mostrarResumen() {
@@ -523,9 +543,17 @@
       document.getElementById("envio-total").textContent = `$${envioTotal.toFixed(2)}`;
       document.getElementById("total").textContent = `$${total.toFixed(2)}`;
       actualizarEnlaceWhatsApp();
+
+      // Cambia el layout para mostrar ambos cuadros
+      document.getElementById('zonaMain').classList.remove('solo-calc');
+      document.getElementById('zonaMain').classList.add('dos-cajas');
+      document.getElementById('resumenBox').classList.add('visible');
     }
     function ocultarResumen() {
-      // limpia los campos de resumen si lo deseas
+      // Solo oculta el resumen, la calculadora queda visible y centrada
+      document.getElementById('zonaMain').classList.remove('dos-cajas');
+      document.getElementById('zonaMain').classList.add('solo-calc');
+      document.getElementById('resumenBox').classList.remove('visible');
     }
     function actualizarEnlaceWhatsApp() {
       if (!ultimaCotizacion) return;
