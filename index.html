@@ -393,109 +393,44 @@
       margin-top: 56px;
       border-top: 1.5px solid #e5e0d0;
     }
-    .sea-footer-top {
-      max-width: 1100px;
-      margin: 0 auto 20px auto;
+    .sea-footer-center {
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 18px;
-      padding: 0 18px;
-    }
-    .sea-footer-brand {
-      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 13px;
-      margin-bottom: 16px;
-      flex: 1 1 260px;
+      gap: 5px;
+      margin-bottom: 25px;
+      margin-top: 8px;
     }
-    .sea-footer-logo {
-      width: 52px;
-      height: 52px;
+    .sea-footer-logo-big {
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       background: #25324a;
       padding: 7px;
       border: 3.5px solid #fff;
       object-fit: contain;
       box-shadow: 0 4px 14px 0 rgba(34,48,80,0.08);
+      margin-bottom: 5px;
     }
-    .sea-footer-brandtext {
-      font-size: 1.14rem;
+    .sea-footer-confiable {
+      font-size: 1.2rem;
       font-weight: 700;
       color: #25324a;
       letter-spacing: 0.02em;
-    }
-    .sea-footer-trust {
-      font-size: .99rem;
-      color: #b59a4d;
-      font-weight: 600;
-      margin-left: 7px;
-    }
-    .sea-footer-apps {
       text-align: center;
-      flex: 1 1 290px;
-      margin-bottom: 12px;
-    }
-    .sea-footer-appstitle {
-      font-size: 1.01rem;
       margin-bottom: 8px;
-      color: #25324a;
-      font-weight: 600;
     }
-    .sea-footer-appicons {
+    .sea-footer-socialicons {
       display: flex;
-      gap: 11px;
       justify-content: center;
-      flex-wrap: wrap;
-    }
-    .sea-footer-appicon {
-      height: 36px;
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(34,48,80,0.03);
-      padding: 2.5px 7px;
-    }
-    .sea-footer-chrome { height: 34px; }
-    .sea-footer-whatsapp {
-      height: 36px;
-      background: #25D366;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2px 10px;
-      margin-left: 6px;
-      margin-right: 6px;
-    }
-    .sea-footer-whatsapp i {
-      font-size: 1.7rem;
-      color: #fff;
-      margin-right: 8px;
-    }
-    .sea-footer-whatsapp span {
-      color: #fff;
-      font-weight: 600;
-      font-size: 1.01rem;
-      font-family: 'Montserrat', Arial, sans-serif;
-      letter-spacing: 0.01em;
-    }
-    .sea-footer-social {
-      flex: 1 1 210px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .sea-footer-socialtitle {
-      font-size: 1.01rem;
-      margin-bottom: 8px;
-      color: #25324a;
-      font-weight: 600;
+      gap: 18px;
+      margin: 6px 0 12px 0;
     }
     .sea-footer-socialicons a {
-      margin: 0 6px;
-      font-size: 2.1rem;
-      color: #25324a;
+      font-size: 2.3rem;
+      color: #223050;
       transition: color .2s;
+      line-height: 1;
     }
     .sea-footer-socialicons a:hover {
       color: #25D366;
@@ -503,7 +438,7 @@
     .sea-footer-divider {
       border: none;
       border-top: 1.2px solid #e0dfdf;
-      margin: 26px auto 18px auto;
+      margin: 20px auto 18px auto;
       width: 96%;
       max-width: 1200px;
     }
@@ -550,7 +485,7 @@
       letter-spacing: 0.01em;
     }
     @media (max-width: 900px) {
-      .sea-footer-top, .sea-footer-links {
+      .sea-footer-links {
         flex-direction: column;
         align-items: center;
         gap: 7px;
@@ -560,27 +495,20 @@
         min-width: 190px;
         margin-bottom: 12px;
       }
-      .sea-footer-brand, .sea-footer-apps, .sea-footer-social {
-        justify-content: center;
-      }
     }
     @media (max-width: 650px) {
       .sea-footer {
         padding-left: 0;
         padding-right: 0;
       }
-      .sea-footer-links, .sea-footer-top {
+      .sea-footer-links {
         padding: 0 4vw;
       }
       .sea-footer-col {
         min-width: 140px;
       }
-      .sea-footer-appicons, .sea-footer-socialicons {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .sea-footer-appicon, .sea-footer-whatsapp {
-        margin-bottom: 8px;
+      .sea-footer-socialicons {
+        gap: 12px;
       }
     }
   </style>
@@ -705,34 +633,16 @@
   </div>
   <!-- FOOTER -->
   <footer class="sea-footer">
-    <div class="sea-footer-top">
-      <div class="sea-footer-brand">
-        <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" alt="SEA Express" class="sea-footer-logo">
-        <span class="sea-footer-brandtext">SEA Express</span>
-        <span class="sea-footer-trust">es confiable</span>
-      </div>
-      <div class="sea-footer-apps">
-        <div class="sea-footer-appstitle">Próximamente en</div>
-        <div class="sea-footer-appicons">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/App_Store_%28iOS%29.svg" alt="App Store" class="sea-footer-appicon">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_ES.svg" alt="Google Play" class="sea-footer-appicon">
-          <span class="sea-footer-whatsapp">
-            <i class="fab fa-whatsapp"></i>
-            <span>WhatsApp</span>
-          </span>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome extension" class="sea-footer-appicon sea-footer-chrome">
-        </div>
-      </div>
-      <div class="sea-footer-social">
-        <div class="sea-footer-socialtitle">Síguenos en:</div>
-        <div class="sea-footer-socialicons">
-          <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </div>
+    <div class="sea-footer-center">
+      <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" alt="SEA Express" class="sea-footer-logo-big">
+      <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
+      <div class="sea-footer-socialicons">
+        <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
       </div>
     </div>
     <hr class="sea-footer-divider">
