@@ -3,15 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEA Express - Calculadora de Envíos</title>
+  <title>SEA EXPRESS - Cotiza tu envío USA-Perú</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
+    :root {
+      --azul-main: #202e45;
+      --azul-sec: #314366;
+      --gris-bg: #f8f5f0;
+      --gris-card: #f7fafd;
+      --gris-input: #f4f6fa;
+      --gris-borde: #e2e3ea;
+      --acento: #2ec4b6;
+      --verde: #1dd1a1;
+      --rojo: #ff3f34;
+      --blanco: #fff;
+      --sombra: 0 12px 44px 0 rgba(32,46,69,0.14), 0 2px 8px 0 rgba(49,67,102,0.04);
+    }
     body {
-      background: #faf5ec;
+      background: var(--gris-bg);
       min-height: 100vh;
       margin: 0;
       font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--azul-main);
       box-sizing: border-box;
     }
     .main-container {
@@ -20,10 +34,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-bottom: 45px;
     }
     .logo-container {
-      margin: 40px 0 8px 0;
+      margin: 48px 0 0 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -32,185 +45,190 @@
       width: 110px;
       max-width: 95vw;
       height: auto;
-      margin-bottom: 6px;
     }
     .logo-text {
-      font-size: 1.03rem;
-      color: #23304b;
-      font-weight: 700;
+      font-size: 1.09rem;
+      color: var(--azul-main);
+      font-weight: 600;
       letter-spacing: 1.1px;
       font-style: italic;
+      margin-top: 10px;
       margin-bottom: 0;
       text-align: center;
     }
-    h1 {
+    .main-title {
       font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
+      font-size: 2.3rem;
       font-weight: 700;
-      margin: 10px 0 10px 0;
-      color: #be1522;
-      line-height: 1.11;
+      margin: 26px 0 8px 0;
+      color: var(--azul-main);
       text-align: center;
       letter-spacing: -1px;
+      line-height: 1.13;
+      animation: fadeInDown 1.2s;
     }
-    .desc {
-      font-size: 1.1rem;
-      color: #23304b;
-      margin-bottom: 30px;
+    .subtitle {
+      font-size: 1.14rem;
+      color: var(--azul-sec);
+      margin-bottom: 32px;
       font-weight: 500;
       text-align: center;
       letter-spacing: 0.01em;
+      animation: fadeInDown 1.4s;
     }
-
-    /* CONTENEDOR DE AMBOS CUADROS */
+    /* Cards (calculadora + resumen) */
     .zona-main {
-      width: 950px;
+      width: 850px;
       max-width: 99vw;
-      min-height: 440px;
-      margin: 55px auto 0 auto;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      gap: 44px;
-      position: relative;
-      transition: gap 0.4s;
+      gap: 32px;
+      margin: 35px auto 0 auto;
+      flex-wrap: wrap;
     }
-
-    .card-calc, .card-resumen {
-      width: 420px;
-      min-width: 320px;
-      max-width: 100%;
-      min-height: 430px;
-      height: 100%;
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 6px 32px 0 rgba(190,21,34,0.09), 0 2px 8px 0 rgba(34,48,75,0.06);
-      padding: 2rem 2rem 2rem 2rem;
+    .form-card, .card-resumen {
+      background: var(--blanco, #fff);
+      border-radius: 22px;
+      box-shadow: var(--sombra);
+      padding: 2.2rem 2.35rem 2.1rem 2.35rem;
+      width: 410px;
+      max-width: 98vw;
+      border: 1.6px solid var(--gris-borde);
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      justify-content: flex-start;
-      border: 1.7px solid #be1522;
+      transition: box-shadow 0.22s, border 0.18s;
+      position: relative;
+      min-height: 430px;
+      animation: fadeInUp 0.9s cubic-bezier(.48,-0.01,.41,1.18);
     }
-
-    .card-calc {
-      border: 1.7px solid #be1522;
+    .form-card {
+      z-index: 2;
+      margin-bottom: 0;
+      border: 1.7px solid var(--acento);
     }
     .card-resumen {
-      border: 1.7px solid #be1522;
+      z-index: 2;
+      border: 1.7px solid var(--azul-main);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(46px) scale(0.98);
+      animation: none;
+      transition: opacity 0.5s, transform 0.6s cubic-bezier(.48,-0.01,.41,1.18);
+      margin-bottom: 0;
+    }
+    .card-resumen.visible {
       opacity: 1;
       pointer-events: auto;
-      transform: none;
-      z-index: 2;
-      display: flex;
-      margin-top: 0;
+      transform: translateY(0) scale(1);
+      animation: fadeInUp 0.7s;
     }
-
     /* Tabs */
     .tab-nav {
       display: flex;
-      margin-bottom: 1.3em;
       gap: 0;
-      border-bottom: 1.5px solid #ece7df;
+      margin-bottom: 1.6em;
+      border-bottom: 1.5px solid var(--gris-borde);
       justify-content: flex-start;
     }
     .tab-btn {
       font-weight: bold;
-      padding: 0.6em 2.2em;
+      padding: 0.53em 1.85em;
       border: none;
-      border-radius: 10px 10px 0 0;
-      background: #fff;
-      color: #be1522;
-      font-size: 1.02em;
+      border-radius: 16px 16px 0 0;
+      background: transparent;
+      color: var(--azul-main);
+      font-size: 1.07em;
       cursor: pointer;
       outline: none;
       margin-right: 2px;
+      margin-bottom: -2px;
       border-bottom: 3px solid transparent;
-      transition: all 0.2s;
-    }
-    .tab-btn.active {
-      background: #be1522;
-      color: #fff;
-      border-bottom: 3px solid #be1522;
+      transition: all 0.22s;
+      position: relative;
       z-index: 2;
     }
-
+    .tab-btn.active {
+      background: var(--azul-main);
+      color: #fff;
+      border-bottom: 3px solid var(--acento);
+      transform: translateY(2px) scale(1.04);
+      box-shadow: 0 4px 19px -6px rgba(32,46,69,0.07);
+    }
+    .tab-btn:not(.active):hover {
+      background: #e8f6f5;
+      color: var(--azul-main);
+    }
     /* Inputs */
-    .card-calc label {
-      font-weight: 700;
+    .form-card label {
+      font-weight: 600;
       font-size: 1.04em;
       margin-bottom: 0.2em;
-      color: #222;
+      color: var(--azul-main);
+      margin-top: 0.3em;
     }
-    .card-calc input[type="number"], .card-calc input[type="text"] {
+    .form-card input[type="number"], .form-card input[type="text"] {
       width: 100%;
       display: block;
       box-sizing: border-box;
       padding: 1em;
-      font-size: 1.09em;
-      border: 1.5px solid #e3e3e3;
+      font-size: 1.10em;
+      border: 1.6px solid var(--gris-borde);
       border-radius: 10px;
-      background: #f7f8fa;
-      margin-top: 0.35em;
-      margin-bottom: 1em;
+      background: var(--gris-input);
+      margin-top: 0.17em;
+      margin-bottom: 1.19em;
       outline: none;
-      transition: border 0.18s;
+      transition: border 0.22s, background 0.22s, box-shadow 0.21s;
     }
-    .card-calc input:focus {
-      border-color: #be1522;
+    .form-card input:focus {
+      border-color: var(--acento);
       background: #fff;
+      box-shadow: 0 2px 12px 0 rgba(46,196,182,0.09);
     }
-
     /* Botón calcular */
     .btn {
       width: 100%;
-      background: #be1522;
+      background: var(--azul-main);
       color: #fff;
       font-weight: bold;
-      padding: 1.08em 0;
+      padding: 1.09em 0;
       border: none;
       border-radius: 12px;
-      margin-top: 0.7em;
-      font-size: 1.13em;
+      margin-top: 0.65em;
+      font-size: 1.15em;
+      letter-spacing: 0.02em;
       cursor: pointer;
-      transition: background 0.23s, box-shadow 0.18s;
-      box-shadow: 0 2px 10px rgba(190,21,34,0.12);
+      transition: background 0.23s, box-shadow 0.18s, transform 0.18s;
+      box-shadow: 0 2px 10px rgba(32,46,69,0.10);
+      font-family: inherit;
     }
-    .btn:active, .btn:focus, .btn:hover { background: #a5111d; }
-
-    /* Botón cerrar */
-    .cerrar-btn {
-      background: #23304b;
-      margin-top: 1.4em;
-      font-weight: 700;
-      font-size: 1.07em;
-      border-radius: 12px;
+    .btn:active, .btn:focus, .btn:hover {
+      background: var(--azul-sec);
+      transform: scale(1.03) translateY(-1px);
+      box-shadow: 0 6px 18px -4px rgba(32,46,69,0.13);
     }
-    .cerrar-btn:hover, .cerrar-btn:focus {
-      background: #1a2339;
-    }
-
     /* Resumen de Cotización */
     .result-title {
-      font-size: 1.25rem;
-      color: #be1522;
+      font-size: 1.22rem;
+      color: var(--azul-main);
       font-weight: 700;
       text-align: center;
       letter-spacing: 0.01em;
-      font-family: 'Montserrat', Arial, sans-serif;
       margin-bottom: 1.1rem;
-      border-bottom: 1.5px solid #ece7df;
+      border-bottom: 1.5px solid var(--gris-borde);
       padding-bottom: 0.6rem;
     }
     .result-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.7rem;
-      padding-bottom: 0.35rem;
+      margin-bottom: 0.65rem;
+      padding-bottom: 0.32rem;
       border-bottom: 1px solid #f3eeee;
-      font-size: 1.09rem;
-      color: #222;
+      font-size: 1.04rem;
+      color: var(--azul-main);
       font-family: 'Montserrat', Arial, sans-serif;
       font-weight: 600;
     }
@@ -218,27 +236,27 @@
       font-weight: 400;
     }
     .highlight-box {
-      background: #f6f6f6;
+      background: #f2fbfa;
       border-radius: 10px;
-      padding: 0.9rem 0.7rem;
-      margin: 1.15rem 0 0.9rem 0;
-      border: 1.2px solid #ebe1e1;
+      padding: 0.85rem 0.7rem;
+      margin: 1.05rem 0 0.7rem 0;
+      border: 1.2px solid var(--acento);
       text-align: center;
     }
     .highlight-title {
-      color: #be1522;
-      font-size: 1.08rem;
+      color: var(--azul-sec);
+      font-size: 1.09rem;
       font-weight: 600;
     }
     .highlight-value {
-      font-size: 1.45rem;
-      color: #be1522;
+      font-size: 1.38rem;
+      color: var(--acento);
       font-weight: bold;
       letter-spacing: 0.01em;
       margin-top: 0.2em;
     }
     .whatsapp-btn {
-      background: #25D366;
+      background: var(--verde);
       color: white;
       border: none;
       padding: 1.07rem 0;
@@ -254,52 +272,141 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 3px 16px 0 rgba(37,211,102,0.12);
+      box-shadow: 0 3px 16px 0 rgba(46, 196, 182, 0.10);
       outline: none;
-      animation: popWsp 1.3s cubic-bezier(.48,-0.01,.41,1.18);
     }
     .whatsapp-btn:active, .whatsapp-btn:focus, .whatsapp-btn:hover {
-      background: #128C7E;
-      outline: 2px solid #128C7E;
+      background: #12b894;
+      outline: 2px solid #12b894;
       outline-offset: 2px;
       transform: scale(1.08) rotate(-2deg);
-      box-shadow: 0 7px 24px rgba(37,211,102,0.16);
+      box-shadow: 0 7px 24px rgba(46, 196, 182, 0.14);
     }
     .whatsapp-btn i {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       display: flex;
       align-items: center;
       justify-content: center;
       line-height: 1;
-      animation: pulseWsp 1.6s infinite;
     }
-
+    /* Botón cerrar */
+    .cerrar-btn {
+      background: var(--azul-sec);
+      margin-top: 1.4em;
+      font-weight: 700;
+      font-size: 1.07em;
+      border-radius: 12px;
+      border: none;
+    }
+    .cerrar-btn:hover, .cerrar-btn:focus {
+      background: var(--azul-main);
+    }
+    /* Testimonio */
+    .testimonio {
+      margin: 38px auto 0 auto;
+      max-width: 600px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.23rem;
+      font-style: italic;
+      text-align: center;
+      color: var(--azul-main);
+      animation: fadeInUp 1.2s 0.2s backwards;
+      font-weight: 400;
+    }
+    .testimonio strong {
+      display: block;
+      margin-top: 8px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-style: normal;
+      font-size: 1.01rem;
+      font-weight: 700;
+      color: var(--azul-main);
+    }
+    /* Features */
+    .features-row {
+      width: 100%;
+      max-width: 900px;
+      margin: 39px auto 28px auto;
+      display: flex;
+      gap: 27px;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .feature-card {
+      min-width: 230px;
+      max-width: 300px;
+      flex: 1 1 220px;
+      background: var(--blanco, #fff);
+      border-radius: 13px;
+      padding: 20px 14px 18px 14px;
+      box-shadow: 0 2px 12px rgba(49,67,102,0.08);
+      text-align: left;
+      border: 1.2px solid var(--gris-borde);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      transition: box-shadow 0.20s, border 0.17s;
+      font-size: 1.04rem;
+      margin-bottom: 10px;
+    }
+    .feature-card:hover {
+      box-shadow: 0 8px 30px rgba(49,67,102,0.13);
+      border-color: var(--acento);
+    }
+    .feature-icon {
+      font-size: 1.6rem;
+      color: var(--azul-main);
+      margin-bottom: 7px;
+      margin-top: 2px;
+      display: inline-block;
+      width: 28px;
+      text-align: center;
+    }
+    .feature-title {
+      font-size: 1.07rem;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: var(--azul-main);
+    }
+    .feature-text {
+      font-size: 1.01rem;
+      color: #222;
+      margin: 0;
+      line-height: 1.32;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 500;
+    }
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(38px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-32px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
     /* Responsive */
-    @media (max-width: 950px) {
+    @media (max-width: 1100px) {
       .zona-main {
         flex-direction: column;
         align-items: center;
         gap: 28px;
         width: 98vw;
       }
-      .card-calc, .card-resumen {
+      .form-card, .card-resumen {
         width: 97vw;
         min-width: unset;
         max-width: 99vw;
       }
     }
-    @keyframes popWsp {
-      0% { transform: scale(0.7);}
-      60% { transform: scale(1.12) rotate(-3deg);}
-      100% { transform: scale(1);}
-    }
-    @keyframes pulseWsp {
-      0%,100%{filter:brightness(1);}
-      50%{filter:brightness(1.5);}
-    }
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateY(30px) scale(0.96);}
-      to   { opacity: 1; transform: translateY(0) scale(1);}
+    @media (max-width: 700px) {
+      .main-title { font-size: 1.19rem; }
+      .form-card, .card-resumen { padding: 1.2rem 0.7rem; }
+      .features-row { gap: 13px; }
+      .feature-card { min-width: 90vw; }
     }
   </style>
 </head>
@@ -309,20 +416,22 @@
       <img src="https://github.com/Will16090102/SEADEMO1/blob/main/LOGOSEAE.png?raw=true" 
            alt="Logo de SEA Express" 
            class="logo-img" tabindex="0">
-      <div class="logo-text">Elígelo y es tuyo</div>
+      <div class="logo-text">Elígete y te acelera</div>
     </div>
-    <h1>SEA EXPRESS<br>
-      Cotiza tu envío USA-Perú en segundos
-    </h1>
-    <div class="desc">
+    <div class="main-title">
+      SEA EXPRESS <br>
+      Cotiza tu envío USA-<wbr>Perú en segundos
+    </div>
+    <div class="subtitle">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
+    <!-- Formulario y Resumen -->
     <div class="zona-main" id="zonaMain">
-      <!-- CALCULADORA -->
-      <div class="card-calc" id="calculadoraBox">
+      <!-- Formulario -->
+      <form class="form-card" autocomplete="off" onsubmit="event.preventDefault();mostrarResumen();">
         <div class="tab-nav">
           <button id="tab-manual" class="tab-btn active" type="button">Manual</button>
-          <button id="tab-enlace" class="tab-btn" type="button">Por Enlace</button>
+          <button id="tab-enlace" class="tab-btn" type="button">Por enlace</button>
         </div>
         <div id="manual-content">
           <label for="valor">Valor del producto (USD)</label>
@@ -331,15 +440,15 @@
           <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
           <label for="producto">Tipo de producto (opcional)</label>
           <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-          <button class="btn" onclick="mostrarResumen()">Calcular</button>
+          <button class="btn" type="submit">Calcular mi envío</button>
         </div>
         <div id="enlace-content" style="display:none;">
           <label for="enlace-producto">Enlace del producto</label>
           <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
-          <button class="btn" onclick="calcularPorEnlace()">Calcular</button>
+          <button class="btn" type="button" onclick="calcularPorEnlace()">Calcular mi envío</button>
         </div>
-      </div>
-      <!-- RESUMEN -->
+      </form>
+      <!-- Resumen -->
       <div class="card-resumen" id="resumenBox">
         <div class="result-title">Resumen de Cotización</div>
         <div class="result-item">
@@ -383,31 +492,32 @@
         <button class="btn cerrar-btn" onclick="ocultarResumen()">Cerrar</button>
       </div>
     </div>
-    <div class="experiencias-box" id="experiencias-box">
+    <!-- Testimonio -->
+    <div class="testimonio" id="experiencias-box">
       “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
       <strong>—Carlos R.</strong>
     </div>
-    <!-- Features debajo -->
+    <!-- Features -->
     <div class="features-row">
       <div class="feature-card" tabindex="0" aria-label="Envío Express">
-        <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
-        <h3 class="feature-title">Envío Express</h3>
-        <p class="feature-text">Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.</p>
+        <span class="feature-icon"><i class="fas fa-shipping-fast"></i></span>
+        <span class="feature-title">Envío Express</span>
+        <span class="feature-text">Entrega en un plazo de 7-10 días hábiles.</span>
       </div>
       <div class="feature-card" tabindex="0" aria-label="Envío Seguro">
-        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-        <h3 class="feature-title">Envío Seguro</h3>
-        <p class="feature-text">Tus envíos siempre están seguros con nosotros.</p>
+        <span class="feature-icon"><i class="fas fa-shield-alt"></i></span>
+        <span class="feature-title">Envío Seguro</span>
+        <span class="feature-text">Tu envío está protegido y asegurado.</span>
       </div>
       <div class="feature-card" tabindex="0" aria-label="Soporte 24/7">
-        <div class="feature-icon"><i class="fas fa-headset"></i></div>
-        <h3 class="feature-title">Soporte 24/7</h3>
-        <p class="feature-text">Nuestro equipo está disponible para resolver tus dudas en cualquier momento.</p>
+        <span class="feature-icon"><i class="fas fa-headset"></i></span>
+        <span class="feature-title">Soporte 24/7</span>
+        <span class="feature-text">Asistencia disponible en cualquier momento.</span>
       </div>
     </div>
   </div>
   <script>
-    // Tabs
+    // Tabs animados
     document.getElementById('tab-manual').onclick = function() {
       document.getElementById('manual-content').style.display = '';
       document.getElementById('enlace-content').style.display = 'none';
@@ -420,7 +530,7 @@
       this.classList.add('active');
       document.getElementById('tab-manual').classList.remove('active');
     };
-    // Experiencias de usuarios
+    // Testimonios animados
     const experiencias = [
       {
         text: "¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.",
@@ -447,66 +557,65 @@
       setTimeout(()=>{
         box.innerHTML = `“${t.text}”<strong>—${t.author}</strong>`;
         box.style.opacity = "1";
-      }, 350);
+      }, 320);
     }
     setInterval(function(){
       currentExp = (currentExp + 1) % experiencias.length;
       showExperiencia(currentExp);
-    }, 5500);
+    }, 7000);
     window.onload = function() {
       showExperiencia(0);
       ocultarResumen();
     };
 
-    // Lógica calculadora y resumen
+    // Cálculo y resumen
     let ultimaCotizacion = null;
     function mostrarResumen() {
-      let peso = parseFloat(document.getElementById("peso").value);
-      const valor = parseFloat(document.getElementById("valor").value);
-      const producto = document.getElementById("producto").value;
-      if (isNaN(peso) || peso <= 0) {
-        alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
-        return;
+      // Solo muestra el resumen si está en manual
+      if(document.getElementById('manual-content').style.display !== 'none') {
+        let peso = parseFloat(document.getElementById("peso").value);
+        const valor = parseFloat(document.getElementById("valor").value);
+        const producto = document.getElementById("producto").value;
+        if (isNaN(peso) || peso <= 0) {
+          alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
+          return;
+        }
+        if (isNaN(valor) || valor <= 0) {
+          alert("Por favor ingresa un valor declarado válido (mínimo $1)");
+          return;
+        }
+        if (peso < 1) peso = 1;
+        const desaduanaje = 8;
+        const costoPorKilo = 15;
+        let costoEnvio = peso * costoPorKilo;
+        if (costoEnvio < 12) costoEnvio = 12;
+        const envioTotal = costoEnvio + desaduanaje;
+        const impuestos = valor > 200 ? valor * 0.25 : 0;
+        const total = valor + envioTotal + impuestos;
+        ultimaCotizacion = {
+          tipo: "manual",
+          producto: producto,
+          peso: peso,
+          valor: valor,
+          desaduanaje: desaduanaje,
+          costoEnvio: costoEnvio,
+          envioTotal: envioTotal,
+          impuestos: impuestos,
+          total: total
+        };
+        document.getElementById("valor-producto").textContent = producto || "-";
+        document.getElementById("valor-result").textContent = `$${valor.toFixed(2)}`;
+        document.getElementById("peso-result").textContent = `${peso.toFixed(2)} kg`;
+        document.getElementById("desaduanaje").textContent = `$${desaduanaje.toFixed(2)}`;
+        document.getElementById("costo-envio").textContent = `$${costoEnvio.toFixed(2)}`;
+        document.getElementById("impuestos").textContent = `$${impuestos.toFixed(2)}`;
+        document.getElementById("envio-total").textContent = `$${envioTotal.toFixed(2)}`;
+        document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+        actualizarEnlaceWhatsApp();
+        document.getElementById('resumenBox').classList.add('visible');
       }
-      if (isNaN(valor) || valor <= 0) {
-        alert("Por favor ingresa un valor declarado válido (mínimo $1)");
-        return;
-      }
-      if (peso < 1) peso = 1;
-      const desaduanaje = 8;
-      const costoPorKilo = 15;
-      let costoEnvio = peso * costoPorKilo;
-      if (costoEnvio < 12) costoEnvio = 12;
-      const envioTotal = costoEnvio + desaduanaje;
-      const impuestos = valor > 200 ? valor * 0.25 : 0;
-      const total = valor + envioTotal + impuestos;
-      ultimaCotizacion = {
-        tipo: "manual",
-        producto: producto,
-        peso: peso,
-        valor: valor,
-        desaduanaje: desaduanaje,
-        costoEnvio: costoEnvio,
-        envioTotal: envioTotal,
-        impuestos: impuestos,
-        total: total
-      };
-      document.getElementById("valor-producto").textContent = producto || "-";
-      document.getElementById("valor-result").textContent = `$${valor.toFixed(2)}`;
-      document.getElementById("peso-result").textContent = `${peso.toFixed(2)} kg`;
-      document.getElementById("desaduanaje").textContent = `$${desaduanaje.toFixed(2)}`;
-      document.getElementById("costo-envio").textContent = `$${costoEnvio.toFixed(2)}`;
-      document.getElementById("impuestos").textContent = `$${impuestos.toFixed(2)}`;
-      document.getElementById("envio-total").textContent = `$${envioTotal.toFixed(2)}`;
-      document.getElementById("total").textContent = `$${total.toFixed(2)}`;
-      actualizarEnlaceWhatsApp();
-
-      // Cambia el layout para mostrar ambos cuadros
-      document.getElementById('zonaMain').classList.add('dos-cajas');
-      document.getElementById('resumenBox').classList.add('visible');
     }
     function ocultarResumen() {
-      document.getElementById('zonaMain').classList.remove('dos-cajas');
       document.getElementById('resumenBox').classList.remove('visible');
     }
     function actualizarEnlaceWhatsApp() {
