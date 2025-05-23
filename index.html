@@ -48,14 +48,16 @@
       align-items: center;
     }
     .logo-img {
-      width: 90px;
-      height: 90px;
+      width: 124px;
+      height: 124px;
       border-radius: 50%;
       background: var(--azul-boton);
       padding: 7px;
       object-fit: contain;
       box-shadow: 0 4px 20px rgba(34,48,80,0.05);
-      transition: width 0.2s, height 0.2s, padding 0.2s;
+      border: 6px solid #fff; /* Barra de borde gruesa y clara */
+      transition: width 0.2s, height 0.2s, padding 0.2s, border 0.2s;
+      box-sizing: border-box;
     }
     .logo-text {
       font-size: 16px;
