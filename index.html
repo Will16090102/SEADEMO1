@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEA Express - Calculadora de Envíos</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
       background: #faf5ec;
@@ -70,7 +71,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      gap: 48px;
+      gap: 44px;
       position: relative;
       transition: gap 0.4s;
     }
@@ -80,166 +81,126 @@
       min-width: 320px;
       max-width: 100%;
       min-height: 430px;
-      height: 430px;
+      height: 100%;
       background: #fff;
-      border-radius: 22px;
-      box-shadow: 0 10px 38px 0 rgba(34,48,75,0.13);
-      padding: 2.3rem 2.2rem 2.1rem 2.2rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 32px 0 rgba(190,21,34,0.09), 0 2px 8px 0 rgba(34,48,75,0.06);
+      padding: 2rem 2rem 2rem 2rem;
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      justify-content: center;
-      border: 2.2px solid #be1522;
-      /* Ocultar la transición para la calculadora al aparecer/disaparecer el resumen */
-      transition: box-shadow 0.3s, transform 0.3s, opacity 0.3s;
+      justify-content: flex-start;
+      border: 1.7px solid #be1522;
     }
 
-    .card-resumen {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(30px) scale(0.97);
-      transition: opacity 0.5s, transform 0.6s cubic-bezier(.48,-0.01,.41,1.18);
-      z-index: 2;
+    .card-calc {
+      border: 1.7px solid #be1522;
     }
-    .card-resumen.visible {
+    .card-resumen {
+      border: 1.7px solid #be1522;
       opacity: 1;
       pointer-events: auto;
-      transform: translateY(0) scale(1);
-      animation: fadeInRight 0.7s;
+      transform: none;
+      z-index: 2;
+      display: flex;
+      margin-top: 0;
     }
 
-    /* Solo la calculadora centrada cuando inicia */
-    .zona-main.solo-calc {
-      justify-content: center;
-    }
-    .zona-main.solo-calc .card-resumen {
-      display: none;
-    }
-    .zona-main.dos-cajas {
-      justify-content: center;
-    }
-    .zona-main.dos-cajas .card-resumen {
+    /* Tabs */
+    .tab-nav {
       display: flex;
+      margin-bottom: 1.3em;
+      gap: 0;
+      border-bottom: 1.5px solid #ece7df;
+      justify-content: flex-start;
     }
-
-    @media (max-width: 950px) {
-      .zona-main { flex-direction: column; align-items: center; gap: 28px; width: 98vw; }
-      .card-calc, .card-resumen { width: 97vw; min-width: unset; }
-    }
-
-    /* Experiencias abajo y centradas */
-    .experiencias-box {
-      width: 420px;
-      max-width: 95vw;
-      min-height: 75px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(34,48,75,0.12);
-      text-align: center;
-      font-style: italic;
-      font-size: 1.23rem;
-      color: #23304b;
-      padding: 22px 22px 16px 22px;
-      margin: 90px auto 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      z-index: 1;
-    }
-    .experiencias-box strong {
-      display: block;
-      margin-top: 8px;
-      font-style: normal;
-      font-size: 1.02rem;
-      font-weight: 700;
-      color: #23304b;
-      font-family: 'Montserrat', Arial, sans-serif;
-    }
-    /* Features debajo */
-    .features-row {
-      width: 100%;
-      max-width: 1000px;
-      margin: 32px auto 28px auto;
-      display: flex;
-      gap: 28px;
-      justify-content: center;
-      align-items: stretch;
-      flex-wrap: wrap;
-    }
-    .feature-card {
-      min-width: 220px;
-      max-width: 330px;
-      flex: 1 1 220px;
-      background: #fff;
-      border-radius: 13px;
-      padding: 24px 16px;
-      box-shadow: 0 2px 12px rgba(34,48,75,0.13);
-      text-align: center;
-      transition: box-shadow 0.2s, transform 0.19s;
-      outline: none;
-      border: 1.5px solid #e8e8e8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .feature-card:focus, .feature-card:hover {
-      box-shadow: 0 8px 30px rgba(34,48,75,0.19);
-      transform: translateY(-4px) scale(1.03) rotate(-1deg);
-      outline: 2px solid #23304b;
-      outline-offset: 2px;
-    }
-    .feature-icon {
-      font-size: 2.1rem;
-      color: #23304b;
-      margin-bottom: 12px;
-    }
-    .feature-title {
-      font-size: 1.13rem;
+    .tab-btn {
       font-weight: bold;
-      margin-bottom: 5px;
-      color: #23304b;
-      font-family: 'Montserrat', Arial, sans-serif;
+      padding: 0.6em 2.2em;
+      border: none;
+      border-radius: 10px 10px 0 0;
+      background: #fff;
+      color: #be1522;
+      font-size: 1.02em;
+      cursor: pointer;
+      outline: none;
+      margin-right: 2px;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
     }
-    .feature-text {
-      font-size: 1.04rem;
+    .tab-btn.active {
+      background: #be1522;
+      color: #fff;
+      border-bottom: 3px solid #be1522;
+      z-index: 2;
+    }
+
+    /* Inputs */
+    .card-calc label {
+      font-weight: 700;
+      font-size: 1.04em;
+      margin-bottom: 0.2em;
       color: #222;
-      margin: 0;
-      line-height: 1.35;
-      font-family: 'Montserrat', Arial, sans-serif;
     }
-    /* Botones y inputs */
+    .card-calc input[type="number"], .card-calc input[type="text"] {
+      width: 100%;
+      display: block;
+      box-sizing: border-box;
+      padding: 1em;
+      font-size: 1.09em;
+      border: 1.5px solid #e3e3e3;
+      border-radius: 10px;
+      background: #f7f8fa;
+      margin-top: 0.35em;
+      margin-bottom: 1em;
+      outline: none;
+      transition: border 0.18s;
+    }
+    .card-calc input:focus {
+      border-color: #be1522;
+      background: #fff;
+    }
+
+    /* Botón calcular */
     .btn {
       width: 100%;
       background: #be1522;
       color: #fff;
       font-weight: bold;
-      padding: 1em;
+      padding: 1.08em 0;
       border: none;
-      border-radius: 10px;
-      margin-top: 1em;
-      font-size: 1.1em;
+      border-radius: 12px;
+      margin-top: 0.7em;
+      font-size: 1.13em;
       cursor: pointer;
-      transition: background 0.23s;
+      transition: background 0.23s, box-shadow 0.18s;
+      box-shadow: 0 2px 10px rgba(190,21,34,0.12);
     }
     .btn:active, .btn:focus, .btn:hover { background: #a5111d; }
+
+    /* Botón cerrar */
     .cerrar-btn {
       background: #23304b;
-      margin-top: 1.5em;
+      margin-top: 1.4em;
+      font-weight: 700;
+      font-size: 1.07em;
+      border-radius: 12px;
     }
-    /* Estilos del resumen */
+    .cerrar-btn:hover, .cerrar-btn:focus {
+      background: #1a2339;
+    }
+
+    /* Resumen de Cotización */
     .result-title {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: #be1522;
       font-weight: 700;
-      margin-bottom: 1.1rem;
       text-align: center;
-      border-bottom: 1px solid #f0e1e1;
-      padding-bottom: 0.6rem;
       letter-spacing: 0.01em;
       font-family: 'Montserrat', Arial, sans-serif;
+      margin-bottom: 1.1rem;
+      border-bottom: 1.5px solid #ece7df;
+      padding-bottom: 0.6rem;
     }
     .result-item {
       display: flex;
@@ -249,27 +210,32 @@
       padding-bottom: 0.35rem;
       border-bottom: 1px solid #f3eeee;
       font-size: 1.09rem;
-      color: #333;
+      color: #222;
       font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+    }
+    .result-item span {
+      font-weight: 400;
     }
     .highlight-box {
-      background: #f8f8f8;
-      border-radius: 8px;
+      background: #f6f6f6;
+      border-radius: 10px;
       padding: 0.9rem 0.7rem;
-      margin: 1.1rem 0 0.7rem 0;
-      border: 1px solid #ebe1e1;
+      margin: 1.15rem 0 0.9rem 0;
+      border: 1.2px solid #ebe1e1;
       text-align: center;
     }
     .highlight-title {
       color: #be1522;
-      font-size: 1.11rem;
+      font-size: 1.08rem;
       font-weight: 600;
     }
     .highlight-value {
-      font-size: 1.37rem;
+      font-size: 1.45rem;
       color: #be1522;
       font-weight: bold;
       letter-spacing: 0.01em;
+      margin-top: 0.2em;
     }
     .whatsapp-btn {
       background: #25D366;
@@ -282,15 +248,13 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.24s, box-shadow 0.27s, transform 0.28s;
-      margin-top: 1.1rem;
-      margin-bottom: 0.2rem;
+      margin-top: 1.05rem;
+      margin-bottom: 0.15rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 11px;
-      box-shadow: 0 3px 16px 0 rgba(37,211,102,0.15);
-      position: relative;
-      overflow: hidden;
+      gap: 10px;
+      box-shadow: 0 3px 16px 0 rgba(37,211,102,0.12);
       outline: none;
       animation: popWsp 1.3s cubic-bezier(.48,-0.01,.41,1.18);
     }
@@ -298,16 +262,31 @@
       background: #128C7E;
       outline: 2px solid #128C7E;
       outline-offset: 2px;
-      transform: scale(1.09) rotate(-2deg);
-      box-shadow: 0 8px 30px rgba(37,211,102,0.19);
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 7px 24px rgba(37,211,102,0.16);
     }
     .whatsapp-btn i {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
       line-height: 1;
-      animation: pulseWsp 1.9s infinite;
+      animation: pulseWsp 1.6s infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 950px) {
+      .zona-main {
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        width: 98vw;
+      }
+      .card-calc, .card-resumen {
+        width: 97vw;
+        min-width: unset;
+        max-width: 99vw;
+      }
     }
     @keyframes popWsp {
       0% { transform: scale(0.7);}
@@ -317,10 +296,6 @@
     @keyframes pulseWsp {
       0%,100%{filter:brightness(1);}
       50%{filter:brightness(1.5);}
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(28px);}
-      to   { opacity: 1; transform: translateY(0);}
     }
     @keyframes fadeInRight {
       from { opacity: 0; transform: translateY(30px) scale(0.96);}
@@ -342,65 +317,53 @@
     <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
-
-    <!-- Zona principal: calculadora y resumen, simétricos -->
-    <div class="zona-main solo-calc" id="zonaMain">
-      <!-- Calculadora -->
+    <div class="zona-main" id="zonaMain">
+      <!-- CALCULADORA -->
       <div class="card-calc" id="calculadoraBox">
-        <div style="text-align:center;">
-          <nav style="margin-bottom:1.2em;">
-            <button id="tab-manual" style="font-weight:bold;padding:0.6em 2em;border-radius:10px 0 0 10px;border:2px solid #be1522;background:#be1522;color:white;cursor:pointer;border-right:none;">Manual</button>
-            <button id="tab-enlace" style="font-weight:bold;padding:0.6em 2em;border-radius:0 10px 10px 0;border:2px solid #be1522;background:#fff;color:#be1522;cursor:pointer;border-left:none;">Por Enlace</button>
-          </nav>
+        <div class="tab-nav">
+          <button id="tab-manual" class="tab-btn active" type="button">Manual</button>
+          <button id="tab-enlace" class="tab-btn" type="button">Por Enlace</button>
         </div>
         <div id="manual-content">
-          <div style="margin-bottom:1.1em;">
-            <label for="valor" style="font-weight:700;">Valor del producto (USD)</label>
-            <input type="number" id="valor" placeholder="Ej: 120" style="width:100%;padding:1em;margin-top:0.4em;margin-bottom:0.8em;border-radius:9px;border:1.7px solid #e8e6e0;">
-          </div>
-          <div style="margin-bottom:1.1em;">
-            <label for="peso" style="font-weight:700;">Peso del paquete (kg)</label>
-            <input type="number" id="peso" placeholder="Ej: 1.5" style="width:100%;padding:1em;margin-top:0.4em;margin-bottom:0.8em;border-radius:9px;border:1.7px solid #e8e6e0;">
-          </div>
-          <div style="margin-bottom:1.1em;">
-            <label for="producto" style="font-weight:700;">Tipo de producto (opcional)</label>
-            <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc." style="width:100%;padding:1em;margin-top:0.4em;border-radius:9px;border:1.7px solid #e8e6e0;">
-          </div>
+          <label for="valor">Valor del producto (USD)</label>
+          <input type="number" id="valor" placeholder="Ej: 120" min="1">
+          <label for="peso">Peso del paquete (kg)</label>
+          <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1">
+          <label for="producto">Tipo de producto (opcional)</label>
+          <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
           <button class="btn" onclick="mostrarResumen()">Calcular</button>
         </div>
         <div id="enlace-content" style="display:none;">
-          <div style="margin-bottom:1.1em;">
-            <label for="enlace-producto" style="font-weight:700;">Enlace del producto</label>
-            <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." style="width:100%;padding:1em;margin-top:0.4em;border-radius:9px;border:1.7px solid #e8e6e0;">
-          </div>
+          <label for="enlace-producto">Enlace del producto</label>
+          <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
           <button class="btn" onclick="calcularPorEnlace()">Calcular</button>
         </div>
       </div>
-      <!-- Resumen -->
+      <!-- RESUMEN -->
       <div class="card-resumen" id="resumenBox">
         <div class="result-title">Resumen de Cotización</div>
         <div class="result-item">
-          <strong>Producto:</strong>
+          <span>Producto:</span>
           <span id="valor-producto">-</span>
         </div>
         <div class="result-item">
-          <strong>Valor del producto:</strong>
+          <span>Valor del producto:</span>
           <span id="valor-result">$0.00</span>
         </div>
         <div class="result-item">
-          <strong>Peso:</strong>
+          <span>Peso:</span>
           <span id="peso-result">0.00 kg</span>
         </div>
         <div class="result-item">
-          <strong>Desaduanaje:</strong>
+          <span>Desaduanaje:</span>
           <span id="desaduanaje">$8.00</span>
         </div>
         <div class="result-item">
-          <strong>Costo de envío:</strong>
+          <span>Costo de envío:</span>
           <span id="costo-envio">$0.00</span>
         </div>
         <div class="result-item">
-          <strong>Impuestos:</strong>
+          <span>Impuestos:</span>
           <span id="impuestos">$0.00</span>
         </div>
         <div class="highlight-box">
@@ -408,7 +371,7 @@
           <div class="highlight-value" id="envio-total">$0.00</div>
         </div>
         <div class="result-item" style="border-bottom: none; margin-top: 1rem;">
-          <strong style="font-size: 1.09rem;">Costo total:</strong>
+          <span style="font-size: 1.09rem;">Costo total:</span>
           <span id="total" style="font-size: 1.09rem;">$0.00</span>
         </div>
         <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener" style="margin-top:1.2rem; width:100%;">
@@ -420,8 +383,6 @@
         <button class="btn cerrar-btn" onclick="ocultarResumen()">Cerrar</button>
       </div>
     </div>
-
-    <!-- Experiencias de usuarios, siempre más abajo y centrado -->
     <div class="experiencias-box" id="experiencias-box">
       “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
       <strong>—Carlos R.</strong>
@@ -450,18 +411,14 @@
     document.getElementById('tab-manual').onclick = function() {
       document.getElementById('manual-content').style.display = '';
       document.getElementById('enlace-content').style.display = 'none';
-      this.style.background = '#be1522';
-      this.style.color = '#fff';
-      document.getElementById('tab-enlace').style.background = '#fff';
-      document.getElementById('tab-enlace').style.color = '#be1522';
+      this.classList.add('active');
+      document.getElementById('tab-enlace').classList.remove('active');
     };
     document.getElementById('tab-enlace').onclick = function() {
       document.getElementById('manual-content').style.display = 'none';
       document.getElementById('enlace-content').style.display = '';
-      this.style.background = '#be1522';
-      this.style.color = '#fff';
-      document.getElementById('tab-manual').style.background = '#fff';
-      document.getElementById('tab-manual').style.color = '#be1522';
+      this.classList.add('active');
+      document.getElementById('tab-manual').classList.remove('active');
     };
     // Experiencias de usuarios
     const experiencias = [
@@ -545,14 +502,11 @@
       actualizarEnlaceWhatsApp();
 
       // Cambia el layout para mostrar ambos cuadros
-      document.getElementById('zonaMain').classList.remove('solo-calc');
       document.getElementById('zonaMain').classList.add('dos-cajas');
       document.getElementById('resumenBox').classList.add('visible');
     }
     function ocultarResumen() {
-      // Solo oculta el resumen, la calculadora queda visible y centrada
       document.getElementById('zonaMain').classList.remove('dos-cajas');
-      document.getElementById('zonaMain').classList.add('solo-calc');
       document.getElementById('resumenBox').classList.remove('visible');
     }
     function actualizarEnlaceWhatsApp() {
@@ -576,10 +530,8 @@
       alert("Simulación de búsqueda por enlace. En versión real, se llenaría la calculadora con datos del enlace.");
       document.getElementById('manual-content').style.display = '';
       document.getElementById('enlace-content').style.display = 'none';
-      document.getElementById('tab-manual').style.background = '#be1522';
-      document.getElementById('tab-manual').style.color = '#fff';
-      document.getElementById('tab-enlace').style.background = '#fff';
-      document.getElementById('tab-enlace').style.color = '#be1522';
+      document.getElementById('tab-manual').classList.add('active');
+      document.getElementById('tab-enlace').classList.remove('active');
     }
   </script>
 </body>
