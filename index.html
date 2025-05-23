@@ -63,74 +63,57 @@
       text-align: center;
       letter-spacing: 0.01em;
     }
-    /* Layout principal: espacio reservado para calculadora y resumen independientes */
+    /* Layout principal: calculadora y resumen simétricos */
     .zona-main {
-      position: relative;
-      width: 1000px;
-      max-width: 99vw;
+      width: 950px;
+      max-width: 98vw;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 48px;
+      margin: 55px auto 0 auto;
       min-height: 440px;
-      margin: 60px auto 0 auto;
-      height: 440px;
-      display: block;
     }
-    .calculadora-box, .resumen-box {
-      position: absolute;
-      top: 0;
-      width: 440px;
-      max-width: 96vw;
-      min-width: 265px;
-      min-height: 390px;
+    .card-calc, .card-resumen {
+      width: 420px;
+      min-width: 320px;
+      max-width: 100%;
+      min-height: 430px;
+      height: 430px;
       background: #fff;
       border-radius: 22px;
-      box-shadow: 0 10px 38px 0 rgba(34,48,75,0.16);
-      padding: 2.3rem 2.4rem 2.1rem 2.4rem;
-      transition: left 0.7s cubic-bezier(.48,-0.01,.41,1.18), opacity 0.5s, box-shadow 0.3s;
-      opacity: 1;
-      z-index: 10;
+      box-shadow: 0 10px 38px 0 rgba(34,48,75,0.13);
+      padding: 2.3rem 2.2rem 2.1rem 2.2rem;
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: center;
+      transition: box-shadow 0.3s, transform 0.3s;
+      border: 2px solid #ece7df;
+      position: relative;
     }
-    .calculadora-box {
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 20;
-      box-shadow: 0 10px 38px 0 rgba(190,21,34,0.09);
-      border: 2px solid #be152233;
-    }
-    .calculadora-box.to-left {
-      left: 0;
-      transform: none;
-      box-shadow: 0 10px 38px 0 rgba(190,21,34,0.13);
-    }
-    .resumen-box {
-      left: 100%;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(-100%);
-      z-index: 10;
-      box-shadow: 0 10px 38px 0 rgba(34,48,75,0.19);
+    .card-calc {
       border: 2.2px solid #be1522;
+      box-shadow: 0 10px 38px 0 rgba(190,21,34,0.10);
+      animation: fadeInUp 0.7s;
     }
-    .resumen-box.show {
-      left: 100%;
+    .card-resumen {
+      border: 2.2px solid #be1522;
+      box-shadow: 0 10px 38px 0 rgba(34,48,75,0.13);
       opacity: 1;
       pointer-events: auto;
-      transform: translateX(-100%);
       animation: fadeInRight 0.7s;
     }
-    @keyframes fadeInRight {
-      from { opacity: 0; left: 80%; }
-      to   { opacity: 1; left: 100%; }
+    /* Responsive: apilar en móvil */
+    @media (max-width: 950px) {
+      .zona-main { flex-direction: column; align-items: center; gap: 28px; width: 98vw; }
+      .card-calc, .card-resumen { width: 97vw; min-width: unset; }
     }
-    /* Experiencias de usuarios completamente independiente */
+    /* Experiencias abajo y centradas */
     .experiencias-box {
-      position: fixed;
-      top: 25px;
-      right: 40px;
-      width: 350px;
-      max-width: 85vw;
+      width: 420px;
+      max-width: 95vw;
       min-height: 75px;
       background: #fff;
       border-radius: 16px;
@@ -140,14 +123,13 @@
       font-size: 1.23rem;
       color: #23304b;
       padding: 22px 22px 16px 22px;
-      transition: opacity 0.4s;
-      opacity: 1;
+      margin: 60px auto 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       font-family: 'Playfair Display', serif;
-      z-index: 99;
+      z-index: 1;
     }
     .experiencias-box strong {
       display: block;
@@ -158,42 +140,7 @@
       color: #23304b;
       font-family: 'Montserrat', Arial, sans-serif;
     }
-    /* Responsive: apilar en móvil */
-    @media (max-width: 1100px) {
-      .zona-main { width: 99vw; }
-      .experiencias-box { right: 12px; }
-    }
-    @media (max-width: 900px) {
-      .zona-main {
-        width: 99vw;
-        height: auto;
-        min-height: 0;
-        margin-top: 30px;
-      }
-      .calculadora-box, .resumen-box, .calculadora-box.to-left, .resumen-box.show {
-        position: static;
-        left: auto !important;
-        transform: none !important;
-        margin: 0 auto 24px auto !important;
-        max-width: 97vw;
-        width: 97vw;
-        box-shadow: 0 10px 38px 0 rgba(34,48,75,0.16);
-      }
-      .resumen-box, .resumen-box.show {
-        opacity: 1;
-        pointer-events: auto;
-        animation: none;
-      }
-      .experiencias-box {
-        position: static;
-        width: 95vw;
-        margin: 24px auto 0 auto;
-        top: unset;
-        right: unset;
-        left: unset;
-        z-index: 8;
-      }
-    }
+    /* Features debajo */
     .features-row {
       width: 100%;
       max-width: 1000px;
@@ -246,6 +193,7 @@
       line-height: 1.35;
       font-family: 'Montserrat', Arial, sans-serif;
     }
+    /* Botones y inputs */
     .btn {
       width: 100%;
       background: #be1522;
@@ -353,6 +301,14 @@
       0%,100%{filter:brightness(1);}
       50%{filter:brightness(1.5);}
     }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(28px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateY(30px) scale(0.96);}
+      to   { opacity: 1; transform: translateY(0) scale(1);}
+    }
   </style>
 </head>
 <body>
@@ -369,15 +325,10 @@
     <div class="desc">
       Simplemente ingresa el valor, peso y tipo de producto.
     </div>
-    <!-- Experiencias de usuarios, SIEMPRE independiente -->
-    <div class="experiencias-box" id="experiencias-box">
-      “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
-      <strong>—Carlos R.</strong>
-    </div>
-    <!-- Zona principal: calculadora y resumen, independientes -->
+    <!-- Zona principal: calculadora y resumen, simétricos -->
     <div class="zona-main">
       <!-- Calculadora -->
-      <div class="calculadora-box" id="calculadoraBox">
+      <div class="card-calc" id="calculadoraBox">
         <div style="text-align:center;">
           <nav style="margin-bottom:1.2em;">
             <button id="tab-manual" style="font-weight:bold;padding:0.6em 2em;border-radius:10px 0 0 10px;border:2px solid #be1522;background:#be1522;color:white;cursor:pointer;border-right:none;">Manual</button>
@@ -408,7 +359,7 @@
         </div>
       </div>
       <!-- Resumen -->
-      <div class="resumen-box" id="resumenBox">
+      <div class="card-resumen" id="resumenBox">
         <div class="result-title">Resumen de Cotización</div>
         <div class="result-item">
           <strong>Producto:</strong>
@@ -450,6 +401,11 @@
         </a>
         <button class="btn cerrar-btn" onclick="ocultarResumen()">Cerrar</button>
       </div>
+    </div>
+    <!-- Experiencias de usuarios, siempre abajo y centrado -->
+    <div class="experiencias-box" id="experiencias-box">
+      “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
+      <strong>—Carlos R.</strong>
     </div>
     <!-- Features debajo -->
     <div class="features-row">
@@ -528,54 +484,48 @@
     // Lógica calculadora y resumen
     let ultimaCotizacion = null;
     function mostrarResumen() {
-      document.getElementById('calculadoraBox').classList.add('to-left');
-      document.getElementById('resumenBox').classList.add('show');
-      // Si es por enlace, simula un resultado rápido
-      if(document.getElementById('manual-content').style.display !== 'none') {
-        let peso = parseFloat(document.getElementById("peso").value);
-        const valor = parseFloat(document.getElementById("valor").value);
-        const producto = document.getElementById("producto").value;
-        if (isNaN(peso) || peso <= 0) {
-          alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
-          return;
-        }
-        if (isNaN(valor) || valor <= 0) {
-          alert("Por favor ingresa un valor declarado válido (mínimo $1)");
-          return;
-        }
-        if (peso < 1) peso = 1;
-        const desaduanaje = 8;
-        const costoPorKilo = 15;
-        let costoEnvio = peso * costoPorKilo;
-        if (costoEnvio < 12) costoEnvio = 12;
-        const envioTotal = costoEnvio + desaduanaje;
-        const impuestos = valor > 200 ? valor * 0.25 : 0;
-        const total = valor + envioTotal + impuestos;
-        ultimaCotizacion = {
-          tipo: "manual",
-          producto: producto,
-          peso: peso,
-          valor: valor,
-          desaduanaje: desaduanaje,
-          costoEnvio: costoEnvio,
-          envioTotal: envioTotal,
-          impuestos: impuestos,
-          total: total
-        };
-        document.getElementById("valor-producto").textContent = producto || "-";
-        document.getElementById("valor-result").textContent = `$${valor.toFixed(2)}`;
-        document.getElementById("peso-result").textContent = `${peso.toFixed(2)} kg`;
-        document.getElementById("desaduanaje").textContent = `$${desaduanaje.toFixed(2)}`;
-        document.getElementById("costo-envio").textContent = `$${costoEnvio.toFixed(2)}`;
-        document.getElementById("impuestos").textContent = `$${impuestos.toFixed(2)}`;
-        document.getElementById("envio-total").textContent = `$${envioTotal.toFixed(2)}`;
-        document.getElementById("total").textContent = `$${total.toFixed(2)}`;
-        actualizarEnlaceWhatsApp();
+      let peso = parseFloat(document.getElementById("peso").value);
+      const valor = parseFloat(document.getElementById("valor").value);
+      const producto = document.getElementById("producto").value;
+      if (isNaN(peso) || peso <= 0) {
+        alert("Por favor ingresa un peso válido (mínimo 0.1 kg)");
+        return;
       }
+      if (isNaN(valor) || valor <= 0) {
+        alert("Por favor ingresa un valor declarado válido (mínimo $1)");
+        return;
+      }
+      if (peso < 1) peso = 1;
+      const desaduanaje = 8;
+      const costoPorKilo = 15;
+      let costoEnvio = peso * costoPorKilo;
+      if (costoEnvio < 12) costoEnvio = 12;
+      const envioTotal = costoEnvio + desaduanaje;
+      const impuestos = valor > 200 ? valor * 0.25 : 0;
+      const total = valor + envioTotal + impuestos;
+      ultimaCotizacion = {
+        tipo: "manual",
+        producto: producto,
+        peso: peso,
+        valor: valor,
+        desaduanaje: desaduanaje,
+        costoEnvio: costoEnvio,
+        envioTotal: envioTotal,
+        impuestos: impuestos,
+        total: total
+      };
+      document.getElementById("valor-producto").textContent = producto || "-";
+      document.getElementById("valor-result").textContent = `$${valor.toFixed(2)}`;
+      document.getElementById("peso-result").textContent = `${peso.toFixed(2)} kg`;
+      document.getElementById("desaduanaje").textContent = `$${desaduanaje.toFixed(2)}`;
+      document.getElementById("costo-envio").textContent = `$${costoEnvio.toFixed(2)}`;
+      document.getElementById("impuestos").textContent = `$${impuestos.toFixed(2)}`;
+      document.getElementById("envio-total").textContent = `$${envioTotal.toFixed(2)}`;
+      document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+      actualizarEnlaceWhatsApp();
     }
     function ocultarResumen() {
-      document.getElementById('calculadoraBox').classList.remove('to-left');
-      document.getElementById('resumenBox').classList.remove('show');
+      // limpia los campos de resumen si lo deseas
     }
     function actualizarEnlaceWhatsApp() {
       if (!ultimaCotizacion) return;
@@ -594,7 +544,6 @@
       const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensaje)}`;
       document.getElementById("whatsapp-link").href = wspUrl;
     }
-    // (Simulación para calcular por enlace)
     function calcularPorEnlace() {
       alert("Simulación de búsqueda por enlace. En versión real, se llenaría la calculadora con datos del enlace.");
       document.getElementById('manual-content').style.display = '';
