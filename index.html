@@ -34,10 +34,6 @@
       min-height: 100vh;
       scroll-behavior: smooth;
     }
-    body {
-      /* Quitamos fondo decorativo de logo gigante */
-      background-image: none !important;
-    }
     .main-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -369,7 +365,59 @@
       color: #4d4d4d;
       margin: 0;
     }
-    /* FOOTER OPTIMIZADO */
+    /* Historial cotizaciones */
+    .historial-container {
+      margin: 32px auto 0 auto;
+      max-width: 500px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(50,50,93,0.09);
+      padding: 18px;
+      text-align: left;
+    }
+    .historial-title {
+      font-size: 1.14rem;
+      font-weight: bold;
+      color: var(--azul-logo);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .historial-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .historial-item {
+      border-bottom: 1px solid #eee;
+      padding: 9px 0;
+      font-size: 0.98rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .historial-item:last-child {
+      border-bottom: none;
+    }
+    .historial-clear-btn {
+      display: block;
+      margin: 10px auto 0 auto;
+      background: #f3e6e6;
+      color: #c22;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 18px;
+      cursor: pointer;
+      font-size: 0.93rem;
+      font-weight: 600;
+      transition: background 0.15s, color 0.15s;
+    }
+    .historial-clear-btn:hover {
+      background: #e9cfcf;
+      color: #900;
+    }
+    /* Footer optimizado */
     .sea-footer {
       font-family: 'Montserrat', Arial, sans-serif;
       background: #f7f1e7;
@@ -610,6 +658,15 @@
         </div>
       </section>
     </div>
+
+    <!-- Historial de cotizaciones -->
+    <div class="historial-container" id="historial-container" style="display:none;">
+      <div class="historial-title">Historial de Cotizaciones</div>
+      <ul class="historial-list" id="historial-list"></ul>
+      <button class="historial-clear-btn" onclick="limpiarHistorial()" id="clear-historial-btn">Limpiar historial</button>
+    </div>
+    <!-- Fin historial -->
+
     <div class="testimonial">
       “¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados.”
       <strong>—Carlos R.</strong>
@@ -704,6 +761,48 @@
     const calculadoraArea = document.getElementById("calculadoraArea");
     resultSection.classList.remove("visible");
     calculadoraArea.classList.remove("has-result");
+
+    // ---- HISTORIAL DE COTIZACIONES ----
+    function guardarEnHistorial(cotizacion) {
+      let historial = JSON.parse(localStorage.getItem('sea_historial')) || [];
+      if (historial.length > 49) historial = historial.slice(0, 49); // Max 50 entradas
+      historial.unshift({
+        ...cotizacion,
+        fecha: new Date().toLocaleString()
+      });
+      localStorage.setItem('sea_historial', JSON.stringify(historial));
+      renderizarHistorial();
+    }
+    function renderizarHistorial() {
+      const historial = JSON.parse(localStorage.getItem('sea_historial')) || [];
+      const cont = document.getElementById('historial-container');
+      const ul = document.getElementById('historial-list');
+      if (!historial.length) {
+        cont.style.display = "none";
+        return;
+      }
+      cont.style.display = "block";
+      ul.innerHTML = '';
+      historial.forEach(item => {
+        const li = document.createElement('li');
+        li.className = "historial-item";
+        li.innerHTML = `
+          <div><strong>${item.tipo === "manual" ? "Manual" : "Enlace"}</strong> | <span style="font-size:0.92em;color:#888">${item.fecha}</span></div>
+          <div>Producto: <strong>${item.producto || "Sin descripción"}</strong></div>
+          <div>Valor: $${parseFloat(item.valor).toFixed(2)} | Peso: ${parseFloat(item.peso).toFixed(2)} kg</div>
+          <div>Total: <span style="color:#1a6">${parseFloat(item.total).toFixed(2)}</span></div>
+        `;
+        ul.appendChild(li);
+      });
+    }
+    function limpiarHistorial() {
+      if (confirm("¿Seguro que quieres borrar el historial?")) {
+        localStorage.removeItem('sea_historial');
+        renderizarHistorial();
+      }
+    }
+    // ---- FIN HISTORIAL ----
+
     function mostrarResultados() {
       resultSection.classList.add("visible");
       calculadoraArea.classList.add("has-result");
@@ -762,6 +861,7 @@
         total: total
       };
       actualizarEnlaceWhatsApp();
+      guardarEnHistorial(ultimaCotizacion); // Guardar en historial
       setTimeout(mostrarResultados, 100);
     }
     async function calcularPorEnlace() {
@@ -807,10 +907,11 @@
       const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensaje)}`;
       document.getElementById("whatsapp-link").href = wspUrl;
     }
-  </script>
-  <!-- Easter Egg Script -->
-  <script>
-    // Secuencia: h, h, p, p (en ese orden), solo si todos los inputs están vacíos
+
+    // Renderizar historial al cargar página
+    window.addEventListener("DOMContentLoaded", renderizarHistorial);
+
+    // ---- EASTER EGG ----
     const easterEggSequence = ['h', 'h', 'p', 'p'];
     let inputBuffer = [];
     document.addEventListener('keydown', function(e) {
