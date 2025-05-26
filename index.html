@@ -344,7 +344,7 @@
       transform: translateY(-6px) scale(1.03) rotate(-1deg);
       outline: 2px solid var(--azul-boton);
       outline-offset: 2px;
-      border: 2.5px solid var(--azul-boton);
+      border: 2.5px solid var(--azul-boton;
     }
     .feature-icon {
       font-size: 2.1rem;
@@ -804,6 +804,31 @@
       const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensaje)}`;
       document.getElementById("whatsapp-link").href = wspUrl;
     }
+  </script>
+  <!-- Easter Egg Script -->
+  <script>
+    // Secuencia: h, h, p, p (en ese orden), solo si todos los inputs están vacíos
+    const easterEggSequence = ['h', 'h', 'p', 'p'];
+    let inputBuffer = [];
+
+    document.addEventListener('keydown', function(e) {
+      const key = e.key.toLowerCase();
+      if (key === 'h' || key === 'p') {
+        inputBuffer.push(key);
+        if (inputBuffer.length > 4) inputBuffer.shift();
+
+        if (inputBuffer.join('') === easterEggSequence.join('')) {
+          const emptyInputs = Array.from(document.querySelectorAll('input[type="text"], input[type="number"]'))
+            .every(input => input.value === "");
+          if (emptyInputs) {
+            alert('Todos tenemos luz y oscuridad en nuestro interior. Lo que importa es qué parte elegimos potenciar');
+          }
+          inputBuffer = [];
+        }
+      } else {
+        inputBuffer = [];
+      }
+    });
   </script>
 </body>
 </html>
