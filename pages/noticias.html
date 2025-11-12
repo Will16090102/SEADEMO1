@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - SEA Express</title>
+    <meta name="description" content="Mantente informado con las últimas noticias de SEA Express. Novedades, promociones y actualizaciones del servicio de envíos USA-Perú.">
+    <meta name="theme-color" content="#25324a">
+    
+    <!-- Preconexiones para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-logo: #223050;
+            --azul-boton: #25324a;
+            --beige-fondo: #f7f1e7;
+            --beige-claro: #faf8f3;
+            --gris-form: #f6f5f2;
+            --gris-borde: #e0dfdf;
+            --negro-texto: #1a2630;
+            --blanco: #ffffff;
+            --wsp: #25D366;
+            --fuente: 'Montserrat', Arial, sans-serif;
+            --fuente-titulo: 'Playfair Display', serif;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: var(--beige-fondo);
+            color: var(--negro-texto);
+            font-family: var(--fuente);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .logo-container {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+        
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--azul-boton);
+            padding: 8px;
+            object-fit: contain;
+            border: 6px solid var(--blanco);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--azul-logo);
+            font-size: 1.1rem;
+        }
+        
+        /* Navegación Simplificada */
+        .nav-container {
+            background: var(--blanco);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--azul-logo);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            background: var(--azul-boton);
+            color: var(--blanco);
+        }
+        
+        .nav-links a.active {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            border-color: var(--azul-logo);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-family: var(--fuente-titulo);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--azul-logo);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Filtros de Noticias */
+        .filters-container {
+            background: var(--blanco);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .filters-title {
+            font-weight: 600;
+            color: var(--azul-logo);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .filters-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            background: var(--gris-form);
+            border: 2px solid var(--gris-borde);
+            color: var(--azul-logo);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            border-color: var(--azul-boton);
+        }
+        
+        /* Grid de Noticias */
+        .noticias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .noticia-card {
+            background: var(--blanco);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .noticia-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .noticia-imagen {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-size: 3rem;
+        }
+        
+        .noticia-content {
+            padding: 25px;
+        }
+        
+        .noticia-categoria {
+            display: inline-block;
+            background: var(--beige-claro);
+            color: var(--azul-logo);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .noticia-categoria.promocion {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .noticia-categoria.novedad {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .noticia-categoria.importante {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        
+        .noticia-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--azul-logo);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .noticia-excerpt {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .noticia-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #999;
+            font-size: 0.9rem;
+            padding-top: 15px;
+            border-top: 1px solid var(--gris-borde);
+        }
+        
+        .noticia-btn {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .noticia-btn:hover {
+            background: var(--azul-logo);
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
+            color: var(--blanco);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .newsletter-title {
+            font-family: var(--fuente-titulo);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-btn {
+            background: var(--wsp);
+            color: var(--blanco);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .newsletter-btn:hover {
+            background: #128C7E;
+        }
+        
+        /* Paginación */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 60px;
+        }
+        
+        .pagination-btn {
+            background: var(--blanco);
+            border: 2px solid var(--gris-borde);
+            color: var(--azul-logo);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-btn.active,
+        .pagination-btn:hover {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            border-color: var(--azul-boton);
+        }
+        
+        /* Footer */
+        .sea-footer {
+            background: var(--azul-logo);
+            color: var(--blanco);
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+        }
+        
+        .sea-footer-center {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .sea-footer-logo-big {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        
+        .sea-footer-confiable {
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .sea-footer-socialicons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .sea-footer-socialicons a {
+            color: var(--blanco);
+            font-size: 1.2rem;
+            transition: opacity 0.2s ease;
+        }
+        
+        .sea-footer-socialicons a:hover {
+            opacity: 0.8;
+        }
+        
+        .sea-footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin: 30px 0;
+        }
+        
+        .sea-footer-links {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .sea-footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .sea-footer-coltitle {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .sea-footer-col a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.2s ease;
+        }
+        
+        .sea-footer-col a:hover {
+            color: var(--blanco);
+        }
+        
+        .sea-footer-copy {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .noticias-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .filters-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sea-footer-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenido Principal -->
+    <div class="main-container">
+        <!-- Logo y Header -->
+        <div class="logo-container">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
+            <div class="logo-text">Elígelo y es tuyo</div>
+        </div>
+
+        <!-- Navegación Simplificada -->
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="opiniones.html">Opiniones</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Últimas Noticias</h1>
+            <p>Mantente informado sobre novedades, promociones y actualizaciones de nuestros servicios</p>
+        </section>
+
+        <!-- Filtros de Noticias -->
+        <div class="filters-container">
+            <h3 class="filters-title">Filtrar por categoría:</h3>
+            <div class="filters-buttons">
+                <button class="filter-btn active">Todas</button>
+                <button class="filter-btn">Promociones</button>
+                <button class="filter-btn">Novedades</button>
+                <button class="filter-btn">Importante</button>
+                <button class="filter-btn">Eventos</button>
+            </div>
+        </div>
+
+        <!-- Grid de Noticias -->
+        <div class="noticias-grid">
+            <!-- Noticia 1 -->
+            <article class="noticia-card">
+                <div class="noticia-imagen">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="noticia-content">
+                    <span class="noticia-categoria promocion">Promoción</span>
+                    <h3 class="noticia-title">Black Friday: 30% de descuento en todos los envíos</h3>
+                    <p class="noticia-excerpt">Aprovecha nuestra promoción especial de Black Friday. Todos los envíos tendrán un 30% de descuento del 25 al 30 de noviembre.</p>
+                    <div class="noticia-meta">
+                        <span>25 Nov, 2024</span>
+                        <a href="#" class="noticia-btn">Leer Más</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Noticia 2 -->
+            <article class="noticia-card">
+                <div class="noticia-imagen">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <div class="noticia-content">
+                    <span class="noticia-categoria novedad">Novedad</span>
+                    <h3 class="noticia-title">Nuevo servicio: Envío Express Premium</h3>
+                    <p class="noticia-excerpt">Lanzamos nuestro servicio premium con entrega garantizada en 5-7 días hábiles. Incluye seguro total y embalaje especial.</p>
+                    <div class="noticia-meta">
+                        <span>18 Nov, 2024</span>
+                        <a href="#" class="noticia-btn">Leer Más</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Noticia 3 -->
+            <article class="noticia-card">
+                <div class="noticia-imagen">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="noticia-content">
+                    <span class="noticia-categoria importante">Importante</span>
+                    <h3 class="noticia-title">Actualización de regulaciones aduaneras</h3>
+                    <p class="noticia-excerpt">Importantes cambios en las regulaciones de importación. Conoce los nuevos límites y requisitos para tus envíos desde USA.</p>
+                    <div class="noticia-meta">
+                        <span>12 Nov, 2024</span>
+                        <a href="#" class="noticia-btn">Leer Más</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Noticia 4 -->
+            <article class="noticia-card">
+                <div class="noticia-imagen">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="noticia-content">
+                    <span class="noticia-categoria novedad">Novedad</span>
+                    <h3 class="noticia-title">Ampliamos cobertura a 5 nuevas ciudades</h3>
+                    <p class="noticia-excerpt">Ahora llegamos a Tacna, Iquitos, Cajamarca, Huancayo y Puno. Cobertura nacional completa para tus envíos.</p>
+                    <div class="noticia-meta">
+                        <span>5 Nov, 2024</span>
+                        <a href="#" class="noticia-btn">Leer Más</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Noticia 5 -->
+            <article class="noticia-card">
+                <div class="noticia-imagen">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="noticia-content">
+                    <span class="noticia-categoria novedad">Novedad</span>
+                    <h3 class="noticia-title">Nueva app móvil disponible</h3>
+                    <p class="noticia-excerpt">Descarga nuestra nueva aplicación para iOS y Android. Seguimiento en tiempo real y notificaciones instantáneas.</p>
+                    <div class="noticia-meta">
+                        <span>28 Oct, 2024</span>
+                        <a href="#" class="noticia-btn">Leer Más</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Noticia 6 -->
+            <article class="noticia-card">
+                <div class="noticia-imagen">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="noticia-content">
+                    <span class="noticia-categoria">Evento</span>
+                    <h3 class="noticia-title">Webinar: Cómo importar de USA sin complicaciones</h3>
+                    <p class="noticia-excerpt">Participa en nuestro webinar gratuito este viernes. Aprende los secretos para importar de manera eficiente y económica.</p>
+                    <div class="noticia-meta">
+                        <span>22 Oct, 2024</span>
+                        <a href="#" class="noticia-btn">Leer Más</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Paginación -->
+        <div class="pagination">
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <h2 class="newsletter-title">No te pierdas ninguna novedad</h2>
+            <p class="newsletter-text">Suscríbete a nuestro newsletter y recibe las últimas promociones y noticias directamente en tu email.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Tu correo electrónico" required>
+                <button type="submit" class="newsletter-btn">Suscribirse</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="sea-footer">
+        <div class="sea-footer-center">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big">
+            <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
+            <div class="sea-footer-socialicons">
+                <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <hr class="sea-footer-divider">
+
+        <div class="sea-footer-links">
+            <!-- Información -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Información</div>
+                <a href="faq.html">Preguntas frecuentes</a>
+                <a href="como-funciona.html">Cómo funciona</a>
+                <a href="tiendas-populares.html">Tiendas populares</a>
+                <a href="compras-asistidas.html">Compras Asistidas</a>
+                <a href="seguro.html">Seguro</a>
+                <a href="productos-prohibidos.html">Productos prohibidos</a>
+            </div>
+
+            <!-- La compañía -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">La compañía</div>
+                <a href="servicios.html">Servicios</a>
+                <a href="opiniones.html">Opiniones de usuarios</a>
+                <a href="terminos.html">Términos de Uso</a>
+                <a href="legal.html">Información legal</a>
+                <a href="noticias.html">Noticias</a>
+            </div>
+
+            <!-- Personal útil -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Personal útil</div>
+                <a href="../index.html">Calculadora SEA Express</a>
+                <a href="opciones-pago.html">Opciones de pago</a>
+                <a href="seguimiento.html">Seguimiento de envío</a>
+                <a href="soporte.html">Soporte 24/7</a>
+            </div>
+
+            <!-- Cooperación -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Cooperación</div>
+                <a href="contacto.html">Contacto</a>
+                <a href="referidos.html">Programa de referidos</a>
+                <a href="mayoristas.html">Oferta para mayoristas</a>
+                <a href="logistics.html">SEA Express Logistics</a>
+            </div>
+        </div>
+
+        <div class="sea-footer-copy">
+            © 2025 SEA Express. Todos los derechos reservados.
+        </div>
+    </footer>
+</body>
+</html>
