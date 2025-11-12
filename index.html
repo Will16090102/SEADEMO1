@@ -173,20 +173,21 @@
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         label {
             display: block;
             font-weight: 600;
             color: var(--azul-logo);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-size: 1rem;
         }
         
         input[type="number"],
         input[type="text"] {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 16px;
             border: 2px solid var(--gris-borde);
             border-radius: 10px;
             font-size: 16px;
@@ -200,9 +201,9 @@
             outline: none;
         }
         
-        button {
+        .calculate-btn {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: var(--azul-boton);
             color: var(--blanco);
             border: none;
@@ -210,11 +211,17 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+            display: block;
+            opacity: 1;
+            visibility: visible;
         }
         
-        button:hover {
+        .calculate-btn:hover {
             background: var(--azul-logo);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 50, 74, 0.3);
         }
         
         .whatsapp-btn {
@@ -224,6 +231,16 @@
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            color: var(--blanco);
+            text-decoration: none;
+            transition: background 0.2s ease;
         }
         
         .whatsapp-btn:hover {
@@ -241,7 +258,7 @@
         .result-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid var(--gris-borde);
         }
         
@@ -438,7 +455,7 @@
         }
         
         .historial-list li {
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid var(--gris-borde);
             display: flex;
             justify-content: space-between;
@@ -448,10 +465,23 @@
         .historial-clear-btn {
             background: var(--error);
             max-width: 200px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            color: var(--blanco);
+            font-weight: 600;
+            cursor: pointer;
         }
         
         .historial-clear-btn:hover {
             background: #c0392b;
+        }
+        
+        .divider {
+            height: 1px;
+            background: var(--gris-borde);
+            margin: 30px 0;
+            border: none;
         }
         
         @media (max-width: 768px) {
@@ -531,8 +561,8 @@
                             <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
                         </div>
                         
-                        <button id="btn-calcular" onclick="SEAApp.calcularManual()">
-                            Calcular Envío
+                        <button class="calculate-btn" id="btn-calcular" onclick="SEAApp.calcularManual()">
+                            Calcular
                         </button>
                     </div>
 
@@ -543,10 +573,27 @@
                             <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
                         </div>
                         
-                        <button id="btn-calcular-enlace" onclick="SEAApp.calcularPorEnlace()">
+                        <button class="calculate-btn" id="btn-calcular-enlace" onclick="SEAApp.calcularPorEnlace()">
                             Calcular desde Enlace
                         </button>
                     </div>
+                </div>
+
+                <!-- Línea divisoria -->
+                <hr class="divider">
+
+                <!-- Historial de Cotizaciones -->
+                <div class="historial-container" id="historial-container">
+                    <div class="historial-title">Historial de Cotizaciones</div>
+                    <ul class="historial-list" id="historial-list">
+                        <li>
+                            <span>Manual</span>
+                            <span>12/11/2025, 15:52:02</span>
+                        </li>
+                    </ul>
+                    <button class="historial-clear-btn" onclick="SEAApp.limpiarHistorial()">
+                        Limpiar Historial
+                    </button>
                 </div>
             </div>
 
@@ -604,15 +651,6 @@
                     </a>
                 </div>
             </section>
-        </div>
-
-        <!-- Historial de Cotizaciones -->
-        <div class="historial-container" id="historial-container" style="display: none;">
-            <div class="historial-title">Historial de Cotizaciones</div>
-            <ul class="historial-list" id="historial-list"></ul>
-            <button class="historial-clear-btn" onclick="SEAApp.limpiarHistorial()">
-                Limpiar Historial
-            </button>
         </div>
 
         <!-- Testimonio -->
