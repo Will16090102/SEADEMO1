@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes - SEA Express</title>
+    <meta name="description" content="Encuentra respuestas a las preguntas más comunes sobre nuestros servicios de envío USA-Perú. Cotiza tu envío en segundos.">
+    
+    <!-- Preconexiones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Estilos específicos para FAQ */
+        .faq-hero {
+            background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
+            color: white;
+            padding: var(--espacio-16) 0;
+            text-align: center;
+        }
+        
+        .faq-hero h1 {
+            color: white;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .faq-hero .desc {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--espacio-12) var(--espacio-6);
+        }
+        
+        .faq-categories {
+            display: flex;
+            gap: var(--espacio-4);
+            margin-bottom: var(--espacio-8);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .faq-category-btn {
+            background: var(--gris-form);
+            border: 2px solid var(--gris-borde);
+            border-radius: var(--radio-lg);
+            padding: var(--espacio-3) var(--espacio-6);
+            font-weight: 600;
+            color: var(--azul-logo);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .faq-category-btn:hover,
+        .faq-category-btn.active {
+            background: var(--azul-boton);
+            color: white;
+            border-color: var(--azul-boton);
+            transform: translateY(-2px);
+        }
+        
+        .faq-section {
+            margin-bottom: var(--espacio-12);
+        }
+        
+        .faq-section h2 {
+            display: flex;
+            align-items: center;
+            gap: var(--espacio-3);
+            color: var(--azul-logo);
+            margin-bottom: var(--espacio-6);
+            font-size: 1.8rem;
+        }
+        
+        .faq-section h2 i {
+            font-size: 1.5rem;
+            color: var(--azul-boton);
+        }
+        
+        .faq-grid {
+            display: grid;
+            gap: var(--espacio-4);
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--radio-lg);
+            box-shadow: var(--sombra-sm);
+            border: 1px solid var(--gris-borde);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: var(--sombra-md);
+            transform: translateY(-2px);
+        }
+        
+        .faq-question {
+            padding: var(--espacio-5) var(--espacio-6);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--azul-logo);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: var(--gris-form);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: var(--azul-boton);
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 var(--espacio-6);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: var(--beige-claro);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: var(--espacio-5) var(--espacio-6);
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            line-height: 1.7;
+            color: var(--negro-texto);
+        }
+        
+        .faq-answer-content p {
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .faq-answer-content ul, 
+        .faq-answer-content ol {
+            margin-bottom: var(--espacio-4);
+            padding-left: var(--espacio-5);
+        }
+        
+        .faq-answer-content li {
+            margin-bottom: var(--espacio-2);
+        }
+        
+        .faq-tip {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 4px solid var(--azul-boton);
+            padding: var(--espacio-4);
+            border-radius: var(--radio-md);
+            margin: var(--espacio-4) 0;
+        }
+        
+        .faq-warning {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left: 4px solid #f44336;
+            padding: var(--espacio-4);
+            border-radius: var(--radio-md);
+            margin: var(--espacio-4) 0;
+        }
+        
+        .faq-contact-cta {
+            background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
+            color: white;
+            padding: var(--espacio-8);
+            border-radius: var(--radio-xl);
+            text-align: center;
+            margin-top: var(--espacio-12);
+        }
+        
+        .faq-contact-cta h3 {
+            color: white;
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .faq-contact-buttons {
+            display: flex;
+            gap: var(--espacio-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--espacio-6);
+        }
+        
+        .btn-whatsapp-faq {
+            background: var(--wsp);
+            color: white;
+            padding: var(--espacio-3) var(--espacio-6);
+            border-radius: var(--radio-md);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--espacio-2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-whatsapp-faq:hover {
+            background: var(--wsp-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-calculator-faq {
+            background: white;
+            color: var(--azul-boton);
+            padding: var(--espacio-3) var(--espacio-6);
+            border-radius: var(--radio-md);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--espacio-2);
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+        
+        .btn-calculator-faq:hover {
+            background: transparent;
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .faq-categories {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .faq-category-btn {
+                text-align: center;
+            }
+            
+            .faq-question {
+                padding: var(--espacio-4) var(--espacio-5);
+                font-size: 1rem;
+            }
+            
+            .faq-contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-whatsapp-faq,
+            .btn-calculator-faq {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .faq-item {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
+                <span class="logo-text">Elígelo y es tuyo</span>
+            </div>
+            <a href="../index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="faq-hero">
+        <div class="main-container">
+            <h1>Preguntas Frecuentes</h1>
+            <p class="desc">Encuentra respuestas rápidas a todas tus dudas sobre nuestros servicios de envío</p>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <main class="faq-container">
+        <!-- Categorías -->
+        <div class="faq-categories">
+            <button class="faq-category-btn active" data-category="all">Todas las preguntas</button>
+            <button class="faq-category-btn" data-category="envios">Envíos</button>
+            <button class="faq-category-btn" data-category="pagos">Pagos y Precios</button>
+            <button class="faq-category-btn" data-category="impuestos">Impuestos y Aduana</button>
+            <button class="faq-category-btn" data-category="seguimiento">Seguimiento</button>
+        </div>
+
+        <!-- Sección: Sobre los Envíos -->
+        <section class="faq-section" data-category="envios">
+            <h2><i class="fas fa-shipping-fast"></i> Sobre los Envíos</h2>
+            <div class="faq-grid">
+                <!-- Pregunta 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Cuánto tiempo tarda en llegar mi pedido?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Los tiempos de entrega varían según el tipo de envío seleccionado:</p>
+                            <ul>
+                                <li><strong>Envío Express:</strong> 7-10 días hábiles</li>
+                                <li><strong>Envío Estándar:</strong> 12-15 días hábiles</li>
+                                <li><strong>Envío Económico:</strong> 18-22 días hábiles</li>
+                            </ul>
+                            <p>El tiempo comienza a contar desde que recibimos tu paquete en nuestro almacén de Miami.</p>
+                            <div class="faq-tip">
+                                <strong>💡 Tip:</strong> Los envíos express son ideales para productos urgentes o de alto valor.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué documentos necesito para realizar un envío?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Para realizar un envío con SEA Express necesitas:</p>
+                            <ol>
+                                <li><strong>DNI o Carnet de Extranjería:</strong> Documento de identidad vigente</li>
+                                <li><strong>Factura o comprobante de compra:</strong> Donde figure el valor del producto</li>
+                                <li><strong>Dirección de entrega completa:</strong> Incluyendo referencia</li>
+                            </ol>
+                            <p>En caso de empresas, se requiere RUC y datos de la empresa.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Puedo enviar múltiples productos en un mismo paquete?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Sí, puedes consolidar múltiples productos en un solo envío. Esto puede ser más económico que enviar cada producto por separado.</p>
+                            <p><strong>Ventajas de la consolidación:</strong></p>
+                            <ul>
+                                <li>Ahorras en costos de envío</li>
+                                <li>Un solo seguimiento para todos tus productos</li>
+                                <li>Gestionas un solo paquete</li>
+                            </ul>
+                            <div class="faq-warning">
+                                <strong>⚠️ Importante:</strong> El valor total consolidado no debe exceder los $200 USD para evitar impuestos, a menos que estés dispuesto a pagarlos.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pregunta 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué pasa si mi paquete excede las dimensiones estándar?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Para paquetes que excedan nuestras dimensiones estándar (150cm en su lado más largo o 30kg):</p>
+                            <ul>
+                                <li>Aplican tarifas especiales por sobrepeso/sobredimension</li>
+                                <li>El costo se calcula según el peso volumétrico</li>
+                                <li>Pueden existir restricciones según la aerolínea</li>
+                            </ul>
+                            <p><strong>Recomendación:</strong> Contáctanos antes de realizar tu compra para cotizar envíos de grandes dimensiones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Pagos y Precios -->
+        <section class="faq-section" data-category="pagos">
+            <h2><i class="fas fa-dollar-sign"></i> Pagos y Precios</h2>
+            <div class="faq-grid">
+                <!-- Pregunta 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué métodos de pago aceptan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Aceptamos los siguientes métodos de pago:</p>
+                            <ul>
+                                <li><strong>Transferencia bancaria:</strong> BCP, BBVA, Interbank</li>
+                                <li><strong>Yape / Plin:</strong> Pago inmediato</li>
+                                <li><strong>Tarjetas de crédito/débito:</strong> Visa, MasterCard</li>
+                                <li><strong>Pago en efectivo:</strong> En nuestras oficinas</li>
+                            </ul>
+                            <p>Los pagos se realizan una vez que tu paquete llega a Perú y está listo para ser entregado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿El precio de la calculadora incluye todos los costos?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Sí, nuestra calculadora incluye todos los costos estimados:</p>
+                            <ul>
+                                <li><strong>Costo de envío internacional</strong></li>
+                                <li><strong>Gastos de desaduanaje</strong></li>
+                                <li><strong>Impuestos de importación</strong> (si aplican)</li>
+                                <li><strong>Gastos de manejo</strong></li>
+                            </ul>
+                            <p>El precio mostrado es el total que pagarás por tu envío.</p>
+                            <div class="faq-tip">
+                                <strong>💡 Tip:</strong> Usa nuestra calculadora para comparar costos antes de realizar tus compras.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Ofrecen descuentos por volumen o clientes frecuentes?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Sí, ofrecemos varios programas de descuento:</p>
+                            <ul>
+                                <li><strong>Programa de Referidos:</strong> Gana créditos por recomendar amigos</li>
+                                <li><strong>Clientes Frecuentes:</strong> Descuentos progresivos según volumen</li>
+                                <li><strong>Empresas:</strong> Tarifas especiales para negocios</li>
+                                <li><strong>Promociones Estacionales:</strong> Descuentos en fechas especiales</li>
+                            </ul>
+                            <p>Contáctanos para conocer los descuentos que aplican para tu caso específico.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Impuestos y Aduana -->
+        <section class="faq-section" data-category="impuestos">
+            <h2><i class="fas fa-file-invoice-dollar"></i> Impuestos y Aduana</h2>
+            <div class="faq-grid">
+                <!-- Pregunta 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Cuándo debo pagar impuestos por mis envíos?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Los impuestos de importación se aplican cuando:</p>
+                            <ul>
+                                <li>El valor declarado del producto supera los <strong>$200 USD</strong></li>
+                                <li>El envío es de naturaleza comercial</li>
+                                <li>El producto está sujeto a impuestos específicos</li>
+                            </ul>
+                            <p><strong>Tasa de impuestos:</strong> 25% sobre el excedente de los $200 USD</p>
+                            <p><strong>Ejemplo:</strong> Producto de $300 USD → Impuestos = ($300 - $200) × 25% = $25 USD</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué productos están exonerados de impuestos?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Están exonerados de impuestos:</p>
+                            <ul>
+                                <li>Libros y material educativo</li>
+                                <li>Medicamentos con receta médica</li>
+                                <li>Productos para personas con discapacidad</li>
+                                <li>Muestras comerciales sin valor comercial</li>
+                            </ul>
+                            <div class="faq-warning">
+                                <strong>⚠️ Importante:</strong> Se requiere documentación específica para cada caso de exoneración.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Cómo declaro el valor de mis productos?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Debes declarar el valor real de tus productos incluyendo:</p>
+                            <ul>
+                                <li>Precio de compra del producto</li>
+                                <li>Costo de envío desde la tienda a nuestro almacén</li>
+                                <li>Seguros adicionales contratados</li>
+                            </ul>
+                            <p><strong>Documentación requerida:</strong></p>
+                            <ul>
+                                <li>Factura o comprobante de compra</li>
+                                <li>Recibo de pago</li>
+                                <li>Confirmación de envío de la tienda</li>
+                            </ul>
+                            <div class="faq-tip">
+                                <strong>💡 Tip:</strong> Mantén toda tu documentación organizada para un proceso aduanero más rápido.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Seguimiento -->
+        <section class="faq-section" data-category="seguimiento">
+            <h2><i class="fas fa-map-marker-alt"></i> Seguimiento y Entrega</h2>
+            <div class="faq-grid">
+                <!-- Pregunta 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Cómo puedo rastrear mi paquete?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Puedes rastrear tu paquete de varias formas:</p>
+                            <ul>
+                                <li><strong>Portal de Clientes:</strong> Accede con tu número de tracking</li>
+                                <li><strong>WhatsApp:</strong> Envía tu número de tracking al +51 912 140 295</li>
+                                <li><strong>Email:</strong> Recibirás actualizaciones automáticas</li>
+                                <li><strong>Teléfono:</strong> Llama a nuestra línea de atención</li>
+                            </ul>
+                            <p>Recibirás tu número de tracking una vez que tu paquete sea procesado en nuestro almacén de Miami.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué pasa si no estoy en casa para recibir mi paquete?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Si no estás en casa durante el primer intento de entrega:</p>
+                            <ul>
+                                <li><strong>Segundo intento:</strong> Realizamos un segundo intento al día siguiente</li>
+                                <li><strong>Punto de recojo:</strong> Puedes recoger en nuestra oficina más cercana</li>
+                                <li><strong>Re programación:</strong> Coordina una nueva fecha de entrega</li>
+                            </ul>
+                            <p><strong>Tiempo de almacenamiento gratuito:</strong> 5 días hábiles</p>
+                            <div class="faq-warning">
+                                <strong>⚠️ Importante:</strong> Después del período gratuito, aplican cargos por almacenamiento.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="faq-contact-cta">
+            <h3>¿No encontraste tu respuesta?</h3>
+            <p>Estamos aquí para ayudarte. Contáctanos directamente y resuelve todas tus dudas.</p>
+            <div class="faq-contact-buttons">
+                <a href="https://wa.me/51912140295" class="btn-whatsapp-faq" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Chatear por WhatsApp
+                </a>
+                <a href="../index.html" class="btn-calculator-faq">
+                    <i class="fas fa-calculator"></i>
+                    Calcular Mi Envío
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="footer-logo">
+                <div class="footer-tagline">SEA EXPRESS es confiable</div>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>Información</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="faq.html">Preguntas frecuentes</a></li>
+                        <li><a href="como-funciona.html">Cómo funciona</a></li>
+                        <li><a href="tiendas-populares.html">Tiendas populares</a></li>
+                        <li><a href="compras-asistidas.html">Compras Asistidas</a></li>
+                        <li><a href="seguro.html">Seguro</a></li>
+                        <li><a href="productos-prohibidos.html">Productos prohibidos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>La compañía</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="opiniones.html">Opiniones</a></li>
+                        <li><a href="terminos.html">Términos de Uso</a></li>
+                        <li><a href="legal.html">Información legal</a></li>
+                        <li><a href="noticias.html">Noticias</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Personal útil</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="../index.html">Calculadora</a></li>
+                        <li><a href="opciones-pago.html">Opciones de pago</a></li>
+                        <li><a href="seguimiento.html">Seguimiento</a></li>
+                        <li><a href="soporte.html">Soporte 24/7</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Cooperación</h3>
+                    <ul class="footer-links-list">
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="referidos.html">Programa de referidos</a></li>
+                        <li><a href="mayoristas.html">Oferta mayoristas</a></li>
+                        <li><a href="logistics.html">SEA Express Logistics</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SEA Express. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Funcionalidad del FAQ
+        document.addEventListener('DOMContentLoaded', function() {
+            // Acordeón FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Cerrar otros items abiertos
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle item actual
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Filtrado por categorías
+            const categoryButtons = document.querySelectorAll('.faq-category-btn');
+            const faqSections = document.querySelectorAll('.faq-section');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.dataset.category;
+                    
+                    // Actualizar botones activos
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Mostrar/ocultar secciones
+                    faqSections.forEach(section => {
+                        if (category === 'all' || section.dataset.category === category) {
+                            section.style.display = 'block';
+                            // Animar entrada
+                            section.style.animation = 'fadeIn 0.5s ease-out';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                    
+                    // Cerrar todos los items al cambiar categoría
+                    faqItems.forEach(item => {
+                        item.classList.remove('active');
+                    });
+                });
+            });
+            
+            // Abrir FAQ específico desde URL hash
+            const hash = window.location.hash;
+            if (hash) {
+                const targetItem = document.querySelector(hash);
+                if (targetItem) {
+                    targetItem.classList.add('active');
+                    targetItem.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            
+            // Analytics para clicks en FAQ
+            faqItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const question = this.querySelector('.faq-question span').textContent;
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'faq_click', {
+                            'event_category': 'engagement',
+                            'event_label': question
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
