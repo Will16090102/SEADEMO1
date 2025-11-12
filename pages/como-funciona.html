@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómo Funciona - SEA Express</title>
+    <meta name="description" content="Descubre cómo funciona SEA Express paso a paso. Desde tu compra en USA hasta la entrega en Perú, te explicamos todo el proceso.">
+    
+    <!-- Preconexiones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Estilos específicos para Cómo Funciona */
+        .how-hero {
+            background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
+            color: white;
+            padding: var(--espacio-16) 0;
+            text-align: center;
+        }
+        
+        .how-hero h1 {
+            color: white;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .how-hero .desc {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--espacio-12) var(--espacio-6);
+        }
+        
+        /* Timeline Process */
+        .process-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto var(--espacio-16);
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--azul-boton), var(--wsp));
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--espacio-12);
+            position: relative;
+        }
+        
+        .process-step:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .step-content {
+            flex: 1;
+            background: white;
+            padding: var(--espacio-6);
+            border-radius: var(--radio-lg);
+            box-shadow: var(--sombra-md);
+            border: 2px solid var(--gris-borde);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:nth-child(odd) .step-content {
+            margin-right: var(--espacio-8);
+        }
+        
+        .process-step:nth-child(even) .step-content {
+            margin-left: var(--espacio-8);
+        }
+        
+        .step-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-lg);
+            border-color: var(--azul-boton);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--azul-boton) 0%, var(--azul-logo) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: var(--espacio-4);
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--beige-claro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--azul-boton);
+        }
+        
+        .step-title {
+            font-size: 1.4rem;
+            color: var(--azul-logo);
+            margin: 0;
+        }
+        
+        .step-description {
+            color: var(--negro-texto);
+            line-height: 1.7;
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .step-features {
+            list-style: none;
+            padding: 0;
+            margin: var(--espacio-4) 0;
+        }
+        
+        .step-features li {
+            padding: var(--espacio-2) 0;
+            border-bottom: 1px solid var(--gris-borde);
+            display: flex;
+            align-items: center;
+            gap: var(--espacio-3);
+        }
+        
+        .step-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .step-features li i {
+            color: var(--success);
+            font-size: 1.1rem;
+        }
+        
+        .step-tip {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-left: 4px solid var(--success);
+            padding: var(--espacio-4);
+            border-radius: var(--radio-md);
+            margin: var(--espacio-4) 0;
+        }
+        
+        .step-warning {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left: 4px solid var(--error);
+            padding: var(--espacio-4);
+            border-radius: var(--radio-md);
+            margin: var(--espacio-4) 0;
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            background: var(--beige-claro);
+            padding: var(--espacio-12) 0;
+            margin: var(--espacio-16) 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--espacio-6);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacio-6);
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: var(--espacio-6);
+            border-radius: var(--radio-lg);
+            text-align: center;
+            box-shadow: var(--sombra-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-md);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--azul-boton);
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .benefit-title {
+            font-size: 1.3rem;
+            color: var(--azul-logo);
+            margin-bottom: var(--espacio-3);
+        }
+        
+        /* CTA Section */
+        .how-cta {
+            background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
+            color: white;
+            padding: var(--espacio-12);
+            border-radius: var(--radio-xl);
+            text-align: center;
+            margin: var(--espacio-16) auto;
+            max-width: 800px;
+        }
+        
+        .how-cta h2 {
+            color: white;
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: var(--espacio-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--espacio-6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .process-timeline::before {
+                left: 30px;
+            }
+            
+            .process-step {
+                flex-direction: row !important;
+                align-items: flex-start;
+            }
+            
+            .process-step:nth-child(odd) .step-content,
+            .process-step:nth-child(even) .step-content {
+                margin: 0 0 0 var(--espacio-8);
+            }
+            
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .step-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--espacio-2);
+            }
+            
+            .step-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .process-step {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .benefit-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
+                <span class="logo-text">Elígelo y es tuyo</span>
+            </div>
+            <a href="../index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="how-hero">
+        <div class="main-container">
+            <h1>¿Cómo Funciona SEA Express?</h1>
+            <p class="desc">Tu envío de USA a Perú en 4 simples pasos. Rápido, seguro y sin complicaciones.</p>
+        </div>
+    </section>
+
+    <!-- Process Timeline -->
+    <main class="process-container">
+        <div class="process-timeline">
+            <!-- Paso 1 -->
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <div class="step-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3 class="step-title">Compra en Tiendas USA</h3>
+                    </div>
+                    <div class="step-description">
+                        <p>Realiza tus compras en cualquier tienda online de Estados Unidos como Amazon, eBay, Best Buy, Walmart y más.</p>
+                    </div>
+                    <ul class="step-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Usa nuestra dirección en Miami como destino de envío</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Compra directamente sin intermediarios</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Múltiples opciones de pago internacional</span>
+                        </li>
+                    </ul>
+                    <div class="step-tip">
+                        <strong>💡 Tip:</strong> Usa nuestra calculadora antes de comprar para conocer el costo total de tu envío.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <div class="step-icon">
+                            <i class="fas fa-warehouse"></i>
+                        </div>
+                        <h3 class="step-title">Recibimos tu Pedido</h3>
+                    </div>
+                    <div class="step-description">
+                        <p>Tu paquete llega a nuestro almacén en Miami donde lo recibimos, inspeccionamos y almacenamos de forma segura.</p>
+                    </div>
+                    <ul class="step-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Almacenamiento gratuito por 30 días</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Inspección visual del empaque</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Fotos de confirmación de recepción</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Consolidación de múltiples paquetes</span>
+                        </li>
+                    </ul>
+                    <div class="step-tip">
+                        <strong>📦 Consolidación:</strong> Puedes combinar múltiples compras en un solo envío para ahorrar costos.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <div class="step-icon">
+                            <i class="fas fa-plane-departure"></i>
+                        </div>
+                        <h3 class="step-title">Procesamiento y Envío</h3>
+                    </div>
+                    <div class="step-description">
+                        <p>Preparamos tu envío, gestionamos la documentación aduanera y lo despachamos a Perú.</p>
+                    </div>
+                    <ul class="step-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Gestión completa de documentación aduanera</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Cálculo automático de impuestos</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Embalaje reforzado opcional</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Seguro incluido en todos los envíos</span>
+                        </li>
+                    </ul>
+                    <div class="step-warning">
+                        <strong>📋 Documentación:</strong> Asegúrate de tener tu DNI vigente y la factura de compra lista.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 4 -->
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <div class="step-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3 class="step-title">Entrega en Perú</h3>
+                    </div>
+                    <div class="step-description">
+                        <p>Tu paquete llega a Perú, pasa por aduanas y te lo entregamos en la dirección que especificaste.</p>
+                    </div>
+                    <ul class="step-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Seguimiento en tiempo real</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Gestión aduanera incluida</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Entrega a domicilio en todo Perú</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Múltiples opciones de pago local</span>
+                        </li>
+                    </ul>
+                    <div class="step-tip">
+                        <strong>🚚 Entrega:</strong> Coordinamos la entrega según tu disponibilidad. 2 intentos de entrega incluidos.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <div class="main-container">
+                <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
+                    ¿Por Qué Elegir SEA Express?
+                </h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="benefit-title">Rápido y Eficiente</h3>
+                        <p>Envíos express en 7-10 días hábiles. El más rápido del mercado.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="benefit-title">100% Seguro</h3>
+                        <p>Seguro incluido en todos los envíos. Tus compras siempre protegidas.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3 class="benefit-title">Precios Transparentes</h3>
+                        <p>Sin costos ocultos. Sabrás exactamente cuánto pagarás desde el inicio.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="benefit-title">Soporte 24/7</h3>
+                        <p>Estamos contigo en cada paso. Soporte en español siempre disponible.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3 class="benefit-title">Calculadora Precisa</h3>
+                        <p>Cotiza tu envío en segundos y toma decisiones informadas.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="benefit-title">Cobertura Nacional</h3>
+                        <p>Entregamos en todo Perú. Desde Lima hasta las ciudades más remotas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="how-cta">
+            <h2>¿Listo para Comenzar?</h2>
+            <p>Únete a miles de clientes satisfechos que ya confían en SEA Express para sus envíos USA-Perú.</p>
+            <div class="cta-buttons">
+                <a href="../index.html" class="btn-whatsapp-faq">
+                    <i class="fas fa-calculator"></i>
+                    Calcular Mi Envío
+                </a>
+                <a href="https://wa.me/51912140295" class="btn-calculator-faq" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Consultar por WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <!-- FAQ Mini Section -->
+        <section style="max-width: 800px; margin: var(--espacio-16) auto;">
+            <h3 style="text-align: center; margin-bottom: var(--espacio-6); color: var(--azul-logo);">
+                Preguntas Comunes sobre el Proceso
+            </h3>
+            <div class="faq-grid" style="grid
