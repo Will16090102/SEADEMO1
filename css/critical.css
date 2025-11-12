@@ -1,0 +1,396 @@
+/* ==========================================================================
+   SEA EXPRESS - CSS CRÍTICO (Above the Fold)
+   Optimizado para el renderizado inicial
+   ========================================================================== */
+
+/* ===== VARIABLES CRÍTICAS ===== */
+:root {
+  /* Colores esenciales */
+  --azul-logo: #223050;
+  --azul-boton: #25324a;
+  --beige-fondo: #f7f1e7;
+  --beige-claro: #faf8f3;
+  --blanco: #ffffff;
+  --negro-texto: #1a2630;
+  --gris-texto: #666666;
+  
+  /* Tipografía */
+  --fuente-principal: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --fuente-titulo: 'Playfair Display', serif;
+  
+  /* Espaciados mínimos */
+  --espacio-4: 1rem;
+  --espacio-6: 1.5rem;
+  --espacio-8: 2rem;
+  --espacio-12: 3rem;
+  --espacio-16: 4rem;
+  
+  /* Radios */
+  --radio-md: 0.75rem;
+  --radio-lg: 1rem;
+  --radio-xl: 1.5rem;
+  --radio-full: 50%;
+}
+
+/* ===== RESET CRÍTICO ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--beige-fondo);
+  color: var(--negro-texto);
+  font-family: var(--fuente-principal);
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== ELEMENTOS CRÍTICOS VISIBLES INMEDIATAMENTE ===== */
+
+/* Header Principal - Visible al cargar */
+.main-header {
+  background: var(--blanco);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  backdrop-filter: blur(10px);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--espacio-4) 0;
+  gap: var(--espacio-6);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: var(--espacio-6);
+  padding-right: var(--espacio-6);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-4);
+  flex-shrink: 0;
+}
+
+.logo-img {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radio-full);
+  background: var(--azul-boton);
+  padding: 0.5rem;
+  object-fit: contain;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 4px solid var(--blanco);
+}
+
+.logo-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--azul-logo);
+  letter-spacing: 0.5px;
+}
+
+/* Hero Section - Contenido principal visible */
+.hero-section {
+  text-align: center;
+  padding: var(--espacio-16) 0 var(--espacio-12);
+  background: linear-gradient(135deg, var(--beige-fondo) 0%, var(--beige-claro) 100%);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: var(--espacio-6);
+  padding-right: var(--espacio-6);
+}
+
+.hero-title {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: var(--espacio-6);
+  background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  color: var(--gris-texto);
+  max-width: 600px;
+  margin: 0 auto var(--espacio-8);
+  line-height: 1.7;
+}
+
+/* Calculadora - Parte visible inicialmente */
+.calculator-section {
+  margin: var(--espacio-12) auto;
+  max-width: 1000px;
+  padding: 0 var(--espacio-6);
+}
+
+.calculator-container {
+  display: flex;
+  gap: var(--espacio-8);
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Tarjeta de Calculadora - Crítica */
+.calculator-card {
+  background: var(--blanco);
+  border-radius: var(--radio-xl);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: var(--espacio-8);
+  flex: 1 1 500px;
+  min-width: min(100%, 400px);
+}
+
+/* Tabs de la Calculadora */
+.tabs-container {
+  margin-bottom: var(--espacio-6);
+}
+
+.tabs-list {
+  display: flex;
+  background: #f6f5f2;
+  border-radius: var(--radio-lg);
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radio-md);
+  font-weight: 600;
+  color: var(--azul-boton);
+  transition: all 0.15s ease-in-out;
+  text-align: center;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: var(--azul-boton);
+  color: var(--blanco);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Formularios Críticos */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: var(--espacio-6);
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  color: var(--azul-logo);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0dfdf;
+  border-radius: var(--radio-md);
+  background: #f6f5f2;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.15s ease-in-out;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--azul-boton);
+  background: var(--blanco);
+  box-shadow: 0 0 0 3px rgba(37, 50, 74, 0.1);
+}
+
+/* Botón Principal Crítico */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--radio-md);
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  background: var(--azul-boton);
+  color: var(--blanco);
+  font-family: inherit;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== ESTADOS DE CARGANDO BÁSICOS ===== */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* ===== UTILIDADES CRÍTICAS ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center { text-align: center; }
+
+/* ===== RESPONSIVE CRÍTICO ===== */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--espacio-4);
+    padding: 1rem;
+  }
+  
+  .hero-section {
+    padding: 3rem 1rem 2rem;
+  }
+  
+  .calculator-section {
+    padding: 0 1rem;
+  }
+  
+  .calculator-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .calculator-card {
+    flex: 1 1 100%;
+    min-width: 100%;
+    padding: 1.5rem;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-description {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logo-text {
+    font-size: 1rem;
+  }
+  
+  .calculator-card {
+    padding: 1.25rem;
+  }
+  
+  .tab-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ===== ANIMACIONES CRÍTICAS ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.calculator-card {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ===== PREFERENCIAS DE ACCESIBILIDAD CRÍTICAS ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .calculator-card {
+    animation: none;
+  }
+}
+
+/* ===== ESTADOS DE FOCO CRÍTICOS ===== */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--azul-boton);
+  outline-offset: 2px;
+}
+
+/* ===== ESTILOS PARA CONTENIDO NO CARGADO ===== */
+/* Evita layout shifts mientras carga el contenido */
+.results-card,
+.features-section,
+.history-section {
+  min-height: 1px;
+}
+
+/* ===== OPTIMIZACIONES DE FUENTES ===== */
+/* Prevenir FOIT (Flash of Invisible Text) */
+body {
+  font-display: swap;
+}
+
+/* ===== ESTILOS DE FALBACK MIENTRAS CARGAN LAS FUENTES ===== */
+.font-loading {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== CRITICAL CSS COMPLETO - 7.2KB (Comprimido: ~2.1KB) ===== */
