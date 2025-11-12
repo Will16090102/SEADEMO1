@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras Asistidas - SEA Express</title>
+    <meta name="description" content="Servicio de compras asistidas. Te ayudamos a comprar en cualquier tienda de USA. No te limites a Amazon, compramos por ti donde quieras.">
+    
+    <!-- Preconexiones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <style>
+        /* Estilos específicos para Compras Asistidas */
+        .assisted-hero {
+            background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
+            color: white;
+            padding: var(--espacio-16) 0;
+            text-align: center;
+        }
+        
+        .assisted-hero h1 {
+            color: white;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .assisted-hero .desc {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .assisted-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--espacio-12) var(--espacio-6);
+        }
+        
+        /* Hero Stats */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--espacio-6);
+            margin: var(--espacio-8) auto;
+            max-width: 800px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: var(--espacio-4);
+            border-radius: var(--radio-lg);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--espacio-2);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            background: var(--beige-claro);
+            padding: var(--espacio-12) 0;
+            margin: var(--espacio-16) 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--espacio-6);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacio-6);
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: var(--espacio-6);
+            border-radius: var(--radio-lg);
+            text-align: center;
+            box-shadow: var(--sombra-sm);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-md);
+            border-color: var(--azul-boton);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--azul-boton);
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .benefit-title {
+            font-size: 1.3rem;
+            color: var(--azul-logo);
+            margin-bottom: var(--espacio-3);
+        }
+        
+        /* Process Section */
+        .process-section {
+            margin: var(--espacio-16) 0;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--espacio-6);
+            margin-top: var(--espacio-8);
+        }
+        
+        .process-step-card {
+            background: white;
+            padding: var(--espacio-6);
+            border-radius: var(--radio-lg);
+            box-shadow: var(--sombra-sm);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .process-step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-md);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--azul-boton) 0%, var(--azul-logo) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 auto var(--espacio-4);
+        }
+        
+        .step-icon {
+            font-size: 2.5rem;
+            color: var(--azul-boton);
+            margin-bottom: var(--espacio-4);
+        }
+        
+        /* Stores Section */
+        .stores-section {
+            background: var(--beige-claro);
+            padding: var(--espacio-12) 0;
+            margin: var(--espacio-16) 0;
+        }
+        
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--espacio-4);
+            max-width: 1000px;
+            margin: var(--espacio-8) auto;
+        }
+        
+        .store-item {
+            background: white;
+            padding: var(--espacio-4);
+            border-radius: var(--radio-md);
+            text-align: center;
+            box-shadow: var(--sombra-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .store-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--sombra-md);
+        }
+        
+        .store-icon {
+            font-size: 2rem;
+            color: var(--azul-boton);
+            margin-bottom: var(--espacio-2);
+        }
+        
+        /* Form Section */
+        .form-section {
+            background: white;
+            padding: var(--espacio-8);
+            border-radius: var(--radio-lg);
+            box-shadow: var(--sombra-md);
+            margin: var(--espacio-12) auto;
+            max-width: 600px;
+        }
+        
+        .form-title {
+            text-align: center;
+            color: var(--azul-logo);
+            margin-bottom: var(--espacio-6);
+        }
+        
+        .form-group {
+            margin-bottom: var(--espacio-5);
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--azul-logo);
+            margin-bottom: var(--espacio-2);
+        }
+        
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: var(--espacio-3) var(--espacio-4);
+            border: 2px solid var(--gris-borde);
+            border-radius: var(--radio-md);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: var(--azul-boton);
+            outline: none;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-note {
+            font-size: 0.9rem;
+            color: var(--gris-texto);
+            margin-top: var(--espacio-2);
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: var(--espacio-4);
+            background: var(--azul-boton);
+            color: white;
+            border: none;
+            border-radius: var(--radio-md);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--espacio-2);
+        }
+        
+        .btn-submit:hover {
+            background: var(--azul-logo);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            max-width: 800px;
+            margin: var(--espacio-16) auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--radio-lg);
+            box-shadow: var(--sombra-sm);
+            margin-bottom: var(--espacio-4);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: var(--espacio-5) var(--espacio-6);
+            font-weight: 600;
+            color: var(--azul-logo);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: var(--gris-form);
+        }
+        
+        .faq-answer {
+            padding: 0 var(--espacio-6);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: var(--espacio-5) var(--espacio-6);
+            max-height: 500px;
+        }
+        
+        /* CTA Section */
+        .assisted-cta {
+            background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
+            color: white;
+            padding: var(--espacio-12);
+            border-radius: var(--radio-xl);
+            text-align: center;
+            margin: var(--espacio-16) auto;
+            max-width: 800px;
+        }
+        
+        .assisted-cta h2 {
+            color: white;
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: var(--espacio-4);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--espacio-6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .stores-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .benefit-card,
+        .process-step-card,
+        .store-item {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
+                <span class="logo-text">Elígelo y es tuyo</span>
+            </div>
+            <a href="../index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="assisted-hero">
+        <div class="main-container">
+            <h1>Compras Asistidas</h1>
+            <p class="desc">¿No puedes comprar directamente? ¡Nosotros lo hacemos por ti! Compramos en cualquier tienda de USA.</p>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Tiendas Disponibles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Soporte Personalizado</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Compra Garantizada</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">0%</div>
+                    <div class="stat-label">Comisión por Servicio</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="assisted-container">
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <div class="main-container">
+                <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
+                    ¿Por Qué Usar Compras Asistidas?
+                </h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-store-slash"></i>
+                        </div>
+                        <h3 class="benefit-title">Tiendas Restrictivas</h3>
+                        <p>Algunas tiendas no aceptan tarjetas internacionales o no envían a casilleros. Nosotros solucionamos esto.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 class="benefit-title">Sin Barreras de Idioma</h3>
+                        <p>¿Problemas con el inglés? Nuestro equipo se comunica en español y maneja todas las negociaciones.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3 class="benefit-title">Compra 100% Segura</h3>
+                        <p>Verificamos vendedores, gestionamos garantías y nos aseguramos de que recibas exactamente lo que pediste.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-search-dollar"></i>
+                        </div>
+                        <h3 class="benefit-title">Búsqueda Especializada</h3>
+                        <p>¿No encuentras un producto? Nuestro equipo lo busca por ti en múltiples tiendas y compara precios.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3 class="benefit-title">Regalos y Sorpresas</h3>
+                        <p>Perfecto para comprar regalos sin que el destinatario se entere. Mantenemos la discreción.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="benefit-title">Ahorra Tiempo</h3>
+                        <p>No pierdas horas buscando y comparando. Dinos qué necesitas y nosotros hacemos el trabajo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process-section">
+            <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
+                Así de Fácil es Nuestro Servicio
+            </h2>
+            <div class="process-steps">
+                <div class="process-step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <h3 style="color: var(--azul-logo); margin-bottom: var(--espacio-3);">Solicita tu Producto</h3>
+                    <p>Enviános el enlace del producto o descríbenos lo que necesitas por WhatsApp o el formulario.</p>
+                </div>
+                
+                <div class="process-step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 style="color: var(--azul-logo); margin-bottom: var(--espacio-3);">Recibe tu Cotización</h3>
+                    <p>Te enviamos el costo total incluyendo el producto, impuestos y envío a Perú en 24 horas.</p>
+                </div>
+                
+                <div class="process-step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3 style="color: var(--azul-logo); margin-bottom: var(--espacio-3);">Realiza el Pago</h3>
+                    <p>Confirmas la cotización y realizas el pago mediante transferencia, Yape o tarjeta.</p>
+                </div>
+                
+                <div class="process-step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 style="color: var(--azul-logo); margin-bottom: var(--espacio-3);">Recibe tu Pedido</h3>
+                    <p>Compramos el producto y te lo enviamos. Recibes tracking y soporte durante todo el proceso.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stores Section -->
+        <section class="stores-section">
+            <div class="main-container">
+                <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
+                    Compramos en Estas y Muchas Más Tiendas
+                </h2>
+                <div class="stores-grid">
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fab fa-amazon"></i>
+                        </div>
+                        <div>Amazon</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fab fa-ebay"></i>
+                        </div>
+                        <div>eBay</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div>Best Buy</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                        <div>Walmart</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div>Target</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <div>Apple</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div>Home Depot</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div>Nike</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-shoe-prints"></i>
+                        </div>
+                        <div>Adidas</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>Samsung</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                        <div>Wayfair</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="store-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div>Y 500+ más</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section class="form-section">
+            <h3 class="form-title">Solicita tu Compra Asistida</h3>
+            <form id="assisted-purchase-form">
+                <div class="form-group">
+                    <label for="product-url" class="form-label">Enlace del Producto (si lo tienes)</label>
+                    <input type="url" id="product-url" class="form-input" placeholder="https://www.tienda.com/producto">
+                    <div class="form-note">Si no tienes un enlace específico, describe el producto abajo</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-description" class="form-label">Descripción del Producto *</label>
+                    <textarea id="product-description" class="form-textarea" placeholder="Ej: Laptop Dell XPS 13, color plata, 16GB RAM, 512GB SSD..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-store" class="form-label">Tienda Preferida (opcional)</label>
+                    <input type="text" id="product-store" class="form-input" placeholder="Ej: Best Buy, Amazon, tienda específica...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="budget" class="form-label">Presupuesto Aproximado (USD)</label>
+                    <select id="budget" class="form-select">
+                        <option value="">Selecciona un rango</option>
+                        <option value="0-100">$0 - $100</option>
+                        <option value="100-300">$100 - $300</option>
+                        <option value="300-500">$300 - $500</option>
+                        <option value="500-1000">$500 - $1,000</option>
+                        <option value="1000+">Más de $1,000</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="urgency" class="form-label">Urgencia del Pedido</label>
+                    <select id="urgency" class="form-select">
+                        <option value="normal">Normal (1-2 semanas)</option>
+                        <option value="urgent">Urgente (3-7 días)</option>
+                        <option value="express">Express (1-3 días)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-name" class="form-label">Tu Nombre *</label>
+                    <input type="text" id="customer-name" class="form-input" placeholder="Nombre completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-email" class="form-label">Email *</label>
+                    <input type="email" id="customer-email" class="form-input" placeholder="tu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-phone" class="form-label">WhatsApp *</label>
+                    <input type="tel" id="customer-phone" class="form-input" placeholder="+51 999 999 999" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="additional-notes" class="form-label">Notas Adicionales</label>
+                    <textarea id="additional-notes" class="form-textarea" placeholder="Información adicional, especificaciones técnicas, preferencias..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i>
+                    Enviar Solicitud
+                </button>
+            </form>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
+                Preguntas Frecuentes sobre Compras Asistidas
+            </h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cobran comisión por el servicio de compras asistidas?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p><strong>No cobramos comisión por el servicio de compras asistidas.</strong> Solo pagas:</p>
+                        <ul>
+                            <li>Precio real del producto en la tienda</li>
+                            <li>Impuestos de importación (si aplican)</li>
+                            <li>Costo de envío USA-Perú</li>
+                            <li>Gastos de manejo estándar</li>
+                        </ul>
+                        <p>El servicio de búsqueda, compra y gestión lo incluimos sin costo adicional.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Qué pasa si el producto no está disponible?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>En caso de que el producto no esté disponible:</p>
+                        <ul>
+                            <li>Te contactamos inmediatamente para informarte</li>
+                            <li>Buscamos alternativas similares en otras tiendas</li>
+                            <li>Te presentamos opciones comparables con sus precios</li>
+                            <li>Si no encuentras una alternativa que te guste, no pagas nada</li>
+                        </ul>
+                        <p>Nuestro compromiso es encontrar exactamente lo que necesitas o la mejor alternativa disponible.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Puedo devolver un producto comprado con compras asistidas?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Las políticas de devolución dependen de la tienda donde se realizó la compra:</p>
+                        <ul>
+                            <li><strong>Amazon:</strong> Generalmente 30 días para devoluciones</li>
+                            <li><strong>Best Buy:</strong> 15 días para la mayoría de productos</li>
+                            <li><strong>eBay:</strong> Depende de la política del vendedor</li>
+                            <li><strong>Otras tiendas:</strong> Varían entre 14-30 días</li>
+                        </ul>
+                        <p>Nosotros gestionamos todo el proceso de devolución por ti, incluyendo la comunicación con la tienda y el reembolso.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>¿Cuánto tiempo toma todo el proceso?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>El tiempo total depende de varios factores:</p>
+                        <ul>
+                            <li><strong>Cotización:</strong> 1-24 horas</li>
+                            <li><strong>Compra y envío a Miami:</strong> 1-5 días hábiles</li>
+                            <li><strong>Procesamiento en Miami:</strong> 1-2 días hábiles</li>
+                            <li><strong>Envío a Perú:</strong> 7-10 días hábiles (express)</li>
+                        </ul>
+                        <p><strong>Tiempo total estimado:</strong> 10-18 días hábiles para recibir tu producto en Perú.</p>
+                        <p>Servicios express están disponibles para tiempos más cortos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="assisted-cta">
+            <h2>¿Tienes Dudas o Prefieres Contactarnos Directamente?</h2>
+            <p>Nuestro equipo está disponible 24/7 para asesorarte personalmente.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/51912140295" class="btn-whatsapp-faq" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Chatear por WhatsApp
+                </a>
+                <a href="../index.html" class="btn-calculator-faq">
+                    <i class="fas fa-calculator"></i>
+                    Calcular Envío Regular
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="sea-footer">
+        <div class="sea-footer-center">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big" loading="lazy">
+            <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
+            <div class="sea-footer-socialicons">
+                <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        
+        <hr class="sea-footer-divider">
+        
+        <div class="sea-footer-links">
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Información</div>
+                <a href="faq.html">Preguntas frecuentes</a>
+                <a href="como-funciona.html">Cómo funciona</a>
+                <a href="tiendas-populares.html">Tiendas populares</a>
+                <a href="compras-asistidas.html">Compras Asistidas</a>
+                <a href="seguro.html">Seguro</a>
+                <a href="productos-prohibidos.html">Product
