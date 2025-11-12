@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Legal - SEA Express</title>
+    <meta name="description" content="Información legal de SEA Express. Datos de la empresa, registros, políticas de privacidad y cumplimiento normativo.">
+    <meta name="theme-color" content="#25324a">
+    
+    <!-- Preconexiones para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-logo: #223050;
+            --azul-boton: #25324a;
+            --beige-fondo: #f7f1e7;
+            --beige-claro: #faf8f3;
+            --gris-form: #f6f5f2;
+            --gris-borde: #e0dfdf;
+            --negro-texto: #1a2630;
+            --blanco: #ffffff;
+            --wsp: #25D366;
+            --fuente: 'Montserrat', Arial, sans-serif;
+            --fuente-titulo: 'Playfair Display', serif;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: var(--beige-fondo);
+            color: var(--negro-texto);
+            font-family: var(--fuente);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .logo-container {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+        
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--azul-boton);
+            padding: 8px;
+            object-fit: contain;
+            border: 6px solid var(--blanco);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--azul-logo);
+            font-size: 1.1rem;
+        }
+        
+        /* Navegación Simplificada */
+        .nav-container {
+            background: var(--blanco);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--azul-logo);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            background: var(--azul-boton);
+            color: var(--blanco);
+        }
+        
+        .nav-links a.active {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            border-color: var(--azul-logo);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-family: var(--fuente-titulo);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--azul-logo);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Contenido Legal */
+        .legal-container {
+            background: var(--blanco);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+        }
+        
+        .legal-section {
+            margin-bottom: 40px;
+        }
+        
+        .legal-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .legal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--azul-logo);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--beige-claro);
+        }
+        
+        .legal-subtitle {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--azul-logo);
+            margin: 25px 0 15px;
+        }
+        
+        .legal-content {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .legal-content p {
+            margin-bottom: 15px;
+        }
+        
+        .legal-content ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        .legal-content li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .legal-content li:before {
+            content: "•";
+            color: var(--azul-boton);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .info-box {
+            background: var(--beige-claro);
+            border-left: 4px solid var(--azul-boton);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .compliance-box {
+            background: #e8f5e8;
+            border-left: 4px solid #28a745;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .contact-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .legal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .legal-card {
+            background: var(--beige-claro);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--gris-borde);
+        }
+        
+        .legal-card h4 {
+            color: var(--azul-logo);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        .sea-footer {
+            background: var(--azul-logo);
+            color: var(--blanco);
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+        }
+        
+        .sea-footer-center {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .sea-footer-logo-big {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        
+        .sea-footer-confiable {
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .sea-footer-socialicons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .sea-footer-socialicons a {
+            color: var(--blanco);
+            font-size: 1.2rem;
+            transition: opacity 0.2s ease;
+        }
+        
+        .sea-footer-socialicons a:hover {
+            opacity: 0.8;
+        }
+        
+        .sea-footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin: 30px 0;
+        }
+        
+        .sea-footer-links {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .sea-footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .sea-footer-coltitle {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .sea-footer-col a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.2s ease;
+        }
+        
+        .sea-footer-col a:hover {
+            color: var(--blanco);
+        }
+        
+        .sea-footer-copy {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .legal-container {
+                padding: 30px 20px;
+            }
+            
+            .legal-title {
+                font-size: 1.5rem;
+            }
+            
+            .legal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sea-footer-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenido Principal -->
+    <div class="main-container">
+        <!-- Logo y Header -->
+        <div class="logo-container">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
+            <div class="logo-text">Elígelo y es tuyo</div>
+        </div>
+
+        <!-- Navegación Simplificada -->
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="opiniones.html">Opiniones</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Información Legal</h1>
+            <p>Transparencia y cumplimiento normativo en todos nuestros servicios</p>
+        </section>
+
+        <!-- Contenido Legal -->
+        <div class="legal-container">
+            <!-- Sección 1 -->
+            <section class="legal-section">
+                <h2 class="legal-title">1. Datos de la Empresa</h2>
+                <div class="legal-content">
+                    <div class="info-box">
+                        <h4>SEA Express E.I.R.L.</h4>
+                        <p>Empresa legalmente constituida bajo las leyes de la República del Perú, dedicada al servicio de courier internacional y logística.</p>
+                    </div>
+                    
+                    <div class="legal-grid">
+                        <div class="legal-card">
+                            <h4>Razón Social</h4>
+                            <p>SEA Express Envíos Internacionales Rápidos E.I.R.L.</p>
+                        </div>
+                        <div class="legal-card">
+                            <h4>RUC</h4>
+                            <p>20605478931</p>
+                        </div>
+                        <div class="legal-card">
+                            <h4>Fecha de Constitución</h4>
+                            <p>15 de Marzo, 2022</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="legal-subtitle">1.1. Domicilio Legal</h3>
+                    <p><strong>Dirección:</strong> Av. Javier Prado Este 1234, Oficina 501, San Isidro, Lima, Perú</p>
+                    <p><strong>Teléfono Corporativo:</strong> +51 (1) 234-5678</p>
+                    <p><strong>Email Corporativo:</strong> legal@seaexpress.com</p>
+                </div>
+            </section>
+
+            <!-- Sección 2 -->
+            <section class="legal-section">
+                <h2 class="legal-title">2. Registros y Autorizaciones</h2>
+                <div class="legal-content">
+                    <div class="compliance-box">
+                        <p>SEA Express opera bajo todas las autorizaciones y registros requeridos por las autoridades peruanas para servicios de courier internacional.</p>
+                    </div>
+                    
+                    <h3 class="legal-subtitle">2.1. Registros Oficiales</h3>
+                    <ul>
+                        <li><strong>Registro en SUNAT:</strong> Agente de Courier Internacional N° 0452-2023</li>
+                        <li><strong>Autorización MTC:</strong> Permiso de Operación Logística N° MT-7894</li>
+                        <li><strong>Registro DIGEMID:</strong> Autorización para transporte de productos médicos</li>
+                        <li><strong>Afiliación ADEX:</strong> Miembro activo de la Asociación de Exportadores</li>
+                    </ul>
+                    
+                    <h3 class="legal-subtitle">2.2. Certificaciones Internacionales</h3>
+                    <ul>
+                        <li>Certificación ISO 9001:2015 - Gestión de Calidad</li>
+                        <li>Certificación IATA - Agente de Carga Aérea</li>
+                        <li>Miembro de WCA - World Cargo Alliance</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sección 3 -->
+            <section class="legal-section">
+                <h2 class="legal-title">3. Política de Privacidad</h2>
+                <div class="legal-content">
+                    <p>En SEA Express protegemos y respetamos su privacidad. Esta política describe cómo recopilamos, usamos y protegemos su información personal.</p>
+                    
+                    <h3 class="legal-subtitle">3.1. Información que Recopilamos</h3>
+                    <ul>
+                        <li><strong>Datos personales:</strong> Nombre, DNI, dirección, teléfono, email</li>
+                        <li><strong>Datos de envío:</strong> Contenido de paquetes, valores declarados, direcciones</li>
+                        <li><strong>Datos de pago:</strong> Información de transacciones (no almacenamos datos de tarjetas)</li>
+                        <li><strong>Datos técnicos:</strong> Dirección IP, tipo de dispositivo, cookies</li>
+                    </ul>
+                    
+                    <h3 class="legal-subtitle">3.2. Uso de la Información</h3>
+                    <p>Utilizamos su información para:</p>
+                    <ul>
+                        <li>Procesar y gestionar sus envíos</li>
+                        <li>Comunicarnos sobre el estado de sus pedidos</li>
+                        <li>Mejorar nuestros servicios</li>
+                        <li>Cumplir con obligaciones legales</li>
+                        <li>Prevenir fraudes y asegurar la plataforma</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p><strong>Protección de Datos:</strong> Implementamos medidas de seguridad técnicas y organizativas para proteger su información contra acceso no autorizado, alteración o destrucción.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 4 -->
+            <section class="legal-section">
+                <h2 class="legal-title">4. Cumplimiento Normativo</h2>
+                <div class="legal-content">
+                    <h3 class="legal-subtitle">4.1. Regulaciones de Importación</h3>
+                    <p>Nos regimos por las siguientes normativas:</p>
+                    <ul>
+                        <li>Ley N° 28953 - Ley del Servicio Postal</li>
+                        <li>Decreto Supremo N° 013-2019-MTC - Reglamento de Courier</li>
+                        <li>Resolución de Superintendencia N° 234-2020/SUNAT</li>
+                        <li>Ley N° 29733 - Ley de Protección de Datos Personales</li>
+                    </ul>
+                    
+                    <h3 class="legal-subtitle">4.2. Lucha contra el Lavado de Activos</h3>
+                    <p>SEA Express cuenta con un programa de cumplimiento AML (Anti-Money Laundering) que incluye:</p>
+                    <ul>
+                        <li>Verificación de identidad de clientes</li>
+                        <li>Monitoreo de transacciones inusuales</li>
+                        <li>Reporte a UIF-Perú cuando corresponda</li>
+                        <li>Capacitación continua del personal</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sección 5 -->
+            <section class="legal-section">
+                <h2 class="legal-title">5. Propiedad Intelectual</h2>
+                <div class="legal-content">
+                    <p>Todos los derechos de propiedad intelectual sobre el contenido, diseño y funcionalidades de nuestro sitio web y servicios son propiedad exclusiva de SEA Express E.I.R.L.</p>
+                    
+                    <h3 class="legal-subtitle">5.1. Marcas Registradas</h3>
+                    <ul>
+                        <li><strong>SEA Express®</strong> - Marca registrada en INDECOPI N° 154789</li>
+                        <li><strong>"Elígelo y es tuyo"</strong> - Eslogan registrado</li>
+                        <li><strong>Logo SEA Express</strong> - Derechos de autor registrados</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p><strong>Nota:</strong> Queda prohibida la reproducción, distribución o modificación de cualquier elemento de nuestra propiedad intelectual sin autorización expresa por escrito.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 6 -->
+            <section class="legal-section">
+                <h2 class="legal-title">6. Responsabilidades y Garantías</h2>
+                <div class="legal-content">
+                    <h3 class="legal-subtitle">6.1. Alcance del Servicio</h3>
+                    <p>SEA Express actúa como agente intermediario entre el cliente y los servicios de transporte. Nuestra responsabilidad se limita a:</p>
+                    <ul>
+                        <li>Recepción y almacenamiento seguro de paquetes</li>
+                        <li>Gestión de trámites aduaneros</li>
+                        <li>Coordinación con transportistas autorizados</li>
+                        <li>Seguimiento y comunicación del estado del envío</li>
+                    </ul>
+                    
+                    <h3 class="legal-subtitle">6.2. Exclusiones de Responsabilidad</h3>
+                    <p>No somos responsables por:</p>
+                    <ul>
+                        <li>Retrasos por factores fuera de nuestro control (clima, aduanas, aerolíneas)</li>
+                        <li>Daños en productos mal embalados por el remitente original</li>
+                        <li>Problemas con productos defectuosos o de mala calidad</li>
+                        <li>Cambios en regulaciones aduaneras o impositivas</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sección 7 -->
+            <section class="legal-section">
+                <h2 class="legal-title">7. Información Fiscal</h2>
+                <div class="legal-content">
+                    <div class="legal-grid">
+                        <div class="legal-card">
+                            <h4>RUC</h4>
+                            <p>20605478931</p>
+                        </div>
+                        <div class="legal-card">
+                            <h4>Condición Tributaria</h4>
+                            <p>Contribuyente del Régimen General</p>
+                        </div>
+                        <div class="legal-card">
+                            <h4>Estado</h4>
+                            <p>Al día en sus obligaciones tributarias</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="legal-subtitle">7.1. Comprobantes de Pago</h3>
+                    <p>Emitimos los siguientes comprobantes:</p>
+                    <ul>
+                        <li><strong>Facturas Electrónicas:</strong> Para todos los servicios contratados</li>
+                        <li><strong>Boletas de Venta:</strong> Para consumidores finales</li>
+                        <li><strong>Recibos por Honorarios:</strong> Cuando corresponda</li>
+                    </ul>
+                    
+                    <p>Todos nuestros comprobantes son emitidos electrónicamente y enviados al correo registrado del cliente.</p>
+                </div>
+            </section>
+
+            <!-- Sección 8 -->
+            <section class="legal-section">
+                <h2 class="legal-title">8. Contacto Legal</h2>
+                <div class="legal-content">
+                    <div class="contact-box">
+                        <h4>Departamento Legal SEA Express</h4>
+                        <p>Para cualquier consulta legal, notificación formal o ejercicio de derechos ARCO (Acceso, Rectificación, Cancelación y Oposición), puede contactarnos a través de:</p>
+                    </div>
+                    
+                    <div class="legal-grid">
+                        <div class="legal-card">
+                            <h4>Email Legal</h4>
+                            <p>legal@seaexpress.com</p>
+                        </div>
+                        <div class="legal-card">
+                            <h4>Dirección para Notificaciones</h4>
+                            <p>Av. Javier Prado Este 1234, Oficina 501, San Isidro, Lima</p>
+                        </div>
+                        <div class="legal-card">
+                            <h4>Teléfono Legal</h4>
+                            <p>+51 (1) 234-5678</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="legal-subtitle">8.1. Horario de Atención Legal</h3>
+                    <p><strong>Lunes a Viernes:</strong> 9:00 AM - 6:00 PM</p>
+                    <p><strong>Sábados:</strong> 9:00 AM - 1:00 PM</p>
+                    <p><strong>Excluido feriados nacionales</strong></p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="sea-footer">
+        <div class="sea-footer-center">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big">
+            <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
+            <div class="sea-footer-socialicons">
+                <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <hr class="sea-footer-divider">
+
+        <div class="sea-footer-links">
+            <!-- Información -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Información</div>
+                <a href="faq.html">Preguntas frecuentes</a>
+                <a href="como-funciona.html">Cómo funciona</a>
+                <a href="tiendas-populares.html">Tiendas populares</a>
+                <a href="compras-asistidas.html">Compras Asistidas</a>
+                <a href="seguro.html">Seguro</a>
+                <a href="productos-prohibidos.html">Productos prohibidos</a>
+            </div>
+
+            <!-- La compañía -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">La compañía</div>
+                <a href="servicios.html">Servicios</a>
+                <a href="opiniones.html">Opiniones de usuarios</a>
+                <a href="terminos.html">Términos de Uso</a>
+                <a href="legal.html">Información legal</a>
+                <a href="noticias.html">Noticias</a>
+            </div>
+
+            <!-- Personal útil -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Personal útil</div>
+                <a href="../index.html">Calculadora SEA Express</a>
+                <a href="opciones-pago.html">Opciones de pago</a>
+                <a href="seguimiento.html">Seguimiento de envío</a>
+                <a href="soporte.html">Soporte 24/7</a>
+            </div>
+
+            <!-- Cooperación -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Cooperación</div>
+                <a href="contacto.html">Contacto</a>
+                <a href="referidos.html">Programa de referidos</a>
+                <a href="mayoristas.html">Oferta para mayoristas</a>
+                <a href="logistics.html">SEA Express Logistics</a>
+            </div>
+        </div>
+
+        <div class="sea-footer-copy">
+            © 2025 SEA Express. Todos los derechos reservados.
+        </div>
+    </footer>
+</body>
+</html>
