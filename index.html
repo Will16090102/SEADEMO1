@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEA Express - Calculadora de Envíos USA-Perú</title>
-    <meta name="description" content="Cotiza tu envío USA-Perú fácil y rápido con SEA Express. Envíos seguros, soporte 24/7, experiencia garantizada.">
+    <title>Servicios - SEA Express</title>
+    <meta name="description" content="Conoce todos nuestros servicios de envío USA-Perú. Envíos express, compras asistidas, seguimiento en tiempo real y más.">
     <meta name="theme-color" content="#25324a">
     
     <!-- Preconexiones para performance -->
@@ -16,9 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- CSS Crítico Inline -->
     <style>
-        /* === CRITICAL CSS === */
         :root {
             --azul-logo: #223050;
             --azul-boton: #25324a;
@@ -29,9 +27,6 @@
             --negro-texto: #1a2630;
             --blanco: #ffffff;
             --wsp: #25D366;
-            --wsp-hover: #128C7E;
-            --error: #e74c3c;
-            --success: #27ae60;
             --fuente: 'Montserrat', Arial, sans-serif;
             --fuente-titulo: 'Playfair Display', serif;
         }
@@ -40,11 +35,6 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-        
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
         }
         
         body {
@@ -61,6 +51,7 @@
             padding: 0 20px;
         }
         
+        /* Header */
         .logo-container {
             text-align: center;
             padding: 40px 0 20px;
@@ -84,271 +75,242 @@
             font-size: 1.1rem;
         }
         
-        h1 {
-            font-family: var(--fuente-titulo);
-            font-size: clamp(2rem, 5vw, 2.5rem);
-            text-align: center;
+        /* Navegación Simplificada */
+        .nav-container {
+            background: var(--blanco);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+        }
+        
+        .nav-links a {
             color: var(--azul-logo);
-            margin: 10px 0;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            background: var(--azul-boton);
+            color: var(--blanco);
+        }
+        
+        .nav-links a.active {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            border-color: var(--azul-logo);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-family: var(--fuente-titulo);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--azul-logo);
+            margin-bottom: 20px;
             line-height: 1.2;
         }
         
-        .desc {
-            text-align: center;
+        .hero p {
+            font-size: 1.2rem;
             color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
-        .calculator-center-area {
-            display: flex;
+        /* Servicios Grid */
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            justify-content: center;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
         
-        .calculator-wrapper {
+        .servicio-card {
             background: var(--blanco);
             border-radius: 20px;
-            padding: 30px 25px;
+            padding: 40px 30px;
+            text-align: center;
             box-shadow: 0 4px 25px rgba(0,0,0,0.1);
-            flex: 1;
-            min-width: 400px;
-            max-width: 500px;
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
         }
         
-        .result-section {
-            background: var(--blanco);
-            border-radius: 16px;
-            padding: 25px 20px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
-            flex: 1;
-            min-width: 350px;
-            max-width: 400px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .result-section.visible {
-            opacity: 1;
-        }
-        
-        .tab-buttons {
-            display: flex;
-            background: var(--gris-form);
-            border-radius: 14px;
-            padding: 4px;
-            margin-bottom: 25px;
-            gap: 4px;
-        }
-        
-        .tab-btn {
-            flex: 1;
-            padding: 10px 20px;
-            border: none;
-            background: none;
-            border-radius: 10px;
-            font-weight: 600;
-            color: var(--azul-boton);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .tab-btn.active {
-            background: var(--azul-boton);
-            color: var(--blanco);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        label {
-            display: block;
-            font-weight: 600;
-            color: var(--azul-logo);
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-        
-        input[type="number"],
-        input[type="text"] {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid var(--gris-borde);
-            border-radius: 10px;
-            font-size: 16px;
-            background: var(--gris-form);
-            transition: border-color 0.2s ease;
-        }
-        
-        input[type="number"]:focus,
-        input[type="text"]:focus {
+        .servicio-card:hover {
+            transform: translateY(-10px);
             border-color: var(--azul-boton);
-            outline: none;
         }
         
-        .calculate-btn {
-            width: 100%;
-            padding: 16px;
-            background: var(--azul-boton);
-            color: var(--blanco);
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 10px;
-            display: block;
-            opacity: 1;
-            visibility: visible;
+        .servicio-icon {
+            font-size: 3rem;
+            color: var(--azul-logo);
+            margin-bottom: 20px;
         }
         
-        .calculate-btn:hover {
-            background: var(--azul-logo);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 50, 74, 0.3);
+        .servicio-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--azul-logo);
+            margin-bottom: 15px;
         }
         
-        .whatsapp-btn {
-            background: var(--wsp);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            padding: 16px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            color: var(--blanco);
-            text-decoration: none;
-            transition: background 0.2s ease;
+        .servicio-desc {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
         
-        .whatsapp-btn:hover {
-            background: var(--wsp-hover);
-        }
-        
-        .result-title {
+        .servicio-precio {
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--azul-logo);
             margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--gris-borde);
-        }
-        
-        .highlight-box {
+            padding: 10px 20px;
             background: var(--beige-claro);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            border: 2px solid var(--azul-logo);
+            border-radius: 25px;
+            display: inline-block;
         }
         
-        .highlight-title {
+        .servicio-btn {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-weight: 600;
-            color: var(--azul-logo);
-            margin-bottom: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
         
-        .highlight-value {
+        .servicio-btn:hover {
+            background: var(--azul-logo);
+            transform: translateY(-2px);
+        }
+        
+        /* Proceso Section */
+        .proceso-section {
+            background: var(--blanco);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-family: var(--fuente-titulo);
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--azul-logo);
+            margin-bottom: 40px;
+        }
+        
+        .proceso-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            counter-reset: step-counter;
+        }
+        
+        .proceso-step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .proceso-step::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            background: var(--azul-boton);
+            color: var(--blanco);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--azul-logo);
+            margin: 0 auto 20px;
         }
         
-        .testimonial {
-            text-align: center;
-            font-style: italic;
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--azul-logo);
+            margin-bottom: 15px;
+        }
+        
+        .step-desc {
             color: #666;
-            margin: 40px 0;
-            padding: 20px;
-            background: var(--blanco);
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            line-height: 1.6;
         }
         
-        .testimonial strong {
-            display: block;
-            margin-top: 10px;
-            color: var(--azul-logo);
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
+            color: var(--blanco);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 60px;
         }
         
-        .features-container {
-            margin: 50px 0;
+        .cta-title {
+            font-family: var(--fuente-titulo);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
         
-        .features-section {
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
         }
         
-        .feature-card {
+        .cta-btn {
             background: var(--blanco);
-            border-radius: 15px;
-            padding: 25px 20px;
-            text-align: center;
-            flex: 1;
-            min-width: 250px;
-            max-width: 300px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
             color: var(--azul-logo);
-            margin-bottom: 15px;
-        }
-        
-        .feature-title {
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
             font-weight: 700;
-            color: var(--azul-logo);
-            margin-bottom: 10px;
-            font-size: 1.1rem;
+            transition: transform 0.3s ease;
         }
         
-        .feature-text {
-            color: #666;
-            font-size: 0.9rem;
-            line-height: 1.5;
+        .cta-btn:hover {
+            transform: translateY(-3px);
         }
         
+        .cta-btn.whatsapp {
+            background: var(--wsp);
+            color: var(--blanco);
+        }
+        
+        /* Footer */
         .sea-footer {
             background: var(--azul-logo);
             color: var(--blanco);
@@ -434,73 +396,23 @@
             font-size: 0.9rem;
         }
         
-        .historial-container {
-            background: var(--blanco);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        
-        .historial-title {
-            font-weight: 700;
-            color: var(--azul-logo);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .historial-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-        
-        .historial-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--gris-borde);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .historial-clear-btn {
-            background: var(--error);
-            max-width: 200px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            color: var(--blanco);
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        .historial-clear-btn:hover {
-            background: #c0392b;
-        }
-        
-        .divider {
-            height: 1px;
-            background: var(--gris-borde);
-            margin: 30px 0;
-            border: none;
-        }
-        
         @media (max-width: 768px) {
-            .calculator-wrapper,
-            .result-section {
-                min-width: 100%;
-            }
-            
-            .calculator-center-area {
-                flex-direction: column;
-            }
-            
-            .features-section {
+            .nav-links {
                 flex-direction: column;
                 align-items: center;
             }
             
-            .feature-card {
-                max-width: 100%;
+            .servicios-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .proceso-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
             }
             
             .sea-footer-links {
@@ -509,188 +421,155 @@
             }
         }
     </style>
-    
-    <!-- CSS Principal (Cargado asíncronamente) -->
-    <link rel="stylesheet" href="./css/styles.css" media="print" onload="this.media='all'">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./assets/logos/LOGOSEAE.png">
 </head>
 <body>
     <!-- Contenido Principal -->
     <div class="main-container">
         <!-- Logo y Header -->
         <div class="logo-container">
-            <img src="./assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img" loading="eager">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
             <div class="logo-text">Elígelo y es tuyo</div>
         </div>
 
-        <h1>Cotiza tu envío USA-Perú en segundos</h1>
-        <p class="desc">Simplemente ingresa el valor, peso y tipo de producto.</p>
+        <!-- Navegación Simplificada -->
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="servicios.html" class="active">Servicios</a></li>
+                <li><a href="opiniones.html">Opiniones</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
 
-        <!-- Calculadora -->
-        <div id="calculadoraArea" class="calculator-center-area">
-            <!-- Panel de Calculadora -->
-            <div class="calculator-wrapper">
-                <!-- Tabs -->
-                <div class="tab-buttons">
-                    <button class="tab-btn active" id="manualTab" onclick="SEAApp.switchTab('manual')">
-                        Manual
-                    </button>
-                    <button class="tab-btn" id="enlaceTab" onclick="SEAApp.switchTab('enlace')">
-                        Por Enlace
-                    </button>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Nuestros Servicios</h1>
+            <p>Ofrecemos soluciones completas para tus envíos USA-Perú. Rápido, seguro y confiable.</p>
+        </section>
+
+        <!-- Servicios Grid -->
+        <div class="servicios-grid">
+            <!-- Servicio 1 -->
+            <div class="servicio-card">
+                <div class="servicio-icon">
+                    <i class="fas fa-shipping-fast"></i>
                 </div>
-
-                <!-- Contenido de Tabs -->
-                <div class="form-section">
-                    <!-- Tab Manual -->
-                    <div id="manual-tab" class="tab-content active">
-                        <div class="form-group">
-                            <label for="valor">Valor del producto (USD)</label>
-                            <input type="number" id="valor" placeholder="Ej: 120" step="0.01" min="1" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="peso">Peso del paquete (kg)</label>
-                            <input type="number" id="peso" placeholder="Ej: 1.5" step="0.01" min="0.1" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="producto">Tipo de producto (opcional)</label>
-                            <input type="text" id="producto" placeholder="Ej: Celular, ropa, etc.">
-                        </div>
-                        
-                        <button class="calculate-btn" id="btn-calcular" onclick="SEAApp.calcularManual()">
-                            Calcular
-                        </button>
-                    </div>
-
-                    <!-- Tab Enlace -->
-                    <div id="enlace-tab" class="tab-content">
-                        <div class="form-group">
-                            <label for="enlace-producto">Enlace del producto</label>
-                            <input type="text" id="enlace-producto" placeholder="Ej: https://www.amazon.com/..." required>
-                        </div>
-                        
-                        <button class="calculate-btn" id="btn-calcular-enlace" onclick="SEAApp.calcularPorEnlace()">
-                            Calcular desde Enlace
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Línea divisoria -->
-                <hr class="divider">
-
-                <!-- Historial de Cotizaciones -->
-                <div class="historial-container" id="historial-container">
-                    <div class="historial-title">Historial de Cotizaciones</div>
-                    <ul class="historial-list" id="historial-list">
-                        <li>
-                            <span>Manual</span>
-                            <span>12/11/2025, 15:52:02</span>
-                        </li>
-                    </ul>
-                    <button class="historial-clear-btn" onclick="SEAApp.limpiarHistorial()">
-                        Limpiar Historial
-                    </button>
-                </div>
+                <h3 class="servicio-title">Envío Express</h3>
+                <p class="servicio-desc">
+                    Recibe tus paquetes en 7-10 días hábiles. Ideal para compras urgentes y productos perecederos.
+                </p>
+                <div class="servicio-precio">Desde $15/kg</div>
+                <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
             </div>
 
-            <!-- Panel de Resultados -->
-            <section id="result-section" class="result-section" aria-live="polite">
-                <div class="result-title">Resumen de Cotización</div>
-                <div id="result-content">
-                    <!-- Información del Producto -->
-                    <div id="producto-info"></div>
-                    
-                    <!-- Desglose de Costos -->
-                    <div class="result-item">
-                        <strong>Valor del producto:</strong>
-                        <span id="valor-result">$0.00</span>
-                    </div>
-                    
-                    <div class="result-item">
-                        <strong>Peso:</strong>
-                        <span id="peso-result">0.00 kg</span>
-                    </div>
-                    
-                    <div class="result-item">
-                        <strong>Desaduanaje:</strong>
-                        <span id="desaduanaje">$8.00</span>
-                    </div>
-                    
-                    <div class="result-item">
-                        <strong>Costo de envío:</strong>
-                        <span id="costo-envio">$0.00</span>
-                    </div>
-                    
-                    <div class="result-item">
-                        <strong>Impuestos:</strong>
-                        <span id="impuestos">$0.00</span>
-                    </div>
-
-                    <!-- Total Destacado -->
-                    <div class="highlight-box">
-                        <div class="highlight-title">Total envío</div>
-                        <div class="highlight-value" id="envio-total">$0.00</div>
-                    </div>
-
-                    <!-- Costo Total -->
-                    <div class="result-item" style="border-bottom: none; margin-top: 20px;">
-                        <strong style="font-size: 1.05rem;">Costo total:</strong>
-                        <span id="total" style="font-size: 1.05rem;">$0.00</span>
-                    </div>
-
-                    <!-- Botón WhatsApp -->
-                    <a id="whatsapp-link" href="https://wa.me/51912140295" target="_blank" rel="noopener">
-                        <button class="whatsapp-btn">
-                            <i class="fab fa-whatsapp"></i>
-                            ¡Quiero mi descuento especial!
-                        </button>
-                    </a>
+            <!-- Servicio 2 -->
+            <div class="servicio-card">
+                <div class="servicio-icon">
+                    <i class="fas fa-box"></i>
                 </div>
-            </section>
+                <h3 class="servicio-title">Envío Estándar</h3>
+                <p class="servicio-desc">
+                    Servicio económico con entrega en 12-15 días hábiles. Perfecto para paquetes no urgentes.
+                </p>
+                <div class="servicio-precio">Desde $12/kg</div>
+                <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
+            </div>
+
+            <!-- Servicio 3 -->
+            <div class="servicio-card">
+                <div class="servicio-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3 class="servicio-title">Compras Asistidas</h3>
+                <p class="servicio-desc">
+                    Te ayudamos a comprar en tiendas que no envían a Perú. Nos encargamos de todo el proceso.
+                </p>
+                <div class="servicio-precio">+10% del valor</div>
+                <a href="compras-asistidas.html" class="servicio-btn">Más Información</a>
+            </div>
+
+            <!-- Servicio 4 -->
+            <div class="servicio-card">
+                <div class="servicio-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3 class="servicio-title">Envío Premium</h3>
+                <p class="servicio-desc">
+                    Servicio VIP con embalaje especial, seguro incluido y entrega prioritaria en 5-7 días.
+                </p>
+                <div class="servicio-precio">Desde $25/kg</div>
+                <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
+            </div>
+
+            <!-- Servicio 5 -->
+            <div class="servicio-card">
+                <div class="servicio-icon">
+                    <i class="fas fa-warehouse"></i>
+                </div>
+                <h3 class="servicio-title">Almacenamiento</h3>
+                <p class="servicio-desc">
+                    Almacena tus paquetes gratis por 30 días en nuestro warehouse de Miami. Consolida envíos.
+                </p>
+                <div class="servicio-precio">Gratis 30 días</div>
+                <a href="../index.html" class="servicio-btn">Más Información</a>
+            </div>
+
+            <!-- Servicio 6 -->
+            <div class="servicio-card">
+                <div class="servicio-icon">
+                    <i class="fas fa-business-time"></i>
+                </div>
+                <h3 class="servicio-title">Servicio Empresas</h3>
+                <p class="servicio-desc">
+                    Soluciones logísticas para empresas. Tarifas especiales y reportes personalizados.
+                </p>
+                <div class="servicio-precio">Consulte precios</div>
+                <a href="mayoristas.html" class="servicio-btn">Contactar</a>
+            </div>
         </div>
 
-        <!-- Testimonio -->
-        <div class="testimonial">
-            "¡Excelente servicio! Mi paquete llegó a tiempo y en perfecta condición. Muy recomendados."
-            <strong>— Carlos R.</strong>
-        </div>
-
-        <!-- Características -->
-        <section class="features-container" aria-label="Ventajas de SEA Express">
-            <div class="features-section">
-                <div class="feature-card" tabindex="0" aria-label="Envío Express">
-                    <div class="feature-icon">
-                        <i class="fas fa-shipping-fast"></i>
-                    </div>
-                    <div class="feature-title">Envío Express</div>
-                    <div class="feature-text">
-                        Entrega rápida en 7-10 días hábiles desde que recibimos tu paquete.
-                    </div>
+        <!-- Proceso Section -->
+        <section class="proceso-section">
+            <h2 class="section-title">Cómo Funciona</h2>
+            <div class="proceso-steps">
+                <div class="proceso-step">
+                    <h4 class="step-title">Compra en USA</h4>
+                    <p class="step-desc">
+                        Compra en cualquier tienda online de USA usando nuestra dirección de Miami
+                    </p>
                 </div>
-
-                <div class="feature-card" tabindex="0" aria-label="Envío Seguro">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="feature-title">Envío Seguro</div>
-                    <div class="feature-text">
-                        Tus envíos siempre están seguros con nosotros. Seguro incluido en todos los envíos.
-                    </div>
+                <div class="proceso-step">
+                    <h4 class="step-title">Recibimos tu Paquete</h4>
+                    <p class="step-desc">
+                        Almacenamos tu paquete gratis por 30 días en nuestro warehouse
+                    </p>
                 </div>
-
-                <div class="feature-card" tabindex="0" aria-label="Soporte 24/7">
-                    <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <div class="feature-title">Soporte 24/7</div>
-                    <div class="feature-text">
-                        Nuestro equipo está disponible para resolver tus dudas en cualquier momento.
-                    </div>
+                <div class="proceso-step">
+                    <h4 class="step-title">Procesamos tu Envío</h4>
+                    <p class="step-desc">
+                        Preparamos tu paquete y calculamos los costos de envío e impuestos
+                    </p>
                 </div>
+                <div class="proceso-step">
+                    <h4 class="step-title">Recibe en Perú</h4>
+                    <p class="step-desc">
+                        Entregamos en la puerta de tu casa en todo el Perú
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="cta-title">¿Listo para Empezar?</h2>
+            <p class="cta-text">
+                Únete a miles de clientes satisfechos que confían en SEA Express para sus envíos USA-Perú
+            </p>
+            <div class="cta-buttons">
+                <a href="../index.html" class="cta-btn">Cotizar Mi Envío</a>
+                <a href="https://wa.me/51912140295" class="cta-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                </a>
             </div>
         </section>
     </div>
@@ -698,7 +577,7 @@
     <!-- Footer -->
     <footer class="sea-footer">
         <div class="sea-footer-center">
-            <img src="./assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big" loading="lazy">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big">
             <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
             <div class="sea-footer-socialicons">
                 <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
@@ -716,40 +595,40 @@
             <!-- Información -->
             <div class="sea-footer-col">
                 <div class="sea-footer-coltitle">Información</div>
-                <a href="./pages/faq.html">Preguntas frecuentes</a>
-                <a href="./pages/como-funciona.html">Cómo funciona</a>
-                <a href="./pages/tiendas-populares.html">Tiendas populares</a>
-                <a href="./pages/compras-asistidas.html">Compras Asistidas</a>
-                <a href="./pages/seguro.html">Seguro</a>
-                <a href="./pages/productos-prohibidos.html">Productos prohibidos</a>
+                <a href="faq.html">Preguntas frecuentes</a>
+                <a href="como-funciona.html">Cómo funciona</a>
+                <a href="tiendas-populares.html">Tiendas populares</a>
+                <a href="compras-asistidas.html">Compras Asistidas</a>
+                <a href="seguro.html">Seguro</a>
+                <a href="productos-prohibidos.html">Productos prohibidos</a>
             </div>
 
             <!-- La compañía -->
             <div class="sea-footer-col">
                 <div class="sea-footer-coltitle">La compañía</div>
-                <a href="./pages/servicios.html">Servicios</a>
-                <a href="./pages/opiniones.html">Opiniones de usuarios</a>
-                <a href="./pages/terminos.html">Términos de Uso</a>
-                <a href="./pages/legal.html">Información legal</a>
-                <a href="./pages/noticias.html">Noticias</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="opiniones.html">Opiniones de usuarios</a>
+                <a href="terminos.html">Términos de Uso</a>
+                <a href="legal.html">Información legal</a>
+                <a href="noticias.html">Noticias</a>
             </div>
 
             <!-- Personal útil -->
             <div class="sea-footer-col">
                 <div class="sea-footer-coltitle">Personal útil</div>
-                <a href="./index.html">Calculadora SEA Express</a>
-                <a href="./pages/opciones-pago.html">Opciones de pago</a>
-                <a href="./pages/seguimiento.html">Seguimiento de envío</a>
-                <a href="./pages/soporte.html">Soporte 24/7</a>
+                <a href="../index.html">Calculadora SEA Express</a>
+                <a href="opciones-pago.html">Opciones de pago</a>
+                <a href="seguimiento.html">Seguimiento de envío</a>
+                <a href="soporte.html">Soporte 24/7</a>
             </div>
 
             <!-- Cooperación -->
             <div class="sea-footer-col">
                 <div class="sea-footer-coltitle">Cooperación</div>
-                <a href="./pages/contacto.html">Contacto</a>
-                <a href="./pages/referidos.html">Programa de referidos</a>
-                <a href="./pages/mayoristas.html">Oferta para mayoristas</a>
-                <a href="./pages/logistics.html">SEA Express Logistics</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="referidos.html">Programa de referidos</a>
+                <a href="mayoristas.html">Oferta para mayoristas</a>
+                <a href="logistics.html">SEA Express Logistics</a>
             </div>
         </div>
 
@@ -757,49 +636,5 @@
             © 2025 SEA Express. Todos los derechos reservados.
         </div>
     </footer>
-
-    <!-- JavaScript Modular -->
-    <script type="module">
-        // Importar módulos
-        import { CONFIG } from './js/config.js';
-        import { CalculadoraEnvio } from './js/calculator.js';
-        import { GestorAlmacenamiento } from './js/storage.js';
-        import { GestorUI } from './js/ui.js';
-        import { SEAApp } from './js/app.js';
-
-        // Inicializar aplicación cuando el DOM esté listo
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                console.log('🚀 Inicializando SEA Express...');
-                SEAApp.inicializar().catch(error => {
-                    console.error('Error inicializando aplicación:', error);
-                });
-            });
-        } else {
-            SEAApp.inicializar().catch(error => {
-                console.error('Error inicializando aplicación:', error);
-            });
-        }
-
-        // Hacer disponible globalmente para event handlers HTML
-        window.SEAApp = SEAApp;
-    </script>
-
-    <!-- Fallback para navegadores sin soporte de modules -->
-    <script nomodule>
-        console.warn('⚠️ Tu navegador no soporta módulos ES6. La aplicación puede no funcionar correctamente.');
-        
-        // Cargar versión compilada si es necesario
-        document.write('<script src="./js/bundle.js"><\/script>');
-    </script>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-    </script>
 </body>
 </html>
