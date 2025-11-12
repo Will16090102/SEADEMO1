@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos de Uso - SEA Express</title>
+    <meta name="description" content="Términos y condiciones de uso de SEA Express. Conoce nuestros políticas, responsabilidades y condiciones del servicio.">
+    <meta name="theme-color" content="#25324a">
+    
+    <!-- Preconexiones para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-logo: #223050;
+            --azul-boton: #25324a;
+            --beige-fondo: #f7f1e7;
+            --beige-claro: #faf8f3;
+            --gris-form: #f6f5f2;
+            --gris-borde: #e0dfdf;
+            --negro-texto: #1a2630;
+            --blanco: #ffffff;
+            --wsp: #25D366;
+            --fuente: 'Montserrat', Arial, sans-serif;
+            --fuente-titulo: 'Playfair Display', serif;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: var(--beige-fondo);
+            color: var(--negro-texto);
+            font-family: var(--fuente);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .logo-container {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+        
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--azul-boton);
+            padding: 8px;
+            object-fit: contain;
+            border: 6px solid var(--blanco);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--azul-logo);
+            font-size: 1.1rem;
+        }
+        
+        /* Navegación Simplificada */
+        .nav-container {
+            background: var(--blanco);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--azul-logo);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            background: var(--azul-boton);
+            color: var(--blanco);
+        }
+        
+        .nav-links a.active {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            border-color: var(--azul-logo);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-family: var(--fuente-titulo);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--azul-logo);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Contenido Términos */
+        .terminos-container {
+            background: var(--blanco);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+        }
+        
+        .terminos-section {
+            margin-bottom: 40px;
+        }
+        
+        .terminos-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .terminos-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--azul-logo);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--beige-claro);
+        }
+        
+        .terminos-subtitle {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--azul-logo);
+            margin: 25px 0 15px;
+        }
+        
+        .terminos-content {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .terminos-content p {
+            margin-bottom: 15px;
+        }
+        
+        .terminos-content ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        .terminos-content li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .terminos-content li:before {
+            content: "•";
+            color: var(--azul-boton);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .highlight-box {
+            background: var(--beige-claro);
+            border-left: 4px solid var(--azul-boton);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            color: #856404;
+        }
+        
+        /* Footer */
+        .sea-footer {
+            background: var(--azul-logo);
+            color: var(--blanco);
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+        }
+        
+        .sea-footer-center {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .sea-footer-logo-big {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+        
+        .sea-footer-confiable {
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .sea-footer-socialicons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .sea-footer-socialicons a {
+            color: var(--blanco);
+            font-size: 1.2rem;
+            transition: opacity 0.2s ease;
+        }
+        
+        .sea-footer-socialicons a:hover {
+            opacity: 0.8;
+        }
+        
+        .sea-footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin: 30px 0;
+        }
+        
+        .sea-footer-links {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .sea-footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .sea-footer-coltitle {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .sea-footer-col a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.2s ease;
+        }
+        
+        .sea-footer-col a:hover {
+            color: var(--blanco);
+        }
+        
+        .sea-footer-copy {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .terminos-container {
+                padding: 30px 20px;
+            }
+            
+            .terminos-title {
+                font-size: 1.5rem;
+            }
+            
+            .sea-footer-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenido Principal -->
+    <div class="main-container">
+        <!-- Logo y Header -->
+        <div class="logo-container">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
+            <div class="logo-text">Elígelo y es tuyo</div>
+        </div>
+
+        <!-- Navegación Simplificada -->
+        <nav class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="opiniones.html">Opiniones</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Términos de Uso</h1>
+            <p>Conoce las condiciones que rigen nuestro servicio de envíos USA-Perú</p>
+        </section>
+
+        <!-- Contenido Términos -->
+        <div class="terminos-container">
+            <!-- Sección 1 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">1. Aceptación de los Términos</h2>
+                <div class="terminos-content">
+                    <p>Al utilizar los servicios de SEA Express, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones. Si no está de acuerdo con alguna parte de estos términos, no podrá utilizar nuestros servicios.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Última actualización:</strong> 15 de Noviembre, 2024</p>
+                        <p><strong>Vigencia:</strong> Estos términos están vigentes desde la fecha de publicación y se aplican a todos los servicios prestados por SEA Express.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 2 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">2. Descripción del Servicio</h2>
+                <div class="terminos-content">
+                    <p>SEA Express ofrece servicios de courier internacional especializado en envíos desde Estados Unidos hacia Perú, incluyendo:</p>
+                    
+                    <ul>
+                        <li>Recepción y almacenamiento temporal de paquetes en nuestro warehouse de Miami</li>
+                        <li>Consolidación de múltiples paquetes</li>
+                        <li>Procesamiento aduanero y trámites de importación</li>
+                        <li>Envío y entrega final en domicilio en Perú</li>
+                        <li>Servicio de compras asistidas</li>
+                    </ul>
+                    
+                    <h3 class="terminos-subtitle">2.1. Dirección de Entrega en USA</h3>
+                    <p>Cada cliente recibirá una dirección única en Miami, Florida, que debe utilizar para todas sus compras. Esta dirección es personal e intransferible.</p>
+                </div>
+            </section>
+
+            <!-- Sección 3 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">3. Responsabilidades del Cliente</h2>
+                <div class="terminos-content">
+                    <p>Como usuario de nuestros servicios, usted se compromete a:</p>
+                    
+                    <ul>
+                        <li>Proporcionar información veraz y completa para el procesamiento de sus envíos</li>
+                        <li>Declarar correctamente el valor y contenido de los productos</li>
+                        <li>Cumplir con las regulaciones de importación peruanas</li>
+                        <li>Verificar que los productos comprados no estén en la lista de prohibidos</li>
+                        <li>Mantener actualizada su información de contacto</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <p><strong>Importante:</strong> El cliente es responsable de la veracidad de la información proporcionada. Cualquier declaración falsa puede resultar en la retención del paquete y aplicación de multas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 4 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">4. Tarifas y Pagos</h2>
+                <div class="terminos-content">
+                    <h3 class="terminos-subtitle">4.1. Estructura de Costos</h3>
+                    <p>Nuestros costos incluyen:</p>
+                    <ul>
+                        <li>Costo de envío internacional (por peso volumétrico)</li>
+                        <li>Gastos de desaduanaje ($8.00 USD fijos)</li>
+                        <li>Impuestos de importación (según valor declarado)</li>
+                        <li>Seguro básico (incluido en todos los envíos)</li>
+                    </ul>
+                    
+                    <h3 class="terminos-subtitle">4.2. Métodos de Pago</h3>
+                    <p>Aceptamos los siguientes métodos de pago:</p>
+                    <ul>
+                        <li>Transferencias bancarias</li>
+                        <li>Tarjetas de crédito y débito</li>
+                        <li>Yape y Plin</li>
+                        <li>Pago en efectivo contra entrega (sujeto a disponibilidad)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sección 5 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">5. Política de Envíos</h2>
+                <div class="terminos-content">
+                    <h3 class="terminos-subtitle">5.1. Tiempos de Entrega</h3>
+                    <ul>
+                        <li><strong>Envío Express:</strong> 7-10 días hábiles</li>
+                        <strong>Envío Estándar:</strong> 12-15 días hábiles</li>
+                        <li><strong>Envío Premium:</strong> 5-7 días hábiles</li>
+                    </ul>
+                    
+                    <p>Los tiempos de entrega son estimados y pueden variar por factores fuera de nuestro control como condiciones climáticas, tráfico aéreo o procesos aduaneros.</p>
+                    
+                    <h3 class="terminos-subtitle">5.2. Almacenamiento</h3>
+                    <p>Ofrecemos almacenamiento gratuito por 30 días naturales. Pasado este período, se aplicará un cargo de $1 USD por día por paquete.</p>
+                </div>
+            </section>
+
+            <!-- Sección 6 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">6. Productos Prohibidos y Restringidos</h2>
+                <div class="terminos-content">
+                    <p>No aceptamos el envío de los siguientes productos:</p>
+                    
+                    <ul>
+                        <li>Armas de fuego y municiones</li>
+                        <li>Drogas y sustancias controladas</li>
+                        <li>Productos perecederos sin refrigeración especial</li>
+                        <li>Material pornográfico</li>
+                        <li>Productos que infrinjan derechos de autor</li>
+                        <li>Baterías de litio sueltas</li>
+                        <li>Productos inflamables o explosivos</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <p><strong>Nota:</strong> El envío de productos prohibidos resultará en la confiscación del paquete y posible suspensión del servicio.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 7 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">7. Política de Reclamaciones</h2>
+                <div class="terminos-content">
+                    <h3 class="terminos-subtitle">7.1. Paquetes Dañados</h3>
+                    <p>En caso de recibir un paquete dañado:</p>
+                    <ul>
+                        <li>Notificar dentro de las 24 horas posteriores a la recepción</li>
+                        <li>Proporcionar fotografías del daño</li>
+                        <li>Conservar el empaque original</li>
+                    </ul>
+                    
+                    <h3 class="terminos-subtitle">7.2. Paquetes Extraviados</h3>
+                    <p>Para paquetes extraviados:</p>
+                    <ul>
+                        <li>Investigación iniciada dentro de las 72 horas</li>
+                        <li>Tiempo máximo de investigación: 15 días hábiles</li>
+                        <li>Compensación según el valor declarado</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sección 8 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">8. Limitación de Responsabilidad</h2>
+                <div class="terminos-content">
+                    <p>SEA Express no será responsable por:</p>
+                    
+                    <ul>
+                        <li>Retrasos causados por autoridades aduaneras</li>
+                        <li>Daños en productos mal embalados por el remitente original</li>
+                        <li>Pérdidas por declaración incorrecta del contenido</li>
+                        <li>Problemas con productos defectuosos o de mala calidad</li>
+                        <li>Fuerza mayor o casos fortuitos</li>
+                    </ul>
+                    
+                    <p>La responsabilidad máxima por paquete extraviado o dañado no excederá el valor declarado del producto.</p>
+                </div>
+            </section>
+
+            <!-- Sección 9 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">9. Modificaciones de los Términos</h2>
+                <div class="terminos-content">
+                    <p>SEA Express se reserva el derecho de modificar estos términos en cualquier momento. Las modificaciones serán efectivas inmediatamente después de su publicación en nuestro sitio web.</p>
+                    
+                    <p>Se notificará a los usuarios sobre cambios significativos a través de:</p>
+                    <ul>
+                        <li>Notificación en nuestro sitio web</li>
+                        <li>Comunicación por correo electrónico</li>
+                        <li>Mensajes a través de nuestros canales oficiales</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sección 10 -->
+            <section class="terminos-section">
+                <h2 class="terminos-title">10. Ley Aplicable y Jurisdicción</h2>
+                <div class="terminos-content">
+                    <p>Estos términos se rigen por las leyes de la República del Perú. Cualquier disputa relacionada con estos términos o con nuestros servicios será resuelta en los tribunales de Lima, Perú.</p>
+                    
+                    <p>Para cualquier consulta sobre estos términos, puede contactarnos a través de:</p>
+                    <ul>
+                        <li>Email: legal@seaexpress.com</li>
+                        <li>WhatsApp: +51 912 140 295</li>
+                        <li>Dirección: Av. Javier Prado 1234, Lima, Perú</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="sea-footer">
+        <div class="sea-footer-center">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big">
+            <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
+            <div class="sea-footer-socialicons">
+                <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <hr class="sea-footer-divider">
+
+        <div class="sea-footer-links">
+            <!-- Información -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Información</div>
+                <a href="faq.html">Preguntas frecuentes</a>
+                <a href="como-funciona.html">Cómo funciona</a>
+                <a href="tiendas-populares.html">Tiendas populares</a>
+                <a href="compras-asistidas.html">Compras Asistidas</a>
+                <a href="seguro.html">Seguro</a>
+                <a href="productos-prohibidos.html">Productos prohibidos</a>
+            </div>
+
+            <!-- La compañía -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">La compañía</div>
+                <a href="servicios.html">Servicios</a>
+                <a href="opiniones.html">Opiniones de usuarios</a>
+                <a href="terminos.html">Términos de Uso</a>
+                <a href="legal.html">Información legal</a>
+                <a href="noticias.html">Noticias</a>
+            </div>
+
+            <!-- Personal útil -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Personal útil</div>
+                <a href="../index.html">Calculadora SEA Express</a>
+                <a href="opciones-pago.html">Opciones de pago</a>
+                <a href="seguimiento.html">Seguimiento de envío</a>
+                <a href="soporte.html">Soporte 24/7</a>
+            </div>
+
+            <!-- Cooperación -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Cooperación</div>
+                <a href="contacto.html">Contacto</a>
+                <a href="referidos.html">Programa de referidos</a>
+                <a href="mayoristas.html">Oferta para mayoristas</a>
+                <a href="logistics.html">SEA Express Logistics</a>
+            </div>
+        </div>
+
+        <div class="sea-footer-copy">
+            © 2025 SEA Express. Todos los derechos reservados.
+        </div>
+    </footer>
+</body>
+</html>
