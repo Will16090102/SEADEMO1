@@ -65,51 +65,28 @@
             padding: 8px;
             object-fit: contain;
             border: 6px solid var(--blanco);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(34, 48, 80, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(34, 48, 80, 0.25);
         }
         
         .logo-text {
-            margin-top: 10px;
+            margin-top: 15px;
             font-weight: 600;
             color: var(--azul-logo);
-            font-size: 1.1rem;
-        }
-        
-        /* Navegación */
-        .nav-container {
-            background: var(--blanco);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--azul-logo);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            background: var(--azul-boton);
-            color: var(--blanco);
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
         }
         
         /* Hero Section */
         .hero {
             text-align: center;
             margin-bottom: 60px;
+            padding: 40px 0;
         }
         
         .hero h1 {
@@ -118,13 +95,26 @@
             color: var(--azul-logo);
             margin-bottom: 20px;
             line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
         }
         
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #666;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Servicios Grid */
@@ -132,7 +122,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         
         .servicio-card {
@@ -140,134 +130,177 @@
             border-radius: 20px;
             padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .servicio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
+            transform: scaleX(0);
             transition: transform 0.3s ease;
         }
         
         .servicio-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border-color: var(--azul-boton);
+        }
+
+        .servicio-card:hover::before {
+            transform: scaleX(1);
         }
         
         .servicio-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--azul-logo);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .servicio-card:hover .servicio-icon {
+            transform: scale(1.1);
+            color: var(--azul-boton);
         }
         
         .servicio-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--azul-logo);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .servicio-card:hover .servicio-title {
+            color: var(--azul-boton);
         }
         
         .servicio-desc {
             color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 1.05rem;
         }
         
         .servicio-precio {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--azul-logo);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            background: var(--beige-claro);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .servicio-card:hover .servicio-precio {
+            background: var(--azul-boton);
+            color: var(--blanco);
+            transform: scale(1.05);
         }
         
         .servicio-btn {
             background: var(--azul-boton);
             color: var(--blanco);
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 14px 35px;
+            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .servicio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .servicio-btn:hover::before {
+            left: 100%;
         }
         
         .servicio-btn:hover {
             background: var(--azul-logo);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(34, 48, 80, 0.3);
         }
-        
-        /* Proceso Section */
-        .proceso-section {
-            background: var(--blanco);
-            border-radius: 20px;
-            padding: 50px 40px;
-            margin-bottom: 60px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.1);
-        }
-        
-        .section-title {
-            font-family: var(--fuente-titulo);
-            font-size: 2.5rem;
-            text-align: center;
-            color: var(--azul-logo);
-            margin-bottom: 40px;
-        }
-        
-        .proceso-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            counter-reset: step-counter;
-        }
-        
-        .proceso-step {
-            text-align: center;
-            position: relative;
-        }
-        
-        .proceso-step::before {
-            counter-increment: step-counter;
-            content: counter(step-counter);
-            background: var(--azul-boton);
-            color: var(--blanco);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 20px;
-        }
-        
-        .step-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--azul-logo);
-            margin-bottom: 15px;
-        }
-        
-        .step-desc {
-            color: #666;
-            line-height: 1.6;
-        }
-        
+
+        /* Animaciones para las tarjetas */
+        .servicio-card:nth-child(1) { animation: fadeInUp 0.6s ease 0.1s both; }
+        .servicio-card:nth-child(2) { animation: fadeInUp 0.6s ease 0.2s both; }
+        .servicio-card:nth-child(3) { animation: fadeInUp 0.6s ease 0.3s both; }
+        .servicio-card:nth-child(4) { animation: fadeInUp 0.6s ease 0.4s both; }
+        .servicio-card:nth-child(5) { animation: fadeInUp 0.6s ease 0.5s both; }
+        .servicio-card:nth-child(6) { animation: fadeInUp 0.6s ease 0.6s both; }
+
         /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
             color: var(--blanco);
-            border-radius: 20px;
-            padding: 60px 40px;
+            border-radius: 25px;
+            padding: 70px 40px;
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
+            box-shadow: 0 15px 40px rgba(34, 48, 80, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0) rotate(0deg); }
+            to { transform: translate(-20px, -20px) rotate(360deg); }
         }
         
         .cta-title {
             font-family: var(--fuente-titulo);
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
         }
         
         .cta-text {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .cta-buttons {
@@ -275,25 +308,37 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
         
         .cta-btn {
             background: var(--blanco);
             color: var(--azul-logo);
-            padding: 15px 30px;
-            border-radius: 8px;
+            padding: 18px 40px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border: 2px solid transparent;
         }
         
         .cta-btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+            border-color: var(--azul-logo);
         }
         
         .cta-btn.whatsapp {
             background: var(--wsp);
             color: var(--blanco);
+        }
+
+        .cta-btn.whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(18, 140, 126, 0.3);
         }
         
         /* Footer */
@@ -330,11 +375,12 @@
         .sea-footer-socialicons a {
             color: var(--blanco);
             font-size: 1.2rem;
-            transition: opacity 0.2s ease;
+            transition: all 0.3s ease;
         }
         
         .sea-footer-socialicons a:hover {
-            opacity: 0.8;
+            transform: scale(1.2);
+            color: var(--wsp);
         }
         
         .sea-footer-divider {
@@ -367,11 +413,14 @@
             color: rgba(255,255,255,0.8);
             text-decoration: none;
             margin-bottom: 8px;
-            transition: color 0.2s ease;
+            transition: all 0.3s ease;
+            padding: 4px 0;
         }
         
         .sea-footer-col a:hover {
             color: var(--blanco);
+            transform: translateX(5px);
+            padding-left: 5px;
         }
         
         .sea-footer-copy {
@@ -383,16 +432,7 @@
         }
         
         @media (max-width: 768px) {
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            
             .servicios-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .proceso-steps {
                 grid-template-columns: 1fr;
             }
             
@@ -400,10 +440,46 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
             
             .sea-footer-links {
                 flex-direction: column;
                 gap: 20px;
+            }
+
+            .hero {
+                padding: 20px 0 40px 0;
+            }
+
+            .servicio-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 0 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-text {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -416,17 +492,6 @@
             <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
             <div class="logo-text">Elígelo y es tuyo</div>
         </div>
-
-        <!-- Navegación -->
-        <nav class="nav-container">
-            <ul class="nav-links">
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="../pages/como-funciona.html">Cómo Funciona</a></li>
-                <li><a href="../pages/tiendas-populares.html">Tiendas Populares</a></li>
-                <li><a href="../pages/servicios.html" style="background: var(--azul-boton); color: var(--blanco);">Servicios</a></li>
-                <li><a href="../pages/contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
 
         <!-- Hero Section -->
         <section class="hero">
@@ -452,32 +517,6 @@
             <!-- Servicio 2 -->
             <div class="servicio-card">
                 <div class="servicio-icon">
-                    <i class="fas fa-box"></i>
-                </div>
-                <h3 class="servicio-title">Envío Estándar</h3>
-                <p class="servicio-desc">
-                    Servicio económico con entrega en 12-15 días hábiles. Perfecto para paquetes no urgentes.
-                </p>
-                <div class="servicio-precio">Desde $12/kg</div>
-                <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
-            </div>
-
-            <!-- Servicio 3 -->
-            <div class="servicio-card">
-                <div class="servicio-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                <h3 class="servicio-title">Compras Asistidas</h3>
-                <p class="servicio-desc">
-                    Te ayudamos a comprar en tiendas que no envían a Perú. Nos encargamos de todo el proceso.
-                </p>
-                <div class="servicio-precio">+10% del valor</div>
-                <a href="../pages/compras-asistidas.html" class="servicio-btn">Más Información</a>
-            </div>
-
-            <!-- Servicio 4 -->
-            <div class="servicio-card">
-                <div class="servicio-icon">
                     <i class="fas fa-gem"></i>
                 </div>
                 <h3 class="servicio-title">Envío Premium</h3>
@@ -488,7 +527,20 @@
                 <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
             </div>
 
-            <!-- Servicio 5 -->
+            <!-- Servicio 3 -->
+            <div class="servicio-card">
+                <div class="servicio-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <h3 class="servicio-title">Envío Estándar</h3>
+                <p class="servicio-desc">
+                    Servicio económico con entrega en 12-15 días hábiles. Perfecto para paquetes no urgentes.
+                </p>
+                <div class="servicio-precio">Desde $12/kg</div>
+                <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
+            </div>
+
+            <!-- Servicio 4 -->
             <div class="servicio-card">
                 <div class="servicio-icon">
                     <i class="fas fa-warehouse"></i>
@@ -498,7 +550,20 @@
                     Almacena tus paquetes gratis por 30 días en nuestro warehouse de Miami. Consolida envíos.
                 </p>
                 <div class="servicio-precio">Gratis 30 días</div>
-                <a href="../index.html" class="servicio-btn">Más Información</a>
+                <a href="../index.html" class="servicio-btn">Más información</a>
+            </div>
+
+            <!-- Servicio 5 -->
+            <div class="servicio-card">
+                <div class="servicio-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3 class="servicio-title">Compras Asistidas</h3>
+                <p class="servicio-desc">
+                    Te ayudamos a comprar en tiendas que no envían a Perú. Nos encargamos de todo el proceso.
+                </p>
+                <div class="servicio-precio">+10% del valor</div>
+                <a href="../pages/compras-asistidas.html" class="servicio-btn">Más Información</a>
             </div>
 
             <!-- Servicio 6 -->
@@ -514,37 +579,6 @@
                 <a href="../pages/mayoristas.html" class="servicio-btn">Contactar</a>
             </div>
         </div>
-
-        <!-- Proceso Section -->
-        <section class="proceso-section">
-            <h2 class="section-title">Cómo Funciona</h2>
-            <div class="proceso-steps">
-                <div class="proceso-step">
-                    <h4 class="step-title">Compra en USA</h4>
-                    <p class="step-desc">
-                        Compra en cualquier tienda online de USA usando nuestra dirección de Miami
-                    </p>
-                </div>
-                <div class="proceso-step">
-                    <h4 class="step-title">Recibimos tu Paquete</h4>
-                    <p class="step-desc">
-                        Almacenamos tu paquete gratis por 30 días en nuestro warehouse
-                    </p>
-                </div>
-                <div class="proceso-step">
-                    <h4 class="step-title">Procesamos tu Envío</h4>
-                    <p class="step-desc">
-                        Preparamos tu paquete y calculamos los costos de envío e impuestos
-                    </p>
-                </div>
-                <div class="proceso-step">
-                    <h4 class="step-title">Recibe en Perú</h4>
-                    <p class="step-desc">
-                        Entregamos en la puerta de tu casa en todo el Perú
-                    </p>
-                </div>
-            </div>
-        </section>
 
         <!-- CTA Section -->
         <section class="cta-section">
