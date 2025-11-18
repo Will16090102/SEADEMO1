@@ -5,145 +5,316 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compras Asistidas - SEA Express</title>
     <meta name="description" content="Servicio de compras asistidas. Te ayudamos a comprar en cualquier tienda de USA. No te limites a Amazon, compramos por ti donde quieras.">
+    <meta name="theme-color" content="#25324a">
+    <link rel="icon" type="image/png" href="../assets/logos/LOGOSEAE.png">
     
-    <!-- Preconexiones -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Fuentes -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Montserrat y Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="../css/styles.css">
-    
     <style>
-        /* Estilos específicos para Compras Asistidas */
-        .assisted-hero {
-            background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
-            color: white;
-            padding: var(--espacio-16) 0;
-            text-align: center;
+        :root {
+            --azul-logo: #223050;
+            --azul-boton: #25324a;
+            --beige-fondo: #f7f1e7;
+            --gris-form: #f6f5f2;
+            --gris-borde: #e0dfdf;
+            --negro-texto: #1a2630;
+            --azul-icono: #25324a;
+            --azul-destacado: #223050;
+            --fuente: 'Montserrat', Arial, sans-serif;
+            --fuente-titulo: 'Playfair Display', serif;
+            --wsp: #25D366;
+            --wsp-hover: #128C7E;
         }
-        
-        .assisted-hero h1 {
-            color: white;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            margin-bottom: var(--espacio-4);
+        html, body {
+            background: var(--beige-fondo);
+            margin: 0;
+            padding: 0;
+            color: var(--negro-texto);
+            font-family: var(--fuente);
+            min-height: 100vh;
+            scroll-behavior: smooth;
         }
-        
-        .assisted-hero .desc {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.3rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .assisted-container {
+        .main-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: var(--espacio-12) var(--espacio-6);
+            padding: 0 16px;
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .logo-container {
+            margin-bottom: 8px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-img {
+            width: 124px;
+            height: 124px;
+            border-radius: 50%;
+            background: var(--azul-boton);
+            padding: 7px;
+            object-fit: contain;
+            box-shadow: 0 4px 20px rgba(34,48,80,0.05);
+            border: 6px solid #fff;
+            transition: width 0.2s, height 0.2s, padding 0.2s, border 0.2s;
+            box-sizing: border-box;
+        }
+        .logo-text {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #454545;
+            letter-spacing: 0.01em;
+        }
+        h1 {
+            font-family: var(--fuente-titulo), serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin: 10px 0 8px 0;
+            color: var(--azul-logo);
+            line-height: 1.13;
+        }
+        .desc {
+            font-size: 1.08rem;
+            color: #5f5f5f;
+            margin-bottom: 30px;
+        }
+        
+        /* Estilos específicos para Compras Asistidas */
+        .page-content {
+            background: #fff;
+            box-shadow: 0 4px 32px 0 rgba(50,50,93,0.09);
+            border-radius: 24px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 1200px;
+            text-align: left;
+            margin-bottom: 36px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .page-title {
+            font-family: var(--fuente-titulo), serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: var(--azul-logo);
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--azul-boton), var(--azul-logo));
+            border-radius: 2px;
         }
         
         /* Hero Stats */
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--espacio-6);
-            margin: var(--espacio-8) auto;
+            gap: 20px;
+            margin: 30px auto;
             max-width: 800px;
         }
         
         .stat-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: var(--espacio-4);
-            border-radius: var(--radio-lg);
+            background: white;
+            padding: 20px 15px;
+            border-radius: 18px;
             text-align: center;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(50,50,93,0.15);
+            border-color: var(--azul-boton);
         }
         
         .stat-number {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: white;
-            margin-bottom: var(--espacio-2);
+            color: var(--azul-logo);
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .stat-card:hover .stat-number {
+            color: var(--azul-boton);
         }
         
         .stat-label {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: #666;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
-        
+
+        /* Animaciones para estadísticas */
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
         /* Benefits Section */
         .benefits-section {
-            background: var(--beige-claro);
-            padding: var(--espacio-12) 0;
-            margin: var(--espacio-16) 0;
+            background: var(--beige-fondo);
+            padding: 40px 0;
+            margin: 40px 0;
+            border-radius: 24px;
         }
         
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--espacio-6);
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--espacio-6);
+            padding: 0 20px;
         }
         
         .benefit-card {
             background: white;
-            padding: var(--espacio-6);
-            border-radius: var(--radio-lg);
+            padding: 25px;
+            border-radius: 18px;
             text-align: center;
-            box-shadow: var(--sombra-sm);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover::before {
+            transform: scaleX(1);
         }
         
         .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--sombra-md);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(50,50,93,0.15);
             border-color: var(--azul-boton);
         }
         
         .benefit-icon {
             font-size: 3rem;
             color: var(--azul-boton);
-            margin-bottom: var(--espacio-4);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1);
+            color: var(--azul-logo);
         }
         
         .benefit-title {
             font-size: 1.3rem;
             color: var(--azul-logo);
-            margin-bottom: var(--espacio-3);
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .benefit-card:hover .benefit-title {
+            color: var(--azul-boton);
         }
         
         /* Process Section */
         .process-section {
-            margin: var(--espacio-16) 0;
+            margin: 40px 0;
         }
         
         .process-steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--espacio-6);
-            margin-top: var(--espacio-8);
+            gap: 25px;
+            margin-top: 30px;
         }
         
         .process-step-card {
             background: white;
-            padding: var(--espacio-6);
-            border-radius: var(--radio-lg);
-            box-shadow: var(--sombra-sm);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
             text-align: center;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .process-step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .process-step-card:hover::before {
+            transform: scaleX(1);
         }
         
         .process-step-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--sombra-md);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(50,50,93,0.15);
+            border-color: var(--azul-boton);
         }
         
         .step-number {
@@ -157,86 +328,108 @@
             justify-content: center;
             font-size: 1.3rem;
             font-weight: 700;
-            margin: 0 auto var(--espacio-4);
+            margin: 0 auto 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .process-step-card:hover .step-number {
+            transform: scale(1.1);
         }
         
         .step-icon {
             font-size: 2.5rem;
             color: var(--azul-boton);
-            margin-bottom: var(--espacio-4);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .process-step-card:hover .step-icon {
+            transform: scale(1.1);
+            color: var(--azul-logo);
         }
         
         /* Stores Section */
         .stores-section {
-            background: var(--beige-claro);
-            padding: var(--espacio-12) 0;
-            margin: var(--espacio-16) 0;
+            background: var(--beige-fondo);
+            padding: 40px 0;
+            margin: 40px 0;
+            border-radius: 24px;
         }
         
         .stores-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--espacio-4);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             max-width: 1000px;
-            margin: var(--espacio-8) auto;
+            margin: 30px auto;
         }
         
         .store-item {
             background: white;
-            padding: var(--espacio-4);
-            border-radius: var(--radio-md);
+            padding: 20px 15px;
+            border-radius: 12px;
             text-align: center;
-            box-shadow: var(--sombra-sm);
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
         }
         
         .store-item:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--sombra-md);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(50,50,93,0.15);
         }
         
         .store-icon {
             font-size: 2rem;
             color: var(--azul-boton);
-            margin-bottom: var(--espacio-2);
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .store-item:hover .store-icon {
+            transform: scale(1.1);
         }
         
         /* Form Section */
         .form-section {
             background: white;
-            padding: var(--espacio-8);
-            border-radius: var(--radio-lg);
-            box-shadow: var(--sombra-md);
-            margin: var(--espacio-12) auto;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
+            margin: 40px auto;
             max-width: 600px;
         }
         
         .form-title {
             text-align: center;
             color: var(--azul-logo);
-            margin-bottom: var(--espacio-6);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
         }
         
         .form-group {
-            margin-bottom: var(--espacio-5);
+            margin-bottom: 20px;
         }
         
         .form-label {
             display: block;
             font-weight: 600;
             color: var(--azul-logo);
-            margin-bottom: var(--espacio-2);
+            margin-bottom: 8px;
         }
         
         .form-input,
         .form-textarea,
         .form-select {
             width: 100%;
-            padding: var(--espacio-3) var(--espacio-4);
+            padding: 12px 15px;
             border: 2px solid var(--gris-borde);
-            border-radius: var(--radio-md);
+            border-radius: 10px;
             font-size: 1rem;
             transition: border-color 0.3s ease;
+            background: var(--gris-form);
         }
         
         .form-input:focus,
@@ -253,47 +446,56 @@
         
         .form-note {
             font-size: 0.9rem;
-            color: var(--gris-texto);
-            margin-top: var(--espacio-2);
+            color: #666;
+            margin-top: 8px;
         }
         
         .btn-submit {
             width: 100%;
-            padding: var(--espacio-4);
+            padding: 15px;
             background: var(--azul-boton);
             color: white;
             border: none;
-            border-radius: var(--radio-md);
+            border-radius: 10px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--espacio-2);
+            gap: 10px;
         }
         
         .btn-submit:hover {
             background: var(--azul-logo);
+            transform: translateY(-2px);
         }
         
         /* FAQ Section */
         .faq-section {
             max-width: 800px;
-            margin: var(--espacio-16) auto;
+            margin: 40px auto;
         }
         
         .faq-item {
             background: white;
-            border-radius: var(--radio-lg);
-            box-shadow: var(--sombra-sm);
-            margin-bottom: var(--espacio-4);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
+            margin-bottom: 15px;
             overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 8px 25px rgba(50,50,93,0.15);
         }
         
         .faq-question {
-            padding: var(--espacio-5) var(--espacio-6);
+            padding: 20px 25px;
             font-weight: 600;
             color: var(--azul-logo);
             cursor: pointer;
@@ -308,43 +510,226 @@
         }
         
         .faq-answer {
-            padding: 0 var(--espacio-6);
+            padding: 0 25px;
             max-height: 0;
             overflow: hidden;
             transition: all 0.3s ease;
+            background: var(--beige-fondo);
         }
         
         .faq-item.active .faq-answer {
-            padding: var(--espacio-5) var(--espacio-6);
-            max-height: 500px;
+            padding: 20px 25px;
+            max-height: 1000px;
         }
         
         /* CTA Section */
-        .assisted-cta {
-            background: linear-gradient(135deg, var(--azul-logo) 0%, var(--azul-boton) 100%);
-            color: white;
-            padding: var(--espacio-12);
-            border-radius: var(--radio-xl);
+        .cta-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 24px;
             text-align: center;
-            margin: var(--espacio-16) auto;
+            margin: 40px auto;
             max-width: 800px;
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
         }
         
-        .assisted-cta h2 {
-            color: white;
-            margin-bottom: var(--espacio-4);
+        .cta-title {
+            color: var(--azul-logo);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .cta-text {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #666;
         }
         
         .cta-buttons {
             display: flex;
-            gap: var(--espacio-4);
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: var(--espacio-6);
+        }
+        
+        .btn-whatsapp-faq, .btn-calculator-faq {
+            background: var(--azul-boton);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-whatsapp-faq:hover, .btn-calculator-faq:hover {
+            background: var(--azul-logo);
+            transform: translateY(-2px);
+        }
+        
+        .btn-whatsapp-faq {
+            background: var(--wsp);
+        }
+        
+        .btn-whatsapp-faq:hover {
+            background: var(--wsp-hover);
+        }
+
+        /* Animaciones escalonadas */
+        .benefit-card:nth-child(1) { animation-delay: 0.1s; }
+        .benefit-card:nth-child(2) { animation-delay: 0.2s; }
+        .benefit-card:nth-child(3) { animation-delay: 0.3s; }
+        .benefit-card:nth-child(4) { animation-delay: 0.4s; }
+        .benefit-card:nth-child(5) { animation-delay: 0.5s; }
+        .benefit-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .process-step-card:nth-child(1) { animation-delay: 0.1s; }
+        .process-step-card:nth-child(2) { animation-delay: 0.2s; }
+        .process-step-card:nth-child(3) { animation-delay: 0.3s; }
+        .process-step-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .store-item:nth-child(1) { animation-delay: 0.1s; }
+        .store-item:nth-child(2) { animation-delay: 0.2s; }
+        .store-item:nth-child(3) { animation-delay: 0.3s; }
+        .store-item:nth-child(4) { animation-delay: 0.4s; }
+        .store-item:nth-child(5) { animation-delay: 0.5s; }
+        .store-item:nth-child(6) { animation-delay: 0.6s; }
+        .store-item:nth-child(7) { animation-delay: 0.7s; }
+        .store-item:nth-child(8) { animation-delay: 0.8s; }
+        .store-item:nth-child(9) { animation-delay: 0.9s; }
+        .store-item:nth-child(10) { animation-delay: 1.0s; }
+        .store-item:nth-child(11) { animation-delay: 1.1s; }
+        .store-item:nth-child(12) { animation-delay: 1.2s; }
+
+        .faq-item:nth-child(1) { animation-delay: 0.1s; }
+        .faq-item:nth-child(2) { animation-delay: 0.2s; }
+        .faq-item:nth-child(3) { animation-delay: 0.3s; }
+        .faq-item:nth-child(4) { animation-delay: 0.4s; }
+        
+        /* Footer optimizado */
+        .sea-footer {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #f7f1e7;
+            color: #223050;
+            padding: 32px 0 8px 0;
+            margin-top: 48px;
+            border-top: 1.5px solid #e5e0d0;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        .sea-footer-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 18px;
+            margin-top: 8px;
+        }
+        
+        .sea-footer-logo-big {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #25324a;
+            padding: 7px;
+            border: 3.5px solid #fff;
+            object-fit: contain;
+            box-shadow: 0 4px 14px 0 rgba(34,48,80,0.08);
+            margin-bottom: 5px;
+        }
+        
+        .sea-footer-confiable {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #25324a;
+            letter-spacing: 0.01em;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .sea-footer-socialicons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 6px 0 10px 0;
+        }
+        
+        .sea-footer-socialicons a {
+            font-size: 2rem;
+            color: #223050;
+            transition: color .2s;
+            line-height: 1;
+        }
+        
+        .sea-footer-socialicons a:hover {
+            color: #25D366;
+        }
+        
+        .sea-footer-divider {
+            border: none;
+            border-top: 1.2px solid #e0dfdf;
+            margin: 16px auto 13px auto;
+            width: 96%;
+            max-width: 1200px;
+        }
+        
+        .sea-footer-links {
+            max-width: 1200px;
+            margin: 0 auto 10px auto;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+        
+        .sea-footer-col {
+            flex: 1 1 150px;
+            min-width: 140px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .sea-footer-coltitle {
+            font-weight: 700;
+            font-size: 1.01rem;
+            color: #25324a;
+            margin-bottom: 5px;
+            letter-spacing: 0.01em;
+        }
+        
+        .sea-footer-col a {
+            display: block;
+            color: #223050;
+            font-size: .97rem;
+            text-decoration: none;
+            margin-bottom: 5px;
+            transition: color .2s;
+        }
+        
+        .sea-footer-col a:hover {
+            color: #25D366;
+            text-decoration: underline;
+        }
+        
+        .sea-footer-copy {
+            color: #b0a692;
+            font-size: .93rem;
+            text-align: center;
+            margin-top: 4px;
+            padding-bottom: 2px;
+            letter-spacing: 0.01em;
         }
         
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .main-container { max-width: 100%; }
             .hero-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -361,6 +746,62 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .btn-whatsapp-faq,
+            .btn-calculator-faq {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .sea-footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                text-align: center;
+            }
+            
+            .sea-footer-col {
+                min-width: 170px;
+                margin-bottom: 8px;
+            }
+        }
+        
+        @media (max-width: 650px) {
+            .main-container { max-width: 100%; }
+            .page-content { max-width: 100%; }
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .stat-card {
+                padding: 15px 10px;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stores-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+            
+            .sea-footer-links {
+                padding: 0 2vw;
+            }
+            
+            .sea-footer-col {
+                min-width: 120px;
+            }
+            
+            .sea-footer-socialicons {
+                gap: 12px;
+            }
         }
         
         /* Animaciones */
@@ -374,34 +815,26 @@
                 transform: translateY(0);
             }
         }
-        
-        .benefit-card,
-        .process-step-card,
-        .store-item {
-            animation: fadeInUp 0.6s ease-out;
-        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header">
-        <div class="header-content">
-            <div class="logo-container">
-                <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
-                <span class="logo-text">Elígelo y es tuyo</span>
-            </div>
-            <a href="../index.html" class="back-button">
-                <i class="fas fa-arrow-left"></i> Volver al Inicio
-            </a>
+    <div class="main-container">
+        <div class="logo-container">
+            <img src="../assets/logos/LOGOSEAE.png" alt="Logo de SEA Express" class="logo-img" tabindex="0">
+            <div class="logo-text">Elígelo y es tuyo</div>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="assisted-hero">
-        <div class="main-container">
-            <h1>Compras Asistidas</h1>
-            <p class="desc">¿No puedes comprar directamente? ¡Nosotros lo hacemos por ti! Compramos en cualquier tienda de USA.</p>
+        <h1>
+            Compras Asistidas
+        </h1>
+        <div class="desc">
+            ¿No puedes comprar directamente? ¡Nosotros lo hacemos por ti! Compramos en cualquier tienda de USA.
+        </div>
+        
+        <!-- Contenido Principal -->
+        <div class="page-content">
+            <h2 class="page-title">Tu Asistente de Compras en USA</h2>
             
+            <!-- Hero Stats -->
             <div class="hero-stats">
                 <div class="stat-card">
                     <div class="stat-number">500+</div>
@@ -420,15 +853,10 @@
                     <div class="stat-label">Comisión por Servicio</div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Main Content -->
-    <main class="assisted-container">
-        <!-- Benefits Section -->
-        <section class="benefits-section">
-            <div class="main-container">
-                <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
+            <!-- Benefits Section -->
+            <section class="benefits-section">
+                <h2 style="text-align: center; margin-bottom: 30px; color: var(--azul-logo);">
                     ¿Por Qué Usar Compras Asistidas?
                 </h2>
                 <div class="benefits-grid">
@@ -480,57 +908,55 @@
                         <p>No pierdas horas buscando y comparando. Dinos qué necesitas y nosotros hacemos el trabajo.</p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Process Section -->
-        <section class="process-section">
-            <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
-                Así de Fácil es Nuestro Servicio
-            </h2>
-            <div class="process-steps">
-                <div class="process-step-card">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">
-                        <i class="fas fa-comment-alt"></i>
+            <!-- Process Section -->
+            <section class="process-section">
+                <h2 style="text-align: center; margin-bottom: 30px; color: var(--azul-logo);">
+                    Así de Fácil es Nuestro Servicio
+                </h2>
+                <div class="process-steps">
+                    <div class="process-step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                        <h3 style="color: var(--azul-logo); margin-bottom: 15px;">Solicita tu Producto</h3>
+                        <p>Enviános el enlace del producto o descríbenos lo que necesitas por WhatsApp o el formulario.</p>
                     </div>
-                    <h3 style="color: var(--azul-logo); margin-bottom: var(--espacio-3);">Solicita tu Producto</h3>
-                    <p>Enviános el enlace del producto o descríbenos lo que necesitas por WhatsApp o el formulario.</p>
-                </div>
-                
-                <div class="process-step-card">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">
-                        <i class="fas fa-calculator"></i>
+                    
+                    <div class="process-step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3 style="color: var(--azul-logo); margin-bottom: 15px;">Recibe tu Cotización</h3>
+                        <p>Te enviamos el costo total incluyendo el producto, impuestos y envío a Perú en 24 horas.</p>
                     </div>
-                    <h3 style="color: var(--azul-logo); margin-bottom: var(--espacio-3);">Recibe tu Cotización</h3>
-                    <p>Te enviamos el costo total incluyendo el producto, impuestos y envío a Perú en 24 horas.</p>
-                </div>
-                
-                <div class="process-step-card">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">
-                        <i class="fas fa-credit-card"></i>
+                    
+                    <div class="process-step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3 style="color: var(--azul-logo); margin-bottom: 15px;">Realiza el Pago</h3>
+                        <p>Confirmas la cotización y realizas el pago mediante transferencia, Yape o tarjeta.</p>
                     </div>
-                    <h3 style="color: var(--azul-logo); margin-bottom: var(--espacio-3);">Realiza el Pago</h3>
-                    <p>Confirmas la cotización y realizas el pago mediante transferencia, Yape o tarjeta.</p>
-                </div>
-                
-                <div class="process-step-card">
-                    <div class="step-number">4</div>
-                    <div class="step-icon">
-                        <i class="fas fa-shipping-fast"></i>
+                    
+                    <div class="process-step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3 style="color: var(--azul-logo); margin-bottom: 15px;">Recibe tu Pedido</h3>
+                        <p>Compramos el producto y te lo enviamos. Recibes tracking y soporte durante todo el proceso.</p>
                     </div>
-                    <h3 style="color: var(--azul-logo); margin-bottom: var(--espacio-3);">Recibe tu Pedido</h3>
-                    <p>Compramos el producto y te lo enviamos. Recibes tracking y soporte durante todo el proceso.</p>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Stores Section -->
-        <section class="stores-section">
-            <div class="main-container">
-                <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
+            <!-- Stores Section -->
+            <section class="stores-section">
+                <h2 style="text-align: center; margin-bottom: 30px; color: var(--azul-logo);">
                     Compramos en Estas y Muchas Más Tiendas
                 </h2>
                 <div class="stores-grid">
@@ -607,201 +1033,299 @@
                         <div>Y 500+ más</div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Form Section -->
-        <section class="form-section">
-            <h3 class="form-title">Solicita tu Compra Asistida</h3>
-            <form id="assisted-purchase-form">
-                <div class="form-group">
-                    <label for="product-url" class="form-label">Enlace del Producto (si lo tienes)</label>
-                    <input type="url" id="product-url" class="form-input" placeholder="https://www.tienda.com/producto">
-                    <div class="form-note">Si no tienes un enlace específico, describe el producto abajo</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="product-description" class="form-label">Descripción del Producto *</label>
-                    <textarea id="product-description" class="form-textarea" placeholder="Ej: Laptop Dell XPS 13, color plata, 16GB RAM, 512GB SSD..." required></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="product-store" class="form-label">Tienda Preferida (opcional)</label>
-                    <input type="text" id="product-store" class="form-input" placeholder="Ej: Best Buy, Amazon, tienda específica...">
-                </div>
-                
-                <div class="form-group">
-                    <label for="budget" class="form-label">Presupuesto Aproximado (USD)</label>
-                    <select id="budget" class="form-select">
-                        <option value="">Selecciona un rango</option>
-                        <option value="0-100">$0 - $100</option>
-                        <option value="100-300">$100 - $300</option>
-                        <option value="300-500">$300 - $500</option>
-                        <option value="500-1000">$500 - $1,000</option>
-                        <option value="1000+">Más de $1,000</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="urgency" class="form-label">Urgencia del Pedido</label>
-                    <select id="urgency" class="form-select">
-                        <option value="normal">Normal (1-2 semanas)</option>
-                        <option value="urgent">Urgente (3-7 días)</option>
-                        <option value="express">Express (1-3 días)</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customer-name" class="form-label">Tu Nombre *</label>
-                    <input type="text" id="customer-name" class="form-input" placeholder="Nombre completo" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customer-email" class="form-label">Email *</label>
-                    <input type="email" id="customer-email" class="form-input" placeholder="tu@email.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customer-phone" class="form-label">WhatsApp *</label>
-                    <input type="tel" id="customer-phone" class="form-input" placeholder="+51 999 999 999" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="additional-notes" class="form-label">Notas Adicionales</label>
-                    <textarea id="additional-notes" class="form-textarea" placeholder="Información adicional, especificaciones técnicas, preferencias..."></textarea>
-                </div>
-                
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-paper-plane"></i>
-                    Enviar Solicitud
-                </button>
-            </form>
-        </section>
+            <!-- Form Section -->
+            <section class="form-section">
+                <h3 class="form-title">Solicita tu Compra Asistida</h3>
+                <form id="assisted-purchase-form">
+                    <div class="form-group">
+                        <label for="product-url" class="form-label">Enlace del Producto (si lo tienes)</label>
+                        <input type="url" id="product-url" class="form-input" placeholder="https://www.tienda.com/producto">
+                        <div class="form-note">Si no tienes un enlace específico, describe el producto abajo</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-description" class="form-label">Descripción del Producto *</label>
+                        <textarea id="product-description" class="form-textarea" placeholder="Ej: Laptop Dell XPS 13, color plata, 16GB RAM, 512GB SSD..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-store" class="form-label">Tienda Preferida (opcional)</label>
+                        <input type="text" id="product-store" class="form-input" placeholder="Ej: Best Buy, Amazon, tienda específica...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget" class="form-label">Presupuesto Aproximado (USD)</label>
+                        <select id="budget" class="form-select">
+                            <option value="">Selecciona un rango</option>
+                            <option value="0-100">$0 - $100</option>
+                            <option value="100-300">$100 - $300</option>
+                            <option value="300-500">$300 - $500</option>
+                            <option value="500-1000">$500 - $1,000</option>
+                            <option value="1000+">Más de $1,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="urgency" class="form-label">Urgencia del Pedido</label>
+                        <select id="urgency" class="form-select">
+                            <option value="normal">Normal (1-2 semanas)</option>
+                            <option value="urgent">Urgente (3-7 días)</option>
+                            <option value="express">Express (1-3 días)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customer-name" class="form-label">Tu Nombre *</label>
+                        <input type="text" id="customer-name" class="form-input" placeholder="Nombre completo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customer-email" class="form-label">Email *</label>
+                        <input type="email" id="customer-email" class="form-input" placeholder="tu@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customer-phone" class="form-label">WhatsApp *</label>
+                        <input type="tel" id="customer-phone" class="form-input" placeholder="+51 999 999 999" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additional-notes" class="form-label">Notas Adicionales</label>
+                        <textarea id="additional-notes" class="form-textarea" placeholder="Información adicional, especificaciones técnicas, preferencias..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Solicitud
+                    </button>
+                </form>
+            </section>
 
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <h2 style="text-align: center; margin-bottom: var(--espacio-8); color: var(--azul-logo);">
-                Preguntas Frecuentes sobre Compras Asistidas
-            </h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Cobran comisión por el servicio de compras asistidas?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        <p><strong>No cobramos comisión por el servicio de compras asistidas.</strong> Solo pagas:</p>
-                        <ul>
-                            <li>Precio real del producto en la tienda</li>
-                            <li>Impuestos de importación (si aplican)</li>
-                            <li>Costo de envío USA-Perú</li>
-                            <li>Gastos de manejo estándar</li>
-                        </ul>
-                        <p>El servicio de búsqueda, compra y gestión lo incluimos sin costo adicional.</p>
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2 style="text-align: center; margin-bottom: 30px; color: var(--azul-logo);">
+                    Preguntas Frecuentes sobre Compras Asistidas
+                </h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Cobran comisión por el servicio de compras asistidas?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p><strong>No cobramos comisión por el servicio de compras asistidas.</strong> Solo pagas:</p>
+                            <ul>
+                                <li>Precio real del producto en la tienda</li>
+                                <li>Impuestos de importación (si aplican)</li>
+                                <li>Costo de envío USA-Perú</li>
+                                <li>Gastos de manejo estándar</li>
+                            </ul>
+                            <p>El servicio de búsqueda, compra y gestión lo incluimos sin costo adicional.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Qué pasa si el producto no está disponible?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        <p>En caso de que el producto no esté disponible:</p>
-                        <ul>
-                            <li>Te contactamos inmediatamente para informarte</li>
-                            <li>Buscamos alternativas similares en otras tiendas</li>
-                            <li>Te presentamos opciones comparables con sus precios</li>
-                            <li>Si no encuentras una alternativa que te guste, no pagas nada</li>
-                        </ul>
-                        <p>Nuestro compromiso es encontrar exactamente lo que necesitas o la mejor alternativa disponible.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Qué pasa si el producto no está disponible?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>En caso de que el producto no esté disponible:</p>
+                            <ul>
+                                <li>Te contactamos inmediatamente para informarte</li>
+                                <li>Buscamos alternativas similares en otras tiendas</li>
+                                <li>Te presentamos opciones comparables con sus precios</li>
+                                <li>Si no encuentras una alternativa que te guste, no pagas nada</li>
+                            </ul>
+                            <p>Nuestro compromiso es encontrar exactamente lo que necesitas o la mejor alternativa disponible.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Puedo devolver un producto comprado con compras asistidas?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        <p>Las políticas de devolución dependen de la tienda donde se realizó la compra:</p>
-                        <ul>
-                            <li><strong>Amazon:</strong> Generalmente 30 días para devoluciones</li>
-                            <li><strong>Best Buy:</strong> 15 días para la mayoría de productos</li>
-                            <li><strong>eBay:</strong> Depende de la política del vendedor</li>
-                            <li><strong>Otras tiendas:</strong> Varían entre 14-30 días</li>
-                        </ul>
-                        <p>Nosotros gestionamos todo el proceso de devolución por ti, incluyendo la comunicación con la tienda y el reembolso.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Puedo devolver un producto comprado con compras asistidas?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Las políticas de devolución dependen de la tienda donde se realizó la compra:</p>
+                            <ul>
+                                <li><strong>Amazon:</strong> Generalmente 30 días para devoluciones</li>
+                                <li><strong>Best Buy:</strong> 15 días para la mayoría de productos</li>
+                                <li><strong>eBay:</strong> Depende de la política del vendedor</li>
+                                <li><strong>Otras tiendas:</strong> Varían entre 14-30 días</li>
+                            </ul>
+                            <p>Nosotros gestionamos todo el proceso de devolución por ti, incluyendo la comunicación con la tienda y el reembolso.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span>¿Cuánto tiempo toma todo el proceso?</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-content">
-                        <p>El tiempo total depende de varios factores:</p>
-                        <ul>
-                            <li><strong>Cotización:</strong> 1-24 horas</li>
-                            <li><strong>Compra y envío a Miami:</strong> 1-5 días hábiles</li>
-                            <li><strong>Procesamiento en Miami:</strong> 1-2 días hábiles</li>
-                            <li><strong>Envío a Perú:</strong> 7-10 días hábiles (express)</li>
-                        </ul>
-                        <p><strong>Tiempo total estimado:</strong> 10-18 días hábiles para recibir tu producto en Perú.</p>
-                        <p>Servicios express están disponibles para tiempos más cortos.</p>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Cuánto tiempo toma todo el proceso?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>El tiempo total depende de varios factores:</p>
+                            <ul>
+                                <li><strong>Cotización:</strong> 1-24 horas</li>
+                                <li><strong>Compra y envío a Miami:</strong> 1-5 días hábiles</li>
+                                <li><strong>Procesamiento en Miami:</strong> 1-2 días hábiles</li>
+                                <li><strong>Envío a Perú:</strong> 7-10 días hábiles (express)</li>
+                            </ul>
+                            <p><strong>Tiempo total estimado:</strong> 10-18 días hábiles para recibir tu producto en Perú.</p>
+                            <p>Servicios express están disponibles para tiempos más cortos.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- CTA Section -->
-        <section class="assisted-cta">
-            <h2>¿Tienes Dudas o Prefieres Contactarnos Directamente?</h2>
-            <p>Nuestro equipo está disponible 24/7 para asesorarte personalmente.</p>
-            <div class="cta-buttons">
-                <a href="https://wa.me/51912140295" class="btn-whatsapp-faq" target="_blank">
-                    <i class="fab fa-whatsapp"></i>
-                    Chatear por WhatsApp
-                </a>
-                <a href="../index.html" class="btn-calculator-faq">
-                    <i class="fas fa-calculator"></i>
-                    Calcular Envío Regular
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <h2 class="cta-title">¿Tienes Dudas o Prefieres Contactarnos Directamente?</h2>
+                <p class="cta-text">Nuestro equipo está disponible 24/7 para asesorarte personalmente.</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/51912140295" class="btn-whatsapp-faq" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chatear por WhatsApp
+                    </a>
+                    <a href="../index.html" class="btn-calculator-faq">
+                        <i class="fas fa-calculator"></i>
+                        Calcular Envío Regular
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
     <footer class="sea-footer">
         <div class="sea-footer-center">
-            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big" loading="lazy">
+            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big">
             <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
             <div class="sea-footer-socialicons">
-                <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+                <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="facebook">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram">
+                <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
         </div>
-        
         <hr class="sea-footer-divider">
-        
         <div class="sea-footer-links">
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">La compañía</div>
+                <a href="servicios.html">Servicios</a>
+                <a href="opiniones.html">Opiniones de los usuarios</a>
+                <a href="terminos.html">Términos de Uso</a>
+                <a href="legal.html">Información legal</a>
+                <a href="noticias.html">Noticias</a>
+            </div>
             <div class="sea-footer-col">
                 <div class="sea-footer-coltitle">Información</div>
                 <a href="faq.html">Preguntas frecuentes</a>
                 <a href="como-funciona.html">Cómo funciona</a>
                 <a href="tiendas-populares.html">Tiendas populares</a>
                 <a href="compras-asistidas.html">Compras Asistidas</a>
-                <a href="seguro.html">Seguro</a>
-                <a href="productos-prohibidos.html">Product
+                <a href="#">Seguro</a>
+                <a href="#">Lista de productos prohibidos</a>
+            </div>
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Personal útil</div>
+                <a href="../index.html">Calculadora SEA Express</a>
+                <a href="opciones-pago.html">Opciones de pago</a>
+                <a href="seguimiento.html">Seguimiento de envío</a>
+                <a href="#">Soporte 24/7</a>
+            </div>
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Cooperación</div>
+                <a href="#">Contacto</a>
+                <a href="#">Programa de referidos</a>
+                <a href="#">Oferta para mayoristas</a>
+                <a href="#">SEA Express Logistics</a>
+            </div>
+        </div>
+        <div class="sea-footer-copy">
+            © 2025 SEA Express. Todos los derechos reservados.
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+    
+    <script>
+        // Funcionalidad del FAQ
+        document.addEventListener('DOMContentLoaded', function() {
+            // Acordeón FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Cerrar otros items abiertos
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle item actual
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Animación para elementos cuando entran en el viewport
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar tarjetas de estadísticas
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+            
+            // Observar tarjetas de beneficios
+            document.querySelectorAll('.benefit-card').forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+            
+            // Observar tarjetas de proceso
+            document.querySelectorAll('.process-step-card').forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+            
+            // Observar items de tiendas
+            document.querySelectorAll('.store-item').forEach(item => {
+                item.style.animationPlayState = 'paused';
+                observer.observe(item);
+            });
+            
+            // Observar items del FAQ
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.style.animationPlayState = 'paused';
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
