@@ -6,14 +6,10 @@
     <title>Servicios - SEA Express</title>
     <meta name="description" content="Conoce todos nuestros servicios de envío USA-Perú. Envíos express, compras asistidas, seguimiento en tiempo real y más.">
     <meta name="theme-color" content="#25324a">
+    <link rel="icon" type="image/png" href="../assets/logos/LOGOSEAE.png">
     
-    <!-- Preconexiones para performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- Fuentes -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Montserrat y Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -21,120 +17,132 @@
             --azul-logo: #223050;
             --azul-boton: #25324a;
             --beige-fondo: #f7f1e7;
-            --beige-claro: #faf8f3;
             --gris-form: #f6f5f2;
             --gris-borde: #e0dfdf;
             --negro-texto: #1a2630;
-            --blanco: #ffffff;
-            --wsp: #25D366;
+            --azul-icono: #25324a;
+            --azul-destacado: #223050;
             --fuente: 'Montserrat', Arial, sans-serif;
             --fuente-titulo: 'Playfair Display', serif;
+            --wsp: #25D366;
+            --wsp-hover: #128C7E;
         }
-        
-        * {
-            box-sizing: border-box;
+        html, body {
+            background: var(--beige-fondo);
             margin: 0;
             padding: 0;
-        }
-        
-        body {
-            background: var(--beige-fondo);
             color: var(--negro-texto);
             font-family: var(--fuente);
-            line-height: 1.6;
             min-height: 100vh;
+            scroll-behavior: smooth;
         }
-        
         .main-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        .logo-container {
+            padding: 0 16px;
             text-align: center;
-            padding: 40px 0 20px;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
         }
-        
+        .logo-container {
+            margin-bottom: 8px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .logo-img {
-            width: 120px;
-            height: 120px;
+            width: 124px;
+            height: 124px;
             border-radius: 50%;
             background: var(--azul-boton);
-            padding: 8px;
+            padding: 7px;
             object-fit: contain;
-            border: 6px solid var(--blanco);
-            box-shadow: 0 8px 25px rgba(34, 48, 80, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(34,48,80,0.05);
+            border: 6px solid #fff;
+            transition: width 0.2s, height 0.2s, padding 0.2s, border 0.2s;
+            box-sizing: border-box;
         }
-
-        .logo-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(34, 48, 80, 0.25);
-        }
-        
         .logo-text {
-            margin-top: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #454545;
+            letter-spacing: 0.01em;
+        }
+        h1 {
+            font-family: var(--fuente-titulo), serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin: 10px 0 8px 0;
             color: var(--azul-logo);
-            font-size: 1.2rem;
-            letter-spacing: 0.5px;
+            line-height: 1.13;
+        }
+        .desc {
+            font-size: 1.08rem;
+            color: #5f5f5f;
+            margin-bottom: 30px;
         }
         
-        /* Hero Section */
-        .hero {
+        /* Estilos específicos para Servicios */
+        .page-content {
+            background: #fff;
+            box-shadow: 0 4px 32px 0 rgba(50,50,93,0.09);
+            border-radius: 24px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 1200px;
+            text-align: left;
+            margin-bottom: 36px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .page-title {
+            font-family: var(--fuente-titulo), serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: var(--azul-logo);
             text-align: center;
-            margin-bottom: 60px;
-            padding: 40px 0;
+            position: relative;
+            padding-bottom: 15px;
         }
         
-        .hero h1 {
-            font-family: var(--fuente-titulo);
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            color: var(--azul-logo);
-            margin-bottom: 20px;
-            line-height: 1.2;
-            animation: fadeInUp 0.8s ease;
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--azul-boton), var(--azul-logo));
+            border-radius: 2px;
         }
         
         /* Servicios Grid */
         .servicios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
         
         .servicio-card {
-            background: var(--blanco);
+            background: white;
             border-radius: 20px;
-            padding: 40px 30px;
+            padding: 30px 25px;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
         .servicio-card::before {
@@ -150,8 +158,8 @@
         }
         
         .servicio-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(50,50,93,0.15);
             border-color: var(--azul-boton);
         }
 
@@ -162,7 +170,7 @@
         .servicio-icon {
             font-size: 3.5rem;
             color: var(--azul-logo);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
@@ -172,10 +180,10 @@
         }
         
         .servicio-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--azul-logo);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             transition: color 0.3s ease;
         }
 
@@ -185,17 +193,17 @@
         
         .servicio-desc {
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.7;
             font-size: 1.05rem;
         }
         
         .servicio-precio {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--azul-logo);
-            margin-bottom: 25px;
-            background: var(--beige-claro);
+            margin-bottom: 20px;
+            background: var(--beige-fondo);
             padding: 10px 20px;
             border-radius: 50px;
             display: inline-block;
@@ -204,234 +212,214 @@
 
         .servicio-card:hover .servicio-precio {
             background: var(--azul-boton);
-            color: var(--blanco);
+            color: white;
             transform: scale(1.05);
         }
         
         .servicio-btn {
             background: var(--azul-boton);
-            color: var(--blanco);
+            color: white;
             border: none;
-            padding: 14px 35px;
-            border-radius: 50px;
+            padding: 12px 30px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             font-size: 1.05rem;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .servicio-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .servicio-btn:hover::before {
-            left: 100%;
         }
         
         .servicio-btn:hover {
             background: var(--azul-logo);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(34, 48, 80, 0.3);
         }
 
-        /* Animaciones para las tarjetas */
-        .servicio-card:nth-child(1) { animation: fadeInUp 0.6s ease 0.1s both; }
-        .servicio-card:nth-child(2) { animation: fadeInUp 0.6s ease 0.2s both; }
-        .servicio-card:nth-child(3) { animation: fadeInUp 0.6s ease 0.3s both; }
-        .servicio-card:nth-child(4) { animation: fadeInUp 0.6s ease 0.4s both; }
-        .servicio-card:nth-child(5) { animation: fadeInUp 0.6s ease 0.5s both; }
-        .servicio-card:nth-child(6) { animation: fadeInUp 0.6s ease 0.6s both; }
+        /* Animaciones escalonadas para las tarjetas */
+        .servicio-card:nth-child(1) { animation-delay: 0.1s; }
+        .servicio-card:nth-child(2) { animation-delay: 0.2s; }
+        .servicio-card:nth-child(3) { animation-delay: 0.3s; }
+        .servicio-card:nth-child(4) { animation-delay: 0.4s; }
+        .servicio-card:nth-child(5) { animation-delay: 0.5s; }
+        .servicio-card:nth-child(6) { animation-delay: 0.6s; }
 
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, var(--azul-logo), var(--azul-boton));
-            color: var(--blanco);
-            border-radius: 25px;
-            padding: 70px 40px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 24px;
             text-align: center;
-            margin-bottom: 80px;
-            box-shadow: 0 15px 40px rgba(34, 48, 80, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            animation: float 20s linear infinite;
-        }
-
-        @keyframes float {
-            from { transform: translate(0, 0) rotate(0deg); }
-            to { transform: translate(-20px, -20px) rotate(360deg); }
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
         }
         
         .cta-title {
-            font-family: var(--fuente-titulo);
-            font-size: 2.8rem;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 2;
+            color: var(--azul-logo);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
         }
         
         .cta-text {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            opacity: 0.95;
-            position: relative;
-            z-index: 2;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #666;
         }
         
         .cta-buttons {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
         }
         
         .cta-btn {
-            background: var(--blanco);
-            color: var(--azul-logo);
-            padding: 18px 40px;
-            border-radius: 50px;
+            background: var(--azul-boton);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
-            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .cta-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-            border-color: var(--azul-logo);
+            background: var(--azul-logo);
+            transform: translateY(-2px);
         }
         
         .cta-btn.whatsapp {
             background: var(--wsp);
-            color: var(--blanco);
-        }
-
-        .cta-btn.whatsapp:hover {
-            background: #128C7E;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 30px rgba(18, 140, 126, 0.3);
         }
         
-        /* Footer */
+        .cta-btn.whatsapp:hover {
+            background: var(--wsp-hover);
+        }
+        
+        /* Footer optimizado */
         .sea-footer {
-            background: var(--azul-logo);
-            color: var(--blanco);
-            padding: 40px 20px 20px;
-            margin-top: 50px;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #f7f1e7;
+            color: #223050;
+            padding: 32px 0 8px 0;
+            margin-top: 48px;
+            border-top: 1.5px solid #e5e0d0;
+            position: relative;
+            z-index: 2;
+            width: 100%;
         }
         
         .sea-footer-center {
-            text-align: center;
-            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 18px;
+            margin-top: 8px;
         }
         
         .sea-footer-logo-big {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 15px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #25324a;
+            padding: 7px;
+            border: 3.5px solid #fff;
+            object-fit: contain;
+            box-shadow: 0 4px 14px 0 rgba(34,48,80,0.08);
+            margin-bottom: 5px;
         }
         
         .sea-footer-confiable {
-            font-weight: 600;
-            margin-bottom: 20px;
             font-size: 1.1rem;
+            font-weight: 700;
+            color: #25324a;
+            letter-spacing: 0.01em;
+            text-align: center;
+            margin-bottom: 5px;
         }
         
         .sea-footer-socialicons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 18px;
+            margin: 6px 0 10px 0;
         }
         
         .sea-footer-socialicons a {
-            color: var(--blanco);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
+            font-size: 2rem;
+            color: #223050;
+            transition: color .2s;
+            line-height: 1;
         }
         
         .sea-footer-socialicons a:hover {
-            transform: scale(1.2);
-            color: var(--wsp);
+            color: #25D366;
         }
         
         .sea-footer-divider {
             border: none;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            margin: 30px 0;
+            border-top: 1.2px solid #e0dfdf;
+            margin: 16px auto 13px auto;
+            width: 96%;
+            max-width: 1200px;
         }
         
         .sea-footer-links {
+            max-width: 1200px;
+            margin: 0 auto 10px auto;
             display: flex;
-            justify-content: space-between;
+            gap: 24px;
+            justify-content: center;
+            align-items: flex-start;
             flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 30px;
+            padding: 0 10px;
         }
         
         .sea-footer-col {
-            flex: 1;
-            min-width: 200px;
+            flex: 1 1 150px;
+            min-width: 140px;
+            margin-bottom: 10px;
+            text-align: left;
         }
         
         .sea-footer-coltitle {
             font-weight: 700;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            font-size: 1.01rem;
+            color: #25324a;
+            margin-bottom: 5px;
+            letter-spacing: 0.01em;
         }
         
         .sea-footer-col a {
             display: block;
-            color: rgba(255,255,255,0.8);
+            color: #223050;
+            font-size: .97rem;
             text-decoration: none;
-            margin-bottom: 8px;
-            transition: all 0.3s ease;
-            padding: 4px 0;
+            margin-bottom: 5px;
+            transition: color .2s;
         }
         
         .sea-footer-col a:hover {
-            color: var(--blanco);
-            transform: translateX(5px);
-            padding-left: 5px;
+            color: #25D366;
+            text-decoration: underline;
         }
         
         .sea-footer-copy {
+            color: #b0a692;
+            font-size: .93rem;
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.7);
-            font-size: 0.9rem;
+            margin-top: 4px;
+            padding-bottom: 2px;
+            letter-spacing: 0.01em;
         }
         
-        @media (max-width: 768px) {
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-container { max-width: 100%; }
             .servicios-grid {
                 grid-template-columns: 1fr;
             }
@@ -440,222 +428,254 @@
                 flex-direction: column;
                 align-items: center;
             }
-
+            
             .cta-btn {
                 width: 100%;
                 max-width: 300px;
-                text-align: center;
+                justify-content: center;
             }
             
             .sea-footer-links {
                 flex-direction: column;
-                gap: 20px;
+                align-items: center;
+                gap: 5px;
+                text-align: center;
             }
-
-            .hero {
-                padding: 20px 0 40px 0;
-            }
-
-            .servicio-card {
-                padding: 30px 20px;
+            
+            .sea-footer-col {
+                min-width: 170px;
+                margin-bottom: 8px;
             }
         }
-
-        @media (max-width: 480px) {
-            .main-container {
-                padding: 0 15px;
+        
+        @media (max-width: 650px) {
+            .main-container { max-width: 100%; }
+            .page-content { max-width: 100%; }
+            .servicio-card {
+                padding: 25px 20px;
             }
             
-            .hero h1 {
-                font-size: 2.2rem;
+            .sea-footer-links {
+                padding: 0 2vw;
             }
             
-            .hero p {
-                font-size: 1.1rem;
+            .sea-footer-col {
+                min-width: 120px;
             }
             
-            .cta-title {
-                font-size: 2.2rem;
+            .sea-footer-socialicons {
+                gap: 12px;
             }
-            
-            .cta-text {
-                font-size: 1.1rem;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
-    <!-- Contenido Principal -->
     <div class="main-container">
-        <!-- Logo y Header -->
         <div class="logo-container">
-            <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="logo-img">
+            <img src="../assets/logos/LOGOSEAE.png" alt="Logo de SEA Express" class="logo-img" tabindex="0">
             <div class="logo-text">Elígelo y es tuyo</div>
         </div>
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Nuestros Servicios</h1>
-            <p>Ofrecemos soluciones completas para tus envíos USA-Perú. Rápido, seguro y confiable.</p>
-        </section>
-
-        <!-- Servicios Grid -->
-        <div class="servicios-grid">
-            <!-- Servicio 1 -->
-            <div class="servicio-card">
-                <div class="servicio-icon">
-                    <i class="fas fa-shipping-fast"></i>
-                </div>
-                <h3 class="servicio-title">Envío Express</h3>
-                <p class="servicio-desc">
-                    Recibe tus paquetes en 7-10 días hábiles. Ideal para compras urgentes y productos perecederos.
-                </p>
-                <div class="servicio-precio">Desde $15/kg</div>
-                <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
-            </div>
-
-            <!-- Servicio 2 -->
-            <div class="servicio-card">
-                <div class="servicio-icon">
-                    <i class="fas fa-gem"></i>
-                </div>
-                <h3 class="servicio-title">Envío Premium</h3>
-                <p class="servicio-desc">
-                    Servicio VIP con embalaje especial, seguro incluido y entrega prioritaria en 5-7 días.
-                </p>
-                <div class="servicio-precio">Desde $25/kg</div>
-                <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
-            </div>
-
-            <!-- Servicio 3 -->
-            <div class="servicio-card">
-                <div class="servicio-icon">
-                    <i class="fas fa-box"></i>
-                </div>
-                <h3 class="servicio-title">Envío Estándar</h3>
-                <p class="servicio-desc">
-                    Servicio económico con entrega en 12-15 días hábiles. Perfecto para paquetes no urgentes.
-                </p>
-                <div class="servicio-precio">Desde $12/kg</div>
-                <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
-            </div>
-
-            <!-- Servicio 4 -->
-            <div class="servicio-card">
-                <div class="servicio-icon">
-                    <i class="fas fa-warehouse"></i>
-                </div>
-                <h3 class="servicio-title">Almacenamiento</h3>
-                <p class="servicio-desc">
-                    Almacena tus paquetes gratis por 30 días en nuestro warehouse de Miami. Consolida envíos.
-                </p>
-                <div class="servicio-precio">Gratis 30 días</div>
-                <a href="../index.html" class="servicio-btn">Más información</a>
-            </div>
-
-            <!-- Servicio 5 -->
-            <div class="servicio-card">
-                <div class="servicio-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                <h3 class="servicio-title">Compras Asistidas</h3>
-                <p class="servicio-desc">
-                    Te ayudamos a comprar en tiendas que no envían a Perú. Nos encargamos de todo el proceso.
-                </p>
-                <div class="servicio-precio">+10% del valor</div>
-                <a href="../pages/compras-asistidas.html" class="servicio-btn">Más Información</a>
-            </div>
-
-            <!-- Servicio 6 -->
-            <div class="servicio-card">
-                <div class="servicio-icon">
-                    <i class="fas fa-business-time"></i>
-                </div>
-                <h3 class="servicio-title">Servicio Empresas</h3>
-                <p class="servicio-desc">
-                    Soluciones logísticas para empresas. Tarifas especiales y reportes personalizados.
-                </p>
-                <div class="servicio-precio">Consulte precios</div>
-                <a href="../pages/mayoristas.html" class="servicio-btn">Contactar</a>
-            </div>
+        <h1>
+            Nuestros Servicios
+        </h1>
+        <div class="desc">
+            Ofrecemos soluciones completas para tus envíos USA-Perú. Rápido, seguro y confiable.
         </div>
+        
+        <!-- Contenido Principal -->
+        <div class="page-content">
+            <h2 class="page-title">Servicios Disponibles</h2>
+            
+            <!-- Servicios Grid -->
+            <div class="servicios-grid">
+                <!-- Servicio 1 -->
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="servicio-title">Envío Express</h3>
+                    <p class="servicio-desc">
+                        Recibe tus paquetes en 7-10 días hábiles. Ideal para compras urgentes y productos perecederos.
+                    </p>
+                    <div class="servicio-precio">Desde $15/kg</div>
+                    <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
+                </div>
 
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <h2 class="cta-title">¿Listo para Empezar?</h2>
-            <p class="cta-text">
-                Únete a miles de clientes satisfechos que confían en SEA Express para sus envíos USA-Perú
-            </p>
-            <div class="cta-buttons">
-                <a href="../index.html" class="cta-btn">Cotizar Mi Envío</a>
-                <a href="https://wa.me/51912140295" class="cta-btn whatsapp">
-                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
-                </a>
+                <!-- Servicio 2 -->
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="servicio-title">Envío Premium</h3>
+                    <p class="servicio-desc">
+                        Servicio VIP con embalaje especial, seguro incluido y entrega prioritaria en 5-7 días.
+                    </p>
+                    <div class="servicio-precio">Desde $25/kg</div>
+                    <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3 class="servicio-title">Envío Estándar</h3>
+                    <p class="servicio-desc">
+                        Servicio económico con entrega en 12-15 días hábiles. Perfecto para paquetes no urgentes.
+                    </p>
+                    <div class="servicio-precio">Desde $12/kg</div>
+                    <a href="../index.html" class="servicio-btn">Cotizar Ahora</a>
+                </div>
+
+                <!-- Servicio 4 -->
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3 class="servicio-title">Almacenamiento</h3>
+                    <p class="servicio-desc">
+                        Almacena tus paquetes gratis por 30 días en nuestro warehouse de Miami. Consolida envíos.
+                    </p>
+                    <div class="servicio-precio">Gratis 30 días</div>
+                    <a href="../index.html" class="servicio-btn">Más información</a>
+                </div>
+
+                <!-- Servicio 5 -->
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="servicio-title">Compras Asistidas</h3>
+                    <p class="servicio-desc">
+                        Te ayudamos a comprar en tiendas que no envían a Perú. Nos encargamos de todo el proceso.
+                    </p>
+                    <div class="servicio-precio">+10% del valor</div>
+                    <a href="../pages/compras-asistidas.html" class="servicio-btn">Más Información</a>
+                </div>
+
+                <!-- Servicio 6 -->
+                <div class="servicio-card">
+                    <div class="servicio-icon">
+                        <i class="fas fa-business-time"></i>
+                    </div>
+                    <h3 class="servicio-title">Servicio Empresas</h3>
+                    <p class="servicio-desc">
+                        Soluciones logísticas para empresas. Tarifas especiales y reportes personalizados.
+                    </p>
+                    <div class="servicio-precio">Consulte precios</div>
+                    <a href="../pages/mayoristas.html" class="servicio-btn">Contactar</a>
+                </div>
             </div>
-        </section>
-    </div>
 
-    <!-- Footer -->
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <h2 class="cta-title">¿Listo para Empezar?</h2>
+                <p class="cta-text">
+                    Únete a miles de clientes satisfechos que confían en SEA Express para sus envíos USA-Perú
+                </p>
+                <div class="cta-buttons">
+                    <a href="../index.html" class="cta-btn">
+                        <i class="fas fa-calculator"></i>
+                        Cotizar Mi Envío
+                    </a>
+                    <a href="https://wa.me/51912140295" class="cta-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> 
+                        Consultar por WhatsApp
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
     <footer class="sea-footer">
         <div class="sea-footer-center">
             <img src="../assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big">
             <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
             <div class="sea-footer-socialicons">
-                <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+                <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="facebook">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="Instagram">
+                <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
         </div>
-
         <hr class="sea-footer-divider">
-
         <div class="sea-footer-links">
-            <!-- Información -->
-            <div class="sea-footer-col">
-                <div class="sea-footer-coltitle">Información</div>
-                <a href="../pages/faq.html">Preguntas frecuentes</a>
-                <a href="../pages/como-funciona.html">Cómo funciona</a>
-                <a href="../pages/tiendas-populares.html">Tiendas populares</a>
-                <a href="../pages/compras-asistidas.html">Compras Asistidas</a>
-                <a href="../pages/seguro.html">Seguro</a>
-                <a href="../pages/productos-prohibidos.html">Productos prohibidos</a>
-            </div>
-
-            <!-- La compañía -->
             <div class="sea-footer-col">
                 <div class="sea-footer-coltitle">La compañía</div>
-                <a href="../pages/servicios.html">Servicios</a>
-                <a href="../pages/opiniones.html">Opiniones de usuarios</a>
-                <a href="../pages/terminos.html">Términos de Uso</a>
-                <a href="../pages/legal.html">Información legal</a>
-                <a href="../pages/noticias.html">Noticias</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="opiniones.html">Opiniones de los usuarios</a>
+                <a href="terminos.html">Términos de Uso</a>
+                <a href="legal.html">Información legal</a>
+                <a href="noticias.html">Noticias</a>
             </div>
-
-            <!-- Personal útil -->
+            <div class="sea-footer-col">
+                <div class="sea-footer-coltitle">Información</div>
+                <a href="faq.html">Preguntas frecuentes</a>
+                <a href="como-funciona.html">Cómo funciona</a>
+                <a href="tiendas-populares.html">Tiendas populares</a>
+                <a href="compras-asistidas.html">Compras Asistidas</a>
+                <a href="#">Seguro</a>
+                <a href="#">Lista de productos prohibidos</a>
+            </div>
             <div class="sea-footer-col">
                 <div class="sea-footer-coltitle">Personal útil</div>
                 <a href="../index.html">Calculadora SEA Express</a>
-                <a href="../pages/opciones-pago.html">Opciones de pago</a>
-                <a href="../pages/seguimiento.html">Seguimiento de envío</a>
-                <a href="../pages/soporte.html">Soporte 24/7</a>
+                <a href="opciones-pago.html">Opciones de pago</a>
+                <a href="seguimiento.html">Seguimiento de envío</a>
+                <a href="#">Soporte 24/7</a>
             </div>
-
-            <!-- Cooperación -->
             <div class="sea-footer-col">
                 <div class="sea-footer-coltitle">Cooperación</div>
-                <a href="../pages/contacto.html">Contacto</a>
-                <a href="../pages/referidos.html">Programa de referidos</a>
-                <a href="../pages/mayoristas.html">Oferta para mayoristas</a>
-                <a href="../pages/logistics.html">SEA Express Logistics</a>
+                <a href="#">Contacto</a>
+                <a href="#">Programa de referidos</a>
+                <a href="#">Oferta para mayoristas</a>
+                <a href="#">SEA Express Logistics</a>
             </div>
         </div>
-
         <div class="sea-footer-copy">
             © 2025 SEA Express. Todos los derechos reservados.
         </div>
     </footer>
+    <!-- /FOOTER -->
+    
+    <script>
+        // Animación para elementos cuando entran en el viewport
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar tarjetas de servicios
+            document.querySelectorAll('.servicio-card').forEach(card => {
+                card.style.animationPlayState = 'paused';
+                observer.observe(card);
+            });
+        });
+    </script>
 </body>
 </html>
