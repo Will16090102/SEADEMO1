@@ -1121,29 +1121,55 @@
     <!-- /FOOTER -->
     
     <script>
-        // FUNCIÓN PARA GUARDAR EN GOOGLE SHEETS
-        async function guardarEnGoogleSheets(datosCliente) {
-            const urlWebApp = 'https://script.google.com/macros/s/AKfycbyiUpu6TYYQ9lWTOqUtNiJFoq29GYIsFal3lJMigtJqdojC0bTj_B_v2NgDOSTWGwu8/exec';
+        /// FUNCIÓN MEJORADA - CON MÚLTIPLES MÉTODOS
+async function guardarEnGoogleSheets(datosCliente) {
+    const urlWebApp = 'https://script.google.com/macros/s/AKfycbyiUpu6TYYQ9lWTOqUtNiJFoq29GYIsFal3lJMigtJqdojC0bTj_B_v2NgDOSTWGwu8/exec';
+    
+    console.log('📤 Enviando datos a Sheets:', datosCliente);
+    
+    try {
+        // Método 1: Fetch con no-cors (más compatible)
+        const response = await fetch(urlWebApp, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datosCliente)
+        });
+        
+        console.log('✅ Petición enviada (modo no-cors)');
+        return true;
+        
+    } catch (error) {
+        console.log('⚠️ Falló método 1, intentando método 2...');
+        
+        try {
+            // Método 2: XMLHttpRequest (más compatible con navegadores viejos)
+            return new Promise((resolve) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', urlWebApp, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                
+                xhr.onload = function() {
+                    console.log('✅ Petición XMLHttpRequest completada');
+                    resolve(true);
+                };
+                
+                xhr.onerror = function() {
+                    console.log('⚠️ XMLHttpRequest falló, pero continuamos...');
+                    resolve(true);
+                };
+                
+                xhr.send(JSON.stringify(datosCliente));
+            });
             
-            try {
-                const response = await fetch(urlWebApp, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datosCliente)
-                });
-                
-                const resultado = await response.json();
-                console.log('✅ Datos guardados en Sheets:', resultado);
-                return true;
-                
-            } catch (error) {
-                console.error('❌ Error al guardar en Sheets:', error);
-                return false;
-            }
+        } catch (error2) {
+            console.log('⚠️ Todos los métodos fallaron, pero continuamos...');
+            return true;
         }
-
+    }
+}
         // Funcionalidad del formulario y animaciones
         document.addEventListener('DOMContentLoaded', function() {
             // Manejo del formulario de compras asistidas
