@@ -1121,55 +1121,56 @@
     <!-- /FOOTER -->
     
     <script>
-        /// FUNCIÓN MEJORADA - CON MÚLTIPLES MÉTODOS
-async function guardarEnGoogleSheets(datosCliente) {
-    const urlWebApp = 'https://script.google.com/macros/s/AKfycbyiUpu6TYYQ9lWTOqUtNiJFoq29GYIsFal3lJMigtJqdojC0bTj_B_v2NgDOSTWGwu8/exec';
-    
-    console.log('📤 Enviando datos a Sheets:', datosCliente);
-    
-    try {
-        // Método 1: Fetch con no-cors (más compatible)
-        const response = await fetch(urlWebApp, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(datosCliente)
-        });
-        
-        console.log('✅ Petición enviada (modo no-cors)');
-        return true;
-        
-    } catch (error) {
-        console.log('⚠️ Falló método 1, intentando método 2...');
-        
-        try {
-            // Método 2: XMLHttpRequest (más compatible con navegadores viejos)
-            return new Promise((resolve) => {
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', urlWebApp, true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                
-                xhr.onload = function() {
-                    console.log('✅ Petición XMLHttpRequest completada');
-                    resolve(true);
-                };
-                
-                xhr.onerror = function() {
-                    console.log('⚠️ XMLHttpRequest falló, pero continuamos...');
-                    resolve(true);
-                };
-                
-                xhr.send(JSON.stringify(datosCliente));
-            });
+        // FUNCIÓN MEJORADA - CON MÚLTIPLES MÉTODOS
+        async function guardarEnGoogleSheets(datosCliente) {
+            const urlWebApp = 'https://script.google.com/macros/s/AKfycbyiUpu6TYYQ9lWTOqUtNiJFoq29GYIsFal3lJMigtJqdojC0bTj_B_v2NgDOSTWGwu8/exec';
             
-        } catch (error2) {
-            console.log('⚠️ Todos los métodos fallaron, pero continuamos...');
-            return true;
+            console.log('📤 Enviando datos a Sheets:', datosCliente);
+            
+            try {
+                // Método 1: Fetch con no-cors (más compatible)
+                const response = await fetch(urlWebApp, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosCliente)
+                });
+                
+                console.log('✅ Petición enviada (modo no-cors)');
+                return true;
+                
+            } catch (error) {
+                console.log('⚠️ Falló método 1, intentando método 2...');
+                
+                try {
+                    // Método 2: XMLHttpRequest (más compatible con navegadores viejos)
+                    return new Promise((resolve) => {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open('POST', urlWebApp, true);
+                        xhr.setRequestHeader('Content-Type', 'application/json');
+                        
+                        xhr.onload = function() {
+                            console.log('✅ Petición XMLHttpRequest completada');
+                            resolve(true);
+                        };
+                        
+                        xhr.onerror = function() {
+                            console.log('⚠️ XMLHttpRequest falló, pero continuamos...');
+                            resolve(true);
+                        };
+                        
+                        xhr.send(JSON.stringify(datosCliente));
+                    });
+                    
+                } catch (error2) {
+                    console.log('⚠️ Todos los métodos fallaron, pero continuamos...');
+                    return true;
+                }
+            }
         }
-    }
-}
+
         // Funcionalidad del formulario y animaciones
         document.addEventListener('DOMContentLoaded', function() {
             // Manejo del formulario de compras asistidas
@@ -1178,7 +1179,7 @@ async function guardarEnGoogleSheets(datosCliente) {
                 purchaseForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     
-                    // Recoger datos del formulario
+                    // 1. Recoger datos del formulario
                     const formData = {
                         nombre: document.getElementById('customer-name').value,
                         email: document.getElementById('customer-email').value,
@@ -1191,35 +1192,38 @@ async function guardarEnGoogleSheets(datosCliente) {
                         notas: document.getElementById('additional-notes').value
                     };
                     
-                    // Enviar a Google Sheets
-                    const guardadoExitoso = await guardarEnGoogleSheets(formData);
-                    
-                    if (guardadoExitoso) {
-                        // Crear mensaje para WhatsApp
-                        let mensajeWsp = `¡Hola SEA Express! 👋\n\nQuiero solicitar una *COMPRA ASISTIDA*:\n\n`;
-                        mensajeWsp += `📦 *Producto:* ${formData.descripcion}\n`;
-                        if (formData.enlace) mensajeWsp += `🔗 *Enlace:* ${formData.enlace}\n`;
-                        if (formData.tienda) mensajeWsp += `🏪 *Tienda:* ${formData.tienda}\n`;
-                        if (formData.presupuesto) mensajeWsp += `💰 *Presupuesto:* ${formData.presupuesto}\n`;
-                        mensajeWsp += `⚡ *Urgencia:* ${formData.urgencia}\n`;
-                        mensajeWsp += `👤 *Mi nombre:* ${formData.nombre}\n`;
-                        mensajeWsp += `📧 *Email:* ${formData.email}\n`;
-                        mensajeWsp += `📱 *WhatsApp:* ${formData.whatsapp}\n`;
-                        if (formData.notas) mensajeWsp += `📝 *Notas:* ${formData.notas}\n\n`;
-                        mensajeWsp += `¡Por favor contáctenme para coordinar mi compra! 🚀`;
-                        
-                        // Redirigir a WhatsApp
-                        const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensajeWsp)}`;
-                        window.open(wspUrl, '_blank');
-                        
-                        // Opcional: Mostrar mensaje de éxito
-                        alert('✅ Solicitud enviada correctamente. Serás redirigido a WhatsApp.');
-                        
-                        // Limpiar formulario
-                        purchaseForm.reset();
-                    } else {
-                        alert('❌ Error al enviar la solicitud. Por favor contáctanos directamente por WhatsApp.');
+                    // 2. Validación básica
+                    if (!formData.descripcion || !formData.nombre || !formData.email || !formData.whatsapp) {
+                        alert('❌ Por favor completa todos los campos obligatorios (*)');
+                        return;
                     }
+                    
+                    // 3. ✅ INTENTAR guardar en Sheets (NO BLOQUEANTE)
+                    guardarEnGoogleSheets(formData).then(() => {
+                        console.log('✅ Proceso de guardado completado');
+                    }).catch(() => {
+                        console.log('⚠️ Error en guardado, pero continuamos...');
+                    });
+                    
+                    // 4. ✅ SIEMPRE redirigir a WhatsApp (INMEDIATAMENTE)
+                    let mensajeWsp = `¡Hola SEA Express! 👋\n\nQuiero solicitar una *COMPRA ASISTIDA*:\n\n`;
+                    mensajeWsp += `📦 *Producto:* ${formData.descripcion}\n`;
+                    if (formData.enlace) mensajeWsp += `🔗 *Enlace:* ${formData.enlace}\n`;
+                    if (formData.tienda) mensajeWsp += `🏪 *Tienda:* ${formData.tienda}\n`;
+                    if (formData.presupuesto) mensajeWsp += `💰 *Presupuesto:* ${formData.presupuesto}\n`;
+                    mensajeWsp += `⚡ *Urgencia:* ${formData.urgencia}\n`;
+                    mensajeWsp += `👤 *Mi nombre:* ${formData.nombre}\n`;
+                    mensajeWsp += `📧 *Email:* ${formData.email}\n`;
+                    mensajeWsp += `📱 *WhatsApp:* ${formData.whatsapp}\n`;
+                    if (formData.notas) mensajeWsp += `📝 *Notas:* ${formData.notas}\n\n`;
+                    mensajeWsp += `¡Por favor contáctenme para coordinar mi compra! 🚀`;
+                    
+                    const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensajeWsp)}`;
+                    window.open(wspUrl, '_blank');
+                    
+                    // 5. Mensaje de éxito y limpiar formulario
+                    alert('✅ Solicitud enviada correctamente. Serás redirigido a WhatsApp.');
+                    purchaseForm.reset();
                 });
             }
 
