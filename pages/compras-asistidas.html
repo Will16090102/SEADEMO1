@@ -472,56 +472,6 @@
             transform: translateY(-2px);
         }
         
-        /* FAQ Section */
-        .faq-section {
-            max-width: 800px;
-            margin: 40px auto;
-        }
-        
-        .faq-item {
-            background: white;
-            border-radius: 18px;
-            box-shadow: 0 4px 20px rgba(50,50,93,0.09);
-            margin-bottom: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .faq-item:hover {
-            box-shadow: 0 8px 25px rgba(50,50,93,0.15);
-        }
-        
-        .faq-question {
-            padding: 20px 25px;
-            font-weight: 600;
-            color: var(--azul-logo);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-        
-        .faq-question:hover {
-            background: var(--gris-form);
-        }
-        
-        .faq-answer {
-            padding: 0 25px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            background: var(--beige-fondo);
-        }
-        
-        .faq-item.active .faq-answer {
-            padding: 20px 25px;
-            max-height: 1000px;
-        }
-        
         /* CTA Section */
         .cta-section {
             background: #fff;
@@ -603,11 +553,6 @@
         .store-item:nth-child(10) { animation-delay: 1.0s; }
         .store-item:nth-child(11) { animation-delay: 1.1s; }
         .store-item:nth-child(12) { animation-delay: 1.2s; }
-
-        .faq-item:nth-child(1) { animation-delay: 0.1s; }
-        .faq-item:nth-child(2) { animation-delay: 0.2s; }
-        .faq-item:nth-child(3) { animation-delay: 0.3s; }
-        .faq-item:nth-child(4) { animation-delay: 0.4s; }
         
         /* Footer optimizado */
         .sea-footer {
@@ -1103,90 +1048,6 @@
                 </form>
             </section>
 
-            <!-- FAQ Section -->
-            <section class="faq-section">
-                <h2 style="text-align: center; margin-bottom: 30px; color: var(--azul-logo);">
-                    Preguntas Frecuentes sobre Compras Asistidas
-                </h2>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Cobran comisión por el servicio de compras asistidas?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p><strong>No cobramos comisión por el servicio de compras asistidas.</strong> Solo pagas:</p>
-                            <ul>
-                                <li>Precio real del producto en la tienda</li>
-                                <li>Impuestos de importación (si aplican)</li>
-                                <li>Costo de envío USA-Perú</li>
-                                <li>Gastos de manejo estándar</li>
-                            </ul>
-                            <p>El servicio de búsqueda, compra y gestión lo incluimos sin costo adicional.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Qué pasa si el producto no está disponible?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>En caso de que el producto no esté disponible:</p>
-                            <ul>
-                                <li>Te contactamos inmediatamente para informarte</li>
-                                <li>Buscamos alternativas similares en otras tiendas</li>
-                                <li>Te presentamos opciones comparables con sus precios</li>
-                                <li>Si no encuentras una alternativa que te guste, no pagas nada</li>
-                            </ul>
-                            <p>Nuestro compromiso es encontrar exactamente lo que necesitas o la mejor alternativa disponible.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Puedo devolver un producto comprado con compras asistidas?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>Las políticas de devolución dependen de la tienda donde se realizó la compra:</p>
-                            <ul>
-                                <li><strong>Amazon:</strong> Generalmente 30 días para devoluciones</li>
-                                <li><strong>Best Buy:</strong> 15 días para la mayoría de productos</li>
-                                <li><strong>eBay:</strong> Depende de la política del vendedor</li>
-                                <li><strong>Otras tiendas:</strong> Varían entre 14-30 días</li>
-                            </ul>
-                            <p>Nosotros gestionamos todo el proceso de devolución por ti, incluyendo la comunicación con la tienda y el reembolso.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Cuánto tiempo toma todo el proceso?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>El tiempo total depende de varios factores:</p>
-                            <ul>
-                                <li><strong>Cotización:</strong> 1-24 horas</li>
-                                <li><strong>Compra y envío a Miami:</strong> 1-5 días hábiles</li>
-                                <li><strong>Procesamiento en Miami:</strong> 1-2 días hábiles</li>
-                                <li><strong>Envío a Perú:</strong> 7-10 días hábiles (express)</li>
-                            </ul>
-                            <p><strong>Tiempo total estimado:</strong> 10-18 días hábiles para recibir tu producto en Perú.</p>
-                            <p>Servicios express están disponibles para tiempos más cortos.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <!-- CTA Section -->
             <section class="cta-section">
                 <h2 class="cta-title">¿Tienes Dudas o Prefieres Contactarnos Directamente?</h2>
@@ -1260,26 +1121,81 @@
     <!-- /FOOTER -->
     
     <script>
-        // Funcionalidad del FAQ
-        document.addEventListener('DOMContentLoaded', function() {
-            // Acordeón FAQ
-            const faqItems = document.querySelectorAll('.faq-item');
+        // FUNCIÓN PARA GUARDAR EN GOOGLE SHEETS
+        async function guardarEnGoogleSheets(datosCliente) {
+            const urlWebApp = 'https://script.google.com/macros/s/AKfycbyiUpu6TYYQ9lWTOqUtNiJFoq29GYIsFal3lJMigtJqdojC0bTj_B_v2NgDOSTWGwu8/exec';
             
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question');
-                
-                question.addEventListener('click', () => {
-                    // Cerrar otros items abiertos
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item && otherItem.classList.contains('active')) {
-                            otherItem.classList.remove('active');
-                        }
-                    });
-                    
-                    // Toggle item actual
-                    item.classList.toggle('active');
+            try {
+                const response = await fetch(urlWebApp, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosCliente)
                 });
-            });
+                
+                const resultado = await response.json();
+                console.log('✅ Datos guardados en Sheets:', resultado);
+                return true;
+                
+            } catch (error) {
+                console.error('❌ Error al guardar en Sheets:', error);
+                return false;
+            }
+        }
+
+        // Funcionalidad del formulario y animaciones
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejo del formulario de compras asistidas
+            const purchaseForm = document.getElementById('assisted-purchase-form');
+            if (purchaseForm) {
+                purchaseForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Recoger datos del formulario
+                    const formData = {
+                        nombre: document.getElementById('customer-name').value,
+                        email: document.getElementById('customer-email').value,
+                        whatsapp: document.getElementById('customer-phone').value,
+                        enlace: document.getElementById('product-url').value,
+                        descripcion: document.getElementById('product-description').value,
+                        tienda: document.getElementById('product-store').value,
+                        presupuesto: document.getElementById('budget').value,
+                        urgencia: document.getElementById('urgency').value,
+                        notas: document.getElementById('additional-notes').value
+                    };
+                    
+                    // Enviar a Google Sheets
+                    const guardadoExitoso = await guardarEnGoogleSheets(formData);
+                    
+                    if (guardadoExitoso) {
+                        // Crear mensaje para WhatsApp
+                        let mensajeWsp = `¡Hola SEA Express! 👋\n\nQuiero solicitar una *COMPRA ASISTIDA*:\n\n`;
+                        mensajeWsp += `📦 *Producto:* ${formData.descripcion}\n`;
+                        if (formData.enlace) mensajeWsp += `🔗 *Enlace:* ${formData.enlace}\n`;
+                        if (formData.tienda) mensajeWsp += `🏪 *Tienda:* ${formData.tienda}\n`;
+                        if (formData.presupuesto) mensajeWsp += `💰 *Presupuesto:* ${formData.presupuesto}\n`;
+                        mensajeWsp += `⚡ *Urgencia:* ${formData.urgencia}\n`;
+                        mensajeWsp += `👤 *Mi nombre:* ${formData.nombre}\n`;
+                        mensajeWsp += `📧 *Email:* ${formData.email}\n`;
+                        mensajeWsp += `📱 *WhatsApp:* ${formData.whatsapp}\n`;
+                        if (formData.notas) mensajeWsp += `📝 *Notas:* ${formData.notas}\n\n`;
+                        mensajeWsp += `¡Por favor contáctenme para coordinar mi compra! 🚀`;
+                        
+                        // Redirigir a WhatsApp
+                        const wspUrl = `https://wa.me/51912140295?text=${encodeURIComponent(mensajeWsp)}`;
+                        window.open(wspUrl, '_blank');
+                        
+                        // Opcional: Mostrar mensaje de éxito
+                        alert('✅ Solicitud enviada correctamente. Serás redirigido a WhatsApp.');
+                        
+                        // Limpiar formulario
+                        purchaseForm.reset();
+                    } else {
+                        alert('❌ Error al enviar la solicitud. Por favor contáctanos directamente por WhatsApp.');
+                    }
+                });
+            }
 
             // Animación para elementos cuando entran en el viewport
             const observerOptions = {
@@ -1316,12 +1232,6 @@
             
             // Observar items de tiendas
             document.querySelectorAll('.store-item').forEach(item => {
-                item.style.animationPlayState = 'paused';
-                observer.observe(item);
-            });
-            
-            // Observar items del FAQ
-            document.querySelectorAll('.faq-item').forEach(item => {
                 item.style.animationPlayState = 'paused';
                 observer.observe(item);
             });
