@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEA Express - Sitio en Mantenimiento</title>
+  <meta name="description" content="Estamos trabajando para brindarte un mejor servicio. SEA Express estará de vuelta pronto.">
+  <meta name="theme-color" content="#25324a">
+  <link rel="icon" type="image/png" href="assets/logos/LOGOSEAE.png">
+  <!-- Google Fonts: Montserrat y Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --azul-logo: #223050;
+      --azul-boton: #25324a;
+      --beige-fondo: #f7f1e7;
+      --gris-form: #f6f5f2;
+      --gris-borde: #e0dfdf;
+      --negro-texto: #1a2630;
+      --azul-icono: #25324a;
+      --azul-destacado: #223050;
+      --fuente: 'Montserrat', Arial, sans-serif;
+      --fuente-titulo: 'Playfair Display', serif;
+      --wsp: #25D366;
+      --wsp-hover: #128C7E;
+    }
+    html, body {
+      background: var(--beige-fondo);
+      margin: 0;
+      padding: 0;
+      color: var(--negro-texto);
+      font-family: var(--fuente);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+      text-align: center;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-container {
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo-img {
+      width: 124px;
+      height: 124px;
+      border-radius: 50%;
+      background: var(--azul-boton);
+      padding: 7px;
+      object-fit: contain;
+      box-shadow: 0 4px 20px rgba(34,48,80,0.05);
+      border: 6px solid #fff;
+    }
+    .logo-text {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #454545;
+      letter-spacing: 0.01em;
+    }
+    h1 {
+      font-family: var(--fuente-titulo), serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 30px 0 20px 0;
+      color: var(--azul-logo);
+      line-height: 1.2;
+    }
+    .mantenimiento-desc {
+      font-size: 1.2rem;
+      color: #5f5f5f;
+      margin-bottom: 40px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    .icono-mantenimiento {
+      font-size: 4rem;
+      color: var(--azul-boton);
+      margin: 30px 0;
+      animation: latido 2s infinite;
+    }
+    @keyframes latido {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .features-container {
+      width: 100%;
+      padding: 40px 0 24px 0;
+      margin: 0 auto;
+    }
+    .features-section {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .feature-card {
+      min-width: 200px;
+      max-width: 260px;
+      flex: 1 1 180px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 16px;
+      box-shadow: 0 2px 10px rgba(34,50,80,0.09);
+      text-align: center;
+      margin: 0 8px 16px 8px;
+      transition: box-shadow 0.23s, transform 0.22s;
+      border: 2.5px solid #fff;
+    }
+    .feature-card:focus, .feature-card:hover {
+      box-shadow: 0 8px 30px rgba(34,50,80,0.13);
+      transform: translateY(-6px) scale(1.03) rotate(-1deg);
+      outline: 2px solid var(--azul-boton);
+      outline-offset: 2px;
+      border: 2.5px solid var(--azul-boton);
+    }
+    .feature-icon {
+      font-size: 2.1rem;
+      color: var(--azul-boton);
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-size: 1.12rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: var(--azul-logo);
+    }
+    .feature-text {
+      font-size: 1.01rem;
+      color: #4d4d4d;
+      margin: 0;
+    }
+    .contacto-emergencia {
+      background: #fff;
+      border-radius: 18px;
+      padding: 25px;
+      margin: 30px auto;
+      max-width: 500px;
+      box-shadow: 0 4px 20px rgba(34,48,80,0.08);
+      border: 2px solid var(--azul-boton);
+    }
+    .contacto-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--azul-logo);
+      margin-bottom: 15px;
+    }
+    .whatsapp-btn {
+      background-color: var(--wsp);
+      color: white;
+      border: none;
+      padding: 1.2rem 0;
+      width: 100%;
+      border-radius: 18px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.24s, box-shadow 0.33s;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 6px 32px 0 rgba(37,211,102,0.18), 0 0 0 6px rgba(37,211,102,0.06);
+      text-decoration: none;
+    }
+    .whatsapp-btn i {
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .whatsapp-btn:hover, .whatsapp-btn:focus {
+      background-color: var(--wsp-hover);
+      box-shadow: 0 10px 34px 0 rgba(18,140,126,0.23), 0 0 0 14px rgba(37,211,102,0.09);
+      transform: scale(1.04) rotate(-2deg);
+      outline: 2.5px solid var(--wsp-hover);
+      outline-offset: 2px;
+    }
+
+    /* Footer (igual al index) */
+    .sea-footer {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #f7f1e7;
+      color: #223050;
+      padding: 32px 0 8px 0;
+      margin-top: 48px;
+      border-top: 1.5px solid #e5e0d0;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .sea-footer-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 18px;
+      margin-top: 8px;
+    }
+    .sea-footer-logo-big {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #25324a;
+      padding: 7px;
+      border: 3.5px solid #fff;
+      object-fit: contain;
+      box-shadow: 0 4px 14px 0 rgba(34,48,80,0.08);
+      margin-bottom: 5px;
+    }
+    .sea-footer-confiable {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #25324a;
+      letter-spacing: 0.01em;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .sea-footer-socialicons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 6px 0 10px 0;
+    }
+    .sea-footer-socialicons a {
+      font-size: 2rem;
+      color: #223050;
+      transition: color .2s;
+      line-height: 1;
+    }
+    .sea-footer-socialicons a:hover {
+      color: #25D366;
+    }
+    .sea-footer-divider {
+      border: none;
+      border-top: 1.2px solid #e0dfdf;
+      margin: 16px auto 13px auto;
+      width: 96%;
+      max-width: 1200px;
+    }
+    .sea-footer-links {
+      max-width: 1200px;
+      margin: 0 auto 10px auto;
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 0 10px;
+    }
+    .sea-footer-col {
+      flex: 1 1 150px;
+      min-width: 140px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .sea-footer-coltitle {
+      font-weight: 700;
+      font-size: 1.01rem;
+      color: #25324a;
+      margin-bottom: 5px;
+      letter-spacing: 0.01em;
+    }
+    .sea-footer-col a {
+      display: block;
+      color: #223050;
+      font-size: .97rem;
+      text-decoration: none;
+      margin-bottom: 5px;
+      transition: color .2s;
+    }
+    .sea-footer-col a:hover {
+      color: #25D366;
+      text-decoration: underline;
+    }
+    .sea-footer-copy {
+      color: #b0a692;
+      font-size: .93rem;
+      text-align: center;
+      margin-top: 4px;
+      padding-bottom: 2px;
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 650px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .mantenimiento-desc {
+        font-size: 1.1rem;
+        padding: 0 10px;
+      }
+      .features-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+      }
+      .sea-footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        text-align: center;
+      }
+      .sea-footer-col {
+        min-width: 170px;
+        margin-bottom: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="logo-container">
+      <img src="assets/logos/LOGOSEAE.png" alt="Logo de SEA Express" class="logo-img" tabindex="0">
+      <div class="logo-text">Elígelo y es tuyo</div>
+    </div>
+
+    <div class="icono-mantenimiento">
+      <i class="fas fa-tools"></i>
+    </div>
+
+    <h1>Estamos trabajando para brindarte un mejor servicio</h1>
+    
+    <div class="mantenimiento-desc">
+      Nuestro sitio web está en mantenimiento para mejorar tu experiencia. 
+      Estaremos de vuelta muy pronto con nuevas funciones y mejoras.
+    </div>
+
+    <div class="contacto-emergencia">
+      <div class="contacto-title">¿Necesitas ayuda urgente?</div>
+      <p>Mientras trabajamos, puedes contactarnos directamente por WhatsApp para consultas sobre tus envíos.</p>
+      <a href="https://wa.me/51912140295" target="_blank" rel="noopener" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+        <span>Contactar por WhatsApp</span>
+      </a>
+    </div>
+
+    <section class="features-container" aria-label="Próximas mejoras">
+      <div class="features-section">
+        <div class="feature-card" tabindex="0">
+          <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+          <div class="feature-title">Nueva Experiencia</div>
+          <div class="feature-text">Estamos renovando completamente nuestra plataforma para ti.</div>
+        </div>
+        <div class="feature-card" tabindex="0">
+          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+          <div class="feature-title">Más Rápido</div>
+          <div class="feature-text">Tiempos de carga mejorados y navegación optimizada.</div>
+        </div>
+        <div class="feature-card" tabindex="0">
+          <div class="feature-icon"><i class="fas fa-star"></i></div>
+          <div class="feature-title">Mejores Funciones</div>
+          <div class="feature-text">Nuevas herramientas para calcular y gestionar tus envíos.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="sea-footer">
+    <div class="sea-footer-center">
+      <img src="assets/logos/LOGOSEAE.png" alt="SEA Express" class="sea-footer-logo-big">
+      <div class="sea-footer-confiable">SEA EXPRESS es confiable</div>
+      <div class="sea-footer-socialicons">
+        <a href="https://www.facebook.com/share/16H3U9w4aM/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/seaexpressperu?igsh=MWdlZWpjNmsxbGJ4cA==" target="_blank" rel="noopener" aria-label="instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+    <hr class="sea-footer-divider">
+    <div class="sea-footer-links">
+      <div class="sea-footer-col">
+        <div class="sea-footer-coltitle">La compañía</div>
+        <a href="pages/servicios.html">Servicios</a>
+        <a href="pages/opiniones.html">Opiniones de los usuarios</a>
+        <a href="pages/terminos.html">Términos de Uso</a>
+        <a href="pages/legal.html">Información legal</a>
+        <a href="pages/noticias.html">Noticias</a>
+      </div>
+      <div class="sea-footer-col">
+        <div class="sea-footer-coltitle">Información</div>
+        <a href="pages/faq.html">Preguntas frecuentes</a>
+        <a href="pages/como-funciona.html">Cómo funciona</a>
+        <a href="pages/tiendas-populares.html">Tiendas populares</a>
+        <a href="pages/compras-asistidas.html">Compras Asistidas</a>
+        <a href="#">Seguro</a>
+        <a href="#">Lista de productos prohibidos</a>
+      </div>
+      <div class="sea-footer-col">
+        <div class="sea-footer-coltitle">Personal útil</div>
+        <a href="index.html">Calculadora SEA Express</a>
+        <a href="pages/opciones-pago.html">Opciones de pago</a>
+        <a href="pages/seguimiento.html">Seguimiento de envío</a>
+        <a href="#">Soporte 24/7</a>
+      </div>
+      <div class="sea-footer-col">
+        <div class="sea-footer-coltitle">Cooperación</div>
+        <a href="#">Contacto</a>
+        <a href="#">Programa de referidos</a>
+        <a href="#">Oferta para mayoristas</a>
+        <a href="#">SEA Express Logistics</a>
+      </div>
+    </div>
+    <div class="sea-footer-copy">
+      © 2025 SEA Express. Todos los derechos reservados.
+    </div>
+  </footer>
+  <!-- /FOOTER -->
+</body>
+</html>
